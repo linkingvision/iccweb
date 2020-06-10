@@ -107,7 +107,7 @@ i{
 	width: 160px;
 	height: 100%;
 	background: url("../assets/imgs/l5s_logo_bai.png") center center no-repeat;
-	/* background-size: 100%; */
+	background-size: 100%;
 }
 .c_use{
 	width: 89%;

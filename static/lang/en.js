@@ -36,6 +36,17 @@ export default {
 		  return:"Return"
 				  
 	  },
+	  left:{
+		videoconference:"video conference",
+	  },
+	  dashboard:{
+		videoconference:"video conference",
+		Createmeeting:"Create a meeting",
+		Joinmeeting:"Join the meeting",
+
+		Created:'Created successfully',
+		appointment:"Successful appointment"
+	  },
 	  setting:
 	  {
 		  Default:"Default",

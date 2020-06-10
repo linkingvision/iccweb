@@ -31,10 +31,10 @@ export default {
     background-color: #1E2228 !important;
 }
 .el-table--striped .el-table__body tr.el-table__row--striped td {
-	background-color: #3D4146 !important;
+	background: #3D4146 !important;
 }
 .el-table__body tr:hover>td {
-  background-color: #3D4146!important;
+  background:none!important;
 }
 .el-table__body tr.hover-row>td{
   background-color: #3D4146!important;
@@ -53,7 +53,21 @@ export default {
   border-color: rgba(255,255,255,1) !important;
 }
 
+/* 分页 */
+.el-pagination li{
+  background: none!important;
+  color: #FFFFFF;
+}
+.el-pagination button{
+  background: none!important;
+  color: #FFFFFF!important;
+}
+
 /* 下拉 */
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected{
+    background: #2E343C  !important;
+    color: #3277FF !important;
+}
 .el-select{
   width: 100%!important;
 }

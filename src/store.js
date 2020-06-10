@@ -9,7 +9,8 @@ const state = {
   lang:"zhchs",
   token:null,
   user:null,
-  root:null
+  root:null,
+  IPPORT:''
 }
 
 const mutations = {

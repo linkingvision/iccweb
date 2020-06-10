@@ -16,6 +16,17 @@ export default {
 		  password: '密码',
 		  language: '语言选择'
 	  },
+	  left:{
+		videoconference:"视频会议",
+	  },
+	  dashboard:{
+		videoconference:"视频会议",
+		Createmeeting:"创建会议",
+		Joinmeeting:"加入会议",
+
+		Created:'创建成功',
+		appointment:"预约成功"
+	  },
 	  setting:
 	  {
   

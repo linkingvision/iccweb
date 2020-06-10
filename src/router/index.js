@@ -22,6 +22,8 @@ const TheContainer = () => import('@/containers/TheContainer')
 const Dashboard = () => import('@/views/mainpage/Dashboard')
 const Participants = () => import('@/views/mainpage/dashboard/participants')
 
+const Meetingman = () => import('@/views/mainpage/Meetingman')
+
 const Userinfo = () => import('@/views/mainpage/setting/userinof')
 const Roleinof = () => import('@/views/mainpage/setting/roleinof')
 
@@ -32,18 +34,7 @@ const Logout = () => import('@/views/logout')
 
 Vue.use(Router)
 
-if(localStorage.getItem('mcutoken')){
-  store.state.token=localStorage.getItem('mcutoken');
-}
-if(localStorage.getItem('mcuuser')){
-  store.state.user=localStorage.getItem('mcuuser');
-}
-if(localStorage.getItem('mculang')){
-  store.state.lang=localStorage.getItem('mculang');
-}
-if(localStorage.getItem('mcuroot')){
-  store.state.root=localStorage.getItem('mcuroot');
-}
+
 
 // meta: {
 //     title: '首页',
@@ -61,7 +52,7 @@ export default new Router({
             // name: 'Dashboard',
             component: TheContainer,
             meta: {
-                title: '首页',
+                title: '1',
                 type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
             },
             children: [
@@ -70,17 +61,25 @@ export default new Router({
                     name: "dashboard",
                     component: Dashboard,
                     meta: {
-                      title: '首页',
+                      title: '1',
                       type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
-				
+				{
+                    path: 'Meetingman',
+                    name: "Meetingman",
+                    component: Meetingman,
+                    meta: {
+                      title: '2',
+                      type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
                 {
                   path: 'Userinfo',
                   name: "Userinfo",
                   component: Userinfo,
                   meta: {
-                    title: '用户',
+                    title: '3-1',
                     type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
                   }
 			  	},
@@ -89,7 +88,7 @@ export default new Router({
 					name: "Roleinof",
 					component: Roleinof,
 					meta: {
-					  title: '角色',
+					  title: '3-2',
 					  type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 					}
 				}
@@ -125,3 +124,20 @@ export default new Router({
     ]
 })
 
+if(localStorage.getItem('mcutoken')){
+	store.state.token=localStorage.getItem('mcutoken');
+  }
+  if(localStorage.getItem('mcuuser')){
+	store.state.user=localStorage.getItem('mcuuser');
+  }
+  if(localStorage.getItem('mculang')){
+	store.state.lang=localStorage.getItem('mculang');
+  }
+  if(localStorage.getItem('mcuroot')){
+	store.state.root=localStorage.getItem('mcuroot');
+  }
+  let root=process.env.VUE_APP_URL;
+  if (root == undefined){
+	  root = window.location.protocol + '//' + window.location.host + window.location.pathname;
+  }
+  store.state.IPPORT=root
