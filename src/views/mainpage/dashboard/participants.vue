@@ -6,7 +6,7 @@
         </div>
         <!-- 返回 -->
         <div>
-            <CButton class="particiants_title_but iconfont icon-fanhui" type="submit" @click="drop" to="dashboard"> 加入会议</CButton>
+            <CButton class="particiants_title_but iconfont icon-fanhui" type="submit" @click="drop" to="dashboard"> 返回首页</CButton>
         </div>
         <!-- 身体 -->
         <div class="particiants_content">
@@ -96,12 +96,12 @@ export default {
     mounted(){
         if(this.usertoken!= undefined){
             this.l5svideplay()
+            this.mettuselest();
         }else{
             this.$router.push({
                 path: 'dashboard'
             })
         }
-        this.mettuselest();
     },
     methods:{
         //获取列表

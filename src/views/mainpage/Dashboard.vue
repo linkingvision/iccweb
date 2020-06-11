@@ -223,20 +223,32 @@ export default {
             this.playvideo(this.joinform.usertoken)
         },
         playvideo(usertoken){
-            
-            this.myModal1==false;
-            this.$router.push({
-                name: `Participants`,
-                path: '/Participants',
-                params: {
-                    token:usertoken
+            var url = this.$store.state.IPPORT + "/api/v1/GetConference?session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                if(result.status==200){
+                    console.log(result)
+                    var data=result.data.conference
+                    for(var i=0;i<data.length;i++){
+                        if(usertoken==data[i].strToken){
+                            if(data[i].bStartStatus){
+                                console.log(data[i].bStartStatus)
+                                this.myModal1==false;
+                                this.$router.push({
+                                    name: `Participants`,
+                                    path: '/Participants',
+                                    params: {
+                                        token:usertoken
+                                    }
+                                })
+                            }else{
+                                this.$message('会议未开始');
+                            }
+                        }
+                    }
                 }
             })
-            // var url = this.$store.state.IPPORT + "/api/v1/StartConference?token="+usertoken+"&session="+ this.$store.state.token;
-            // this.$http.get(url).then(result=>{
-            //     if(result.status==200){
-            //     }
-            // })
+            
+            
         },
         //创建会议
         myModalADD(){

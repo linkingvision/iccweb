@@ -53,8 +53,6 @@ export default {
     }
 }
 </script>
-<style scoped>
-</style>
 <style lang="scss" scopad>
 .sideb_content{
     background: none;
@@ -63,6 +61,7 @@ export default {
         // margin-left: -10%;
         font-family:PingFang SC;
         font-weight:500;
+        text-decoration: none;
     }
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item{

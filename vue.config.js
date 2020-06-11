@@ -11,6 +11,7 @@ module.exports = {
           })
         ]
     },
+    assetsDir: 'static',
     devServer: {
       port: 9527,     // 端口
     },

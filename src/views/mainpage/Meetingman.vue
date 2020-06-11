@@ -496,16 +496,3 @@ export default {
     }
 }
 </style>
-<style scoped>
-
-.user_pop >>>.el-dialog{
-	background-color: #2E343C!important;
-}
-
-.user_pop >>> .el-form-item__label{
-	color: #FFFFFF!important;
-}
-.user_pop >>> .el-dialog__body{
-	padding: 30px 20px 0 20px;
-}
-</style>
