@@ -1,12 +1,8 @@
 <template>
   <CFooter :fixed="true">
-    <div>
+    <div class="footer_bottom">
       <!-- <a href="https://coreui.io" target="_blank">CoreUI</a> -->
-      <span class="ml-1">&copy; {{new Date().getFullYear()}} linkingvision.com.</span>
-    </div>
-    <div class="ml-auto">
-      <!-- <span class="mr-1" target="_blank">Powered by</span>
-      <a href="https://coreui.io/vue">CoreUI for Vue</a> -->
+      <span class="ml-1 ">&copy; {{new Date().getFullYear()}} linkingvision.com</span>
     </div>
   </CFooter>
 </template>
@@ -17,4 +13,8 @@ export default {
 }
 </script>
 <style lang="scss">
+.footer_bottom{
+  width: 100%;
+  text-align: center;
+}
 </style>
