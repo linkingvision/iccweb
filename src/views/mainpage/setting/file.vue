@@ -208,7 +208,7 @@ import uuid from '../../../assets/js/uuid'
           //url
           var url = this.$store.state.IPPORT + "/api/v1/GetSrc?type=H5_FILE&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
-              //console.log("a",result);
+              console.log("a",result);
               if(result.status == 200){
                   var itme=result.data.src;
                   this.tableData2=[]
@@ -229,6 +229,7 @@ import uuid from '../../../assets/js/uuid'
                       };
                       this.tableData2.push(tabledata);
                   }
+                //   console.log("xiugai",this.tableData2)
                   this.total2=this.tableData2.length;
               }
             })
@@ -264,7 +265,8 @@ import uuid from '../../../assets/js/uuid'
                 if(result.status==200){
                     if(result.data.bStatus==true){
                         //this.reload();
-                        this.tableData2.splice(this.editindex, 1,list)
+                        // this.tableData2.splice(this.editindex, 1,list)
+                        this.loadfile();
                     }else{
                         this.$message({
                             message: '编辑失败',

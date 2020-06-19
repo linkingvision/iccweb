@@ -123,7 +123,7 @@ i{
 .c_logo{
 	width: 160px;
 	height: 100%;
-	background: url("../assets/imgs/l5s_logo_bai.png") center center no-repeat;
+	background: url("../assets/imgs/l5s_logo1.png") center center no-repeat;
 	background-size: 85%;
 }
 .c_use{

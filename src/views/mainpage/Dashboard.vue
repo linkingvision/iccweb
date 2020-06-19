@@ -83,7 +83,7 @@
                     width="25%">
                     <el-input v-model="joinform.usertoken" placeholder="请输入会议号"></el-input>
                     <span slot="footer" class="dialog-footer">
-                        <CButton class="conten_buttom_but" type="primary"  @click="Modalplay">创建</CButton>
+                        <CButton class="conten_buttom_but" type="primary"  @click="Modalplay">加入会议</CButton>
                     </span>
                 </el-dialog>
 
@@ -285,7 +285,7 @@ export default {
             +"&endtime="+encodeURIComponent(jss)
             +"&type="+encodeURIComponent(form.metttype)
             +"&layout="+encodeURIComponent(form.mettmode)
-            +"&layoutsize=22&session="+ this.$store.state.token;
+            +"&layoutsize=1080P&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     

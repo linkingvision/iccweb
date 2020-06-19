@@ -267,7 +267,7 @@ import uuid from '../../../assets/js/uuid'
             
             //url
             var form=this.editform;
-            var url = root + "/api/v1/AddSrcRTSP?&name="+encodeURIComponent(form.Name)+
+            var url = root + "/api/v1/AddSrcRTSP?name="+encodeURIComponent(form.Name)+
             "&token="+encodeURIComponent(form.Token)+
             "&user="+encodeURIComponent(form.Username)+
             "&password="+encodeURIComponent(form.Password)+
@@ -321,7 +321,7 @@ import uuid from '../../../assets/js/uuid'
                 if(result.status==200){
                     if(result.data.bStatus==true){
                         // console.log("*************************",result.data.bStatus)
-                        this.tableData.splice(this.editindex, 1,list)
+                        // this.tableData.splice(this.editindex, 1,list)
                         this.Success();
                         
                     }else{

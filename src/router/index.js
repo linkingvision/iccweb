@@ -249,4 +249,5 @@ if(localStorage.getItem('mcutoken')){
   if (root == undefined){
 	  root = window.location.protocol + '//' + window.location.host + window.location.pathname;
   }
+  console.log(root)
   store.state.IPPORT=root

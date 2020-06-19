@@ -331,7 +331,7 @@ import uuid from '../../../assets/js/uuid'
                 if(result.status==200){
                     if(result.data.bStatus==true){
                         // console.log("*************************",result.data.bStatus)
-                        this.tableData.splice(this.editindex, 1,list)
+                        // this.tableData1.splice(this.editindex, 1,list)
                         this.Success();
                         
                     }else{
