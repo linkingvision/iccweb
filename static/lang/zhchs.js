@@ -96,7 +96,34 @@ export default {
 		  Editorfailure:"编辑失败",
 		  Creationfailed:"创建失败",
 		  Illegal:"非法登录锁定"
-	  }
+	  },
+	  table:{
+		pleasechoose:"请选择",
+		Enterkeywords:"输入关键字",
+		Token:"编号",
+		Type:"类型",
+		Online:"在线状态",
+		Edit:"编辑",
+		Index:"序号",
+		GBID:"国标ID",
+		IP:"IP地址",
+		Name:"名称",
+		Port:"端口",
+		User:"用户名",
+		UUID:"事件编号",
+		Time:"时间",
+		Detaill:"详细",
+		Tokenevent:"设备编号",
+		StartTime:"开始时间",
+		EndTime:"结束时间",
+		Codec:"视频编码",
+		Engine:"引擎",
+		FPSType:"帧率类型",
+		ScaleType:"分辨率类型",
+		Bitrate:"码率",
+		FPS:"帧率",
+		WH:"宽*高"
+		}
 	}
   }
   

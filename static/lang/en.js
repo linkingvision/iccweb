@@ -115,6 +115,33 @@ export default {
 		  Creationfailed:"Creation failed",
 		  Illegal:"Illegal login lock"
 	  },
+	  table:{
+		pleasechoose:"please choose",
+		Enterkeywords:"Enter keywords",
+		Token:"Token",
+		Type:"Type",
+		Online:"Online",
+		Edit:"Edit",
+		Index:"Index",
+		GBID:"GBID",
+		IP:"IP",
+		Name:"Name",
+		Port:"Port",
+		User:"User",
+		UUID:"UUID",
+		Time:"Time",
+		Detaill:"Detaill",
+		Tokenevent:"Token",
+		StartTime:"Start Time",
+		EndTime:"End Time",
+		Codec:"Codec",
+		Engine:"Engine",
+		FPSType:"FPSType",
+		ScaleType:"ScaleType",
+		Bitrate:"Bitrate",
+		FPS:"FPS",
+		WH:"Width*Height"
+	},
 	}
   }
   

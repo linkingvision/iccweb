@@ -1,95 +1,93 @@
 <template>
 	<div class="dasboard_global">
-        <CCard>
-            <CCardBody>
-				<!-- 编辑弹窗 -->
+        <!-- 编辑弹窗 -->
         
-				<el-dialog class="user_pop" width="25%" close="dialog" :title="label.Edit" :visible.sync="editPopup">
-					<!-- 1 -->
-					<el-form label-position="left" label-width="150px" :model="editform">
-						<el-form-item :label="label.user">
-							<input disabled class="editinput" v-model="editform.strUser"/>
-						</el-form-item>
-						<el-form-item :label="label.olPassword">
-							<input class="editinput" v-model="editform.strPasswd"/>
-						</el-form-item>
-						<el-form-item :label="label.nePassword">
-							<input class="editinput" v-model="editform.Newpassword"/>
-						</el-form-item>
-						<el-form-item :label="label.confirmpass1">
-							<input class="editinput" v-model="editform.Newpassword1"/>
-						</el-form-item>
-					</el-form>
-					<div slot="footer" class="dialog-footer">
-						<!-- <el-button @click="editPopup = false">{{$t("message.setting.Cancel")}}</el-button> -->
-						<el-button class="pop_but" type="primary" @click="changepwss">{{$t("message.setting.OK")}}</el-button>
-					</div>
-				</el-dialog>
-                <!-- 添加 -->
-                <el-dialog class="user_pop"  width="25%" :title="eltitle" :visible.sync="dialogFormVisible">
-                    <!-- 1 -->
-                    <el-form label-position="left" label-width="150px" :model="form">
-                        <el-form-item :label="label.user">
-                            <input class="editinput" v-model="form.strUser"/>
-                        </el-form-item>
-                        <el-form-item :label="label.Password">
-                            <input class="editinput" v-model="form.strPasswd"/>
-                        </el-form-item>
-                        <el-form-item :label="label.confirmpass">
-                            <input class="editinput" v-model="form.strPasswd1"/>
-                        </el-form-item>
-                        <!-- <el-form-item :label="label.role">
-                            <input class="editinput" v-model="form.strRoleToken"/>
-                        </el-form-item> -->
-                        <el-form-item :label="label.role">
-                            <el-select v-model="form.strRoleToken" placeholder="请选择">
-                                <el-option
-                                    v-for="item in Role"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-form>
-                    <div slot="footer" class="dialog-footer">
-                        <!-- <el-button @click="dialogFormVisible = false">{{$t("message.setting.Cancel")}}</el-button> -->
-                        <el-button  class="pop_but" @click="adduse" type="primary">{{$t("message.setting.OK")}}</el-button>
-                    </div>
-                </el-dialog>
-                <CButton class="form_butt" @click="dialogFormVisible = true" type="submit">添加用户</CButton>
-                <CButton class="form_butt1" @click="deleteuser" type="submit">删除用户</CButton>
-                <el-table
-                    :data="tableData"
-                    stripe
-                    @select='selectCall'
-                    @select-all='select_Call'
-                    style="width: 100%">
-                    <el-table-column
-                    type="selection"
-                    width="55">
-                    </el-table-column>
-                    <el-table-column
-                    prop="strUser"
-                    label="用户名"
-                    width="180">
-                    </el-table-column>
-                    <el-table-column
-                    prop="strRole"
-                    label="角色"
-                    min-width="50">
-                    </el-table-column>
-                    <el-table-column
-                        min-width="50"
-                        class="size"
-                        fixed="right">
-                        <template  slot-scope="scope">
-                            <el-button @click="handleClick(scope.$index,scope.row)" type="text" size="small">{{$t("message.setting.Change")}}</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </CCardBody>
-		</CCard>
+        <el-dialog class="user_pop" width="25%" close="dialog" :title="label.Edit" :visible.sync="editPopup">
+            <!-- 1 -->
+            <el-form label-position="left" label-width="150px" :model="editform">
+                <el-form-item :label="label.user">
+                    <input disabled class="editinput" v-model="editform.strUser"/>
+                </el-form-item>
+                <el-form-item :label="label.olPassword">
+                    <input class="editinput" v-model="editform.strPasswd"/>
+                </el-form-item>
+                <el-form-item :label="label.nePassword">
+                    <input class="editinput" v-model="editform.Newpassword"/>
+                </el-form-item>
+                <el-form-item :label="label.confirmpass1">
+                    <input class="editinput" v-model="editform.Newpassword1"/>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <!-- <el-button @click="editPopup = false">{{$t("message.setting.Cancel")}}</el-button> -->
+                <el-button class="pop_but" type="primary" @click="changepwss">{{$t("message.setting.OK")}}</el-button>
+            </div>
+        </el-dialog>
+        <!-- 添加 -->
+        <el-dialog class="user_pop"  width="25%" :title="eltitle" :visible.sync="dialogFormVisible">
+            <!-- 1 -->
+            <el-form label-position="left" label-width="150px" :model="form">
+                <el-form-item :label="label.user">
+                    <input class="editinput" v-model="form.strUser"/>
+                </el-form-item>
+                <el-form-item :label="label.Password">
+                    <input class="editinput" v-model="form.strPasswd"/>
+                </el-form-item>
+                <el-form-item :label="label.confirmpass">
+                    <input class="editinput" v-model="form.strPasswd1"/>
+                </el-form-item>
+                <!-- <el-form-item :label="label.role">
+                    <input class="editinput" v-model="form.strRoleToken"/>
+                </el-form-item> -->
+                <el-form-item :label="label.role">
+                    <el-select v-model="form.strRoleToken" placeholder="请选择">
+                        <el-option
+                            v-for="item in Role"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <!-- <el-button @click="dialogFormVisible = false">{{$t("message.setting.Cancel")}}</el-button> -->
+                <el-button  class="pop_but" @click="adduse" type="primary">{{$t("message.setting.OK")}}</el-button>
+            </div>
+        </el-dialog>
+        <div class="button_edi">
+            <CButton class="form_butt" @click="dialogFormVisible = true" type="submit">添加用户</CButton>
+            <CButton class="form_butt1" @click="deleteuser" type="submit">删除用户</CButton>
+        </div>
+        <el-table
+            :data="tableData"
+            stripe
+            @select='selectCall'
+            @select-all='select_Call'
+            style="width: 100%">
+            <el-table-column
+            type="selection"
+            width="55">
+            </el-table-column>
+            <el-table-column
+            prop="strUser"
+            label="用户名"
+            width="180">
+            </el-table-column>
+            <el-table-column
+            prop="strRole"
+            label="角色"
+            min-width="50">
+            </el-table-column>
+            <el-table-column
+                min-width="50"
+                class="size"
+                fixed="right">
+                <template  slot-scope="scope">
+                    <el-button @click="handleClick(scope.$index,scope.row)" type="text" size="small">{{$t("message.setting.Change")}}</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
 	</div>
 </template>
 
@@ -340,27 +338,6 @@ export default {
 			width: 100%;
 		}
 	}
-    .form_butt{
-        background:rgba(50,119,255,1);
-        border-radius:2px;
-        padding: 5px 10px;
-        font-size:14px;
-        font-family:PingFang SC;
-        font-weight:600;
-        color:rgba(255,255,255,1);
-        margin-right: 20px;
-		border-color: none;
-    }
-    .form_butt1{
-        background:rgba(55,62,72,1);
-        border:1px solid rgba(50,119,255,1);
-        border-radius:2px;
-        font-size:14px;
-        font-family:PingFang SC;
-        font-weight:600;
-        color:rgba(255,255,255,1);
-        box-sizing: border-box;
-    }
 }
 
 </style>

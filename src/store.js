@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  sidebarShow: 'responsive',
+  sidebarShow: null,
   sidebarMinimize: false,
   darkMode: true,
   lang:"zhchs",
@@ -18,10 +18,10 @@ const mutations = {
     const sidebarOpened = [true, 'responsive'].includes(state.sidebarShow)
     state.sidebarShow = sidebarOpened ? false : 'responsive'
   },
-  toggleSidebarMobile (state) {
-    const sidebarClosed = [false, 'responsive'].includes(state.sidebarShow)
-    state.sidebarShow = sidebarClosed ? true : 'responsive'
-  },
+  // toggleSidebarMobile (state) {
+  //   const sidebarClosed = [false, 'responsive'].includes(state.sidebarShow)
+  //   state.sidebarShow = sidebarClosed ? true : 'responsive'
+  // },
   set (state, [variable, value]) {
     state[variable] = value
   },

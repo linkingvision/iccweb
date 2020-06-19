@@ -1,8 +1,43 @@
 // Variable overrides
-//左边菜单栏鼠标放上去的颜色
-$theme-colors: (
-  "primary": #55C3EB,
-  "danger": #ff4136,
-  "primary1": #55C3EB,
-);
-$breadcrumb-divider: none;
+@import "~@coreui/coreui-pro/scss/coreui";
+// Your variable overrides
+
+$body-bg: #fff;
+$body-color: #000;
+.c-app.c-dark-theme {
+    color: $body-color;
+    background-color: $body-bg;
+}
+// .toggler{
+//   color: $body-color;
+// }
+// 左边栏
+.c-app .c-sidebar {
+  color: $body-color;
+  background:$body-bg;
+  // border: 0;
+}
+
+// 表格
+.c-app {
+	a{
+		color: $body-color;
+	} 
+	//顶部导航栏
+	.c_ding{
+		background-color: $body-bg;
+	}
+    .btn-link{
+        color: $body-color;
+        text-decoration: none;
+    }
+    .el-table {
+      background-color:#ff0;
+	}
+	//设置左侧栏
+	.setting_all{
+		.setting_zuo{
+			background-color: #212121;
+		}
+	}
+}

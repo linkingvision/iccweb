@@ -1,13 +1,13 @@
 <template>
     <div class="particiants">
         <!-- 头部 -->
-        <div class="particiants_title">
+        <!-- <div class="particiants_title">
             <div class="particiants_logo"></div>
-        </div>
+        </div> -->
         <!-- 返回 -->
-        <div>
+        <!-- <div>
             <CButton class="particiants_title_but iconfont icon-fanhui" type="submit" @click="drop" to="dashboard"> 返回首页</CButton>
-        </div>
+        </div> -->
         <!-- 身体 -->
         <div class="particiants_content">
             <div class="content_you">
@@ -174,7 +174,7 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #252A32;
-    position: fixed;
+    // position: fixed;
     //头部
     .particiants_title{
         width: 100%;
@@ -207,7 +207,7 @@ export default {
         .content_zuo{
             width: 15%;
             min-width: 260px;
-            height: 90vh;
+            height: 97vh;
             color: #FFFFFF;
             //1
             .content_zuo_con{
@@ -354,7 +354,7 @@ export default {
                 }
                 .content_zuo_but{
                     width: 100%;
-                    height: 50%;
+                    // height: 50%;
                     padding: 10px 18px;
                     background-color: #2E343C;
                     div{
@@ -387,7 +387,7 @@ export default {
         }
         .content_you{
             width: 85%;
-            height: 90vh;
+            height: 95vh;
             .l5video{
                 width: 100%;
                 height: 100%;

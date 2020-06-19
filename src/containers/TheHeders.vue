@@ -1,41 +1,40 @@
 <template>
     <div class="c_ding">
+        <CButton style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="$store.commit('toggleSidebarDesktop')"></CButton>
         <div class="c_logo"></div>
         <div class="c_use">
-            <CHeader with-subheader>
-                <!-- <CToggler
-                in-header
-                class="ml-3 d-lg-none"
-                @click="$store.commit('toggleSidebarMobile')"
-                >
-                    <span class="toggler el-icon-s-fold"></span>
-                </CToggler> -->
-                <!-- <CToggler
-                in-header
-                class="ml-3 d-md-down-none"
-                @click="$store.commit('toggleSidebarDesktop')"
-                >
-                    <span class="toggler el-icon-s-unfold"></span>
-                </CToggler> -->
-            </CHeader>
+            
+            <div></div>
             <div class="use_you">
-                <div class="use_you_top">欢迎你</div>
+                    <!-- <button 
+                    @click="() => $store.commit('toggle', 'darkMode')" 
+                    class="c-header-nav-btn"
+                    >
+                    <CIcon v-if="$store.state.darkMode" name="cil-sun"/>
+                    <CIcon v-else name="cil-moon"/>
+                    </button> -->
                 <div class="use_you_top">
-                    <router-link to='logout'>
-                        <span class="">
-                            <i class="iconfont icon-yonghuming"></i> {{user}}
-                        </span>
-                    </router-link>
-                    <!-- <el-dropdown trigger="click">
-                        <span class="el-dropdown-link">
-                            admin<i class="el-icon-arrow-down el-icon--right"></i>
-                        </span>
-                        <el-dropdown-menu slot="dropdown">
-                            <router-link to='logout'>
-                                <el-dropdown-item divided ><i class="el-icon-arrow-down el-icon--right"></i>用户</el-dropdown-item>
-                            </router-link>
-                        </el-dropdown-menu>
-                    </el-dropdown> -->
+                    <div class="use_user">
+                        <router-link :to="{name:'Logout'}">
+                            <span class="">
+                                <i class="iconfont icon-yonghuming"></i> {{user}}
+                            </span>
+                        </router-link>
+                    </div>
+                    <div>
+                        <CDropdown
+                            color="link"
+                            :caret="false"
+                        >
+                            <template #toggler-content>
+                                <i class="iconfont icon-qita"></i>
+                            </template>
+                            <CDropdownItem >
+                                <div class="about_ab"><i class="iconfont icon-guanyu"></i>关于</div>
+                            </CDropdownItem>
+                        </CDropdown>
+                        
+                    </div>
                 </div>
                 
             </div>
@@ -45,24 +44,40 @@
 <script>
     export default {
         name: 'TheHeders',
+        computed: {
+            show () {
+            return this.$store.state.sidebarShow 
+            },
+            minimize () {
+            return this.$store.state.sidebarMinimize 
+            }
+        },
         data(){
             return{
                 gEvvalue:120,
-                user:this.$store.state.user
+                user:this.$store.state.user,
+                // show: false,
+                navbarText: false,
+                navbarDropdown: false
             }
         }
     }
 </script>
 <style scoped>
-a{
+/* a{
     color: #FFFFFF;
-}
-.toggler{
-    color: #FFF;
-}
+} */
 i{
     font-size:16px;
 }
+.toggler{
+    padding: 0;
+    text-align: center;
+    line-height: 40px;
+    color: #FFF;
+    /* margin-right: 5px; */
+}
+
 /* 铃铛 */
 .el-badge >>> .el-badge__content{
     border: 0;
@@ -75,6 +90,9 @@ i{
 .el-dropdown{
     color: #FFFFFF;
 }
+.about_ab i{
+    margin-right: 6px;
+}
 /* 顶部 */
 .use_you{
     /* width: 20%; */
@@ -82,32 +100,31 @@ i{
     /* justify-content: space-between; */
 }
 .use_you .use_you_top{
+    display: flex;
     margin-right: 30px;
 }
-.c-header.c-header-fixed{
-	position:static;
-}
-.c-header {
-    background: none;
-    border-bottom:none;
-}
+/* .use_user{
+    margin-right: 10px;
+} */
+
 .c_ding{
   width: 100%;
-  height: 50px;
-  background-color: #151515;
+  height:40px;
+  /* background-color: #202020; */
   position: fixed;
   top: 0;
   bottom: 0;
-  padding: 0 30px;
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
+  z-index: 10;
 }
 /* logo */
 .c_logo{
 	width: 160px;
 	height: 100%;
 	background: url("../assets/imgs/l5s_logo_bai.png") center center no-repeat;
-	background-size: 100%;
+	background-size: 85%;
 }
 .c_use{
 	width: 89%;
@@ -116,11 +133,9 @@ i{
 	font-family:Source Han Sans CN;
 	font-weight:400;
 	color:rgba(255,255,255,1);
-	line-height: 50px;
+	line-height: 40px;
 	display: flex;
 	justify-content: space-between;
 }
-.c-dark-theme .c-header {
-    border-bottom: 0;
-}
+
 </style>

@@ -1,15 +1,14 @@
 <template>
 	<div>
-		
-		<TheHeders/>
 		<div  class="c-app" :class="{ 'c-dark-theme': $store.state.darkMode }">
+			<TheHeders/>
 			<!-- 左边菜单栏 -->
 			<TheSidebar/>
 			<CWrapper>
 				<!-- 顶部导航 -->
 				<!-- <TheHeader/> -->
-				<!-- 内容 -->
-				<div class="c-body">
+				<!-- 内容 @click="-->
+				<div @click="clicktogg" class="c-body">
 					<main class="c-main">
 						<CContainer fluid>
 							<transition name="fade">
@@ -19,7 +18,7 @@
 					</main>
 					
 				<!-- 底部 -->
-				<TheFooter/>
+				<!-- <TheFooter/> -->
 				</div>
 			</CWrapper>
 				
@@ -40,51 +39,48 @@ export default {
 	TheHeders,
 	TheHeader,
 	TheFooter,
+  },
+  methods:{
+	  clicktogg(){
+		  if(this.$store.state.sidebarShow){
+			  this.$store.commit('toggleSidebarDesktop')
+		  }
+	  }
   }
 }
 </script>
 
 <style scoped>
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
 }
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-/* 全体的css */
-.c-app.c-dark-theme {
-    color: #e1e1e1;
-    background-color: #353840;
-}
-
-/* 左边菜单栏 */
-.c-dark-theme .c-sidebar {
-    color: #e1e1e1;
-    background: #212428;
-    border: 0;
-}
+} */
+/* 左边 */
 .c-sidebar.c-sidebar-fixed {
     position: fixed;
-    top: 50px;
+    top: 40px;
 	/* bottom: 50px; */
 	z-index: 1000;
 }
 /* 右边内容 */
 .c-wrapper{
 	/* margin-top: 48px; */
-	padding-top: 50px;
+	padding-top: 40px;
 	box-sizing: border-box;
+	margin: 0;
 }
 .c-wrapper:not(.c-wrapper-fluid) {
 	height: 100vh;
 }
 .c-main {
-	height: 94%;
+	height: 90vh;
 	overflow: scroll;
 	padding: 0;
-	background-color: #1E2228;
+	/* background-color: #1E2228; */
 }
 .c-main::-webkit-scrollbar{
     display: none;
@@ -92,5 +88,24 @@ export default {
 .c-main > .container-fluid{
 	padding: 0;
 	height: 100%;
+}
+
+
+/* // 顶部 */
+
+.c-dark-theme .c-header {
+    border-bottom: 0;
+}
+.c-header.c-header-fixed{
+	position:static;
+}
+.c-header {
+    min-height: 40px;
+    background: none;
+    border-bottom:none;
+    box-sizing: border-box;
+}
+.c-header .c-header-toggler{
+    border: none !important;
 }
 </style>

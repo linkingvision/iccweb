@@ -6,7 +6,6 @@
                 <!-- 添加 -->
                 
                 <el-dialog
-                    class="dasboard_modal"
                     title="创建会议"
                     :visible.sync="dialogFormVisible"
                     width="25%">
@@ -78,8 +77,10 @@
                         <CButton class="conten_buttom_but" type="primary"  @click="myModalADD">创建</CButton>
                     </span>
                 </el-dialog>
-                <CButton class="form_butt" @click="addclick" type="submit">创建会议</CButton>
-                <CButton class="form_butt1" @click="deletClickall" type="submit">删除会议</CButton>
+                <div class="button_edi">
+                    <CButton class="form_butt" @click="addclick" type="submit">创建会议</CButton>
+                    <CButton class="form_butt1" @click="deletClickall" type="submit">删除会议</CButton>
+                </div>
                 <el-table
                     :data="tableData.filter(data => !search || data.Name.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
                     stripe
@@ -158,7 +159,7 @@
 </template>
 
 <script>
-import uuid from '../../assets/js/uuid'
+import uuid from '../../../assets/js/uuid'
 export default {
 	name: 'roleinof',
 	data(){
@@ -432,42 +433,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dasboard_global{
-	/* 弹框input */
-    .form_butt{
-        background:rgba(50,119,255,1);
-        border-radius:2px;
-        padding: 5px 10px;
-        font-size:14px;
-        font-family:PingFang SC;
-        font-weight:600;
-        color:rgba(255,255,255,1);
-        margin-right: 20px;
-		border-color: none;
-    }
-    .form_butt1{
-        background:rgba(55,62,72,1);
-        border:1px solid rgba(50,119,255,1);
-        border-radius:2px;
-        font-size:14px;
-        font-family:PingFang SC;
-        font-weight:600;
-        color:rgba(255,255,255,1);
-        box-sizing: border-box;
-    }
-}
 /deep/ .dasboard_modal{
-    .el-dialog{
-        background-color: #2E343C;
-        .conten_buttom_but{
-            padding: 5px 30px;
-            background:#3277FF;
-            font-size:14px;
-            font-family:PingFang SC;
-            font-weight:600;
-            color:rgba(255,255,255,1);
-        }
-    }
     .el-input-number__decrease, .el-input-number__increase{
         background: none;
     }

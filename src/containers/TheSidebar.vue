@@ -1,23 +1,20 @@
 <template>
-    <CSidebar >
+    <CSidebar 
+    :minimize="minimize"
+    unfoldable
+    :show="show"
+    @update:show="(value) => $store.commit('set', ['sidebarShow', value])">
         <Menu class="sideb_content" theme="dark" :active-name="activemenu" style="width:100%">
-            <MenuItem name="1" to="dashboard">
+            <MenuItem name="1" :to="{name:'dashboard'}">
                 <Icon type="" class="iconfont icon-11111"/>
                 视频会议
             </MenuItem>
-            <MenuItem name="2" to="Meetingman">
-                <Icon class="iconfont icon-11111"/>
-                会议管理
-            </MenuItem>
-            <Submenu name="3" class="zuo_none">
-                <template slot="title">
+            <router-link  :to="{name:'Meetingman'}" target="_blank">
+                <MenuItem name="3">
                     <Icon class="iconfont icon-yonghuming"/>
-                    用户管理
-                </template>
-                <MenuItem to="Userinfo" name="3-1">用户管理</MenuItem>
-                <MenuItem to="Roleinof" name="3-2">角色管理</MenuItem>
-                <MenuItem name="3-3">分组管理</MenuItem>
-            </Submenu>
+                    设置管理
+                </MenuItem>
+            </router-link>
         </Menu>
     </CSidebar>
 </template>
@@ -28,11 +25,17 @@ export default {
   name: 'TheSidebar',
   data(){
       return {
-          activemenu:"2"
+          activemenu:"1"
       }
   },
 //   nav,
   computed: {
+    show () {
+      return this.$store.state.sidebarShow 
+    },
+    minimize () {
+      return this.$store.state.sidebarMinimize 
+    }
   },
   mounted(){
         if(this.$store.state.root==='Operator'){
@@ -42,13 +45,9 @@ export default {
         this.menuList();
   },
     methods:{
-        menuList(){  // 这个方法里定义好，高亮和路由
-            let path = this.$route.matched[1].meta.title// 获取到地址拦上#号后面的url地址
-            // console.log(path,this.$route)
+        menuList(){ 
+            let path = this.$route.matched[1].meta.title
             this.activemenu = path
-            // if(path.indexOf('事先定义好的理由') != -1){  // 是否包含，-1是包含，0不包含
-            //     this.activemenu = 2
-            // }
         }
     }
 }

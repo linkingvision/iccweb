@@ -5,9 +5,9 @@
                 <!-- 弹窗 -->
                 <el-dialog
                     class="dasboard_modal"
+                    width="25%"
                     title="创建会议"
-                    :visible.sync="myModal"
-                    width="25%">
+                    :visible.sync="myModal">
                     <el-form class="el_form" ref="form" label-position='left' :model="sizeForm" label-width="100px" size="small ">
                         <el-form-item label="会议名称">
                             <el-input v-model="sizeForm.name"></el-input>
@@ -126,7 +126,7 @@
 					</CCol>
 				</CRow>
                 <CRow class="margin_g">
-                    <CCol sm="4" class="margin_g" v-for="(a,index) in meetdata" :key="index">
+                    <CCol sm="3" class="margin_g" v-for="(a,index) in meetdata" :key="index">
                         <div class="dasboard_content">
                             <!-- 标题 -->
                             <div class="content_title">
@@ -235,7 +235,7 @@ export default {
                                 this.myModal1==false;
                                 this.$router.push({
                                     name: `Participants`,
-                                    path: '/Participants',
+                                    path: 'Participants',
                                     params: {
                                         token:usertoken
                                     }
@@ -311,7 +311,7 @@ export default {
                 var url = this.$store.state.IPPORT + "/api/v1/CreateParticipant?token="+encodeURIComponent(token)+"&token1="+encodeURIComponent(usertoken[i])+"&type="+member+"&solt="+size+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
                     this.myModal=false
-                    this.$message(successfully);
+                    // this.$message(successfully);
                     this.meetingdata()
                 })
             }
@@ -427,23 +427,28 @@ export default {
 		.dasboard_top{
 			width: 100%;
 			height: 100%;
+            min-height: 226px;
 			background: url('../gallery/dash_oneback.png')no-repeat;
-			padding: 6% 8% 6% 12%;
+			padding: 4% 8% 6% 12%;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-radius: 10px;
+            background-size: 100%;
             //第一个内容左边
             .top_zuo{
                 width: 80%;
                 height: 100%;
                 //第一内容顶部
                 .top_title{
-                    height: 36%;
+                    width: 25%;
+                    height: 30%;
                     // font-size: 20px;
                     // font-family:AliHYAiHei;
                     // font-weight:600;
                     // color:rgba(255,255,255,1);
                     background: url('../../assets/imgs/l5s_logo_bai.png')no-repeat;
+                    background-size: 100%;
                 }
                 .top_zuo_zuo{
                     margin: 20px 0 0 6%;
@@ -515,7 +520,6 @@ export default {
             width: 100%;
             height: 100%;
             min-height: 150px;
-            background:rgba(46,52,60,1);
             border-radius: 4px;
             padding: 5%;
             .content_title{
@@ -613,45 +617,7 @@ export default {
 	}
 }
 // 弹框 
-/deep/ .dasboard_modal{
-    .el-dialog{
-        background-color: #2E343C;
-        .conten_buttom_but{
-            padding: 5px 30px;
-            background:#3277FF;
-            font-size:14px;
-            font-family:PingFang SC;
-            font-weight:600;
-            color:rgba(255,255,255,1);
-        }
-    }
-    .el-input-number__decrease, .el-input-number__increase{
-        background: none;
-    }
-    .el-dialog__body{
-        color: #FFF;
-    }
-    .el-form-item__label{
-        color: #FFF;
-    }
-    .el-input__inner{
-        color: #FFF !important;
-        border:1px solid rgba(181,181,181,1);
-    }
-    .el-range-input{
-        color: #FFF !important;
-        background: none;
-        border: none;
-    }
-    .el-radio-group{
-        display: flex;
-        justify-content: space-around;   
-        align-items: center; 
-        .el-radio{
-            color: #FFF;
-        }
-    }
-}
+
 .margin_g{
     margin-bottom: 20px;
 }

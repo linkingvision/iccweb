@@ -6,6 +6,7 @@
                 <CCol sm="12">
                     <CCard class="content_beck">
                         <CCardBody>
+                            
                             <CForm novalidate @submit.stop.prevent="login">
                                 <CInput placeholder="Username" v-model="name">
                                     <template #prepend-content><i class="content_icon iconfont icon-yonghuming"></i> </template>
@@ -99,6 +100,20 @@ export default {
                         localStorage.mcutoken = this.$store.state.token
                         
                         this.loginroot(data.strSession,root)
+                    }else{
+                        // console.log(data)
+                        // if(data.nFaultTimes<=3){
+                        //     _this.frequency=3-data.nFaultTimes;
+                        //     // console.log("data还能错次拉",3-data.nFaultTimes,_this.frequency);
+                        //     $("#prompt").show();
+                        //     $("#prompt1").hide();
+                        // }else{
+                        //     _this.lockingdate = Math.floor(data.tLockTimeResidue/60);
+                        //     $("#prompt1").show();
+                        //     $("#prompt").hide();
+                        //     console.log("data请等待",_this.lockingdate,data.tLockTimeResidue)
+                        // }
+                        this.$message(this.$t("message.login.login_status_failed"));
                     }
                 }
             })

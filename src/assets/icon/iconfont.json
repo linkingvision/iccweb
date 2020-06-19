@@ -6,18 +6,60 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "109818",
-      "name": "加",
-      "font_class": "jia",
-      "unicode": "e609",
-      "unicode_decimal": 58889
+      "icon_id": "2118518",
+      "name": "设置_管理",
+      "font_class": "shezhi_guanli",
+      "unicode": "e660",
+      "unicode_decimal": 58976
     },
     {
-      "icon_id": "518139",
-      "name": "用户",
-      "font_class": "user",
+      "icon_id": "3073911",
+      "name": "WebRTC",
+      "font_class": "WebRTC",
+      "unicode": "e675",
+      "unicode_decimal": 58997
+    },
+    {
+      "icon_id": "3720804",
+      "name": "转码管理",
+      "font_class": "transcode-management",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "8645533",
+      "name": "huiyiguanli",
+      "font_class": "huiyiguanli",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "12139649",
+      "name": "huiyiguanli-",
+      "font_class": "huiyiguanli-",
       "unicode": "e603",
       "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "2230186",
+      "name": "汉堡包",
+      "font_class": "hanbaobao",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "4008334",
+      "name": "其他",
+      "font_class": "qita",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "7499599",
+      "name": "关于",
+      "font_class": "guanyu",
+      "unicode": "e615",
+      "unicode_decimal": 58901
     },
     {
       "icon_id": "1269618",
@@ -25,27 +67,6 @@
       "font_class": "shangchuan",
       "unicode": "e608",
       "unicode_decimal": 58888
-    },
-    {
-      "icon_id": "5452558",
-      "name": "减",
-      "font_class": "jian",
-      "unicode": "e632",
-      "unicode_decimal": 58930
-    },
-    {
-      "icon_id": "7018046",
-      "name": "搜索--1",
-      "font_class": "soushuo",
-      "unicode": "e6e5",
-      "unicode_decimal": 59109
-    },
-    {
-      "icon_id": "7184563",
-      "name": "sou-suo",
-      "font_class": "search",
-      "unicode": "e604",
-      "unicode_decimal": 58884
     },
     {
       "icon_id": "8287513",
@@ -60,13 +81,6 @@
       "font_class": "guanbi6",
       "unicode": "e606",
       "unicode_decimal": 58886
-    },
-    {
-      "icon_id": "8892302",
-      "name": "关 闭",
-      "font_class": "guanbi1",
-      "unicode": "e653",
-      "unicode_decimal": 58963
     },
     {
       "icon_id": "11690871",
@@ -153,13 +167,6 @@
       "unicode_decimal": 58984
     },
     {
-      "icon_id": "6665743",
-      "name": "关  闭",
-      "font_class": "guanbi",
-      "unicode": "e664",
-      "unicode_decimal": 58980
-    },
-    {
       "icon_id": "7120824",
       "name": "会议",
       "font_class": "huiyi1",
@@ -174,39 +181,11 @@
       "unicode_decimal": 58882
     },
     {
-      "icon_id": "9401483",
-      "name": "会议",
-      "font_class": "huiyi2",
-      "unicode": "e616",
-      "unicode_decimal": 58902
-    },
-    {
       "icon_id": "9974437",
       "name": "退出登录",
       "font_class": "tuichudenglu",
       "unicode": "e70b",
       "unicode_decimal": 59147
-    },
-    {
-      "icon_id": "10177388",
-      "name": "返回",
-      "font_class": "fanhui1",
-      "unicode": "e6de",
-      "unicode_decimal": 59102
-    },
-    {
-      "icon_id": "13411994",
-      "name": "表  情",
-      "font_class": "biaoqing",
-      "unicode": "e60e",
-      "unicode_decimal": 58894
-    },
-    {
-      "icon_id": "14282929",
-      "name": "下载",
-      "font_class": "xiazai",
-      "unicode": "e628",
-      "unicode_decimal": 58920
     },
     {
       "icon_id": "14407843",

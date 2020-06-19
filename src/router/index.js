@@ -22,10 +22,24 @@ const TheContainer = () => import('@/containers/TheContainer')
 const Dashboard = () => import('@/views/mainpage/Dashboard')
 const Participants = () => import('@/views/mainpage/dashboard/participants')
 
-const Meetingman = () => import('@/views/mainpage/Meetingman')
 
+const Setting = () => import('@/views/mainpage/setting')
+const Meetingman = () => import('@/views/mainpage/setting/Meetingman')
 const Userinfo = () => import('@/views/mainpage/setting/userinof')
 const Roleinof = () => import('@/views/mainpage/setting/roleinof')
+// const Device = () => import('@/views/mainpage/setting/device')
+const Stream = () => import('@/views/mainpage/setting/stream')
+const Onvif = () => import('@/views/mainpage/setting/onvif')
+const File = () => import('@/views/mainpage/setting/file')
+const Deviceall = () => import('@/views/mainpage/setting/deviceall')
+const Tran_customize = () => import('@/views/mainpage/setting/Tran_customize')
+const Tran_default = () => import('@/views/mainpage/setting/Tran_default')
+const Device_sdk = () => import('@/views/mainpage/setting/device_sdk')
+
+const Webrtc_cloudmode = () => import('@/views/mainpage/setting/webrtc_cloudmode')
+const Webrtc_Forwardingmode = () => import('@/views/mainpage/setting/webrtc_Forwardingmode')
+const Webrtc_turnmode = () => import('@/views/mainpage/setting/webrtc_turnmode')
+
 
 const Login = () => import('@/views/login')
 const Logout = () => import('@/views/logout')
@@ -65,44 +79,139 @@ export default new Router({
                       type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
+				
 				{
-                    path: 'Meetingman',
-                    name: "Meetingman",
-                    component: Meetingman,
-                    meta: {
-                      title: '2',
-                      type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
-                    },
-				},
-                {
-                  path: 'Userinfo',
-                  name: "Userinfo",
-                  component: Userinfo,
-                  meta: {
-                    title: '3-1',
-                    type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
-                  }
-			  	},
-				  {
-					path: 'Roleinof',
-					name: "Roleinof",
-					component: Roleinof,
+					path: 'Participants',
+					name: "Participants",
+					component: Participants,
 					meta: {
-					  title: '3-2',
-					  type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
-					}
+						title: '播放',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+					},
+				},
+				{
+					path: 'Setting',
+					name: "Setting",
+					component: Setting,
+					meta: {
+						title: '2',
+						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+					},
+					children: [
+						{
+							path: 'Meetingman',
+							name: "Meetingman",
+							component: Meetingman,
+							meta: {
+							  title: '2-1',
+							  type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},
+						{
+							path: 'Userinfo',
+							name: "User",
+							component: Userinfo,
+							meta: {
+								title: '2-2',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},
+						{
+							path: 'Roleinof',
+							name: "Roleinof",
+							component: Roleinof,
+							meta: {
+							title: '2-3',
+							type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							}
+						},
+						{
+							path: 'Stream',
+							name: "Stream",
+							component: Stream,
+							meta: {
+								title: '2-4',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},
+						{
+							path: 'Onvif',
+							name: "Onvif",
+							component: Onvif,
+							meta: {
+								title: '2-5',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'File',
+							name: "File",
+							component: File,
+							meta: {
+								title: '2-6',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Deviceall',
+							name: "Deviceall",
+							component: Deviceall,
+							meta: {
+								title: '2-7',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Tran_default',
+							name: "Tran_default",
+							component: Tran_default,
+							meta: {
+								title: '2-8',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Tran_customize',
+							name: "Tran_customize",
+							component: Tran_customize,
+							meta: {
+								title: '2-9',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Device_sdk',
+							name: "Device_sdk",
+							component: Device_sdk,
+							meta: {
+								title: '2-10',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Webrtc_cloudmode',
+							name: "Webrtc_cloudmode",
+							component: Webrtc_cloudmode,
+							meta: {
+								title: '2-11',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Webrtc_Forwardingmode',
+							name: "Webrtc_Forwardingmode",
+							component: Webrtc_Forwardingmode,
+							meta: {
+								title: '2-12',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Webrtc_turnmode',
+							name: "Webrtc_turnmode",
+							component: Webrtc_turnmode,
+							meta: {
+								title: '2-13',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						}
+					]
 				}
             ]
 		},
-		{
-			path: '/Participants',
-			name: "Participants",
-			component: Participants,
-			meta: {
-				title: '播放',
-				type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
-			},
-		},
+		
         {
 			path: '/login',
 			name: 'Login',
