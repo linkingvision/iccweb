@@ -6,13 +6,13 @@
             
             <div></div>
             <div class="use_you">
-                    <!-- <button 
+                <!-- <button 
                     @click="() => $store.commit('toggle', 'darkMode')" 
                     class="c-header-nav-btn"
                     >
                     <CIcon v-if="$store.state.darkMode" name="cil-sun"/>
                     <CIcon v-else name="cil-moon"/>
-                    </button> -->
+                </button> -->
                 <div class="use_you_top">
                     <div class="use_user">
                         <router-link :to="{name:'Logout'}">
@@ -24,8 +24,7 @@
                     <div>
                         <CDropdown
                             color="link"
-                            :caret="false"
-                        >
+                            :caret="false">
                             <template #toggler-content>
                                 <i class="iconfont icon-qita"></i>
                             </template>

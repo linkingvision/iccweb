@@ -9,8 +9,13 @@
             <CButton class="particiants_title_but iconfont icon-fanhui" type="submit" @click="drop" to="dashboard"> 返回首页</CButton>
         </div> -->
         <!-- 身体 -->
-        <div class="particiants_content">
+        <div class="particiants_content" @mouseover="mouseOver"  @mouseleave="mouseLeave">
             <div class="content_you">
+                <div class="conten_you_stup">
+                    <div class="conten_you_stupcen" @click="drop">
+                        关闭
+                    </div>
+                </div>
                 <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
             </div>
             <div class="content_zuo">
@@ -21,7 +26,7 @@
                         <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
                             <div class="user_icon">
                                 <i class="icon_size iconfont icon-yonghuming"></i>
-                                <div class="user_size">{{a.strToken}}</div>
+                                <div class="user_size">{{a.strName}}</div>
                             </div>
                             <div class="user_onl">在线</div>
                         </div>
@@ -64,7 +69,7 @@
                             <span class="iconfont icon-biaoqing"></span>
                         </div>
                         <div>
-                            <CButton class="form_butt1" type="submit">加入会议</CButton>
+                            <CButton class="form_butt1" type="submit">发送</CButton>
                         </div>
                     </div>
                 </div>
@@ -94,13 +99,12 @@ export default {
         }
     },
     mounted(){
+        $(".conten_you_stup").hide()
         if(this.usertoken!= undefined){
             this.l5svideplay()
             this.mettuselest();
         }else{
-            this.$router.push({
-                path: 'dashboard'
-            })
+            this.drop()
         }
     },
     methods:{
@@ -124,6 +128,7 @@ export default {
                         mosaicId: data[i].mosaicId,
                         nSolt: data[i].nSolt,
                         partId: data[i].partId,
+                        strName: data[i].strName,
                         strToken: data[i].strToken,
                         strType: data[i].strType
                     }
@@ -135,6 +140,7 @@ export default {
         },
         //退出
         drop(){
+            // console.log("41")
             if (this.h5handler != undefined)
             {
                 this.h5handler.disconnect();
@@ -142,7 +148,7 @@ export default {
                 this.h5handler = undefined;
             }
             this.$router.push({
-                path: 'dashboard'
+                path: 'Conference'
             })
         },
         //播放视频
@@ -165,6 +171,12 @@ export default {
             };
             this.h5handler = new H5sPlayerRTC(conf);
             this.h5handler.connect();
+        },
+        mouseOver(){
+            $(".conten_you_stup").show()
+        },
+        mouseLeave(){
+            $(".conten_you_stup").hide()
         }
     }
 }
@@ -172,7 +184,8 @@ export default {
 <style lang="scss" scoped>
 .particiants{
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    height: 96vh;
     background-color: #252A32;
     // position: fixed;
     //头部
@@ -203,11 +216,12 @@ export default {
     .particiants_content{
         width: 100%;
         // height: 100%;
+        height: 96vh;
         display: flex;
         .content_zuo{
             width: 15%;
             min-width: 260px;
-            height: 97vh;
+            height: 98vh;
             color: #FFFFFF;
             //1
             .content_zuo_con{
@@ -387,7 +401,24 @@ export default {
         }
         .content_you{
             width: 85%;
-            height: 95vh;
+            height: 96vh;
+            position: relative;
+            
+            .conten_you_stup{
+                width: 100%;
+                position: absolute;
+                bottom: 15%;
+                display: flex;
+                justify-content: center;
+                z-index: 10;
+                cursor:pointer;
+                .conten_you_stupcen{
+                    background:rgba(46,52,60,0.7);
+                    border-radius:17px;
+                    padding: 10px 30px;
+                    // text-align: center;
+                }
+            }
             .l5video{
                 width: 100%;
                 height: 100%;

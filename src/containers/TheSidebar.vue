@@ -7,14 +7,22 @@
         <Menu class="sideb_content" theme="dark" :active-name="activemenu" style="width:100%">
             <MenuItem name="1" :to="{name:'dashboard'}">
                 <Icon type="" class="iconfont icon-11111"/>
-                视频会议
+                会议首页
             </MenuItem>
-            <router-link  :to="{name:'Meetingman'}" target="_blank">
+            <router-link  :to="{name:'Conference'}" >
                 <MenuItem name="3">
+                    <Icon class="iconfont icon-yonghuming"/>
+                    视频会议
+                </MenuItem>
+            </router-link>
+            <!-- target="_blank" -->
+            <router-link  :to="{name:'Meetingman'}" target="_blank">
+                <MenuItem name="2">
                     <Icon class="iconfont icon-yonghuming"/>
                     设置管理
                 </MenuItem>
             </router-link>
+            
         </Menu>
     </CSidebar>
 </template>

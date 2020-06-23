@@ -22,6 +22,7 @@ const TheContainer = () => import('@/containers/TheContainer')
 const Dashboard = () => import('@/views/mainpage/Dashboard')
 const Participants = () => import('@/views/mainpage/dashboard/participants')
 
+const Conference = () => import('@/views/mainpage/Conference')
 
 const Setting = () => import('@/views/mainpage/setting')
 const Meetingman = () => import('@/views/mainpage/setting/Meetingman')
@@ -35,7 +36,6 @@ const Deviceall = () => import('@/views/mainpage/setting/deviceall')
 const Tran_customize = () => import('@/views/mainpage/setting/Tran_customize')
 const Tran_default = () => import('@/views/mainpage/setting/Tran_default')
 const Device_sdk = () => import('@/views/mainpage/setting/device_sdk')
-
 const Webrtc_cloudmode = () => import('@/views/mainpage/setting/webrtc_cloudmode')
 const Webrtc_Forwardingmode = () => import('@/views/mainpage/setting/webrtc_Forwardingmode')
 const Webrtc_turnmode = () => import('@/views/mainpage/setting/webrtc_turnmode')
@@ -79,7 +79,15 @@ export default new Router({
                       type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
-				
+				{
+                    path: 'Conference',
+                    name: "Conference",
+                    component: Conference,
+                    meta: {
+                      title: '3',
+                      type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
 				{
 					path: 'Participants',
 					name: "Participants",
