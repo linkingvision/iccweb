@@ -259,3 +259,13 @@ if(localStorage.getItem('mcutoken')){
   }
   console.log(root)
   store.state.IPPORT=root
+
+  var wsroot = process.env.VUE_APP_PORT;
+  if (wsroot == undefined)
+  {
+	  wsroot = window.location.host;
+  }
+  console.log(wsroot)
+  store.state.WSROOT=wsroot
+
+  

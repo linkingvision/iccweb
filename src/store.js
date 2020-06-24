@@ -10,7 +10,8 @@ const state = {
   token:null,
   user:null,
   root:null,
-  IPPORT:''
+  IPPORT:'',
+  WSROOT:''
 }
 
 const mutations = {

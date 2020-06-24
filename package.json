@@ -16,6 +16,7 @@
     "@coreui/icons": "~1.0.1",
     "@coreui/vue": "~3.0.0",
     "axios": "^0.19.2",
+    "echarts": "^4.7.0",
     "element-ui": "^2.13.0",
     "jquery": "^3.4.1",
     "view-design": "^4.2.0",

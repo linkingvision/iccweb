@@ -17,6 +17,7 @@
                     </div>
                 </div>
                 <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
+                <video class="l5video1" id="h5sVideoLocal" autoplay webkit-playsinline playsinline></video>
             </div>
             <div class="content_zuo">
                 <!-- 1 -->
@@ -79,7 +80,7 @@
 </template>
 <script>
 // import '../../../assets/js/adapter'
-import {H5sPlayerRTC} from '../../../assets/js/h5splayer.js'
+import {H5sPlayerRTC,H5sRTCGetCapability,H5sRTCPush} from '../../../assets/js/h5splayer.js'
 export default {
     name:"participants",
     data(){
@@ -87,7 +88,27 @@ export default {
             chatwith: '',
             h5handler:undefined,
             usertoken:this.$route.params.token,
-            userdata:[]
+            userdata:[],
+
+            VideoCodecs: [],
+            VideoCodec:"",
+
+            VideoIns: [],
+            VideoIn:"",
+
+            AudioIns: [],
+            AudioIn:"",
+
+            AudioOuts: [],
+            AudioOut:"",
+
+            Resolutions: [],
+            Resolution:"",
+
+            Bitrates: [],
+            Bitratess:"",
+            audioout:true,
+            v1:undefined
         }
     },
     beforeDestroy() {
@@ -97,17 +118,158 @@ export default {
             delete this.h5handler;
             this.h5handler = undefined;
         }
+        if (this.v1 != undefined)
+        {
+            this.v1.disconnect();
+            delete this.v1;
+            this.v1 = undefined;
+        }
     },
     mounted(){
         $(".conten_you_stup").hide()
         if(this.usertoken!= undefined){
             this.l5svideplay()
             this.mettuselest();
+            this.updisplay();
         }else{
             this.drop()
         }
     },
     methods:{
+        //播放自己
+        connection(){
+            if (this.v1 != undefined)
+            {
+                this.v1.disconnect();
+                delete this.v1;
+                this.v1 = undefined;
+            }
+            var audioout=this.audioout.toString();
+            var conf1 = {
+                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
+                protocol: window.location.protocol, //http: or https:
+                host:this.$store.state.WSROOT, //localhost:8080
+                rootpath:'/', // {string} - path of the app running
+                user:this.$store.state.user, // {string} - user name
+                type:'media', // {string} - media or sharing
+                audio: audioout,
+                callback: null, //Callback for the event
+                userdata: null, // user data
+                session: this.$store.state.token, //session got from login
+                consolelog: 'true' // 'true' or 'false' enable/disable console.log
+            };
+            console.log("***********",conf1, audioout)
+            // return false
+            console.log("*******",this.VideoCodec,"1*",
+                this.VideoIn,"2*",
+                this.Bitratess,"5*",
+                this.Resolution,"3*",
+                this.AudioIn,
+            )
+                // return false
+            this.v1 = new H5sRTCPush(conf1);
+		    this.v1.connect(
+                this.VideoIn,
+                this.VideoCodec,
+                this.Bitratess,
+                this.Resolution,
+                this.AudioIn
+            );
+            console.log(this.AudioIn)
+        },
+        updisplay(){
+            var up=H5sRTCGetCapability(this.UpdateCapability);
+        },
+        UpdateCapability(capability){
+            
+            console.log(capability);
+            if(capability){
+
+                for (let i = 0; i !== capability['videocodec'].length; ++i) {
+                    const data = capability['videocodec'][i];
+                    var src={
+                        value: data,
+                        label: data
+                    }
+                    this.VideoCodec = data
+                    this.VideoCodecs.push(src);
+                }
+                for (let i = 0; i !== capability['videocodec'].length; ++i) {
+                    const data = capability['videocodec'][i];
+                    if (data == 'H264')
+                    {
+                        this.VideoCodec = data
+                    }
+                }
+                for (let i = 0; i !== capability['videoin'].length; ++i) {
+                    const data = capability['videoin'][i];
+                    var src={
+                        value: data.id,
+                        label: data.name
+                    }
+                    this.VideoIn=data.id
+                    this.VideoIns.push(src);
+                }	
+
+                for (let i = 0; i !== capability['audioin'].length; ++i) {
+                    const data = capability['audioin'][i];
+                    var src={
+                        value: data.id,
+                        label: data.name
+                    }
+                    this.AudioIn=capability['audioin'][0].id
+                    this.AudioIns.push(src);
+                }
+                
+                for (let i = 0; i !== capability['audioout'].length; ++i) {
+                    const data = capability['audioout'][i];
+                    var src={
+                        value: data.id,
+                        label: data.name
+                    }
+                    this.AudioOut=capability['audioout'][0].id
+                    this.AudioOuts.push(src);
+                }
+                
+                var resolution = ['QVGA', 'VGA', 'D1', '720P', '1080P', '4K', '8K']
+                for (let i = 0; i !== resolution.length; ++i) {
+                    const data = resolution[i];
+                    /* Default use 720P */
+                    
+                    var src={
+                        value: data,
+                        label: data
+                    }
+                    // this.Resolution=data
+                    if (data == '720P')
+                    {
+                        this.Resolution=data
+                    }
+                    this.Resolutions.push(src);
+                }
+                
+                var bitrate = ['32', '64', '128', '256', '512', '1024', '2048', '4096']
+                for (let i = 0; i !== bitrate.length; ++i) {
+                    const data = bitrate[i];
+                    var src={
+                        value: data,
+                        label: data
+                    }
+                    // this.Bitratess=data
+                    /* Default use 720P */
+                    if (data == '1024')
+                    {
+                        this.Bitratess=data
+                    }
+                    this.Bitrates.push(src);
+                }
+                setTimeout(() => {
+                    this.connection();
+                }, 5000)
+            }
+        },
+        
         //获取列表
         mettuselest(){
             // console.log(this.$store.state.IPPORT)
@@ -147,28 +309,36 @@ export default {
                 delete this.h5handler;
                 this.h5handler = undefined;
             }
+            if (this.v1 != undefined)
+            {
+                this.v1.disconnect();
+                delete this.v1;
+                this.v1 = undefined;
+            }
             this.$router.push({
                 path: 'Conference'
             })
         },
         //播放视频
         l5svideplay(){
-            var wsroot = process.env.VUE_APP_PORT;
-            if (wsroot == undefined)
+            if (this.h5handler != undefined)
             {
-                wsroot = window.location.host;
+                this.h5handler.disconnect();
+                delete this.h5handler;
+                this.h5handler = undefined;
             }
             // console.log(playid,token,streamprofile)
             let conf = {
                 videoid:"l5video",
                 protocol: window.location.protocol, //http: or https:
-                host: wsroot, //localhost:8080
+                host: this.$store.state.WSROOT, //localhost:8080
                 streamprofile: "main", // {string} - stream profile, main/sub or other predefine transcoding profile
                 rootpath: '/', // '/'
                 token: this.usertoken,
                 hlsver: 'v1', //v1 is for ts, v2 is for fmp4
                 session: this.$store.state.token //session got from login
             };
+            console.log("播放",conf);
             this.h5handler = new H5sPlayerRTC(conf);
             this.h5handler.connect();
         },
@@ -423,6 +593,9 @@ export default {
                 width: 100%;
                 height: 100%;
                 object-fit: fill;
+            }
+            .l5video1{
+                display: none;
             }
         }
     }
