@@ -20,29 +20,30 @@ const TheContainer = () => import('@/containers/TheContainer')
 
 // Views
 const Dashboard = () => import('@/views/mainpage/Dashboard')
-const Participants = () => import('@/views/mainpage/dashboard/participants')
+const Participants = () => import('@/views/mainpage/dashboard/Participants')
 
 const Conference = () => import('@/views/mainpage/Conference')
 
-const Setting = () => import('@/views/mainpage/setting')
+const Setting = () => import('@/views/mainpage/Setting')
 const Meetingman = () => import('@/views/mainpage/setting/Meetingman')
 const Userinfo = () => import('@/views/mainpage/setting/userinof')
-const Roleinof = () => import('@/views/mainpage/setting/roleinof')
+const Roleinfo = () => import('@/views/mainpage/setting/roleinof')
 // const Device = () => import('@/views/mainpage/setting/device')
-const Stream = () => import('@/views/mainpage/setting/stream')
-const Onvif = () => import('@/views/mainpage/setting/onvif')
-const File = () => import('@/views/mainpage/setting/file')
-const Deviceall = () => import('@/views/mainpage/setting/deviceall')
-const Tran_customize = () => import('@/views/mainpage/setting/Tran_customize')
-const Tran_default = () => import('@/views/mainpage/setting/Tran_default')
-const Device_sdk = () => import('@/views/mainpage/setting/device_sdk')
-const Webrtc_cloudmode = () => import('@/views/mainpage/setting/webrtc_cloudmode')
-const Webrtc_Forwardingmode = () => import('@/views/mainpage/setting/webrtc_Forwardingmode')
-const Webrtc_turnmode = () => import('@/views/mainpage/setting/webrtc_turnmode')
+const Stream = () => import('@/views/mainpage/setting/Stream')
+const Onvif = () => import('@/views/mainpage/setting/Onvif')
+const File = () => import('@/views/mainpage/setting/File')
+const DeviceAll = () => import('@/views/mainpage/setting/DeviceAll')
+const TranCustomize = () => import('@/views/mainpage/setting/TranCustomize')
+const TranDefault = () => import('@/views/mainpage/setting/TranDefault')
+const DeviceSdk = () => import('@/views/mainpage/setting/device_sdk')
+const WebrtcCloudmode = () => import('@/views/mainpage/setting/WebrtcCloudmode')
+const WebrtcForwardingmode = () => import('@/views/mainpage/setting/WebrtcForwardingmode')
+const WebrtcTurnmode = () => import('@/views/mainpage/setting/WebrtcTurnmode')
+const Safetyinof = () => import('@/views/mainpage/setting/Safetyinof')
 
 
-const Login = () => import('@/views/login')
-const Logout = () => import('@/views/logout')
+const Login = () => import('@/views/Login')
+const Logout = () => import('@/views/Logout')
 // const liveplay = () => import('@/views/widgets/liveplay')
 
 
@@ -125,11 +126,20 @@ export default new Router({
 							},
 						},
 						{
-							path: 'Roleinof',
-							name: "Roleinof",
-							component: Roleinof,
+							path: 'Roleinfo',
+							name: "Roleinfo",
+							component: Roleinfo,
 							meta: {
 							title: '2-3',
+							type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							}
+						},
+						{
+							path: 'Safetyinof',
+							name: "Safetyinof",
+							component: Safetyinof,
+							meta: {
+							title: '2-14',
 							type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							}
 						},
@@ -159,57 +169,57 @@ export default new Router({
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Deviceall',
-							name: "Deviceall",
-							component: Deviceall,
+							path: 'DeviceAll',
+							name: "DeviceAll",
+							component: DeviceAll,
 							meta: {
 								title: '2-7',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Tran_default',
-							name: "Tran_default",
-							component: Tran_default,
+							path: 'TranDefault',
+							name: "TranDefault",
+							component: TranDefault,
 							meta: {
 								title: '2-8',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Tran_customize',
-							name: "Tran_customize",
-							component: Tran_customize,
+							path: 'TranCustomize',
+							name: "TranCustomize",
+							component: TranCustomize,
 							meta: {
 								title: '2-9',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Device_sdk',
-							name: "Device_sdk",
-							component: Device_sdk,
+							path: 'DeviceSdk',
+							name: "DeviceSdk",
+							component: DeviceSdk,
 							meta: {
 								title: '2-10',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Webrtc_cloudmode',
-							name: "Webrtc_cloudmode",
-							component: Webrtc_cloudmode,
+							path: 'WebrtcCloudmode',
+							name: "WebrtcCloudmode",
+							component: WebrtcCloudmode,
 							meta: {
 								title: '2-11',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Webrtc_Forwardingmode',
-							name: "Webrtc_Forwardingmode",
-							component: Webrtc_Forwardingmode,
+							path: 'WebrtcForwardingmode',
+							name: "WebrtcForwardingmode",
+							component: WebrtcForwardingmode,
 							meta: {
 								title: '2-12',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						},{
-							path: 'Webrtc_turnmode',
-							name: "Webrtc_turnmode",
-							component: Webrtc_turnmode,
+							path: 'WebrtcTurnmode',
+							name: "WebrtcTurnmode",
+							component: WebrtcTurnmode,
 							meta: {
 								title: '2-13',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断

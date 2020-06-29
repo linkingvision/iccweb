@@ -1,4 +1,5 @@
 <template>
+<div class="dasboard_global">
 	<div class="setting_all">
 		<div class="setting_zuo">
 			<!-- <Menu class="sideb_content" theme="dark" :active-name="activemenu" style="width:100%">
@@ -32,8 +33,11 @@
 							<span slot="title">用户管理</span>
 						</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Roleinof'}">
+					<router-link :to="{name:'Roleinfo'}">
 						<el-menu-item index="2-3">角色管理</el-menu-item>
+					</router-link>
+					<router-link :to="{name:'Safetyinof'}">
+						<el-menu-item index="2-14">安全管理</el-menu-item>
 					</router-link>
 				</el-submenu>
 
@@ -44,16 +48,16 @@
 					</template>
 					<!-- 二级 -->
 					<router-link :to="{name:'Stream'}">
-						<el-menu-item index="2-4">H5-STREAM</el-menu-item>
+						<el-menu-item index="2-4">RTSP/RTMP</el-menu-item>
 					</router-link>
 					<router-link :to="{name:'Onvif'}">
-						<el-menu-item index="2-5">H5-ONVIF</el-menu-item>
+						<el-menu-item index="2-5">ONVIF</el-menu-item>
 					</router-link>
 					<router-link :to="{name:'File'}">
-						<el-menu-item index="2-6">H5-FILE</el-menu-item>
+						<el-menu-item index="2-6">文件</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Deviceall'}">
-						<el-menu-item index="2-7">ALL</el-menu-item>
+					<router-link :to="{name:'DeviceAll'}">
+						<el-menu-item index="2-7">全部</el-menu-item>
 					</router-link>
 				</el-submenu>
 				<!-- <router-link :to="{name:'Device_sdk'}">
@@ -68,10 +72,10 @@
 						<span>转码管理</span>
 					</template>
 					<!-- 二级 -->
-					<router-link :to="{name:'Tran_default'}">
+					<router-link :to="{name:'TranDefault'}">
 						<el-menu-item index="2-8">默认</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Tran_customize'}">
+					<router-link :to="{name:'TranCustomize'}">
 						<el-menu-item index="2-9">自定义</el-menu-item>
 					</router-link>
 				</el-submenu>
@@ -82,13 +86,13 @@
 						<span>WEBRTC</span>
 					</template>
 					<!-- 二级 -->
-					<router-link :to="{name:'Webrtc_cloudmode'}">
+					<router-link :to="{name:'WebrtcCloudmode'}">
 						<el-menu-item index="2-11">云模式</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Webrtc_Forwardingmode'}">
+					<router-link :to="{name:'WebrtcForwardingmode'}">
 						<el-menu-item index="2-12">转发模式</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Webrtc_turnmode'}">
+					<router-link :to="{name:'WebrtcTurnmode'}">
 						<el-menu-item index="2-13">TURN服务</el-menu-item>
 					</router-link>
 				</el-submenu>
@@ -99,6 +103,7 @@
 			<router-view></router-view>
 		</div>
 	</div>
+</div>
 </template>
 
 <script>

@@ -650,6 +650,8 @@ $body-color: #FFFFFF;
         flex-wrap: wrap;
         align-content: space-between;
         border-radius: 10px;
+        min-width: 993px;
+        min-height: 900px;
         .dasboard_one{
             width: 100%;
             height: 69.3%;

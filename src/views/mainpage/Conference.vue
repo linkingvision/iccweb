@@ -12,12 +12,12 @@
                         <el-form-item label="会议名称">
                             <el-input v-model="sizeForm.name"></el-input>
                         </el-form-item>
-                        <el-form-item label="会议类型">
+                        <!-- <el-form-item label="会议类型">
                             <el-radio-group v-model="sizeForm.metttype" size="medium">
                                 <el-radio  label="temporary">临时会议</el-radio>
                                 <el-radio  label="regular">定期会议</el-radio>
                             </el-radio-group>
-                        </el-form-item>
+                        </el-form-item> -->
                         <el-form-item label="开始时间">
                             <el-col :span="24">
                                 <el-date-picker
@@ -38,17 +38,43 @@
                                 </el-date-picker>
                             </el-col>
                         </el-form-item>
-                        <!-- <el-form-item label="会议模式">
-                            <el-input type='number' min='1' max="23" v-model="sizeForm.mettmode"></el-input>
-                        </el-form-item> -->
                         <el-form-item label="会议模式">
-                            <el-input-number size="small" :min="1" :max="23" v-model="sizeForm.mettmode"></el-input-number>
+                            <div class="mode">
+                                <el-radio-group v-model="sizeForm.mettmodesetting" size="medium">
+                                    <el-radio  label="1pn"><span class="mode_back"></span> 1+N模式</el-radio>
+                                    <el-radio  label="nxn"><span class="mode_back1"></span> 等分模式</el-radio>
+                                </el-radio-group>
+                            </div>
                         </el-form-item>
+                        <el-form-item label="1+N模式" v-if="sizeForm.mettmodesetting=='1pn'">
+                            <!-- <el-input v-model="sizeForm.user" v-if="sizeForm.member=='user'"></el-input> -->
+                            <el-select v-model="sizeForm.one" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in sizeForm.onenmode"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="等分模式" v-if="sizeForm.mettmodesetting=='nxn'">
+                            <el-select v-model="sizeForm.ep" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in sizeForm.epmode"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+
                         <el-form-item label="成员类型">
-                            <el-radio-group v-model="sizeForm.member" size="medium">
-                                <el-radio  label="user">会议人员</el-radio>
-                                <el-radio  label="device">会议设备</el-radio>
-                            </el-radio-group>
+                            <div class="mode">
+                                <el-radio-group v-model="sizeForm.member" size="medium">
+                                    <el-radio  label="user">会议人员</el-radio>
+                                    <el-radio  label="device">会议设备</el-radio>
+                                </el-radio-group>
+                            </div>
                         </el-form-item>
                         <el-form-item label="会议成员" v-if="sizeForm.member=='user'">
                             <!-- <el-input v-model="sizeForm.user" v-if="sizeForm.member=='user'"></el-input> -->
@@ -65,6 +91,16 @@
                             <el-select v-model="sizeForm.token" multiple filterable placeholder="请选择">
                                 <el-option
                                 v-for="item in sizeForm.tokendata"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="分辨率">
+                            <el-select v-model="sizeForm.resolutiondata" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in sizeForm.resolution"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
@@ -96,7 +132,7 @@
 							<div class="top_zuo">
                                 
 							    <div class="top_title"></div>
-								<div class="top_zuo_zuo">
+								<div class="top_zuo_zuo" v-if="daterecent.length!=''">
 									<div>{{daterecent.beginTime}} “{{daterecent.strName}}” 即将开始</div>
 									<span>会议号：{{daterecent.strToken}}</span>
 									<!-- <span>人数：2/8</span> -->
@@ -179,7 +215,7 @@
 </template>
 
 <script>
-import uuid from '../../assets/js/uuid'
+import uuid from '../../assets/js/uuid1'
 export default {
 	name: 'Conference',
 	data(){
@@ -192,17 +228,110 @@ export default {
                 usertoken:"",
             },
             sizeForm: {
-                name: 'name',//名称
-                metttype: 'temporary',//类型
-                Startdate: '',//时间
-                Eendate: '',//时间
-                mettmode:'1',//模式
+                name: 'Conference1',//名称
+                metttype: 'temporary',//会议类型
+                Startdate: new Date(),//时间
+                Eendate: new Date(),//时间
+
+                mettmodesetting:"nxn",
+                one:"1p2",
+                onenmode:[
+                    {
+                        value: "1p2",
+                        label: "1p2"
+                    },{
+                        value: "1p2A",
+                        label: "1p2A"
+                    },{
+                        value: "1p3A",
+                        label: "1p3A"
+                    },{
+                        value: "1p4A",
+                        label: "1p4A"
+                    },{
+                        value: "1p5",
+                        label: "1p5"
+                    },{
+                        value: "1p6A",
+                        label: "1p6A"
+                    },{
+                        value: "1p7",
+                        label: "1p7"
+                    },{
+                        value: "3p4",
+                        label: "3p4"
+                    },{
+                        value: "PIP1",
+                        label: "PIP1"
+                    },{
+                        value: "PIP3",
+                        label: "PIP3"
+                    },{
+                        value: "1p2x2A",
+                        label: "1p2x2A"
+                    },{
+                        value: "1p12",
+                        label: "1p12"
+                    },{
+                        value: "1p16A",
+                        label: "1p16A"
+                    },{
+                        value: "4x5A",
+                        label: "4x5A"
+                    },{
+                        value: "1p1A",
+                        label: "1p1A"
+                    },{
+                        value: "1p2x6A",
+                        label: "1p2x6A"
+                    },{
+                        value: "1p1p2x4A ",
+                        label: "1p1p2x4A "
+                    }
+                ],//1+n模式
+                ep:"2x2",
+                epmode:[
+                    {
+                        value: "1x1",
+                        label: "1x1"
+                    },{
+                        value: "2x2",
+                        label: "2x2"
+                    },{
+                        value: "3x3",
+                        label: "3x3"
+                    },{
+                        value: "4x4",
+                        label: "4x4"
+                    },{
+                        value: "5x5",
+                        label: "5x5"
+                    }
+                ],//等分模式
+
+                mettmode:'5x5',//模式
                 mettmodesize:1,//位置
                 member:'user',//成员类型
                 user:'',//成员
                 userdata:[],
                 token:'',//设备
-                tokendata:[]
+                tokendata:[],
+                resolutiondata:"1080P",
+                resolution:[
+                    {
+                        value: "VGA",
+                        label: "VGA"
+                    },{
+                        value: "D1",
+                        label: "D1"
+                    },{
+                        value: "720P",
+                        label: "720P"
+                    },{
+                        value: "1080P",
+                        label: "1080P"
+                    }
+                ]//分辨率
             },
             label:{
                 Created:this.$t("message.dashboard.Created"),
@@ -269,30 +398,36 @@ export default {
             }
             // return false
 
-            var token = uuid(4, 16).toLowerCase();
-            var usertoken=''
-            var member=this.sizeForm.member
-            if(member=='user'){
-                usertoken=this.sizeForm.user
-            }else if(member=='device'){
-                usertoken=this.sizeForm.token
-            }
+            var token = uuid(5, 10);
             
+            // return false
+            var playmode=''
+            if(form.mettmodesetting=='1pn'){
+                playmode=form.one
+            }else if(form.mettmodesetting=='nxn'){
+                playmode=form.ep
+            }
             // return false
             var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+form.name
             +"&token="+encodeURIComponent(token)
-            +"&begintime="+encodeURIComponent(ks)
-            +"&endtime="+encodeURIComponent(jss)
+            +"&begintime="+encodeURIComponent(form.Startdate)
+            +"&endtime="+encodeURIComponent(form.Eendate)
             +"&type="+encodeURIComponent(form.metttype)
-            +"&layout="+encodeURIComponent(form.mettmode)
-            +"&layoutsize=1080P&session="+ this.$store.state.token;
+            +"&layoutmode="+encodeURIComponent(form.mettmodesetting)
+            +"&layout="+encodeURIComponent(playmode)
+            +"&layoutsize="+encodeURIComponent(form.resolutiondata)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 if(result.status==200){
-                    
-                    
-                    if(usertoken!=''){
-                        this.Addparticipants(token,usertoken,member,form.mettmodesize,this.label.Created)
-                    }else if(usertoken==''){
+                    if(form.token.length!=0||form.user.length!=0){
+                        if(form.user.length>0){
+                            console.log("1",form.token,form.user)
+                            this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created,form.user.length)
+                        }
+                        if(form.token.length>0){
+                            console.log("2",)
+                            this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created,form.user.length)
+                        }
+                    }else if(form.token.length==0&&form.user.length==0){
                         this.myModal=false
                         this.$message(this.label.Created);
                         this.meetingdata()
@@ -303,12 +438,18 @@ export default {
             })
         },
         //添加参会者
-        Addparticipants(token,usertoken,member,mettmodesize,successfully){
+        Addparticipants(token,usertoken,member,mettmodesize,successfully,userlength){
+            // return false
             for(var i=0 ; i<usertoken.length ; i++){
-                var size=Number(mettmodesize)+Number(i)
+                var size=""
+                if(member=="user"){
+                    size=Number(i)
+                }else if(member=="device"){
+                    size=Number(i)+Number(userlength)
+                }
                 // console.log(usertoken[i],size)
                 // return false
-                var url = this.$store.state.IPPORT + "/api/v1/CreateParticipant?token="+encodeURIComponent(token)+"&token1="+encodeURIComponent(usertoken[i])+"&type="+member+"&solt="+size+"&session="+ this.$store.state.token;
+                var url = this.$store.state.IPPORT + "/api/v1/CreateParticipant?token="+encodeURIComponent(token)+"&participanttoken="+encodeURIComponent(usertoken[i])+"&type="+member+"&solt="+size+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
                     this.myModal=false
                     // this.$message(successfully);
@@ -330,20 +471,31 @@ export default {
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     // this.meetdata=result.data.conference
-                    // console.log(result)
+                    console.log(result)
                     this.meetdata=[];
                     var data=result.data.conference
                     if(data.length==0){
                         return false
                     }
                     for(var i=0;i<data.length;i++){
-                        var begin=new Date(parseInt(data[i].beginTime) * 1000).toLocaleString().replace(/:\d{1,2}$/,'');  
+                        var beginTime=new Date(data[i].beginTime).getTime();
+                        var begin=new Date(data[i].beginTime);  
                         var eng=new Date(data[i].endTime)
+
+                        //年月日
+                        var y = begin.getFullYear();
+                        var m = this.addZero(begin.getMonth()+1);
+                        var d = this.addZero(begin.getDate());
+                        //时分秒
+                        var h = this.addZero(begin.getHours());
+                        var mm = this.addZero(begin.getMinutes());
+                        var rq=y+'.'+m+'.'+d+" "+h+':'+mm;
+
                         var listdata={
                             bStartStatus: data[i].bStartStatus,
-                            beginTime: begin,
-                            beginTime1: data[i].beginTime,
-                            endTime: eng,
+                            beginTime: rq,
+                            beginTime1: beginTime,
+                            endTime: data[i].endTime,
                             mosaicSize: data[i].mosaicSize,
                             mosaicType: data[i].mosaicType,
                             nId: data[i].nId,
@@ -353,7 +505,7 @@ export default {
                         }
                         this.meetdata.push(listdata)
                         
-                        // console.log("1*",listdata.beginTime1)
+                        // console.log("1*",begin,rq)
                     }
                     this.meetdata.sort(function(a,b){
                         return  b.beginTime1-a.beginTime1
@@ -374,6 +526,7 @@ export default {
                 
             })
         },
+        
         usertokendata(){
             // let root=process.env.VUE_APP_URL;
             // if (root == undefined){
@@ -414,6 +567,9 @@ export default {
                     }
                 }
             })
+        },
+        addZero(n){
+            return n<10?"0"+n:n;
         }
 	}
 }
@@ -620,8 +776,29 @@ export default {
         }
 	}
 }
+.dasboard_modal{
+    .mode_back{
+        padding: 15px 15px;
+        background: url("~@/views/gallery/conference_1pn.png"){
+            repeat:no-repeat;
+            position:center;
+            size: 100%;
+        };
+    }
+    .mode_back1{
+        padding: 15px 15px;
+        background: url("~@/views/gallery/conference_npn.png"){
+            repeat:no-repeat;
+            position:center;
+            size: 100%;
+        };
+    }
+    .mode{
+        height: 40px;
+        padding-top: 8px;
+    }
+}
 // 弹框 
-
 .margin_g{
     margin-bottom: 20px;
 }

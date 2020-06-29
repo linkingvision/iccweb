@@ -1,4 +1,5 @@
 <template>
+<div class="dasboard_global">
     <div class="particiants">
         <!-- 头部 -->
         <!-- <div class="particiants_title">
@@ -22,7 +23,7 @@
             <div class="content_zuo">
                 <!-- 1 -->
                 <div class="content_zuo_con">
-                    <div class="content_zuo_title">参议人员</div>
+                    <div class="content_zuo_title">参会人员</div>
                     <div class="content_zuo_content">
                         <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
                             <div class="user_icon">
@@ -34,7 +35,7 @@
                     </div>
                 </div>
                 <!-- 2 -->
-                <div class="content_zuo_con1">
+                <!-- <div class="content_zuo_con1">
                     <div class="content_zuo_title">文档</div>
                     <div class="content_zuo_content">
                         <div class="content_doc">
@@ -48,10 +49,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- 3 -->
                 <div class="content_zuo_con2">
-                    <div class="content_zuo_title">聊天</div>
+                    <div class="content_zuo_title">消息</div>
                     <div class="content_zuo_content">
                         <div class="content_zuo_user">
                             <div class="user_icon">
@@ -77,6 +78,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 <script>
 // import '../../../assets/js/adapter'
@@ -137,47 +139,6 @@ export default {
     },
     methods:{
         //播放自己
-        connection(){
-            if (this.v1 != undefined)
-            {
-                this.v1.disconnect();
-                delete this.v1;
-                this.v1 = undefined;
-            }
-            var audioout=this.audioout.toString();
-            var conf1 = {
-                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
-                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
-                protocol: window.location.protocol, //http: or https:
-                host:this.$store.state.WSROOT, //localhost:8080
-                rootpath:'/', // {string} - path of the app running
-                user:this.$store.state.user, // {string} - user name
-                type:'media', // {string} - media or sharing
-                audio: audioout,
-                callback: null, //Callback for the event
-                userdata: null, // user data
-                session: this.$store.state.token, //session got from login
-                consolelog: 'true' // 'true' or 'false' enable/disable console.log
-            };
-            console.log("***********",conf1, audioout)
-            // return false
-            console.log("*******",this.VideoCodec,"1*",
-                this.VideoIn,"2*",
-                this.Bitratess,"5*",
-                this.Resolution,"3*",
-                this.AudioIn,
-            )
-                // return false
-            this.v1 = new H5sRTCPush(conf1);
-		    this.v1.connect(
-                this.VideoIn,
-                this.VideoCodec,
-                this.Bitratess,
-                this.Resolution,
-                this.AudioIn
-            );
-            console.log(this.AudioIn)
-        },
         updisplay(){
             var up=H5sRTCGetCapability(this.UpdateCapability);
         },
@@ -270,6 +231,47 @@ export default {
             }
         },
         
+        connection(){
+            if (this.v1 != undefined)
+            {
+                this.v1.disconnect();
+                delete this.v1;
+                this.v1 = undefined;
+            }
+            var audioout=this.audioout.toString();
+            var conf1 = {
+                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
+                protocol: window.location.protocol, //http: or https:
+                host:this.$store.state.WSROOT, //localhost:8080
+                rootpath:'/', // {string} - path of the app running
+                user:this.$store.state.user, // {string} - user name
+                type:'media', // {string} - media or sharing
+                audio: audioout,
+                callback: null, //Callback for the event
+                userdata: null, // user data
+                session: this.$store.state.token, //session got from login
+                consolelog: 'true' // 'true' or 'false' enable/disable console.log
+            };
+            console.log("***********",conf1, audioout)
+            // return false
+            console.log("*******",this.VideoCodec,"1*",
+                this.VideoIn,"2*",
+                this.Bitratess,"5*",
+                this.Resolution,"3*",
+                this.AudioIn,
+            )
+                // return false
+            this.v1 = new H5sRTCPush(conf1);
+		    this.v1.connect(
+                this.VideoIn,
+                this.VideoCodec,
+                this.Bitratess,
+                this.Resolution,
+                this.AudioIn
+            );
+            console.log(this.AudioIn)
+        },
         //获取列表
         mettuselest(){
             // console.log(this.$store.state.IPPORT)
@@ -354,9 +356,9 @@ export default {
 <style lang="scss" scoped>
 .particiants{
     width: 100%;
-    // height: 100%;
-    height: 96vh;
-    background-color: #252A32;
+    height: 100%;
+    // height: 96vh;
+    background-color: #212121;
     // position: fixed;
     //头部
     .particiants_title{
@@ -385,22 +387,23 @@ export default {
     //身体
     .particiants_content{
         width: 100%;
-        // height: 100%;
-        height: 96vh;
+        height: 100%;
+        // height: 96vh;
         display: flex;
         .content_zuo{
             width: 15%;
             min-width: 260px;
-            height: 98vh;
+            height: 100%;
+            // height: 98vh;
             color: #FFFFFF;
             //1
             .content_zuo_con{
                 width: 100%;
-                height: 30%;
+                height: 40%;
                 .content_zuo_title{
-                    background:rgba(29,33,39,1);
+                    background:#2E2E2E;
                     width: 100%;
-                    padding: 8px 12px;
+                    padding: 5% 12px;
                     font-size:15px;
                     font-family:PingFang SC;
                     font-weight:500;
@@ -409,7 +412,7 @@ export default {
                 }
                 .content_zuo_content{
                     width: 100%;
-                    height: 100%;
+                    height: 90%;
                     overflow: auto;
                     .content_zuo_user{
                         width: 100%;
@@ -450,7 +453,7 @@ export default {
                 width: 100%;
                 height: 20%;
                 .content_zuo_title{
-                    background:rgba(29,33,39,1);
+                    background:#2E2E2E;
                     width: 100%;
                     padding: 8px 12px;
                     font-size:15px;
@@ -486,11 +489,11 @@ export default {
             //3
             .content_zuo_con2{
                 width: 100%;
-                height: 50%;
+                height: 60%;
                 .content_zuo_title{
-                    background:rgba(29,33,39,1);
+                    background:#2E2E2E;
                     width: 100%;
-                    padding: 8px 12px;
+                    padding: 5% 12px;
                     font-size:15px;
                     font-family:PingFang SC;
                     font-weight:500;
@@ -538,16 +541,16 @@ export default {
                 }
                 .content_zuo_but{
                     width: 100%;
-                    // height: 50%;
+                    height: 30%;
                     padding: 10px 18px;
-                    background-color: #2E343C;
+                    background-color: #252525;
                     div{
                         margin: 10px 0;
                     }
                     .chatwith_inp{
                         .chatwith_input{
                             width: 100%;
-                            background:rgba(37,41,49,1);
+                            background:#3C3C3C;
                             border-radius:2px;
                             /deep/ .el-input__inner{
                                 border: none !important;
@@ -571,7 +574,8 @@ export default {
         }
         .content_you{
             width: 85%;
-            height: 96vh;
+            // height: 96vh;
+            height: 100%;
             position: relative;
             
             .conten_you_stup{

@@ -15,11 +15,19 @@
                 </button> -->
                 <div class="use_you_top">
                     <div class="use_user">
-                        <router-link :to="{name:'Logout'}">
-                            <span class="">
+                        <CDropdown
+                            color="link"
+                            :caret="false">
+                            <template #toggler-content>
                                 <i class="iconfont icon-yonghuming"></i> {{user}}
-                            </span>
-                        </router-link>
+                            </template>
+                            <CDropdownItem :to="{name:'Logout'}">
+                                <div class="about_ab"><i class="iconfont icon-tuichudenglu"></i>退出登录</div>
+                            </CDropdownItem>
+                            <CDropdownItem href="doc/api.html">
+                                <div class="about_ab"><i class="iconfont icon-guanyu"></i>API</div>
+                            </CDropdownItem>
+                        </CDropdown>
                     </div>
                     <div>
                         <CDropdown
@@ -31,6 +39,9 @@
                             <CDropdownItem >
                                 <div class="about_ab"><i class="iconfont icon-guanyu"></i>关于</div>
                             </CDropdownItem>
+                            <!-- <CDropdownItem href="doc/api.html">
+                                <div class="about_ab"><i class="iconfont icon-guanyu"></i>API</div>
+                            </CDropdownItem> -->
                         </CDropdown>
                         
                     </div>
@@ -100,11 +111,8 @@ i{
 }
 .use_you .use_you_top{
     display: flex;
-    margin-right: 30px;
+    margin-right: -10px;
 }
-/* .use_user{
-    margin-right: 10px;
-} */
 
 .c_ding{
   width: 100%;
@@ -113,7 +121,7 @@ i{
   position: fixed;
   top: 0;
   bottom: 0;
-  padding: 0 10px;
+  padding: 0 13px;
   display: flex;
   justify-content: space-between;
   z-index: 10;

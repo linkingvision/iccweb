@@ -4,10 +4,36 @@
     unfoldable
     :show="show"
     @update:show="(value) => $store.commit('set', ['sidebarShow', value])">
-        <Menu class="sideb_content" theme="dark" :active-name="activemenu" style="width:100%">
+        <el-menu
+			:default-active="activemenu"
+				class="el-menu-vertical-demo"
+				background-color="#212121"
+				text-color="#FFFFFF"
+				active-text-color="#3277FF">
+
+				<router-link :to="{name:'dashboard'}">
+					<el-menu-item index="1">
+						<i class="iconfont icon-11111"></i>
+						<span slot="title">仪表盘</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'Conference'}">
+					<el-menu-item index="3">
+						<i class="iconfont icon-yonghuming"></i>
+						<span slot="title">视频会议</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'Meetingman'}">
+					<el-menu-item index="2">
+						<i class="iconfont icon-shezhi_guanli"></i>
+						<span slot="title">设置</span>
+					</el-menu-item>
+				</router-link>
+        </el-menu>
+        <!-- <Menu class="sideb_content" theme="dark" :active-name="activemenu" style="width:100%">
             <MenuItem name="1" :to="{name:'dashboard'}">
                 <Icon type="" class="iconfont icon-11111"/>
-                会议首页
+                仪表盘
             </MenuItem>
             <router-link  :to="{name:'Conference'}" >
                 <MenuItem name="3">
@@ -15,15 +41,14 @@
                     视频会议
                 </MenuItem>
             </router-link>
-            <!-- target="_blank" -->
-            <router-link  :to="{name:'Meetingman'}" target="_blank">
+            <router-link  :to="{name:'Meetingman'}">
                 <MenuItem name="2">
-                    <Icon class="iconfont icon-yonghuming"/>
-                    设置管理
+                    <Icon class="iconfont icon-shezhi_guanli"/>
+                    设置
                 </MenuItem>
             </router-link>
             
-        </Menu>
+        </Menu> -->
     </CSidebar>
 </template>
 
@@ -61,30 +86,11 @@ export default {
 }
 </script>
 <style lang="scss" scopad>
-.sideb_content{
-    background: none;
-    text-align: center;
-    .ivu-menu-item{
-        // margin-left: -10%;
-        font-family:PingFang SC;
-        font-weight:500;
-        text-decoration: none;
+.el-menu-vertical-demo{
+    i{
+        color: #FFFFFF;
+		margin-right: 24px;
     }
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item{
-    color: #FFFFFF;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened{
-    background: none;
-}
-.ivu-menu-submenu{
-    .ivu-menu-submenu-title{
-        color: #FFFFFF !important;
-    }
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active{
-    background: none !important;
-    color: #3277FF;
 }
 </style>
 

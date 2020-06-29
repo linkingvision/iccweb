@@ -12,7 +12,7 @@ import LangZhCHT from '../static/lang/zhcht'
 import './assets/icon/iconfont.css'//字体
 import $ from 'jquery'
 
-import axios from 'axios';
+import axios from '@/http';
 Vue.prototype.$http = axios;
 
 import ElementUI from 'element-ui'
