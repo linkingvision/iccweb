@@ -39,9 +39,9 @@
                             <CDropdownItem >
                                 <div class="about_ab"><i class="iconfont icon-guanyu"></i>关于</div>
                             </CDropdownItem>
-                            <!-- <CDropdownItem href="doc/api.html">
+                            <CDropdownItem href="doc/api.html">
                                 <div class="about_ab"><i class="iconfont icon-guanyu"></i>API</div>
-                            </CDropdownItem> -->
+                            </CDropdownItem>
                         </CDropdown>
                         
                     </div>

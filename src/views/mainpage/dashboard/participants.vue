@@ -81,7 +81,7 @@
 </div>
 </template>
 <script>
-// import '../../../assets/js/adapter'
+import '../../../assets/js/adapter'
 import {H5sPlayerRTC,H5sRTCGetCapability,H5sRTCPush} from '../../../assets/js/h5splayer.js'
 export default {
     name:"participants",
@@ -227,7 +227,8 @@ export default {
                 }
                 setTimeout(() => {
                     this.connection();
-                }, 5000)
+                }, 2000)
+                // this.connection();
             }
         },
         
@@ -253,16 +254,24 @@ export default {
                 session: this.$store.state.token, //session got from login
                 consolelog: 'true' // 'true' or 'false' enable/disable console.log
             };
-            console.log("***********",conf1, audioout)
             // return false
+            this.v1 = new H5sRTCPush(conf1);
             console.log("*******",this.VideoCodec,"1*",
                 this.VideoIn,"2*",
                 this.Bitratess,"5*",
                 this.Resolution,"3*",
                 this.AudioIn,
+                this.v1
             )
-                // return false
-            this.v1 = new H5sRTCPush(conf1);
+            // this.v1.connect(
+            //     "a4afcd793d76a3effca436c6cd006d6baa6023164f5f739aceaa6ea5b28cda0b",
+            //     "H264",
+            //     "1024",
+            //     "720P",
+            //     "default"
+            // );
+            
+            // return false
 		    this.v1.connect(
                 this.VideoIn,
                 this.VideoCodec,
@@ -270,7 +279,6 @@ export default {
                 this.Resolution,
                 this.AudioIn
             );
-            console.log(this.AudioIn)
         },
         //获取列表
         mettuselest(){

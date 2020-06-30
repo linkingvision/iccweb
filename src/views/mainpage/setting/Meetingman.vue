@@ -411,7 +411,7 @@ export default {
             }
             // return false
 
-            var token = uuid(5, 10);
+            var token = uuid(4, 10);
             
             // return false
             var playmode=''
@@ -421,6 +421,7 @@ export default {
                 playmode=form.ep
             }
             // return false
+            this.dialogFormVisible=false
             var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+form.name
             +"&token="+encodeURIComponent(token)
             +"&begintime="+encodeURIComponent(form.Startdate)
@@ -441,7 +442,6 @@ export default {
                             this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created,form.user.length)
                         }
                     }else if(form.token.length==0&&form.user.length==0){
-                        this.dialogFormVisible=false
                         this.$message(this.label.Created);
                         this.mettinglist()
                         
