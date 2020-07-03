@@ -1,29 +1,27 @@
 <template>
-	<div>
-		<div  class="c-app" :class="{ 'c-dark-theme': $store.state.darkMode }">
-			<TheHeders/>
-			<!-- 左边菜单栏 -->
-			<TheSidebar/>
-			<CWrapper>
-				<!-- 顶部导航 -->
-				<!-- <TheHeader/> -->
-				<!-- 内容 @click="-->
-				<div @click="clicktogg" class="c-body">
-					<main class="c-main">
-						<CContainer fluid>
-							<transition name="fade">
-								<router-view></router-view>
-							</transition>
-						</CContainer>
-					</main>
-					
-				<!-- 底部 -->
-				<!-- <TheFooter/> -->
-				</div>
-			</CWrapper>
+	<div  class="c-app" :class="{ 'c-dark-theme': $store.state.darkMode }">
+		<TheHeders/>
+		<!-- 左边菜单栏 -->
+		<TheSidebar/>
+		<CWrapper>
+			<!-- 顶部导航 -->
+			<!-- <TheHeader/> -->
+			<!-- 内容 @click="-->
+			<div @click="clicktogg" class="c-body">
+				<main class="c-main">
+					<CContainer fluid>
+						<transition name="fade">
+							<router-view></router-view>
+						</transition>
+					</CContainer>
+				</main>
 				
-		</div>
-  	</div>
+			<!-- 底部 -->
+			<!-- <TheFooter/> -->
+			</div>
+		</CWrapper>
+			
+	</div>
 </template>
 
 <script>

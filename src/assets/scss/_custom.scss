@@ -8,52 +8,75 @@ $body-bg:  #181818;
 $body-top:#202020;
 $concent-bg:#212121;
 $body-color: #FFFFFF;
+$confere_fast_bg:#212121;
 /* 全体的css */
 .c-app.c-dark-theme {
     color: $body-color;
     background-color: $body-bg;
 }
-.toggler{
-    color: $body-color;
-}
-  
-/* 左边菜单栏 */
-.c-app.c-dark-theme .c-sidebar {
-    min-width: 220px;
-    width: 12%;
-    color: #000;
-    background:$concent-bg;
-    border: 0;
-}
-.c-dark-theme .c-sidebar .c-sidebar-nav-title {
-    color: $body-color;
-}
-.c-dark-theme .c-sidebar .c-sidebar-nav-link{
-    color: $body-color;
-}
-// 表格
- .el-checkbox__inner{
-background-color: #494B4E !important;
-border-radius: 50px !important;
-}
-.el-checkbox__input.is-checked .el-checkbox__inner,.el-checkbox__input.is-indeterminate .el-checkbox__inner{
-background-color: #3277FF !important;
-border-color: rgba(255,255,255,1) !important;
-}
+
 
 
 .c-app.c-dark-theme{
-    a{
-        color: $body-color;
-        text-decoration: none;
-    } 
-    .card{
-        background:none;
+    //会议
+	.dasboard_global{
+        .title_g{
+            color:$body-color;
+        }
+        .dasboard_top{
+            background: url('~@/views/gallery/dash_oneback.png')no-repeat;
+            background-size: 100%;
+            .top_zuo{
+				.top_title{
+					background: url('~@/assets/imgs/l5s_logo_bai.png')no-repeat;
+                    background-size: 100%;
+                }
+                .top_zuo_zuo{
+                    color:$body-color;
+                    div{
+                        opacity:0.7;
+                    }
+                    span{
+                        opacity:0.4;
+                    }
+				}
+            }
+            .top_you{
+                .top_you_butt{
+                    background: url('~@/views/gallery/dash_oneicon.png')no-repeat center center;
+                }
+            }
+		}
+        .dasboard_content{
+            background-color: $confere_fast_bg;
+            .content_title_back{
+				background: url('~@/assets/imgs/l5s_logo_bai.png')no-repeat;
+			}
+            .content_con_title{
+                .content_con_title_size{
+                    color:$body-color;
+                }
+            }
+            .content_size_ag{
+				color: $body-color;
+			}
+            .conten_buttom{
+				.conten_buttom_dian1{
+					background:rgba(38,165,82,1);
+				}
+				.conten_buttom_size{
+					color: $body-color;
+				}
+			}
+        }
+        // 设置
+        .setting_all{
+            .setting_zuo{
+                background-color: $confere_fast_bg;
+            }
+        }
     }
-    //左边菜单栏
-    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){
-        background: #4F5155;
-    }
+     
     //设置内左边栏
     .setting_all{
         .setting_you{
@@ -67,7 +90,16 @@ border-color: rgba(255,255,255,1) !important;
     //顶部
     /*下拉*/
     .c_ding{
-		background-color: $body-top;
+		color: $body-color;
+        background-color: $body-top;
+        .c_logo{
+            background: url("~@/assets/imgs/l5s_logo1.png") center center no-repeat;
+            background-size: 85%;
+        }
+		.toggler{
+			border: none !important;
+			color: $body-color;
+		}
 	}
     .btn-link{
         color: $body-color;
@@ -76,11 +108,9 @@ border-color: rgba(255,255,255,1) !important;
     .dropdown-menu{
         min-width: 80px;
     }
-    //首页播放
-    .dasboard_content{
-        background:$concent-bg;
-        
-    }
+
+
+
     // 表格
     .el-tabs--border-card{
         margin-top: 8px;
@@ -118,6 +148,12 @@ border-color: rgba(255,255,255,1) !important;
             font-weight:600;
             color:rgba(255,255,255,1);
         }
+        
+    }
+    
+    .el-input__inner{
+        background: none!important;
+        color:rgba(255,255,255,1)!important;
     }
     .el-input-number__decrease, .el-input-number__increase{
         background: none;
@@ -159,7 +195,7 @@ border-color: rgba(255,255,255,1) !important;
             repeat:no-repeat;
             position:center
         }
-        background-image: url('~@/assets/imgs/setting_tober.png');
+        background-image: url('~@/assets/imgs/setting_tober1.png');
         .el-table__empty-text{
             display: none;
         }
@@ -183,4 +219,77 @@ border-color: rgba(255,255,255,1) !important;
         color:rgba(255,255,255,1);
         border: none!important;
     }
+    /* 分页 */
+    .el-pagination li{
+        background: none!important;
+        color: #FFFFFF;
+    }
+    .el-pagination button{
+        background: none!important;
+        color: #FFFFFF!important;
+    }
+    // 表格 选项
+    // 表格
+    .el-checkbox__inner{
+        background-color: #494B4E !important;
+        border-radius: 50px !important;
+    }
+    .el-checkbox__input.is-checked .el-checkbox__inner,.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+        background-color: #3277FF !important;
+        border-color: rgba(255,255,255,1) !important;
+    }
 } 
+
+//所有弹窗html > body table + ul 
+/* 时间 */
+.c-app.c-dark-theme ~ .el-popper{
+        background-color: #181818 !important;
+        border:none !important;
+        color: #FFFFFF !important;
+        .el-input__inner{
+            background: none;
+            color: $body-color;
+        }
+        .el-picker-panel__footer{
+            background-color: #181818 !important;
+            border:none !important;
+        }
+        .el-picker-panel__footer .is-plain{
+            background-color: #3277FF;
+            border: none;
+            color: #FFFFFF;
+        }
+        .el-select-dropdown.is-multiple .el-select-dropdown__item.selected{
+            background: #181818  !important;
+            color: #3277FF !important;
+        }
+        
+        .el-select-dropdown{
+            background: #252525 !important;
+            border: 1px solid #B5B5B5 !important;
+        }
+        .el-select-dropdown__item{
+            color:rgba(255,255,255,1)!important;
+        }
+        .el-select-dropdown__item.hover, .el-select-dropdown__item:hover{
+            background-color: #4F5255!important;
+        }
+}
+
+/* 左边菜单栏 */
+.c-app.c-dark-theme .c-sidebar {
+    min-width: 220px;
+    width: 12%;
+    color: #000;
+    background:$concent-bg;
+    border: 0;
+}
+.c-dark-theme .c-sidebar .c-sidebar-nav-title {
+    color: $body-color;
+}
+.c-dark-theme .c-sidebar .c-sidebar-nav-link{
+    color: $body-color;
+}
+.el-checkbox__inner{
+    border-radius: 50px !important;
+}

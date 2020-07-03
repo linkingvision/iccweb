@@ -1,14 +1,19 @@
 <template>
 <div class="dasboard_global">
     <div class="particiants">
-        <!-- 头部 -->
-        <!-- <div class="particiants_title">
-            <div class="particiants_logo"></div>
-        </div> -->
-        <!-- 返回 -->
-        <!-- <div>
-            <CButton class="particiants_title_but iconfont icon-fanhui" type="submit" @click="drop" to="dashboard"> 返回首页</CButton>
-        </div> -->
+        <el-dialog
+            class="dasboard_modal"
+            title="加入会议"
+            :visible.sync="myModal1"
+            width="25%">
+            <div>请问您是否开启视频上传？</div>
+            <span slot="footer" class="dialog-footer">
+                <div class="particip_buttom">
+                    <CButton class="part_buttom_but1" type="primary"  @click="myModal1=false">否</CButton>
+                    <CButton class="part_buttom_but" type="primary"  @click="connection">是</CButton>
+                </div>
+            </span>
+        </el-dialog>
         <!-- 身体 -->
         <div class="particiants_content" @mouseover="mouseOver"  @mouseleave="mouseLeave">
             <div class="content_you">
@@ -18,7 +23,7 @@
                     </div>
                 </div>
                 <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
-                <video class="l5video1" id="h5sVideoLocal" autoplay webkit-playsinline playsinline></video>
+                <video class="l5video1" id="h5sVideoLocal" muted autoplay webkit-playsinline playsinline></video>
             </div>
             <div class="content_zuo">
                 <!-- 1 -->
@@ -110,7 +115,8 @@ export default {
             Bitrates: [],
             Bitratess:"",
             audioout:true,
-            v1:undefined
+            v1:undefined,
+            myModal1:true
         }
     },
     beforeDestroy() {
@@ -225,14 +231,11 @@ export default {
                     }
                     this.Bitrates.push(src);
                 }
-                setTimeout(() => {
-                    this.connection();
-                }, 2000)
-                // this.connection();
             }
         },
         
         connection(){
+            this.myModal1=false
             if (this.v1 != undefined)
             {
                 this.v1.disconnect();

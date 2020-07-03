@@ -1,196 +1,192 @@
 <template>
 	<div class="dasboard_global">
-        <CCard>
-            <CCardBody>
-				<!-- 编辑弹窗 -->
-                <!-- 添加 -->
-                <el-dialog
-                    class="dasboard_modal"
-                    width="25%"
-                    title="创建会议"
-                    :visible.sync="dialogFormVisible">
-                    <el-form class="el_form" ref="form" label-position='left' :model="sizeForm" label-width="100px" size="small ">
-                        <el-form-item label="会议名称">
-                            <el-input v-model="sizeForm.name"></el-input>
-                        </el-form-item>
-                        <!-- <el-form-item label="会议类型">
-                            <el-radio-group v-model="sizeForm.metttype" size="medium">
-                                <el-radio  label="temporary">临时会议</el-radio>
-                                <el-radio  label="regular">定期会议</el-radio>
-                            </el-radio-group>
-                        </el-form-item> -->
-                        <el-form-item label="开始时间">
-                            <el-col :span="24">
-                                <el-date-picker
-                                    style="width:100%"
-                                    v-model="sizeForm.Startdate"
-                                    type="datetime"
-                                    placeholder="选择日期时间">
-                                </el-date-picker>
-                            </el-col>
-                        </el-form-item>
-                        <el-form-item label="结束时间">
-                            <el-col :span="24">
-                                <el-date-picker
-                                    style="width:100%"
-                                    v-model="sizeForm.Eendate"
-                                    type="datetime"
-                                    placeholder="选择日期时间">
-                                </el-date-picker>
-                            </el-col>
-                        </el-form-item>
-                        <el-form-item label="会议模式">
-                            <div class="mode">
-                                <el-radio-group v-model="sizeForm.mettmodesetting" size="medium">
-                                    <el-radio  label="1pn"><span class="mode_back"></span> 1+N模式</el-radio>
-                                    <el-radio  label="nxn"><span class="mode_back1"></span> 等分模式</el-radio>
-                                </el-radio-group>
-                            </div>
-                        </el-form-item>
-                        <el-form-item label="1+N模式" v-if="sizeForm.mettmodesetting=='1pn'">
-                            <!-- <el-input v-model="sizeForm.user" v-if="sizeForm.member=='user'"></el-input> -->
-                            <el-select v-model="sizeForm.one" filterable placeholder="请选择">
-                                <el-option
-                                v-for="item in sizeForm.onenmode"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="等分模式" v-if="sizeForm.mettmodesetting=='nxn'">
-                            <el-select v-model="sizeForm.ep" filterable placeholder="请选择">
-                                <el-option
-                                v-for="item in sizeForm.epmode"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
+        <!-- 编辑弹窗 -->
+        <!-- 添加 -->
+        <el-dialog
+            class="dasboard_modal"
+            width="25%"
+            title="创建会议"
+            :visible.sync="dialogFormVisible">
+            <el-form class="el_form" ref="form" label-position='left' :model="sizeForm" label-width="100px" size="small ">
+                <el-form-item label="会议名称">
+                    <el-input v-model="sizeForm.name"></el-input>
+                </el-form-item>
+                <!-- <el-form-item label="会议类型">
+                    <el-radio-group v-model="sizeForm.metttype" size="medium">
+                        <el-radio  label="temporary">临时会议</el-radio>
+                        <el-radio  label="regular">定期会议</el-radio>
+                    </el-radio-group>
+                </el-form-item> -->
+                <el-form-item label="开始时间">
+                    <el-col :span="24">
+                        <el-date-picker
+                            style="width:100%"
+                            v-model="sizeForm.Startdate"
+                            type="datetime"
+                            placeholder="选择日期时间">
+                        </el-date-picker>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="结束时间">
+                    <el-col :span="24">
+                        <el-date-picker
+                            style="width:100%"
+                            v-model="sizeForm.Eendate"
+                            type="datetime"
+                            placeholder="选择日期时间">
+                        </el-date-picker>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="会议模式">
+                    <div class="mode">
+                        <el-radio-group v-model="sizeForm.mettmodesetting" size="medium">
+                            <el-radio  label="1pn"><span class="mode_back"></span> 1+N模式</el-radio>
+                            <el-radio  label="nxn"><span class="mode_back1"></span> 等分模式</el-radio>
+                        </el-radio-group>
+                    </div>
+                </el-form-item>
+                <el-form-item label="1+N模式" v-if="sizeForm.mettmodesetting=='1pn'">
+                    <!-- <el-input v-model="sizeForm.user" v-if="sizeForm.member=='user'"></el-input> -->
+                    <el-select v-model="sizeForm.one" filterable placeholder="请选择">
+                        <el-option
+                        v-for="item in sizeForm.onenmode"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="等分模式" v-if="sizeForm.mettmodesetting=='nxn'">
+                    <el-select v-model="sizeForm.ep" filterable placeholder="请选择">
+                        <el-option
+                        v-for="item in sizeForm.epmode"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
 
-                        <el-form-item label="成员类型">
-                            <div class="mode">
-                                <el-radio-group v-model="sizeForm.member" size="medium">
-                                    <el-radio  label="user">会议人员</el-radio>
-                                    <el-radio  label="device">会议设备</el-radio>
-                                </el-radio-group>
-                            </div>
-                        </el-form-item>
-                        <el-form-item label="会议成员" v-if="sizeForm.member=='user'">
-                            <!-- <el-input v-model="sizeForm.user" v-if="sizeForm.member=='user'"></el-input> -->
-                            <el-select v-model="sizeForm.user" multiple filterable placeholder="请选择">
-                                <el-option
-                                v-for="item in sizeForm.userdata"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="会议设备" v-if="sizeForm.member=='device'">
-                            <el-select v-model="sizeForm.token" multiple filterable placeholder="请选择">
-                                <el-option
-                                v-for="item in sizeForm.tokendata"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="分辨率">
-                            <el-select v-model="sizeForm.resolutiondata" filterable placeholder="请选择">
-                                <el-option
-                                v-for="item in sizeForm.resolution"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-form>
-                    <span slot="footer" class="dialog-footer">
-                        <CButton class="conten_buttom_but" type="primary"  @click="myModalADD">创建</CButton>
-                    </span>
-                </el-dialog>
-                <div class="button_edi">
-                    <CButton class="form_butt" @click="addclick" type="submit">创建会议</CButton>
-                    <CButton class="form_butt1" @click="deletClickall" type="submit">删除会议</CButton>
-                </div>
-                <el-table
-                    :data="tableData.filter(data => !search || data.Name.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
-                    stripe
-                    @select='selectCall'
-                    @select-all='select_Call'
-                    style="width: 100%">
-                    <el-table-column
-                    type="selection"
-                    width="55">
-                    </el-table-column>
-                    <el-table-column
-                    prop="strName"
-                    label="会议名称"
-                    width="180">
-                    </el-table-column>
-                    <el-table-column
-                    prop="strType"
-                    label="会议模式"
-                    min-width="50">
-                    </el-table-column>
-                    <el-table-column
-                    prop="beginTime"
-                    label="开始时间"
-                    min-width="50">
-                    </el-table-column>
-                    <el-table-column
-                    prop="endTime"
-                    label="结束时间"
-                    min-width="50">
-                    </el-table-column>
-                    <el-table-column
-                    prop="strToken"
-                    label="会议号"
-                    min-width="50">
-                    </el-table-column>
-                    <el-table-column
-                        min-width="50"
-                        class="size"
-                        fixed="right">
-                        <template  slot-scope="scope">
-                            <el-switch
-                                @change="mettchang(scope.row)"
-                                v-model="scope.row.bStartStatus"
-                                active-color="#13ce66">
-                            </el-switch>
-                        </template>
-                    </el-table-column>
-                    <el-table-column
-                        min-width="50"
-                        class="size"
-                        fixed="right">
-                        <template slot="header" slot-scope="scope">
-                            <el-input
-                            v-model="search"
-                            @change="handlechange(scope.$index,scope.row)"
-                            size="mini"
-                            placeholder="输入关键字"/>
-                        </template>
-                        <template  slot-scope="scope">
-                            <el-button @click="deletClick(scope.$index,scope.row,tableData)" type="text" size="small">删除会议</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-                <!-- 分页 -->
-                <el-pagination
-                    style="text-align: center;"
-                    layout=" prev, pager, next,total, jumper"
-                    @size-change="handleSizeChange1" 
-                    @current-change="handleCurrentChange1"
-                    :current-page="currentPage"
-                    :total="total">
-                </el-pagination>
-            </CCardBody>
-		</CCard>
+                <el-form-item label="成员类型">
+                    <div class="mode">
+                        <el-radio-group v-model="sizeForm.member" size="medium">
+                            <el-radio  label="user">会议人员</el-radio>
+                            <el-radio  label="device">会议设备</el-radio>
+                        </el-radio-group>
+                    </div>
+                </el-form-item>
+                <el-form-item label="会议成员" v-if="sizeForm.member=='user'">
+                    <!-- <el-input v-model="sizeForm.user" v-if="sizeForm.member=='user'"></el-input> -->
+                    <el-select v-model="sizeForm.user" multiple filterable placeholder="请选择">
+                        <el-option
+                        v-for="item in sizeForm.userdata"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="会议设备" v-if="sizeForm.member=='device'">
+                    <el-select v-model="sizeForm.token" multiple filterable placeholder="请选择">
+                        <el-option
+                        v-for="item in sizeForm.tokendata"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="分辨率">
+                    <el-select v-model="sizeForm.resolutiondata" filterable placeholder="请选择">
+                        <el-option
+                        v-for="item in sizeForm.resolution"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <CButton class="conten_buttom_but" type="primary"  @click="myModalADD">创建</CButton>
+            </span>
+        </el-dialog>
+        <div class="button_edi">
+            <CButton class="form_butt" @click="addclick" type="submit">创建会议</CButton>
+            <CButton class="form_butt1" @click="deletClickall" type="submit">删除会议</CButton>
+        </div>
+        <el-table
+            :data="tableData.filter(data => !search || data.Name.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
+            stripe
+            @select='selectCall'
+            @select-all='select_Call'
+            style="width: 100%">
+            <el-table-column
+            type="selection"
+            width="55">
+            </el-table-column>
+            <el-table-column
+            prop="strName"
+            label="会议名称"
+            width="180">
+            </el-table-column>
+            <el-table-column
+            prop="strType"
+            label="会议模式"
+            min-width="50">
+            </el-table-column>
+            <el-table-column
+            prop="beginTime"
+            label="开始时间"
+            min-width="50">
+            </el-table-column>
+            <el-table-column
+            prop="endTime"
+            label="结束时间"
+            min-width="50">
+            </el-table-column>
+            <el-table-column
+            prop="strToken"
+            label="会议号"
+            min-width="50">
+            </el-table-column>
+            <el-table-column
+                min-width="50"
+                class="size"
+                fixed="right">
+                <template  slot-scope="scope">
+                    <el-switch
+                        @change="mettchang(scope.row)"
+                        v-model="scope.row.bStartStatus"
+                        active-color="#13ce66">
+                    </el-switch>
+                </template>
+            </el-table-column>
+            <el-table-column
+                min-width="50"
+                class="size"
+                fixed="right">
+                <template slot="header" slot-scope="scope">
+                    <el-input
+                    v-model="search"
+                    @change="handlechange(scope.$index,scope.row)"
+                    size="mini"
+                    placeholder="输入关键字"/>
+                </template>
+                <template  slot-scope="scope">
+                    <el-button @click="deletClick(scope.$index,scope.row,tableData)" type="text" size="small">删除会议</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <!-- 分页 -->
+        <el-pagination
+            style="text-align: center;"
+            layout=" prev, pager, next,total, jumper"
+            @size-change="handleSizeChange1" 
+            @current-change="handleCurrentChange1"
+            :current-page="currentPage"
+            :total="total">
+        </el-pagination>
 	</div>
 </template>
 

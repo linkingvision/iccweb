@@ -24,9 +24,6 @@
                             <CDropdownItem :to="{name:'Logout'}">
                                 <div class="about_ab"><i class="iconfont icon-tuichudenglu"></i>退出登录</div>
                             </CDropdownItem>
-                            <CDropdownItem href="doc/api.html">
-                                <div class="about_ab"><i class="iconfont icon-guanyu"></i>API</div>
-                            </CDropdownItem>
                         </CDropdown>
                     </div>
                     <div>
@@ -54,29 +51,27 @@
 <script>
     export default {
         name: 'TheHeders',
-        computed: {
-            show () {
-            return this.$store.state.sidebarShow 
-            },
-            minimize () {
-            return this.$store.state.sidebarMinimize 
-            }
-        },
         data(){
             return{
                 gEvvalue:120,
                 user:this.$store.state.user,
                 // show: false,
                 navbarText: false,
-                navbarDropdown: false
+                navbarDropdown: false,
+                toggle:this.$store.state.darkMode
             }
+        },
+        watch:{
+            toggle(a){
+                console.log(a,"heders")
+            }
+        },
+        mounted(){
+            console.log("heders",this.toggle)
         }
     }
 </script>
 <style scoped>
-/* a{
-    color: #FFFFFF;
-} */
 i{
     font-size:16px;
 }
@@ -84,8 +79,6 @@ i{
     padding: 0;
     text-align: center;
     line-height: 40px;
-    color: #FFF;
-    /* margin-right: 5px; */
 }
 
 /* 铃铛 */
@@ -95,10 +88,6 @@ i{
 .el-badge >>> .el-badge__content.is-fixed{
     top: 10px;
     padding: 0 4px;
-}
-/* 下拉 */
-.el-dropdown{
-    color: #FFFFFF;
 }
 .about_ab i{
     margin-right: 6px;
@@ -118,6 +107,7 @@ i{
   width: 100%;
   height:40px;
   /* background-color: #202020; */
+  color:rgba(255,255,255,1);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -130,8 +120,6 @@ i{
 .c_logo{
 	width: 160px;
 	height: 100%;
-	background: url("../assets/imgs/l5s_logo1.png") center center no-repeat;
-	background-size: 85%;
 }
 .c_use{
 	width: 89%;
@@ -139,7 +127,6 @@ i{
 	font-size:14px;
 	font-family:Source Han Sans CN;
 	font-weight:400;
-	color:rgba(255,255,255,1);
 	line-height: 40px;
 	display: flex;
 	justify-content: space-between;
