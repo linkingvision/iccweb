@@ -2,12 +2,6 @@
 <div class="dasboard_global">
 	<div class="setting_all">
 		<div class="setting_zuo">
-			<!-- <Menu class="sideb_content" theme="dark" :active-name="activemenu" style="width:100%">
-				<MenuItem :to="{name:'Meetingman'}" name="2-1">会议管理</MenuItem>
-				<MenuItem :to="{name:'Userinfo'}" name="2-2">用户管理</MenuItem>
-				<MenuItem :to="{name:'Roleinof'}" name="2-3">角色管理</MenuItem>
-				<MenuItem :to="{name:'Device'}"  name="2-4">设备管理</MenuItem>
-			</Menu> -->
 			<el-menu
 			:default-active="activemenu"
 				class="el-menu-vertical-demo"
