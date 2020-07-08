@@ -18,7 +18,7 @@
 
 				<el-submenu index="2-2">
 					<template slot="title">
-						<i class="iconfont icon-huiyiguanli"></i>
+						<i class="iconfont icon-yonghuming"></i>
 						<span>用户管理</span>
 					</template>
 					<!-- 二级 -->

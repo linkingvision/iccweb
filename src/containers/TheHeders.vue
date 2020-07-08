@@ -1,6 +1,7 @@
 <template>
     <div class="c_ding">
-        <CButton style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="$store.commit('toggleSidebarDesktop')"></CButton>
+        <div class="heder_Mask" @click="clicktogg"></div>
+        <CButton style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="togg"></CButton>
         <div class="c_logo"></div>
         <div class="c_use">
             
@@ -34,7 +35,7 @@
                                 <i class="iconfont icon-qita"></i>
                             </template>
                             <CDropdownItem >
-                                <div class="about_ab"><i class="iconfont icon-guanyu"></i>关于</div>
+                                <div @click="about=true" class="about_ab"><i class="iconfont icon-guanyu"></i>关于</div>
                             </CDropdownItem>
                             <CDropdownItem href="doc/api.html">
                                 <div class="about_ab"><i class="iconfont icon-guanyu"></i>API</div>
@@ -43,7 +44,18 @@
                         
                     </div>
                 </div>
-                
+                <el-dialog
+                    class="plugin"
+                    :visible.sync="about"
+                    width="25%"
+                    append-to-body
+                    center>
+                    <div class="plugin_back">
+                    </div>
+                    <div class="plugin_size">
+                        <div>{{$t("message.dashboard.version")}}: {{information.strVersion}}</div>
+                    </div>
+                </el-dialog>
             </div>
         </div>
     </div>
@@ -53,12 +65,16 @@
         name: 'TheHeders',
         data(){
             return{
+                about:false,
                 gEvvalue:120,
                 user:this.$store.state.user,
                 // show: false,
                 navbarText: false,
                 navbarDropdown: false,
-                toggle:this.$store.state.darkMode
+                toggle:this.$store.state.sidebarShow,
+                information:{
+                    strVersion: ""
+                }
             }
         },
         watch:{
@@ -67,11 +83,77 @@
             }
         },
         mounted(){
-            console.log("heders",this.toggle)
+            $(".heder_Mask").hide()
+            this.GetSystemInfo()
+        },
+        methods:{
+            togg(){
+                $(".heder_Mask").toggle()
+                this.$store.commit('toggleSidebarDesktop')
+            },
+            clicktogg(){
+                if(this.$store.state.sidebarShow){
+                    $(".heder_Mask").toggle()
+                    this.$store.commit('toggleSidebarDesktop')
+                }
+            },
+            GetSystemInfo(){
+                var url = this.$store.state.IPPORT + "/api/v1/GetSystemInfo?session="+ this.$store.state.token;
+
+                this.$http.get(url).then(result => {
+                    //console.log(result);
+                    if (result.status == 200) 
+                    {
+                        this.information = result.data;
+                        // console.log(_this.information);
+                    }
+                }).catch(error => {
+                    console.log('GetSystemInfo', error);
+                });
+
+            },
         }
     }
 </script>
 <style scoped>
+/*弹框 */
+.heder_Mask{
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0.5;
+    position: fixed;
+    z-index: -10;
+
+}
+.plugin >>> .el-dialog{
+    background:none;
+}
+.plugin >>>.el-dialog__header{
+  padding: 0;
+}
+.plugin >>> .el-dialog--center .el-dialog__body{
+    padding: 11% 0;
+    width: 100%;
+    height: 260px;
+    background: url("../assets/imgs/header_tk_bg.png") no-repeat center;
+    background-size: 100%;
+}
+.plugin_back{
+    width: 100%;
+    height: 100px;
+    background: url("../assets/imgs/header_tk_logo.png") no-repeat center;
+    background-size: 50%;
+}
+.plugin_size{
+    font-size:16px;
+    font-family:PingFang SC;
+    font-weight:400;
+    color: #FFFFFF;
+    text-align: center;
+    opacity: 0.4;
+}
+
 i{
     font-size:16px;
 }

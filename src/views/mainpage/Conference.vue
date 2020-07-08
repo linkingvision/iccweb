@@ -105,6 +105,12 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="是否开启会议">
+                    <el-switch
+                        v-model="sizeForm.openmeeting"
+                        active-color="#13ce66">
+                    </el-switch>
+                </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <CButton class="conten_buttom_but" type="primary"  @click="myModalADD">创建</CButton>
@@ -224,6 +230,7 @@ export default {
                 usertoken:"",
             },
             sizeForm: {
+                openmeeting:false,//是否开启会议
                 name: 'Conference1',//名称
                 metttype: 'temporary',//会议类型
                 Startdate: new Date(),//时间
@@ -313,19 +320,19 @@ export default {
                 token:'',//设备
                 tokendata:[],
                 resolutiondata:"1080P",
-                resolution:[
-                    {
-                        value: "VGA",
-                        label: "VGA"
-                    },{
-                        value: "D1",
-                        label: "D1"
+                resolution:[{
+                        value: "1080P",
+                        label: "1080P"
                     },{
                         value: "720P",
                         label: "720P"
                     },{
-                        value: "1080P",
-                        label: "1080P"
+                        value: "D1",
+                        label: "D1"
+                    },
+                    {
+                        value: "VGA",
+                        label: "VGA"
                     }
                 ]//分辨率
             },
@@ -418,19 +425,23 @@ export default {
                 if(result.status==200){
                     if(form.token.length!=0||form.user.length!=0){
                         if(form.user.length>0){
-                            console.log("1",form.token,form.user)
-                            this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created,form.user.length)
+                            this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created)
+                            // .then((a)=>{
+                            //     console.log("aaaaa",a)
+                            // })
                         }
                         if(form.token.length>0){
-                            console.log("2",)
-                            this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created,form.user.length)
+                            this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created)
                         }
                     }else if(form.token.length==0&&form.user.length==0){
                         this.$message(this.label.Created);
                         this.meetingdata()
-                        
                     }
-                    // console.log(ks,jss,url,result)
+                    
+                    if(form.openmeeting){
+                        console.log("aaaaa")
+                        this.mettchang(token)
+                    }
                 }
             })
         },
@@ -438,21 +449,26 @@ export default {
         Addparticipants(token,usertoken,member,mettmodesize,successfully,userlength){
             // return false
             for(var i=0 ; i<usertoken.length ; i++){
-                var size=""
-                if(member=="user"){
-                    size=Number(i)
-                }else if(member=="device"){
-                    size=Number(i)+Number(userlength)
-                }
-                // console.log(usertoken[i],size)
-                // return false
-                var url = this.$store.state.IPPORT + "/api/v1/CreateParticipant?token="+encodeURIComponent(token)+"&participanttoken="+encodeURIComponent(usertoken[i])+"&type="+member+"&solt="+size+"&session="+ this.$store.state.token;
+                var url = this.$store.state.IPPORT
+                 + "/api/v1/CreateParticipant?token="
+                 +encodeURIComponent(token)+"&participanttoken="
+                 +encodeURIComponent(usertoken[i])+"&type="+member+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
                     this.myModal=false
-                    // this.$message(successfully);
                     this.meetingdata()
+                    // this.$message(successfully);
                 })
             }
+            // return Promise.resolve("sss")
+        },
+        //开启会议
+        mettchang(token){
+            var url = this.$store.state.IPPORT + "/api/v1/StartConference?token="+encodeURIComponent(token)+"&session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                if(result.status==200){
+                    this.$message('会议开始');
+                }
+            })
         },
         //点击创建会议
         myModaldata(){
@@ -507,12 +523,12 @@ export default {
                     this.meetdata.sort(function(a,b){
                         return  b.beginTime1-a.beginTime1
                     })
-                    var daterecent=Math.round(new Date().getTime()/1000)
-                    // console.log(daterecent)
+                    var daterecent=Math.round(new Date().getTime())
                     var newArr = [];
                     this.meetdata.map(function(x){
                         // 对数组各个数值求差值
                         newArr.push(Math.abs(x.beginTime1 - daterecent));
+                        // console.log(newArr,x.beginTime1 - daterecent,x.beginTime1,daterecent)
                     });
                     // 求最小值的索引
                     var index = newArr.indexOf(Math.min.apply(null, newArr))

@@ -57,10 +57,11 @@ export default {
 .fade-leave-to {
   opacity: 0;
 } */
+
 /* 左边 */
 .c-sidebar.c-sidebar-fixed {
     position: fixed;
-    top: 40px;
+    top: 0px;
 	/* bottom: 50px; */
 	z-index: 1000;
 }

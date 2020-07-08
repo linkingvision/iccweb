@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10031905",
+      "name": "设 置",
+      "font_class": "shezhi",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "3402233",
+      "name": "摄像机控制",
+      "font_class": "shexiangjikongzhi",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "5907099",
+      "name": "全屏",
+      "font_class": "fullscreen",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "8037821",
+      "name": "yuyin",
+      "font_class": "yuyin",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "8520290",
+      "name": "摄像机",
+      "font_class": "shexiangji",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "12194203",
+      "name": "挂断",
+      "font_class": "guaduan",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "14138670",
+      "name": "桌面共享",
+      "font_class": "zhuomiangongxiang",
+      "unicode": "e699",
+      "unicode_decimal": 59033
+    },
+    {
+      "icon_id": "14586669",
+      "name": "共享屏幕",
+      "font_class": "gongxiangpingmu",
+      "unicode": "ecc6",
+      "unicode_decimal": 60614
+    },
+    {
+      "icon_id": "8148682",
+      "name": "仪表盘",
+      "font_class": "yibiaopan1",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
       "icon_id": "2118518",
       "name": "设置_管理",
       "font_class": "shezhi_guanli",

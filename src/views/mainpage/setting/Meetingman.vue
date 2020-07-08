@@ -431,11 +431,11 @@ export default {
                     if(form.token.length!=0||form.user.length!=0){
                         if(form.user.length>0){
                             console.log("1",form.token,form.user)
-                            this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created,form.user.length)
+                            this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created)
                         }
                         if(form.token.length>0){
                             console.log("2",)
-                            this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created,form.user.length)
+                            this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created)
                         }
                     }else if(form.token.length==0&&form.user.length==0){
                         this.$message(this.label.Created);
@@ -446,18 +446,13 @@ export default {
             })
         },
         //添加参会者
-        Addparticipants(token,usertoken,member,mettmodesize,successfully,userlength){
+        Addparticipants(token,usertoken,member,mettmodesize,successfully,){
             // return false
             for(var i=0 ; i<usertoken.length ; i++){
-                var size=""
-                if(member=="user"){
-                    size=Number(i)
-                }else if(member=="device"){
-                    size=Number(i)+Number(userlength)
-                }
-                // console.log(usertoken[i],size)
-                // return false
-                var url = this.$store.state.IPPORT + "/api/v1/CreateParticipant?token="+encodeURIComponent(token)+"&participanttoken="+encodeURIComponent(usertoken[i])+"&type="+member+"&solt="+size+"&session="+ this.$store.state.token;
+                var url = this.$store.state.IPPORT 
+                + "/api/v1/CreateParticipant?token="
+                +encodeURIComponent(token)+"&participanttoken="
+                +encodeURIComponent(usertoken[i])+"&type="+member+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
                     this.dialogFormVisible=false
                     // this.$message(successfully);

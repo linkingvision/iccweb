@@ -16,7 +16,6 @@ $confere_fast_bg:#212121;
 }
 
 
-
 .c-app.c-dark-theme{
     //会议
 	.dasboard_global{
@@ -76,7 +75,32 @@ $confere_fast_bg:#212121;
             }
         }
     }
-     
+     //视频
+     .particiants{
+         .particiants_content{
+             .content_zuo{
+                .el-collapse{
+                    border: none;
+                    .el-collapse-item__header{
+                        color: #FFFFFF;
+                        background-color: #2E2E2E;
+                        opacity: 0.7;
+                        border: none;
+                        padding: 0 7px;
+                    }
+                    .el-collapse-item__wrap{
+                        background: none;
+                        border-bottom: none;
+                        .el-collapse-item__content{
+                            padding: 0;
+                            color: #FFFFFF;
+                            // opacity: 0.7;
+                        }
+                    }
+                }
+             }
+         }
+     }
     //设置内左边栏
     .setting_all{
         .setting_you{
@@ -89,6 +113,10 @@ $confere_fast_bg:#212121;
     }
     //顶部
     /*下拉*/
+    .c_logo{
+        background: url("~@/assets/imgs/l5s_logo1.png") center center no-repeat;
+        background-size: 85%;
+    }
     .c_ding{
 		color: $body-color;
         background-color: $body-top;
@@ -259,7 +287,7 @@ $confere_fast_bg:#212121;
             border: none;
             color: #FFFFFF;
         }
-        .el-select-dropdown.is-multiple .el-select-dropdown__item.selected{
+        .el-select-dropdown__item.selected{
             background: #181818  !important;
             color: #3277FF !important;
         }

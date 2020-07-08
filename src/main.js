@@ -23,6 +23,9 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
 
+// import event from '@/containers/event'
+// Vue.prototype.EVENT = event
+
 Vue.use(CoreuiVue)
 Vue.use(VueI18n)
 const bus = new Vue()
