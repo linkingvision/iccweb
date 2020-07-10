@@ -10,11 +10,11 @@ export default {
     mounted() {
         console.log("logout");
         // this.$store.commit(types.LOGOUT);
-        localStorage.removeItem('mcutoken')
+        sessionStorage.removeItem('mcutoken')
         this.$store.state.token = null
-        localStorage.removeItem('mcuuser')
+        sessionStorage.removeItem('mcuuser')
         this.$store.state.user = null
-        localStorage.removeItem('mcuroot')
+        sessionStorage.removeItem('mcuroot')
         this.$store.state.root = null
         this.$router.push({
             path: 'login'

@@ -70,18 +70,17 @@ export default {
         };
     },
     mounted(){
-        console.log(localStorage.getItem('mcutoken'),localStorage.getItem('mcuuser'),localStorage.getItem('mculang'),localStorage.getItem('mcuroot'),this.$store.state.token,this.$store.state.user)
+        // console.log(localStorage.getItem('mcutoken'),localStorage.getItem('mcuuser'),localStorage.getItem('mculang'),localStorage.getItem('mcuroot'),this.$store.state.token,this.$store.state.user)
     },
     methods: {
         langchang(){
             console.log("111",this.lang)
             this.$i18n.locale=this.lang
             this.$store.state.lang=this.lang
-            localStorage.mculang=this.lang
+            sessionStorage.mculang=this.lang
             console.log("11221",this.$store.state.lang,this.$i18n.locale)
         },
         login(){
-            // console.log(this.name)
             // return false;
             let root=process.env.VUE_APP_URL;
             if (root == undefined){
@@ -97,7 +96,7 @@ export default {
                         var data=result.data;
                         console.log(data)
                         this.$store.state.token=data.strSession
-                        localStorage.mcutoken = this.$store.state.token
+                        sessionStorage.mcutoken = this.$store.state.token
                         
                         this.loginroot(data.strSession,root)
                     }else{
@@ -132,8 +131,8 @@ export default {
                     console.log(data)
                     this.$store.state.user=data.strUser
                     this.$store.state.root=data.strUserType
-                    localStorage.mcuuser = this.$store.state.user
-                    localStorage.mcuroot=this.$store.state.root
+                    sessionStorage.mcuuser = this.$store.state.user
+                    sessionStorage.mcuroot=this.$store.state.root
                     this.$router.push({
                         path: 'dashboard'
                     })

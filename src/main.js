@@ -23,9 +23,6 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
 
-// import event from '@/containers/event'
-// Vue.prototype.EVENT = event
-
 Vue.use(CoreuiVue)
 Vue.use(VueI18n)
 const bus = new Vue()
@@ -56,11 +53,11 @@ router.beforeEach((to, from, next) => {
 			next()  // 确保一定要有next()被调用
 		}
       } else {
-        localStorage.removeItem('mcutoken')
+        sessionStorage.removeItem('mcutoken')
         store.state.token = null
-        localStorage.removeItem('mcuuser')
+        sessionStorage.removeItem('mcuuser')
         store.state.user = null
-        localStorage.removeItem('mcuroot')
+        sessionStorage.removeItem('mcuroot')
         store.state.root = null
         // console.log(type,"3");
         next('/login')

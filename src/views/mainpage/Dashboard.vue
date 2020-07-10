@@ -380,7 +380,7 @@ export default {
                     for(var i=0;i<devdata.length;i++){
                         this.devimage(devdata[i],i);
                     }
-                    console.log(data)
+                    // console.log(data)
                 }
             })
         },
@@ -483,7 +483,7 @@ export default {
             var url =_this.$store.state.IPPORT + "/api/v1/GetSystemInfo?session=" + _this.$store.state.token;
                 // console.log("------------",url)
             _this.$http.get(url).then(result => {
-                console.log(result);
+                // console.log(result);
                 if (result.status == 200) {
                     var data =  result.data;
                     var cpu=[{
@@ -503,16 +503,16 @@ export default {
                             name:this.$t("message.dashboard.transcoding")+":",
                             id:data.bTranscoding
                         },{
-                            name:"H323Limit:",
+                            name:"H323:",
                             id:data.strH323Limit
                         },{
-                            name:"SipLimit:",
+                            name:"SIP:",
                             id:data.strSipLimit
                         },{
-                            name:"ChannelLimit:",
+                            name:"通道:",
                             id:data.strChannelLimit
                         },{
-                            name:"UserLimit:",
+                            name:"User:",
                             id:data.strUserLimit
                         },{
                             name:"",
@@ -520,7 +520,7 @@ export default {
                         }]
                     this.capability=cpu;
                     this.system=fun;
-                    console.log("***********",this.system)
+                    // console.log("***********",this.system)
                 }
             }).catch(error => {
                 console.log("GetSystemInfo");

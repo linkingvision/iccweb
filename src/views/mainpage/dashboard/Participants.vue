@@ -65,8 +65,9 @@
             <div class="content_you" id="fullscreen">
                 <div class="conten_you_stup">
                     <div class="conten_you_stupcen">
-                        <div class="iconfont icon-gongxiangpingmu"  @click="desktop"> </div>
+                        <div class="iconfont" :class="icon.connectionicon"  @click="connection"> </div>
                         <div class="iconfont icon-guaduan" @click="drop"> </div>
+                        <div class="iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
                         <div class="iconfont icon-fullscreen"  @click="FullScreen"> </div>
                     </div>
                 </div>
@@ -80,19 +81,21 @@
                             <div class="content_zuo_content">
                                 <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
                                     <div class="user_icon">
-                                        <i class="icon_size iconfont icon-yonghuming"></i>
+                                        <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
                                         <div class="user_size">{{a.strName}}</div>
                                     </div>
-                                    <div class="user_onl">在线</div>
+                                    <div class="user_onl" v-if="a.bOnline">在线</div>
+                                    <div class="user_onl1" v-else>离线</div>
                                 </div>
                             </div>
                         </div>
                     </el-collapse-item>
-                    <el-collapse-item title="" name="2">
+                    <el-collapse-item title="" name="2" >
                         <template slot="title">
                             <div style="display: flex;justify-content: space-between;width: 85%; align-items: center;">
                                 <div>共享桌面</div>
-                                <div class="header-icon el-icon-info"></div>
+                                <!-- @click="DesktopSwitch"  -->
+                                <div @click.stop="DesktopSwitch" class="desktop_icon"></div>
                             </div>
                         </template>
                         <video class="l5sdesktop" id="l5sShadesktop" muted autoplay webkit-playsinline playsinline></video>
@@ -182,7 +185,11 @@ export default {
             v1:undefined,
             l5sdesktop:undefined,
             myModal1:true,
-            Shareddesktop:false,//共享桌面
+            Shareddesktop:true,//共享桌面
+            icon:{
+                connectionicon:"icon-shexiangjikongzhi",
+                desktopicon:"icon-gongxiangpingmu"
+            }
         }
     },
     beforeDestroy() {
@@ -216,20 +223,42 @@ export default {
         }
     },
     methods:{
+        DesktopSwitch(){
+            console.log("桌面切换")
+            // $("#l5sShadesktop").after($("#l5video"))
+            // $("#l5video").after($("#l5sShadesktop"))
+            var insert = function(nodeInsert,nodeTo){
+                if(nodeInsert.insertAdjacentElement)
+                {
+                    nodeTo.insertAdjacentElement('beforeBegin',nodeInsert);
+                }
+                else
+                {
+                    nodeTo.parentNode.insertBefore(nodeInsert,nodeTo);
+                }
+            }
+            var obj= document.createElement("a");
+            var t1 = document.getElementById("l5video");
+            var t2 = document.getElementById("l5sShadesktop");
+            insert(obj,t2);
+            insert(t2,t1);
+            insert(t1,obj);
+        //     document.body.removeChild(obj);
+        },
         //共享桌面
         desktop(){
-            if(this.Shareddesktop){
-                this.Shareddesktop=false
+            if(this.icon.desktopicon=="icon-zhuomiangongxiang1"){
                 if (this.l5sdesktop != undefined)
                 {
                     this.l5sdesktop.disconnect();
                     delete this.l5sdesktop;
                     this.l5sdesktop = undefined;
+                    $("#l5sShadesktop").get(0).load();
+                    $("#l5sShadesktop").get(0).poster = '';
+                    this.icon.desktopicon="icon-zhuomiangongxiang"
                 }
-                console.log(this.Shareddesktop,"2");
             }else{
-                this.Shareddesktop=true
-                console.log(this.Shareddesktop,"1");
+                this.icon.desktopicon="icon-zhuomiangongxiang1"
                 if (this.l5sdesktop != undefined)
                 {
                     this.l5sdesktop.disconnect();
@@ -238,7 +267,7 @@ export default {
                 }
                 var audioout=this.audioout.toString();
                 var pushType=""
-                if (this.Shareddesktop == "true")
+                if (this.Shareddesktop == true)
                 {
                     pushType = 'sharing';
                 }
@@ -256,7 +285,7 @@ export default {
                     session: this.$store.state.token, //session got from login
                     consolelog: 'true' // 'true' or 'false' enable/disable console.log
                 };
-                console.log(conf1)
+                console.log("************",conf1)
                 // return false
                 this.l5sdesktop = new H5sRTCPush(conf1);
                 this.l5sdesktop.connect(
@@ -400,56 +429,62 @@ export default {
                 console.log('Fullscreen is not supported on your browser.');
             }
         },
+        //开启视频
         connection(){
             this.myModal1=false
-            if (this.v1 != undefined)
-            {
-                this.v1.disconnect();
-                delete this.v1;
-                this.v1 = undefined;
+            if(this.icon.connectionicon=="icon-shexiangjikongzhi"){
+                this.icon.connectionicon="icon-shexiangjikongzhi-2"
+                if (this.v1 != undefined)
+                {
+                    this.v1.disconnect();
+                    delete this.v1;
+                    this.v1 = undefined;
+                }
+                var audioout=this.audioout.toString();
+                var conf1 = {
+                    localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                    //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
+                    protocol: window.location.protocol, //http: or https:
+                    host:this.$store.state.WSROOT, //localhost:8080
+                    rootpath:'/', // {string} - path of the app running
+                    user:this.$store.state.user, // {string} - user name
+                    type:'media', // {string} - media or sharing
+                    audio: audioout,
+                    callback: null, //Callback for the event
+                    userdata: null, // user data
+                    session: this.$store.state.token, //session got from login
+                    consolelog: 'true' // 'true' or 'false' enable/disable console.log
+                };
+                // return false
+                this.v1 = new H5sRTCPush(conf1);
+                console.log("*******",this.VideoCodec,"1*",
+                    this.VideoIn,"2*",
+                    this.Bitratess,"5*",
+                    this.Resolution,"3*",
+                    this.AudioIn,
+                    this.v1,
+                    true
+                )
+                // return false
+                this.v1.connect(
+                    this.VideoIn,
+                    this.VideoCodec,
+                    this.Bitratess,
+                    this.Resolution,
+                    this.AudioIn,
+                    false
+                );
+            }else{
+                if (this.v1 != undefined)
+                {
+                    this.v1.disconnect();
+                    delete this.v1;
+                    this.v1 = undefined;
+                    $("#h5sVideoLocal").get(0).load();
+                    $("#h5sVideoLocal").get(0).poster = '';
+                    this.icon.connectionicon="icon-shexiangjikongzhi"
+                }
             }
-            var audioout=this.audioout.toString();
-            var conf1 = {
-                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
-                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
-                protocol: window.location.protocol, //http: or https:
-                host:this.$store.state.WSROOT, //localhost:8080
-                rootpath:'/', // {string} - path of the app running
-                user:this.$store.state.user, // {string} - user name
-                type:'media', // {string} - media or sharing
-                audio: audioout,
-                callback: null, //Callback for the event
-                userdata: null, // user data
-                session: this.$store.state.token, //session got from login
-                consolelog: 'true' // 'true' or 'false' enable/disable console.log
-            };
-            // return false
-            this.v1 = new H5sRTCPush(conf1);
-            console.log("*******",this.VideoCodec,"1*",
-                this.VideoIn,"2*",
-                this.Bitratess,"5*",
-                this.Resolution,"3*",
-                this.AudioIn,
-                this.v1,
-                true
-            )
-            // this.v1.connect(
-            //     "a4afcd793d76a3effca436c6cd006d6baa6023164f5f739aceaa6ea5b28cda0b",
-            //     "H264",
-            //     "1024",
-            //     "720P",
-            //     "default"
-            // );
-            
-            // return false
-		    this.v1.connect(
-                this.VideoIn,
-                this.VideoCodec,
-                this.Bitratess,
-                this.Resolution,
-                this.AudioIn,
-                false
-            );
         },
         //获取列表
         mettuselest(){
@@ -473,16 +508,23 @@ export default {
                         partId: data[i].partId,
                         strName: data[i].strName,
                         strToken: data[i].strToken,
-                        strType: data[i].strType
+                        strType: data[i].strType,
+                        icon:"iconfont icon-yonghuming",
+                        bOnline: data[i].bOnline
+                    }
+                    if(userdata["strType"]=="device"){
+                        userdata["icon"]="iconfont icon-shexiangji"
                     }
                     this.userdata.push(userdata)
                     
-                    // console.log(i,data[i].strToken,this.usertoken)
+                    console.log(i,userdata)
                 }
             })
         },
         //退出
         drop(){
+            // $("#" + this.h5videoid).get(0).load();
+            // $("#" + this.h5videoid).get(0).poster = '';
             // console.log("41")
             if (this.h5handler != undefined)
             {
@@ -546,6 +588,16 @@ export default {
     background-color: #212121;
     // position: fixed;
     //头部
+    .l5video{
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
+    .l5sdesktop{
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
     .dasboard_modal{
         .up_you_content{
             margin-top: 20px;
@@ -597,12 +649,21 @@ export default {
             &::-webkit-scrollbar{
                 display: none;
             }
-            .l5sdesktop{
-                width: 100%;
-                height: 100%;
-                object-fit: fill;
-            }
+            // .l5sdesktop{
+            //     width: 100%;
+            //     height: 100%;
+            //     object-fit: fill;
+            // }
             .el-collapse{
+                .desktop_icon{
+                    width: 35px;
+                    height: 35px;
+                    background: url("~@/views/gallery/paricipant_icon_gx.png") no-repeat;
+                    background: {
+                        size: 100%;
+                        
+                    };
+                }
                 .el-collapse-item__wrap{
                     .el-collapse-item__content{
                         //1
@@ -628,7 +689,13 @@ export default {
                                         .icon_size{
                                             font-size:15px;
                                             opacity:0.7;
-                                            color: #3171FF;
+                                            color: #0099da;
+                                            margin-right: 8px;
+                                        }
+                                        .icon_size1{
+                                            font-size:15px;
+                                            color:#FFFFFF;
+                                            opacity:0.4;
                                             margin-right: 8px;
                                         }
                                         .user_size{
@@ -646,6 +713,13 @@ export default {
                                     font-weight:500;
                                     color:rgba(59,205,107,1);
                                     opacity:0.7;
+                                }
+                                .user_onl1{
+                                    font-size:14px;
+                                    font-family:PingFang SC;
+                                    font-weight:500;
+                                    color:#FFFFFF;
+                                    opacity:0.4;
                                 }
                             }
                             
@@ -675,7 +749,7 @@ export default {
                                         .icon_size{
                                             font-size:14px;
                                             opacity:0.7;
-                                            color: #3171FF;
+                                            color: #0099da;
                                             margin-right: 8px;
                                         }
                                         .user_size{
@@ -789,23 +863,24 @@ export default {
                 z-index: 10;
                 cursor:pointer;
                 .conten_you_stupcen{
-                    background:rgba(255,255,255,0.1);
-                    padding: 0 30px;
+                    background:rgba(0,0,0,0.5);
+                    padding: 0 10px;
                     border-radius:35px;
                     display: flex;
                     justify-content: space-around;
                     div{
+                        font-size: 18px;
                         color: #FFFFFF;
                         padding: 10px 10px;
                         margin: 0 20px;
                     }
                 }
             }
-            .l5video{
-                width: 100%;
-                height: 100%;
-                object-fit: fill;
-            }
+            // .l5video{
+            //     width: 100%;
+            //     height: 100%;
+            //     object-fit: fill;
+            // }
             .l5video1{
                 display: none;
             }

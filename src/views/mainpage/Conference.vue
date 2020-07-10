@@ -232,7 +232,7 @@ export default {
             sizeForm: {
                 openmeeting:false,//是否开启会议
                 name: 'Conference1',//名称
-                metttype: 'temporary',//会议类型
+                metttype: 'regular',//会议类型
                 Startdate: new Date(),//时间
                 Eendate: new Date(),//时间
 

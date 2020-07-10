@@ -23,7 +23,7 @@
 				</router-link>
                 <router-link :to="{name:'Conference'}">
 					<el-menu-item index="3">
-						<i class="iconfont icon-11111"></i>
+						<i class="iconfont icon-duorenhuiyikuaizhuang"></i>
 						<span slot="title">视频会议</span>
 					</el-menu-item>
 				</router-link>

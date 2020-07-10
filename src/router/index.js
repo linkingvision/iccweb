@@ -251,17 +251,17 @@ export default new Router({
     ]
 })
 
-if(localStorage.getItem('mcutoken')){
-	store.state.token=localStorage.getItem('mcutoken');
+if(sessionStorage.getItem('mcutoken')){
+	store.state.token=sessionStorage.getItem('mcutoken');
   }
-  if(localStorage.getItem('mcuuser')){
-	store.state.user=localStorage.getItem('mcuuser');
+  if(sessionStorage.getItem('mcuuser')){
+	store.state.user=sessionStorage.getItem('mcuuser');
   }
-  if(localStorage.getItem('mculang')){
-	store.state.lang=localStorage.getItem('mculang');
+  if(sessionStorage.getItem('mculang')){
+	store.state.lang=sessionStorage.getItem('mculang');
   }
-  if(localStorage.getItem('mcuroot')){
-	store.state.root=localStorage.getItem('mcuroot');
+  if(sessionStorage.getItem('mcuroot')){
+	store.state.root=sessionStorage.getItem('mcuroot');
   }
   let root=process.env.VUE_APP_URL;
   if (root == undefined){

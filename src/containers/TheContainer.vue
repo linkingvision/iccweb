@@ -30,6 +30,10 @@ import TheHeders from './TheHeders'
 import TheHeader from './TheHeader'
 import TheFooter from './TheFooter'
 
+import Vue from 'vue'
+import {events} from '@/containers/event'
+// Vue.prototype.EVENT = event
+
 export default {
   name: 'TheContainer',
   components: {
@@ -37,6 +41,9 @@ export default {
 	TheHeders,
 	TheHeader,
 	TheFooter,
+  },
+  mounted(){
+	//   console.log("event",events())
   },
   methods:{
 	  clicktogg(){
