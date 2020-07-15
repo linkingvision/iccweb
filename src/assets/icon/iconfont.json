@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5830571",
+      "name": "摄像头",
+      "font_class": "shexiangtou",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "5426207",
+      "name": "点对点-01",
+      "font_class": "dianduidian-",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
       "icon_id": "15812667",
       "name": "zhuomiangongxiang",
       "font_class": "zhuomiangongxiang1",

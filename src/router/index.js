@@ -23,6 +23,7 @@ const Dashboard = () => import('@/views/mainpage/Dashboard')
 const Participants = () => import('@/views/mainpage/dashboard/Participants')
 
 const Conference = () => import('@/views/mainpage/Conference')
+const OneToOne = () => import('@/views/mainpage/OneToOne')
 
 const Setting = () => import('@/views/mainpage/Setting')
 const Meetingman = () => import('@/views/mainpage/setting/Meetingman')
@@ -86,6 +87,15 @@ export default new Router({
                     component: Conference,
                     meta: {
                       title: '3',
+                      type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
+				{
+                    path: 'OneToOne',
+                    name: "OneToOne",
+                    component: OneToOne,
+                    meta: {
+                      title: '4',
                       type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},

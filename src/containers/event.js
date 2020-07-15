@@ -2,7 +2,6 @@
    
 import {H5sEvent} from '../assets/js/h5sevent.js'
 import store from '@/store'
-console.log(store.state.token,store.state.root)
 let gEvent=[];
 var e1=undefined;
 function EventCB(event, userdata)
@@ -15,8 +14,8 @@ function EventCB(event, userdata)
             Time:msgevent.strTime,
             Detail:event
         };
-    gEvent.push(timeitem);
-    console.log("*******",gEvent,event)
+    gEvent=msgevent;
+    console.log("*******",gEvent,msgevent)
 }
 function events(){
     console.log("*******1")
@@ -37,5 +36,4 @@ function events(){
     e1.connect();
 }
 events();
-console.log("*******",store.state.token)
-export{events}
+export default{gEvent}

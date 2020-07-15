@@ -122,7 +122,8 @@ $confere_fast_bg:#FFFFFF;
             repeat:no-repeat;
             position:center
         }
-        background-image: url('~@/assets/imgs/setting_tober.png');
+		background-image: url('~@/assets/imgs/setting_tober.png');
+		background-size: 18%;
         .el-table__empty-text{
             display: none;
         }

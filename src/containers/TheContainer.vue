@@ -20,6 +20,20 @@
 			<!-- <TheFooter/> -->
 			</div>
 		</CWrapper>
+		
+		<!-- :modal="false" -->
+		<el-dialog
+            class="dasboard_modal"
+            title="加入会议"
+            :close-on-click-modal="false"
+            :visible.sync="myModal"
+            width="25%">
+            是否接听会议?
+            <span slot="footer" class="dialog-footer particip_buttom">
+                <CButton class="part_buttom_but1" type="primary"  @click="myModal=false">否</CButton>
+                <CButton class="part_buttom_but" type="primary"  @click="l5svideplay">是</CButton>
+            </span>
+        </el-dialog>
 			
 	</div>
 </template>
@@ -30,28 +44,108 @@ import TheHeders from './TheHeders'
 import TheHeader from './TheHeader'
 import TheFooter from './TheFooter'
 
-import Vue from 'vue'
-import {events} from '@/containers/event'
+import '../assets/js/adapter'
+import {H5sEvent} from '../assets/js/h5sevent.js'
 // Vue.prototype.EVENT = event
 
 export default {
-  name: 'TheContainer',
-  components: {
-    TheSidebar,
-	TheHeders,
-	TheHeader,
-	TheFooter,
-  },
-  mounted(){
-	//   console.log("event",events())
-  },
-  methods:{
-	  clicktogg(){
-		  if(this.$store.state.sidebarShow){
-			  this.$store.commit('toggleSidebarDesktop')
-		  }
-	  }
-  }
+	name: 'TheContainer',
+	components: {
+		TheSidebar,
+		TheHeders,
+		TheHeader,
+		TheFooter,
+	},
+	data(){
+		return {
+			myModal:false,
+			meettoken:undefined,
+			sharedstart:undefined,
+			sharedstop:undefined
+		}
+	},
+	watch:{
+		meettoken(token){
+			console.log("改变",token)
+			this.meettoken=token
+			this.myModal=true;
+		},
+		sharedstart(token){
+			console.log("改变1",token)
+			this.$root.bus.$emit('sharedstart', token);
+		},
+		sharedstop(token){
+			console.log("改变2",token)
+			this.$root.bus.$emit('sharedstop', token);
+		}
+	},
+	mounted(){
+		//   console.log("event",events())
+		this.open()
+	},
+	methods:{
+		//播放
+		l5svideplay(){
+			if(this.myModal==true){
+				if(this.meettoken!=undefined){
+					this.myModal=false;
+					if(this.$router.history.current.name!="OneToOne"){
+						console.log("1")
+						this.$router.push({
+							name: `OneToOne`,
+							path: 'OneToOne',
+							params: {
+								token:this.meettoken
+							}
+						})
+					}else{
+						console.log("2")
+						this.$root.bus.$emit('meettoken', this.meettoken);
+					}
+					console.log(this.$router.history.current.name)
+				}
+			}
+		},
+		open(){
+			var conf1 = {
+				protocol: window.location.protocol, //http: or https:
+				host:this.$store.state.WSROOT, //localhost:8080
+				rootpath:'/', // '/'
+				callback: this.EventCB, 
+				userdata: null, // user data
+				session: this.$store.state.token //session got from login
+			};
+			
+			// console.log("*******2",conf1)
+			this.e1 = new H5sEvent(conf1);
+			this.e1.connect();
+		},
+		EventCB(event, userdata){
+			var msgevent = JSON.parse(event);
+			if(msgevent.type=="H5S_EVENT_SEND_CONFERENCE"){
+				this.meettoken=msgevent.sendConference.token;
+			}else if(msgevent.type=="H5S_EVENT_START_SHARE_DESKTOP"){
+				this.sharedstart=msgevent.shareDesktop.token;
+				console.log("****",msgevent)
+			}else if(msgevent.type=="H5S_EVENT_STOP_SHARE_DESKTOP"){
+				this.sharedstop=msgevent.stopShareDesktop.token;
+				console.log("****",msgevent)
+			}
+		},
+		clicktogg(){
+			if(this.$store.state.sidebarShow){
+				this.$store.commit('toggleSidebarDesktop')
+			}
+		}
+	},
+	beforeDestroy() {
+		if (this.e1 != undefined)
+		{
+			this.e1.disconnect();
+			delete this.e1;
+			this.e1 = undefined;
+		}
+	},
 }
 </script>
 

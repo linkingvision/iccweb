@@ -12,6 +12,10 @@ import LangZhCHT from '../static/lang/zhcht'
 import './assets/icon/iconfont.css'//字体
 import $ from 'jquery'
 
+
+// import event from './containers/event'
+// Vue.prototype.EVENT = event
+
 import axios from '@/http';
 Vue.prototype.$http = axios;
 

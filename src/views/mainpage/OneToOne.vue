@@ -60,6 +60,19 @@
                 </div>
             </span>
         </el-dialog>
+        <!-- <el-dialog
+            class="dasboard_modal"
+            title="加入会议"
+            :modal="false"
+            :close-on-click-modal="false"
+            :visible.sync="myModal"
+            width="25%">
+            是否接听会议?
+            <span slot="footer" class="dialog-footer particip_buttom">
+                <CButton class="part_buttom_but1" type="primary"  @click="myModal=false">否</CButton>
+                <CButton class="part_buttom_but" type="primary"  @click="l5svideplay">是</CButton>
+            </span>
+        </el-dialog> -->
         <!-- 身体 -->
         <div class="particiants_content">
             <div class="content_you" id="fullscreen" @mouseover="mouseOver"  @mouseleave="mouseLeave">
@@ -76,7 +89,7 @@
             </div>
             <div class="content_zuo">
                 <el-collapse v-model="activeNames">
-                    <el-collapse-item title="会议人员" name="1">
+                    <el-collapse-item title="联系人" name="1">
                         <div class="content_zuo_con">
                             <div class="content_zuo_content">
                                 <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
@@ -84,8 +97,8 @@
                                         <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
                                         <div class="user_size">{{a.strName}}</div>
                                     </div>
-                                    <div class="user_onl" v-if="a.bOnline">在线</div>
-                                    <div class="user_onl1" v-else>离线</div>
+                                    <div class="user_onl iconfont icon-shexiangtou" @click="call(a.strName)"></div>
+                                    <!-- <div class="user_onl1" v-else>离线</div> -->
                                 </div>
                             </div>
                         </div>
@@ -152,8 +165,12 @@
 </div>
 </template>
 <script>
-import '../../../assets/js/adapter'
-import {H5sPlayerRTC,H5sRTCGetCapability,H5sRTCPush} from '../../../assets/js/h5splayer.js'
+import '../../assets/js/adapter'
+import uuid from '../../assets/js/uuid1'
+import {H5sPlayerRTC,H5sRTCGetCapability,H5sRTCPush} from '../../assets/js/h5splayer.js'
+import Vue from 'vue'
+// import event from '../../containers/event'
+// Vue.prototype.EVENT = event
 export default {
     name:"participants",
     data(){
@@ -185,7 +202,7 @@ export default {
             v1:undefined,
             l5sdesktop:undefined,
             l5sdesktops:undefined,
-            myModal1:true,
+            myModal1:false,
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",
@@ -196,22 +213,44 @@ export default {
         }
     },
     beforeDestroy() {
-        this.drop();
-        this.$root.bus.$off('sharedstart');
-        this.$root.bus.$off('sharedstop');
-        clearInterval(this.timerRunInfo1)
+        if (this.h5handler != undefined)
+        {
+            this.h5handler.disconnect();
+            delete this.h5handler;
+            this.h5handler = undefined;
+        }
+        if (this.v1 != undefined)
+        {
+            this.v1.disconnect();
+            delete this.v1;
+            this.v1 = undefined;
+        }
+        if (this.l5sdesktop != undefined)
+        {
+            this.l5sdesktop.disconnect();
+            delete this.l5sdesktop;
+            this.l5sdesktop = undefined;
+        }
+        this.$root.bus.$off('meettoken');
+        clearInterval(this.timerRunInfo1);
     },
     mounted(){
+        // console.log("**",this.EVENT)
         $(".conten_you_stup").hide()
-        if(this.usertoken!= undefined){
+        this.mettuselest();
+        this.updisplay();
+        if(this.usertoken!=undefined){
+            console.log("播放",this.usertoken)
             this.l5svideplay()
-            this.mettuselest();
-            this.updisplay();
-        }else{
-            this.drop()
         }
         this.golddesktop();
         var _this=this
+        _this.$root.bus.$on('meettoken', function(token){
+            console.log("播放",token)
+            _this.usertoken=token
+            _this.l5svideplay()
+            // _this.myModal=true;
+        });
         _this.$root.bus.$on('sharedstart', function(token){
             console.log("播放",token)
             _this.$message('共享屏幕开始');
@@ -224,7 +263,6 @@ export default {
         });
     },
     methods:{
-        //聊天
         //是否有人在使用共享桌面
         golddesktop(){
             var url = this.$store.state.IPPORT + "/api/v1/GetShareDesktopStatus?token="+this.usertoken+"&session="+ this.$store.state.token;
@@ -270,6 +308,7 @@ export default {
                         if(result.data.strToken==token){
                             console.log("同步1")
                             clearInterval(this.timerRunInfo1);
+                            // return false
                             let conf = {
                                 videoid:"l5sShadesktop",
                                 protocol: window.location.protocol, //http: or https:
@@ -298,7 +337,27 @@ export default {
                 $("#l5sShadesktop").get(0).poster = '';
             }
         },
-        //桌面切换
+        //拨打电话
+        call(user){
+            var token = uuid(4, 10);
+            this.usertoken=token
+            var starfs=new Date().getTime();
+            var endds=new Date().getTime();
+            var ks=new Date(starfs).toISOString()+"08:00";
+            var jss=new Date(endds).toISOString()+"08:00";
+
+            var url = this.$store.state.IPPORT + "/api/v1/OnetoOneConference?name="
+            +this.$store.state.user+"&token="
+            +token+"&begintime="
+            +ks+"&endtime="
+            +jss+"&user="
+            +user+"&session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                console.log(result)
+                this.l5svideplay();
+            })
+        },
+        //切换视频
         DesktopSwitch(){
             console.log("桌面切换")
             // $("#l5sShadesktop").after($("#l5video"))
@@ -578,7 +637,6 @@ export default {
                     this.AudioIn,
                     false
                 );
-                // this.mettuselest();
             }else{
                 if (this.v1 != undefined)
                 {
@@ -593,47 +651,33 @@ export default {
         },
         //获取列表
         mettuselest(){
-            this.userdata=[];
             // console.log(this.$store.state.IPPORT)
-            var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/GetOnlineUserList?session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 console.log(result)
-                // this.userdata=result.data.particiants
-                var data=result.data.particiants
+                var data=result.data.userList
                 if(data.length==0){
                     return false
                 }
-                console.log(data)
                 for(var i=0; i<data.length;i++){
-                    if(data[i].strToken==this.usertoken){
+                    if(this.$store.state.user==data[i].strName){
                         continue
                     }
                     var userdata={
-                        mosaicId: data[i].mosaicId,
-                        nSolt: data[i].nSolt,
-                        partId: data[i].partId,
                         strName: data[i].strName,
-                        strToken: data[i].strToken,
-                        strType: data[i].strType,
                         icon:"iconfont icon-yonghuming",
-                        bOnline: data[i].bOnline
-                    }
-                    if(userdata["strType"]=="device"){
-                        userdata["icon"]="iconfont icon-shexiangji"
+                        bOnline:true
                     }
                     this.userdata.push(userdata)
                     
-                    console.log(i,userdata)
                 }
             })
         },
         //退出
         drop(){
-            if (this.l5sdesktops != undefined){
-                this.l5sdesktops.disconnect();
-                delete this.l5sdesktops;
-                this.l5sdesktops = undefined;
-            }
+            // $("#" + this.h5videoid).get(0).load();
+            // $("#" + this.h5videoid).get(0).poster = '';
+            // console.log("41")
             if (this.h5handler != undefined)
             {
                 this.h5handler.disconnect();
@@ -646,24 +690,19 @@ export default {
                 delete this.v1;
                 this.v1 = undefined;
             }
-            if (this.l5sdesktop != undefined){
+            if (this.l5sdesktop != undefined)
+            {
                 this.l5sdesktop.disconnect();
                 delete this.l5sdesktop;
                 this.l5sdesktop = undefined;
-                var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
-                this.$http.get(url).then(result=>{
-                    console.log("关闭",result)
-                })
             }
-            console.log(this.h5handler,this.v1,this.l5sdesktop)
-            if(this.h5handler == undefined&&this.v1 == undefined&&this.l5sdesktop == undefined&&this.l5sdesktops==undefined){
-                this.$router.push({
-                    path: 'Conference'
-                }).catch((e) => {})
-            }
+            // this.$router.push({
+            //     path: 'Conference'
+            // })
         },
         //播放视频
         l5svideplay(){
+            this.myModal=false;
             if (this.h5handler != undefined)
             {
                 this.h5handler.disconnect();
@@ -732,7 +771,7 @@ export default {
         .particiants_logo{
             width: 160px;
             height: 100%;
-            background: url('../../../assets/imgs/l5s_logo_bai.png') no-repeat center center;
+            background: url('../../assets/imgs/l5s_logo_bai.png') no-repeat center center;
             background-size: 100%;
         }
     }
@@ -827,6 +866,7 @@ export default {
                                     font-weight:500;
                                     color:rgba(59,205,107,1);
                                     opacity:0.7;
+                                    cursor:pointer;
                                 }
                                 .user_onl1{
                                     font-size:14px;

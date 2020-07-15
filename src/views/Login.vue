@@ -46,6 +46,8 @@
 <script>
 import '../assets/js/jQuery.md5'
 import { version } from '@babel/core';
+import '../assets/js/adapter'
+import {H5sEvent} from '../assets/js/h5sevent.js'
 export default {
     data() {
         return {
@@ -66,11 +68,12 @@ export default {
                     value: 'zhchs',
                     label: '简体中文'
                 },
-            ]
+            ],
+            e1:undefined
         };
     },
     mounted(){
-        // console.log(localStorage.getItem('mcutoken'),localStorage.getItem('mcuuser'),localStorage.getItem('mculang'),localStorage.getItem('mcuroot'),this.$store.state.token,this.$store.state.user)
+        console.log(sessionStorage.getItem('mcutoken'),sessionStorage.getItem('mcuuser'),sessionStorage.getItem('mculang'),sessionStorage.getItem('mcuroot'),this.$store.state.token,this.$store.state.user)
     },
     methods: {
         langchang(){
@@ -133,12 +136,26 @@ export default {
                     this.$store.state.root=data.strUserType
                     sessionStorage.mcuuser = this.$store.state.user
                     sessionStorage.mcuroot=this.$store.state.root
+
+                    // var conf1 = {
+                    //     protocol: window.location.protocol, //http: or https:
+                    //     host:this.$store.state.WSROOT, //localhost:8080
+                    //     rootpath:'/', // '/'
+                    //     callback: this.EventCB, 
+                    //     userdata: null, // user data
+                    //     session: strSession //session got from login
+                    // };
+                    
+                    // // console.log("*******2",conf1)
+                    // this.e1 = new H5sEvent(conf1);
+                    // this.e1.connect();
+
                     this.$router.push({
                         path: 'dashboard'
                     })
                 }
             })
-        }
+        },
     }
 };
 </script>

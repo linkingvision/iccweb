@@ -512,9 +512,9 @@ export default {
                         }
                         this.tableData.push(listdata)
                     }
-                    this.tableData.sort(function(a,b){
-                        return  b.beginTime1-a.beginTime1
-                    })
+                    // this.tableData.sort(function(a,b){
+                    //     return  b.beginTime1-a.beginTime1
+                    // })
                     this.total=this.tableData.length
                 }
             })

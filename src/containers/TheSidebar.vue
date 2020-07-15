@@ -23,8 +23,14 @@
 				</router-link>
                 <router-link :to="{name:'Conference'}">
 					<el-menu-item index="3">
-						<i class="iconfont icon-duorenhuiyikuaizhuang"></i>
+						<i class="iconfont icon-11111"></i>
 						<span slot="title">视频会议</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'OneToOne'}">
+					<el-menu-item index="4">
+						<i class="iconfont icon-huiyiguanli"></i>
+						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
                 <router-link :to="{name:'Meetingman'}">

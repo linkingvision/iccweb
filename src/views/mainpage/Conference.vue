@@ -240,6 +240,9 @@ export default {
                 one:"1p2",
                 onenmode:[
                     {
+                        value: "1p1",
+                        label: "1p1"
+                    },{
                         value: "1p2",
                         label: "1p2"
                     },{
@@ -491,6 +494,10 @@ export default {
                         return false
                     }
                     for(var i=0;i<data.length;i++){
+                        // console.log("1*",data[i].strType)
+                        if(data[i].strType=="temporary"){
+                            continue
+                        }
                         var beginTime=new Date(data[i].beginTime).getTime();
                         var begin=new Date(data[i].beginTime);  
                         var eng=new Date(data[i].endTime)
@@ -503,7 +510,6 @@ export default {
                         var h = this.addZero(begin.getHours());
                         var mm = this.addZero(begin.getMinutes());
                         var rq=y+'.'+m+'.'+d+" "+h+':'+mm;
-
                         var listdata={
                             bStartStatus: data[i].bStartStatus,
                             beginTime: rq,
@@ -518,23 +524,25 @@ export default {
                         }
                         this.meetdata.push(listdata)
                         
-                        // console.log("1*",begin,rq)
+                        console.log("1*",this.meetdata)
                     }
-                    this.meetdata.sort(function(a,b){
-                        return  b.beginTime1-a.beginTime1
-                    })
-                    var daterecent=Math.round(new Date().getTime())
-                    var newArr = [];
-                    this.meetdata.map(function(x){
-                        // 对数组各个数值求差值
-                        newArr.push(Math.abs(x.beginTime1 - daterecent));
-                        // console.log(newArr,x.beginTime1 - daterecent,x.beginTime1,daterecent)
-                    });
-                    // 求最小值的索引
-                    var index = newArr.indexOf(Math.min.apply(null, newArr))
-                    this.daterecent=this.meetdata[index]
-                    
-                    // console.log(this.daterecent,"1")
+                    if(this.meetdata.length!=0){
+                        this.meetdata.sort(function(a,b){
+                            return  b.beginTime1-a.beginTime1
+                        })
+                        var daterecent=Math.round(new Date().getTime())
+                        var newArr = [];
+                        this.meetdata.map(function(x){
+                            // 对数组各个数值求差值
+                            newArr.push(Math.abs(x.beginTime1 - daterecent));
+                            // console.log(newArr,x.beginTime1 - daterecent,x.beginTime1,daterecent)
+                        });
+                        // 求最小值的索引
+                        var index = newArr.indexOf(Math.min.apply(null, newArr))
+                        this.daterecent=this.meetdata[index]
+                        
+                        // console.log(this.daterecent,"1")
+                    }
                 }
                 
             })
