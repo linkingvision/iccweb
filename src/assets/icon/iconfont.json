@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2402947",
+      "name": "文件",
+      "font_class": "wenjian",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "5311294",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "2053909",
+      "name": "踢出",
+      "font_class": "tichu",
+      "unicode": "e6e4",
+      "unicode_decimal": 59108
+    },
+    {
+      "icon_id": "6162635",
+      "name": "会议控制",
+      "font_class": "kongzhitai",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "6638239",
+      "name": "麦克风",
+      "font_class": "Mic",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "10249125",
+      "name": "延长会议",
+      "font_class": "extend-copy",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "10660428",
+      "name": "扬声器",
+      "font_class": "yangshengqi",
+      "unicode": "e6e8",
+      "unicode_decimal": 59112
+    },
+    {
+      "icon_id": "12097886",
+      "name": "录像",
+      "font_class": "baobaokanhuyidingzhiLOGO-",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "14812033",
+      "name": "邀请入会",
+      "font_class": "yaoqingruhui",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
       "icon_id": "5830571",
       "name": "摄像头",
       "font_class": "shexiangtou",
@@ -256,13 +319,6 @@
       "font_class": "rili",
       "unicode": "e618",
       "unicode_decimal": 58904
-    },
-    {
-      "icon_id": "3584754",
-      "name": "文件夹",
-      "font_class": "wenjian",
-      "unicode": "e601",
-      "unicode_decimal": 58881
     },
     {
       "icon_id": "4383506",

@@ -115,25 +115,25 @@
                     </el-collapse-item>
                     <el-collapse-item title="消息" name="3">
                         <div class="content_zuo_con2">
-                            <div class="content_zuo_content">
-                                <div class="content_zuo_user">
+                            <div class="content_zuo_content" id="chatrecord">
+                                <div class="content_zuo_user" v-for="(a,index) in chatrecord" :key="index">
                                     <div class="user_icon">
                                         <i class="icon_size iconfont icon-yonghuming"></i>
-                                        <div class="user_size">用户：</div>
+                                        <div class="user_size">{{a.user}}：</div>
                                     </div>
-                                    <div class="user_onl">这是一个很重要的会议，大家先讨论一下</div>
+                                    <div class="user_onl">{{a.msg}}</div>
                                 </div>
                             </div>
                             <div class="content_zuo_but">
                                 <div class="chatwith_inp">
-                                    <el-input class="chatwith_input" v-model="chatwith" placeholder="请输入内容"></el-input>
+                                    <el-input class="chatwith_input" v-model="chatwith" placeholder="请输入内容" @keyup.enter.native="sendnews"></el-input>
                                 </div>
                                 <div class="chatwith_icon">
                                     <span class="iconfont icon-biaoqing"></span>
                                     <span class="iconfont icon-biaoqing"></span>
                                 </div>
                                 <div>
-                                    <CButton class="form_butt1" type="submit">发送</CButton>
+                                    <CButton class="form_butt1" type="submit" @click="sendnews">发送</CButton>
                                 </div>
                             </div>
                         </div>
@@ -206,6 +206,7 @@ export default {
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",
+            chatrecord:[],//聊天记录
             icon:{
                 connectionicon:"icon-shexiangjikongzhi",
                 desktopicon:"icon-gongxiangpingmu"
@@ -263,6 +264,20 @@ export default {
         });
     },
     methods:{
+        //聊天
+        sendnews(){
+            console.log("回车",this.chatwith);
+            if (this.v1 != undefined)
+            {
+                if(this.chatwith){
+                    console.log("回车1");
+                    this.v1.send(this.usertoken,this.chatwith)
+                    this.chatwith=""
+                }else{
+                    this.$message('消息不能为空');
+                }
+            }
+        },
         //是否有人在使用共享桌面
         golddesktop(){
             var url = this.$store.state.IPPORT + "/api/v1/GetShareDesktopStatus?token="+this.usertoken+"&session="+ this.$store.state.token;
@@ -613,7 +628,7 @@ export default {
                     user:this.$store.state.user, // {string} - user name
                     type:'media', // {string} - media or sharing
                     audio: audioout,
-                    callback: null, //Callback for the event
+                    callback: this.PlaybackCB, //Callback for the event
                     userdata: null, // user data
                     session: this.$store.state.token, //session got from login
                     consolelog: 'true' // 'true' or 'false' enable/disable console.log
@@ -649,6 +664,20 @@ export default {
                 }
             }
         },
+        PlaybackCB(event, userdata){
+            
+            var msgevent = JSON.parse(event);
+            var chatrecorddata={
+                user:msgevent.user,
+                msg:msgevent.msg
+            }
+            this.chatrecord.push(chatrecorddata)
+            this.$nextTick(() => {
+                let ele = document.getElementById('chatrecord');
+                ele.scrollTop = ele.scrollHeight;
+            })
+            console.log("Playback callback ", event,msgevent,this.chatrecord,chatrecorddata);
+        },
         //获取列表
         mettuselest(){
             // console.log(this.$store.state.IPPORT)
@@ -678,6 +707,11 @@ export default {
             // $("#" + this.h5videoid).get(0).load();
             // $("#" + this.h5videoid).get(0).poster = '';
             // console.log("41")
+            if (this.l5sdesktops != undefined){
+                this.l5sdesktops.disconnect();
+                delete this.l5sdesktops;
+                this.l5sdesktops = undefined;
+            }
             if (this.h5handler != undefined)
             {
                 this.h5handler.disconnect();
@@ -695,6 +729,10 @@ export default {
                 this.l5sdesktop.disconnect();
                 delete this.l5sdesktop;
                 this.l5sdesktop = undefined;
+                var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
+                this.$http.get(url).then(result=>{
+                    console.log("关闭",result)
+                })
             }
             // this.$router.push({
             //     path: 'Conference'

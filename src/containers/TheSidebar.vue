@@ -29,10 +29,16 @@
 				</router-link>
                 <router-link :to="{name:'OneToOne'}">
 					<el-menu-item index="4">
-						<i class="iconfont icon-huiyiguanli"></i>
+						<i class="iconfont icon-dianduidian-"></i>
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
+                <a href="/mediastore">
+                    <el-menu-item index="2-1-1">
+                        <i class="iconfont icon-wenjian"></i>
+                        <span slot="title">文件夹</span>
+                    </el-menu-item>
+                </a>
                 <router-link :to="{name:'Meetingman'}">
 					<el-menu-item index="2">
 						<i class="iconfont icon-shezhi"></i>
