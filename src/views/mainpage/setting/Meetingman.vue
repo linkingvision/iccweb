@@ -355,8 +355,13 @@ export default {
             var url = this.$store.state.IPPORT + "/api/v1/DeleteConference?token="+encodeURIComponent(row.strToken)+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
                     if(result.status==200){
-                        this.$message('删除会议成功');
-                        rows.splice(index_xlh, 1);
+                        if(result.data.bStatus){
+                            console.log(result ,"删除");
+                            this.$message('删除会议成功');
+                            rows.splice(index_xlh, 1);
+                        }else{
+                            this.$message('请关闭会议或刷新重试');
+                        }
                     }
                 })
         },

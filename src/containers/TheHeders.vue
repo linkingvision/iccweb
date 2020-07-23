@@ -1,14 +1,14 @@
 <template>
     <div class="c_ding">
         <div class="heder_Mask" @click="clicktogg"></div>
-        <CButton style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="togg"></CButton>
+        <button style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="togg"></button>
         <div class="c_logo"></div>
         <div class="c_use">
             
             <div></div>
             <div class="use_you">
                 <!-- <button 
-                    @click="() => $store.commit('toggle', 'darkMode')" 
+                    @click="skin" 
                     class="c-header-nav-btn"
                     >
                     <CIcon v-if="$store.state.darkMode" name="cil-sun"/>
@@ -71,7 +71,7 @@
                 // show: false,
                 navbarText: false,
                 navbarDropdown: false,
-                toggle:this.$store.state.sidebarShow,
+                toggle:"",
                 information:{
                     strVersion: ""
                 }
@@ -79,7 +79,7 @@
         },
         watch:{
             toggle(a){
-                console.log(a,"heders")
+                this.$root.bus.$emit('skintoggle', a);
             }
         },
         mounted(){
@@ -87,6 +87,10 @@
             this.GetSystemInfo()
         },
         methods:{
+            skin(){
+                this.toggle=this.$store.state.darkMode
+                this.$store.commit('toggle', 'darkMode')
+            },
             togg(){
                 $(".heder_Mask").toggle()
                 this.$store.commit('toggleSidebarDesktop')
@@ -116,6 +120,11 @@
     }
 </script>
 <style scoped>
+/* 隐藏按钮 */
+.c-header-nav-btn{
+    border: none;
+    background: none;
+}
 /*弹框 */
 .heder_Mask{
     width: 100%;
@@ -123,7 +132,7 @@
     background-color: #000;
     opacity: 0.5;
     position: fixed;
-    z-index: -10;
+    /* z-index: -10; */
 
 }
 .plugin >>> .el-dialog{

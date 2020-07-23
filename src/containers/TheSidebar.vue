@@ -5,14 +5,54 @@
     :show="show"
     @update:show="(value) => $store.commit('set', ['sidebarShow', value])">
         <div class="side_togg">
-            <CButton style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="togg"></CButton>
+            <button style="font-size:25px" class="toggler iconfont icon-hanbaobao" @click="togg"></button>
             <div class="c_logo"></div>
         </div>
         <el-menu
+            v-if="$store.state.darkMode"
 			:default-active="activemenu"
 				class="el-menu-vertical-demo"
 				background-color="#212121"
 				text-color="#FFFFFF"
+				active-text-color="#3277FF">
+
+				<router-link :to="{name:'dashboard'}">
+					<el-menu-item index="1">
+						<i class="iconfont icon-yibiaopan1"></i>
+						<span slot="title">仪表盘</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'Conference'}">
+					<el-menu-item index="3">
+						<i class="iconfont icon-11111"></i>
+						<span slot="title">视频会议</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'OneToOne'}">
+					<el-menu-item index="4">
+						<i class="iconfont icon-dianduidian-"></i>
+						<span slot="title">对讲</span>
+					</el-menu-item>
+				</router-link>
+                <a href="/mediastore">
+                    <el-menu-item index="2-1-1">
+                        <i class="iconfont icon-wenjian"></i>
+                        <span slot="title">文件夹</span>
+                    </el-menu-item>
+                </a>
+                <router-link :to="{name:'Meetingman'}">
+					<el-menu-item index="2">
+						<i class="iconfont icon-shezhi"></i>
+						<span slot="title">设置</span>
+					</el-menu-item>
+				</router-link>
+        </el-menu>
+        <el-menu
+            v-else
+			:default-active="activemenu"
+				class="el-menu-vertical-demo"
+				background-color="#F3F5FA"
+				text-color="#000000"
 				active-text-color="#3277FF">
 
 				<router-link :to="{name:'dashboard'}">
@@ -98,12 +138,6 @@ export default {
     .c_logo{
         width: 160px;
         height: 100%;
-    }
-}
-.el-menu-vertical-demo{
-    i{
-        color: #FFFFFF;
-		margin-right: 24px;
     }
 }
 </style>

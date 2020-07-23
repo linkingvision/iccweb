@@ -72,35 +72,93 @@ $confere_fast_bg:#212121;
         .setting_all{
             .setting_zuo{
                 background-color: $confere_fast_bg;
+                .el-submenu{
+					.el-submenu__title{
+						i{
+							color: rgb(113, 127, 135);
+						}
+					}
+				}
             }
         }
     }
      //视频
-     .particiants{
-         .particiants_content{
-             .content_zuo{
-                .el-collapse{
+    .particiants{
+        .particiants_content{
+            .content_zuo{
+            .el-collapse{
+                border: none;
+                .el-collapse-item__header{
+                    color: $body-color;
+                    background-color: #2E2E2E;
+                    opacity: 0.7;
                     border: none;
-                    .el-collapse-item__header{
-                        color: #FFFFFF;
-                        background-color: #2E2E2E;
-                        opacity: 0.7;
-                        border: none;
-                        padding: 0 7px;
-                    }
-                    .el-collapse-item__wrap{
-                        background: none;
-                        border-bottom: none;
-                        .el-collapse-item__content{
-                            padding: 0;
-                            color: #FFFFFF;
-                            // opacity: 0.7;
+                    padding: 0 7px;
+                }
+                .el-collapse-item__wrap{
+                    background: none;
+                    border-bottom: none;
+                    .el-collapse-item__content{
+                        padding: 0;
+                        color: $body-color;
+                        // opacity: 0.7;
+                        //1
+                        .content_zuo_con{
+                            .content_zuo_content{
+                                .content_zuo_user{
+                                    .user_icon{
+                                        .icon_size1{
+                                            color:$body-color;
+                                            opacity:0.7;
+                                        }
+                                        .icon_size{
+                                            opacity:0.7;
+                                        }
+                                        .user_size{
+                                            color:$body-color;
+                                            opacity:0.4;
+                                        }
+                                    }
+                                    .user_onl{
+                                        opacity:0.4;
+                                    }
+                                }
+                            }
+                            
+                        }
+                        //2
+                        .content_zuo_con2{
+                            .content_zuo_content{
+                                .content_zuo_user{
+                                    .user_icon{
+                                        .user_size{
+                                            color:$body-color;
+                                            opacity:0.7;
+                                        }
+                                    }
+                                    .user_onl{
+                                        color:$body-color;
+                                        opacity:0.4;
+                                    }
+                                }
+                            }
+                            .content_zuo_but{
+                                background-color:#272427;
+                                .chatwith_inp{
+                                    .chatwith_input{
+                                        /deep/ .el-input__inner{
+                                            background:#373438!important;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-             }
-         }
-     }
+            }
+            }
+        }
+    }
     //设置内左边栏
     .setting_all{
         .setting_you{
@@ -126,8 +184,12 @@ $confere_fast_bg:#212121;
         }
 		.toggler{
 			border: none !important;
-			color: $body-color;
-		}
+            color: $body-color;
+            background: none;
+        }
+        .c-header-nav-btn{
+            color: #FFFFFF;
+        }
 	}
     .btn-link{
         color: $body-color;
@@ -224,7 +286,7 @@ $confere_fast_bg:#212121;
             position:center
         }
         background-image: url('~@/assets/imgs/setting_tober1.png');
-        background-size: 18%;
+        background-size: 14%;
         .el-table__empty-text{
             display: none;
         }
@@ -312,6 +374,21 @@ $confere_fast_bg:#212121;
     color: #000;
     background:$concent-bg;
     border: 0;
+    .el-menu-vertical-demo{
+        i{
+            color:  $body-color;
+            margin-right: 24px;
+        }
+    }
+    .c_logo{
+        background: url("~@/assets/imgs/l5s_logo1.png") center center no-repeat;
+        background-size: 85%;
+    }
+    .toggler{
+        border: none !important;
+        color: $body-color;
+        background: none;
+    }
 }
 .c-dark-theme .c-sidebar .c-sidebar-nav-title {
     color: $body-color;

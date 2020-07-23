@@ -258,7 +258,7 @@ export default {
             Gpulen:{
                 nIndex:"",
                 nvidia:""
-            }
+            },
             
 		}
 	},
@@ -274,6 +274,12 @@ export default {
         this.timerRunInfo1 = setInterval(() => {
             this.GetDeviceSummary();
         }, 60000*5)
+        var _this=this
+        _this.$root.bus.$on('skintoggle', function(a){
+            console.log("更换皮肤",a)
+            _this.GetRunInfo();
+            _this.GetDeviceSummary();
+        });
 	},
 	methods:{
         //GPU
@@ -393,6 +399,12 @@ export default {
             if (!pieId){
                 return false;
             }
+            var titlecol
+            if(this.$store.state.darkMode){
+                titlecol="#FFFFFF"
+            }else{
+                titlecol="#000000"
+            }
             var myChart = echarts.init(pieId);
             myChart.setOption({
                 tooltip: {
@@ -404,7 +416,7 @@ export default {
                     textStyle:{
                         fontSize:12,
                         fontWeight:400,
-                        color:"#FFFFFF"
+                        color:titlecol
                     }
                 },
                 
@@ -565,7 +577,7 @@ export default {
             var base = +new Date();
             var date = [];
             var _this=this;
-            var oneSecond = 1000;
+            var oneSecond = 5000;
             for (var i = 1; i < 62; i++) {
                 var now = new Date((base += oneSecond));
                 date.push(
@@ -574,6 +586,12 @@ export default {
             }
             // return false;
             // 绘制图表
+            var titlecol
+            if(this.$store.state.darkMode){
+                titlecol="#FFFFFF"
+            }else{
+                titlecol="#000000"
+            }
             var Option={
                 tooltip: {
                     trigger: 'axis',
@@ -594,7 +612,7 @@ export default {
                         itemHeight: 2,
                         textStyle:{
                             fontSize: 12,//字体大小
-                            color: '#FFFFFF'//字体颜色
+                            color: titlecol//字体颜色
                         },
                     },
                 xAxis: {
@@ -613,7 +631,7 @@ export default {
                     axisLabel: {
                         show: true,
                         textStyle: {
-                            color: '#FFFFFF'
+                            color: titlecol
                         }
                     }
                 },
@@ -631,7 +649,7 @@ export default {
                     axisLabel: {
                         show: true,
                         textStyle: {
-                            color: '#FFFFFF'
+                            color: titlecol
                         }
                     }
                 },
@@ -684,13 +702,19 @@ export default {
         },
         cpunv(myChart1){
             var base = +new Date()
-            var oneSecond = 1000
+            var oneSecond = 5000
             var date = [];
             for (var i = 1; i <= 61; i++) {
                 var now = new Date((base += oneSecond))
                 date.push(
                     [('0' + now.getSeconds()).slice(-2) + 's']
                 )
+            }
+            var titlecol
+            if(this.$store.state.darkMode){
+                titlecol="#FFFFFF"
+            }else{
+                titlecol="#000000"
             }
             // 绘制图表
             myChart1.setOption({
@@ -714,7 +738,7 @@ export default {
                         x:"200px",
                         textStyle:{
                             fontSize: 12,//字体大小
-                            color: '#FFFFFF'//字体颜色
+                            color: titlecol//字体颜色
                         },
                     },
                 xAxis: {
@@ -733,7 +757,7 @@ export default {
                     axisLabel: {
                         show: true,
                         textStyle: {
-                            color: '#ffffff'
+                            color: titlecol
                         }
                     }
                 },
@@ -751,7 +775,7 @@ export default {
                     axisLabel: {
                         show: true,
                         textStyle: {
-                            color: '#ffffff'
+                            color: titlecol
                         }
                     }
                 },
@@ -808,9 +832,290 @@ export default {
 
 <style lang="scss" scoped>
 
-$body-color: #FFFFFF;
+.c-app {
+    
+    $body-color: #000000;
+	// 首页块状背景颜色
+	.back_g{
+        background-color: #FFFFFF;
+    }
+    .back_g{
+    border-radius: 2px;
+    padding: 10px;
+}
+.beibiao_zi{
+    font-size:14px;
+    margin: 0 10px;
+    margin-bottom: 8px;
+    font-family:PingFang SC;
+    font-weight:550;
+    color:$body-color;
+}
+.dasboard{
+    width: 100%;
+    height: 96vh;
+    .dasboard_global{
+        width: 100%;
+        height: 100%;
+        padding: 15px 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        border-radius: 10px;
+        min-width: 993px;
+        min-height: 900px;
+        .dasboard_one{
+            width: 100%;
+            height: 69.3%;
+            display: flex;
+            justify-content: space-between;
+            // background-color: aqua;
+            .dasboard_one_left{
+                width: 78%;
+                height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+                .dasboard_one_lup{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    height: 49.5%;
+                    .dasboard_one_lupl{
+                        width: 49.8%;
+                        @extend .back_g;
+                    }
+                    .dasboard_one_lupr{
+                        width: 49.8%;
+                        @extend .back_g;
+                    }
+                }
+                .dasboard_one_ldown{
+                    width: 100%;
+                    height: 49.5%;
+                    display: flex;
+                    justify-content: space-between;
+                    .dasboard_one_ldown_left{
+                        width: 34.6%;
+                        @extend .back_g;
+                        .function_list{
+                            width: 100%;
+                            height: 90%;
+                            display: flex;
+                            justify-content: center;
+                            align-content: space-around;
+                            flex-wrap: wrap;
+                            .function_list_content{
+                                width: 40%;
+                                // text-align: center;
+                                span{
+                                    margin-right: 5px;
+                                }
+                                .el-switch.is-disabled{
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                    .dasboard_one_ldown_right{
+                        width: 64.9%;
+                        @extend .back_g;
+                        .container{
+                            width: 100%;
+                            height: 90%;
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+                            div{
+                                width: 30%;
+                                height: 100%;
+                                div{
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .dasboard_one_right{
+                width: 21.7%;
+                height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+                .dasboard_one_rup{
+                    width: 100%;
+                    height: 34%;
+                    @extend .back_g;
+                    .nr_mory{
+                        height: 80%;
+                        display: flex;
+                        width: 100%;
+                        padding: 0 20px;
+                        justify-content: space-between;
+                        align-items: center;
+                        text-align: center;
+                    }
+                }
+                .dasboard_one_rin{
+                    width: 100%;
+                    height: 49%;
+                    @extend .back_g;
+                    .flex_nc_ag{
+                        margin: 20px 0;
+                        height:60%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        overflow-y: auto;
+                        color: $body-color;
+                        align-content: space-between;
+                        .flex_nc_cpu{
+                            width: 100%;
+                            // height:90%;
+                            .cpu_zuo{
+                                font-size:14px;
+                                /* font-family:PingFang SC; */
+                                font-weight:400;
+                                margin-right: 8px;
+                                opacity:0.4;
+                            }
+                            .cpu_you{
+                                font-size:14px;
+                                /* font-family:PingFang SC; */
+                                font-weight:400;
+                            }
+                        }
+                    }
+                }
+                .dasboard_one_rdown{
+                    width: 100%;
+                    height: 15%;
+                    @extend .back_g;
+                    .flex_GPU{
+                        width: 100%;
+                        height: 50%;
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+        .dasboard_two{
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: space-between;
+            .dasboard_two1{
+                width: 27%;
+                @extend .back_g;
+                .flex_nc_ag{
+                    margin: 5px 0;
+                    height:80%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    overflow-y: auto;
+                    align-content: space-between;
+                    .flex_nc_cpu{
+                        width: 100%;
+                        margin: 0 0 0 10px;
+                        margin-bottom: 10px;
+                        color: $body-color;
+                        .cpu_zuo{
+                            font-size:12px;
+                            /* font-family:PingFang SC; */
+                            font-weight:400;
+                            margin-right: 8px;
+                            opacity:0.4;
+                        }
+                        .cpu_you{
+                            font-size:12px;
+                            /* font-family:PingFang SC; */
+                            font-weight:400;
+                        }
+                        #foo{
+                            border: 0;
+                            width: 78%;
+                            background: none;
+                            color: $body-color;
+                        }
+                    }
+                }
+            }
+            .dasboard_two2{
+                width: 32%;
+                @extend .back_g;
+                .zong_flex{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    align-content: space-between;
+                    margin: 10px 10px;
+                    .zong_mve{
+                        div{
+                            margin-bottom: 10px;
+                        }
+                        div:nth-child(1){
+                            opacity: 0.4;
+                        }
+                    } 
+                }
+                .zong_img{
+                    width: 100%;
+                    text-align: center;
+                    img{
+                        width: 90%;
+                    }
+                }
+            }
+            .dasboard_two3{
+                width: 40.2%;
+                @extend .back_g;
+                .container_sdk{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    text-align: center;
+                    .containesr_sdks{
+                        width: 32%;
+                        height: 100%;
+                        text-align: center;
+                        .sdk_back{
+                            width: 100%;
+                            text-align: center;
+                            // padding: 45% 6px;
+                            font-size:22px;
+                            font-family:Arial Black;
+                            font-weight:400;
+                            color:#B4FFEF;
+                            width: 100%;
+                            height: 62%;
+                            background: url('../gallery/dash_shuitong.png')no-repeat center;
+                            // background-size: 100%;
+                            position: relative;
+                        }
+                        .sdk_szie{
+                            padding-top: 20%;
+                            width: 100%;
+                        }
+                    }
+                
+                }
+            }
+        }
+    }
+}
+}
+.c-app.c-dark-theme{
+    $body-color: #FFFFFF;
+    .back_g{
+        background-color: #212121;
+    }
 .back_g{
-    background-color: #212121;
     border-radius: 2px;
     padding: 10px;
 }
@@ -1079,6 +1384,8 @@ $body-color: #FFFFFF;
             }
         }
     }
+}
+
 }
 // 弹框 
 </style>

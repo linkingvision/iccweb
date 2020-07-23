@@ -731,7 +731,6 @@ export default {
     width: 100%;
     height: 100%;
     // height: 96vh;
-    background-color: #212121;
     // position: fixed;
     //头部
     .l5video{
@@ -811,6 +810,7 @@ export default {
                     };
                 }
                 .el-collapse-item__wrap{
+                    background: none;
                     .el-collapse-item__content{
                         //1
                         .content_zuo_con{
@@ -834,22 +834,17 @@ export default {
                                         align-items: center;
                                         .icon_size{
                                             font-size:15px;
-                                            opacity:0.7;
                                             color: #0099da;
                                             margin-right: 8px;
                                         }
                                         .icon_size1{
                                             font-size:15px;
-                                            color:#FFFFFF;
-                                            opacity:0.4;
                                             margin-right: 8px;
                                         }
                                         .user_size{
                                             font-size:16px;
                                             font-family:PingFang SC;
                                             font-weight:500;
-                                            color:rgba(255,255,255,1);
-                                            opacity:0.7;
                                         }
                                     }
                                 }
@@ -858,14 +853,11 @@ export default {
                                     font-family:PingFang SC;
                                     font-weight:500;
                                     color:rgba(59,205,107,1);
-                                    opacity:0.7;
                                 }
                                 .user_onl1{
                                     font-size:14px;
                                     font-family:PingFang SC;
                                     font-weight:500;
-                                    color:#FFFFFF;
-                                    opacity:0.4;
                                 }
                             }
                             
@@ -902,8 +894,6 @@ export default {
                                             font-size:14px;
                                             font-family:PingFang SC;
                                             font-weight:500;
-                                            color:rgba(255,255,255,1);
-                                            opacity:0.7;
                                         }
                                     }
                                     .user_onl{
@@ -911,8 +901,6 @@ export default {
                                         font-size:14px;
                                         font-family:PingFang SC;
                                         font-weight:500;
-                                        color:rgba(255,255,255,1);
-                                        opacity:0.4;
                                     }
                                 }
                             }
@@ -920,14 +908,12 @@ export default {
                                 width: 100%;
                                 height: 30%;
                                 padding: 10px 18px;
-                                background-color: #252525;
                                 div{
                                     margin: 10px 0;
                                 }
                                 .chatwith_inp{
                                     .chatwith_input{
                                         width: 100%;
-                                        background:#3C3C3C;
                                         border-radius:2px;
                                         /deep/ .el-input__inner{
                                             border: none !important;

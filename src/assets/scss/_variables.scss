@@ -63,6 +63,13 @@ $confere_fast_bg:#FFFFFF;
 		.setting_all{
 			.setting_zuo{
 				background-color: $heders-bg;
+				.el-submenu{
+					.el-submenu__title{
+						i{
+							color: $body-color;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -70,11 +77,91 @@ $confere_fast_bg:#FFFFFF;
 	.c-sidebar {
 		color: $body-color;
 		background:$body-bg;
+		.el-menu-vertical-demo{
+			i{
+				color: $body-color;
+				margin-right: 24px;
+			}
+		}
+		.c_logo{
+            background: url("~@/assets/imgs/l5s_logo11.png") center center no-repeat;
+            background-size: 85%;
+        }
+		.toggler{
+			border: none !important;
+			color: $body-color;
+		}
 		// border: 0;
 	}
 	a{
 		color: $body-color;
 	} 
+	// 视频
+	.particiants{
+        .particiants_content{
+            .content_zuo{
+				.el-collapse{
+					border: none;
+					.el-collapse-item__header{
+						font-weight: 600;
+						color: $body-color;
+						background-color: $heders-bg;
+						border: none;
+						padding: 0 7px;
+					}
+					.el-collapse-item__wrap{
+						background: none;
+						border-bottom: none;
+						.el-collapse-item__content{
+							padding: 0;
+							color: $body-color;
+							// opacity: 0.7;
+							//1
+							.content_zuo_con{
+								.content_zuo_content{
+									.content_zuo_user{
+										.user_icon{
+											.icon_size1{
+												color:$body-color;
+											}
+											.user_size{
+												color:$body-color;
+											}
+										}
+									}
+								}
+								
+							}
+							//2
+							.content_zuo_con2{
+								.content_zuo_content{
+									.content_zuo_user{
+										.user_icon{
+											.user_size{
+												color:$body-color;
+											}
+										}
+										.user_onl{
+											color:$body-color;
+										}
+									}
+								}
+								.content_zuo_but{
+									background-color: $heders-bg;
+									.chatwith_input{
+                                        /deep/ .el-input__inner{
+                                            background:#F0EFF2!important;
+                                        }
+                                    }
+								}
+							}
+						}
+						
+					}
+				}
+            }
+        }
+    }
 	//顶部导航栏
 	.c_ding{
 		color: $body-color;
@@ -86,6 +173,7 @@ $confere_fast_bg:#FFFFFF;
 		.toggler{
 			border: none !important;
 			color: $body-color;
+			background: none;
 		}
 	}
 
@@ -123,7 +211,7 @@ $confere_fast_bg:#FFFFFF;
             position:center
         }
 		background-image: url('~@/assets/imgs/setting_tober.png');
-		background-size: 18%;
+		background-size: 14%;
         .el-table__empty-text{
             display: none;
         }
