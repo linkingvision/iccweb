@@ -192,8 +192,8 @@ export default {
             timerRunInfo1:"",
             chatrecord:[],//聊天记录
             icon:{
-                connectionicon:"icon-shexiangjikongzhi",
-                desktopicon:"icon-gongxiangpingmu"
+                connectionicon:"icon-shexiangjikongzhi-2",
+                desktopicon:"icon-gongxiangpingmu1"
             }
         }
     },
@@ -352,7 +352,7 @@ export default {
                 this.$message('有用户正在共享桌面');
                 this.golddesktopss();
             }else{
-                if(this.icon.desktopicon=="icon-zhuomiangongxiang1"){
+                if(this.icon.desktopicon=="icon-zhuomiangongxiang"){
 
                     var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
                     this.$http.get(url).then(result=>{
@@ -365,7 +365,7 @@ export default {
                                 this.l5sdesktop = undefined;
                                 $("#l5sShadesktop").get(0).load();
                                 $("#l5sShadesktop").get(0).poster = '';
-                                this.icon.desktopicon="icon-zhuomiangongxiang"
+                                this.icon.desktopicon="icon-zhuomiangongxiang1"
                             }
                         }
                     })
@@ -374,7 +374,7 @@ export default {
                     this.$http.get(url).then(result=>{
                         if(result.status==200){
                             console.log("共享成果",result)
-                            this.icon.desktopicon="icon-zhuomiangongxiang1"
+                            this.icon.desktopicon="icon-zhuomiangongxiang"
                             if (this.l5sdesktop != undefined)
                             {
                                 this.l5sdesktop.disconnect();
@@ -551,8 +551,8 @@ export default {
         //开启视频
         connection(){
             this.myModal1=false
-            if(this.icon.connectionicon=="icon-shexiangjikongzhi"){
-                this.icon.connectionicon="icon-shexiangjikongzhi-2"
+            if(this.icon.connectionicon=="icon-shexiangjikongzhi-2"){
+                this.icon.connectionicon="icon-shexiangjikongzhi"
                 if (this.v1 != undefined)
                 {
                     this.v1.disconnect();
@@ -602,7 +602,7 @@ export default {
                     this.v1 = undefined;
                     $("#h5sVideoLocal").get(0).load();
                     $("#h5sVideoLocal").get(0).poster = '';
-                    this.icon.connectionicon="icon-shexiangjikongzhi"
+                    this.icon.connectionicon="icon-shexiangjikongzhi-2"
                 }
             }
         },
@@ -659,6 +659,8 @@ export default {
         },
         //退出
         drop(){
+            this.icon.desktopicon="icon-zhuomiangongxiang1"
+            this.icon.connectionicon="icon-shexiangjikongzhi-2"
             if (this.l5sdesktops != undefined){
                 this.l5sdesktops.disconnect();
                 delete this.l5sdesktops;

@@ -72,10 +72,15 @@ $confere_fast_bg:#212121;
         .setting_all{
             .setting_zuo{
                 background-color: $confere_fast_bg;
+                .el-menu-item{
+                    i{
+                        color: #d9d9d9;
+                    }
+                }
                 .el-submenu{
 					.el-submenu__title{
 						i{
-							color: rgb(113, 127, 135);
+							color: #d9d9d9;
 						}
 					}
 				}
@@ -286,7 +291,7 @@ $confere_fast_bg:#212121;
             position:center
         }
         background-image: url('~@/assets/imgs/setting_tober1.png');
-        background-size: 14%;
+        background-size: 10%;
         .el-table__empty-text{
             display: none;
         }

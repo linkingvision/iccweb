@@ -63,6 +63,11 @@ $confere_fast_bg:#FFFFFF;
 		.setting_all{
 			.setting_zuo{
 				background-color: $heders-bg;
+				.el-menu-item{
+					i{
+						color: $body-color;
+					}
+				}
 				.el-submenu{
 					.el-submenu__title{
 						i{
@@ -209,9 +214,9 @@ $confere_fast_bg:#FFFFFF;
         background: none{
             repeat:no-repeat;
             position:center
-        }
+		}
 		background-image: url('~@/assets/imgs/setting_tober.png');
-		background-size: 14%;
+		background-size: 10%;
         .el-table__empty-text{
             display: none;
         }

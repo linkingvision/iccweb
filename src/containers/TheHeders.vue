@@ -7,13 +7,13 @@
             
             <div></div>
             <div class="use_you">
-                <!-- <button 
+                <button 
                     @click="skin" 
                     class="c-header-nav-btn"
                     >
                     <CIcon v-if="$store.state.darkMode" name="cil-sun"/>
                     <CIcon v-else name="cil-moon"/>
-                </button> -->
+                </button>
                 <div class="use_you_top">
                     <div class="use_user">
                         <CDropdown

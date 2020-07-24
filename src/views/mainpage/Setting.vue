@@ -7,7 +7,7 @@
 			:default-active="activemenu"
 				class="el-menu-vertical-demo"
 				background-color="#252525"
-				text-color="#717F87"
+				text-color="#d9d9d9"
 				active-text-color="#3277FF">
 				<router-link :to="{name:'Meetingman'}">
 					<el-menu-item index="2-1">
@@ -19,7 +19,7 @@
 
 				<el-submenu index="2-2">
 					<template slot="title">
-						<i class="iconfont icon-yonghuming"></i>
+						<i class="iconfont icon-huiyiguanli"></i>
 						<span>用户管理</span>
 					</template>
 					<!-- 二级 -->
@@ -110,7 +110,7 @@
 
 				<el-submenu index="2-2">
 					<template slot="title">
-						<i class="iconfont icon-yonghuming"></i>
+						<i class="iconfont icon-huiyiguanli"></i>
 						<span>用户管理</span>
 					</template>
 					<!-- 二级 -->
@@ -233,12 +233,6 @@ export default {
 			.el-menu-item{
 				padding-left: 70px!important;
 				
-			}
-			.el-submenu__title{
-				i{
-					color: #000;
-					margin-right: 10px;
-				}
 			}
 		}
 	}
