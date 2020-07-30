@@ -39,6 +39,9 @@ export default {
 	  left:{
 		videoconference:"video conference",
 	  },
+	  conference:{
+		Scan:"Scan to view video",
+	  },
 	  dashboard:{
 		Storage:"Storage",
 		Copysuccessful:"Copy successful",

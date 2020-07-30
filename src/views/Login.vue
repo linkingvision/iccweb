@@ -136,20 +136,6 @@ export default {
                     this.$store.state.root=data.strUserType
                     sessionStorage.mcuuser = this.$store.state.user
                     sessionStorage.mcuroot=this.$store.state.root
-
-                    // var conf1 = {
-                    //     protocol: window.location.protocol, //http: or https:
-                    //     host:this.$store.state.WSROOT, //localhost:8080
-                    //     rootpath:'/', // '/'
-                    //     callback: this.EventCB, 
-                    //     userdata: null, // user data
-                    //     session: strSession //session got from login
-                    // };
-                    
-                    // // console.log("*******2",conf1)
-                    // this.e1 = new H5sEvent(conf1);
-                    // this.e1.connect();
-
                     this.$router.push({
                         path: 'dashboard'
                     })

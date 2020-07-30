@@ -151,6 +151,7 @@
             min-width="50">
             </el-table-column>
             <el-table-column
+                label="开始/关闭会议"
                 min-width="50"
                 class="size"
                 fixed="right">
@@ -476,6 +477,9 @@ export default {
                     this.tableData=[];
                     var data=result.data.conference
                     for(var i=0;i<data.length;i++){
+                        if(data[i].strType=="temporary"){
+                            continue
+                        }
                         var begin=new Date(parseInt(data[i].beginTime) * 1000).toLocaleString().replace(/:\d{1,2}$/,'');  
                         var eng=new Date(data[i].endTime* 1000).toLocaleString().replace(/:\d{1,2}$/,'')
 

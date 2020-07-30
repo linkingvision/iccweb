@@ -164,7 +164,22 @@ $confere_fast_bg:#FFFFFF;
 						
 					}
 				}
-            }
+			}
+			.content_you{
+				.conten_you_stup{
+					.conten_you_stupcen{
+						.but_col{
+							color:#FFFFFF;
+						}
+						.bottom_QR{
+							color:$body-color;
+							.bottom_scan{
+								color:$body-color;
+							}
+						}
+					}
+				}
+			}
         }
     }
 	//顶部导航栏

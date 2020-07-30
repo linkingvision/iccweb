@@ -19,6 +19,9 @@ export default {
 	  left:{
 		videoconference:"视频会议",
 	  },
+	  conference:{
+		Scan:"扫扫查看视频",
+	  },
 	  dashboard:{
 		Storage:"存储",
 		Copysuccessful:"复制成功",

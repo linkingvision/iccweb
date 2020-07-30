@@ -60,7 +60,7 @@
             <CButton class="form_butt1" @click="deleteuser" type="submit">删除用户</CButton>
         </div>
         <el-table
-            :data="tableData"
+            :data="tableData.filter(data => !search || data.strUser.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
             stripe
             @select='selectCall'
             @select-all='select_Call'
@@ -88,6 +88,14 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+            style="text-align: center;"
+            layout=" prev, pager, next,total, jumper"
+            @size-change="handleSizeChange1" 
+            @current-change="handleCurrentChange1"
+            :current-page="currentPage"
+            :total="total">
+        </el-pagination>
 	</div>
 </template>
 
@@ -97,6 +105,10 @@ export default {
 	name: 'roleinof',
 	data(){
 		return{
+            total: 0, // 总条数 1
+            currentPage: 1, // 当前页码1
+            pageSize: 10,//一页数量
+            search: '',//搜索
 			tableData: [],
             editPopup:false,
             dialogFormVisible:false,
@@ -280,8 +292,16 @@ export default {
                 // console.log("***",result);
                 if(result.status==200){
                     this.tableData=result.data.users;
+                    this.total=this.tableData.length
                 }
             })
+        },
+        handleSizeChange1(val) {
+            this.currentPage = 1;
+            this.pageSize = val;
+        },
+        handleCurrentChange1(val) {
+            this.currentPage = val;
         },
         rolelist(){
             let root=process.env.VUE_APP_URL;

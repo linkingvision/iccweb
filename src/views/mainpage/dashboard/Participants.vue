@@ -62,14 +62,39 @@
         </el-dialog>
         <!-- 身体 -->
         <div class="particiants_content">
+            <!--  @mouseover="mouseOver"  @mouseleave="mouseLeave" -->
             <div class="content_you" id="fullscreen" @mouseover="mouseOver"  @mouseleave="mouseLeave">
                 <div class="conten_you_stup">
+                    <!-- 隐藏 -->
                     <div class="conten_you_stupcen">
-                        <div class="iconfont" :class="icon.connectionicon"  @click="connection"> </div>
-                        <div class="iconfont icon-guaduan" @click="drop"> </div>
-                        <div class="iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
-                        <div class="iconfont icon-fullscreen"  @click="FullScreen"> </div>
-                        <div class="iconfont icon-fanhui"  @click="signout"> </div>
+                        <div class="but_g iconfont" :class="icon.connectionicon"  @click="connection"> </div>
+                        <div class="but_g iconfont icon-guaduan" @click="drop"> </div>
+                        <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
+                        <div class="but_g iconfont icon-fullscreen"  @click="FullScreen"> </div>
+                        <CDropdown
+                            style="padding:0"
+                            color="link"
+                            placement="top-start"
+                            :caret="false">
+                            <template #toggler-content>
+                                <i style="font-size: 26px;" class="but_col iconfont icon-ico" @click="qrcode"></i>
+                            </template>
+                            <div class="bottom_QR">
+                                <div class="bottom_scan">{{$t("message.conference.Scan")}}</div>
+                                <div class="bottom_QRcode">
+                                    <div>
+                                        <div ref="qrcodead" id="qrcodead1" style="margin-bottom: 16px;"></div>
+                                        <div>Android</div>
+                                    </div>
+                                    <div>
+                                        <div ref="qrcodeios" id="qrcodeios1" style="margin-bottom: 16px;"></div>
+                                        <div>iOS</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </CDropdown>
+                        <!-- <div class="iconfont icon-ico"> </div> -->
+                        <div class="but_g iconfont icon-fanhui"  @click="signout"> </div>
                     </div>
                 </div>
                 <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
@@ -153,6 +178,7 @@
 </div>
 </template>
 <script>
+import QRCode from 'qrcodejs2';
 import '../../../assets/js/adapter'
 import {H5sPlayerRTC,H5sRTCGetCapability,H5sRTCPush} from '../../../assets/js/h5splayer.js'
 export default {
@@ -186,14 +212,14 @@ export default {
             v1:undefined,
             l5sdesktop:undefined,
             l5sdesktops:undefined,
-            myModal1:true,
+            myModal1:false,//弹窗
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",
             chatrecord:[],//聊天记录
             icon:{
                 connectionicon:"icon-shexiangjikongzhi-2",
-                desktopicon:"icon-gongxiangpingmu1"
+                desktopicon:"icon-zhuomiangongxiang1"
             }
         }
     },
@@ -226,6 +252,31 @@ export default {
         });
     },
     methods:{
+        // 二维码
+        qrcode () {
+            console.log(this.tokenshou)
+            if(this.usertoken==""){
+                return false;
+            }else{
+                var android= window.location.protocol + '//' + window.location.host + '/single.html?token=' + this.usertoken+"&h5splayer=ws";
+                var ios= window.location.protocol + '//' + window.location.host + '/single.html?token=' + this.usertoken+"&h5splayer=rtc";
+            }
+            this.$refs.qrcodead.innerHTML="";
+            this.$refs.qrcodeios.innerHTML="";
+            console.log(android,ios)
+            var qrcode = new QRCode(this.$refs.qrcodead, {
+                width: 100,
+                height: 100// 高度
+            })
+            var qrcode1 = new QRCode(this.$refs.qrcodeios, {
+                width: 100,
+                height: 100// 高度
+            })
+            qrcode.clear();
+            qrcode1.clear();
+            qrcode.makeCode(android);
+            qrcode1.makeCode(ios);
+        },
         //聊天
         sendnews(){
             console.log("回车",this.chatwith);
@@ -1002,11 +1053,30 @@ export default {
                     border-radius:35px;
                     display: flex;
                     justify-content: space-around;
-                    div{
+                    .but_g{
                         font-size: 26px;
                         color: #FFFFFF;
                         padding: 10px 10px;
                         margin: 0 20px;
+                    }
+                    .bottom_QR{
+                        font-size:16px;
+                        font-weight:600;
+                        
+                        text-align: center;
+                        
+                        .bottom_scan{
+                            font-size:16px;
+                            font-weight:600;
+                            margin-bottom: 20px;
+                            padding: 0 20px;
+                        }
+                        .bottom_QRcode{
+                            display: flex;
+                            div{
+                                padding: 0 20px;
+                            }
+                        }
                     }
                 }
             }

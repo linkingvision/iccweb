@@ -7,14 +7,33 @@
             
             <div></div>
             <div class="use_you">
-                <button 
+                <!-- <button 
                     @click="skin" 
                     class="c-header-nav-btn"
                     >
                     <CIcon v-if="$store.state.darkMode" name="cil-sun"/>
                     <CIcon v-else name="cil-moon"/>
-                </button>
+                </button> -->
                 <div class="use_you_top">
+                    <div class="use_user" id="rtc_togg">
+                        <!-- 1 -->
+                        <CDropdown
+                            color="link"
+                            :caret="false">
+                            <template #toggler-content>
+                                <i class="iconfont icon-zhongqi"></i>
+                            </template>
+                            <div class="news_hed">
+                                <div class="news_size"><div class="news_img"></div>修改后请您重启</div>
+                                
+                                <div class="news_hed1">
+                                    <div style="cursor:pointer " @click="Reboot">重启</div>
+                                    <div @click="rtctogg">忽略</div>
+                                </div>
+                            </div>
+                        </CDropdown>
+                    </div>
+                        <!-- 2 -->
                     <div class="use_user">
                         <CDropdown
                             color="link"
@@ -38,7 +57,10 @@
                                 <div @click="about=true" class="about_ab"><i class="iconfont icon-guanyu"></i>关于</div>
                             </CDropdownItem>
                             <CDropdownItem href="doc/api.html">
-                                <div class="about_ab"><i class="iconfont icon-guanyu"></i>API</div>
+                                <div class="about_ab"><i class="iconfont icon-API"></i>API</div>
+                            </CDropdownItem>
+                            <CDropdownItem>
+                                <div @click="skin"  class="about_ab"><i class="iconfont icon-mingpianhuanfu"></i>换肤</div>
                             </CDropdownItem>
                         </CDropdown>
                         
@@ -85,8 +107,33 @@
         mounted(){
             $(".heder_Mask").hide()
             this.GetSystemInfo()
+            var _this=this
+            $("#rtc_togg").hide();
+            _this.$root.bus.$on('webrtc', function(token){
+                $("#rtc_togg").show();
+            });
         },
         methods:{
+            Reboot(){
+                var url = this.$store.state.IPPORT + "/api/v1/Restart?session="+ this.$store.state.token;
+                this.$http.get(url).then(result=>{
+                    if(result.status==200){
+                        if(result.data.bStatus){
+                            console.log("重启",result.data.bStatus)
+                        }
+                    }
+                })
+                
+                this.$nextTick(()=>{
+                    this.$router.push({
+                        name: `Logout`,
+                        path: 'Logout',
+                    })
+                })
+            },
+            rtctogg(){
+                $("#rtc_togg").hide();
+            },
             skin(){
                 this.toggle=this.$store.state.darkMode
                 this.$store.commit('toggle', 'darkMode')
@@ -120,6 +167,30 @@
     }
 </script>
 <style scoped>
+/* 重启 */
+.news_hed{
+    width: 140px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+.news_hed1{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.news_size{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.news_img{
+    width: 20px;
+    height: 20px;
+    background: url("../assets/imgs/Reboot.png") no-repeat center;
+}
 /* 隐藏按钮 */
 .c-header-nav-btn{
     border: none;

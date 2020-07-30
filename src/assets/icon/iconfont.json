@@ -6,18 +6,39 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8139386",
+      "name": "名片换肤",
+      "font_class": "mingpianhuanfu",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "4818074",
+      "name": "API",
+      "font_class": "API",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "10654222",
+      "name": "二维码",
+      "font_class": "ico",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "1687855",
+      "name": "重启",
+      "font_class": "zhongqi",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
       "icon_id": "2402947",
       "name": "文件",
       "font_class": "wenjian",
       "unicode": "e628",
       "unicode_decimal": 58920
-    },
-    {
-      "icon_id": "5311294",
-      "name": "文件夹",
-      "font_class": "wenjianjia",
-      "unicode": "e61a",
-      "unicode_decimal": 58906
     },
     {
       "icon_id": "2053909",
@@ -32,13 +53,6 @@
       "font_class": "kongzhitai",
       "unicode": "e611",
       "unicode_decimal": 58897
-    },
-    {
-      "icon_id": "6638239",
-      "name": "麦克风",
-      "font_class": "Mic",
-      "unicode": "e612",
-      "unicode_decimal": 58898
     },
     {
       "icon_id": "10249125",
@@ -158,13 +172,6 @@
       "font_class": "zhuomiangongxiang",
       "unicode": "e699",
       "unicode_decimal": 59033
-    },
-    {
-      "icon_id": "14586669",
-      "name": "共享屏幕",
-      "font_class": "gongxiangpingmu",
-      "unicode": "ecc6",
-      "unicode_decimal": 60614
     },
     {
       "icon_id": "8148682",

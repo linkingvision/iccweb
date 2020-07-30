@@ -440,11 +440,12 @@ export default {
                         this.$message(this.label.Created);
                         this.meetingdata()
                     }
-                    
-                    if(form.openmeeting){
-                        console.log("aaaaa")
-                        this.mettchang(token)
-                    }
+                    this.$nextTick(()=>{
+                        if(form.openmeeting){
+                            console.log("aaaaa")
+                            this.mettchang(token)
+                        }
+                    })
                 }
             })
         },

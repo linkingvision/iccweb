@@ -225,6 +225,7 @@ import '../../../assets/js/jQuery.md5.js'
                         this.editPopup = false;
                         this.tableData=[];
                         this.loadCloud();
+                        this.$root.bus.$emit('webrtc',true);
                     }else{
                         this.$message({
                             message:this.$t("message.setting.Editorfailure") ,

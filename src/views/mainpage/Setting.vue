@@ -31,7 +31,7 @@
 					<router-link :to="{name:'Roleinfo'}">
 						<el-menu-item index="2-3">角色管理</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Safetyinof'}">
+					<router-link :to="{name:'Safetyinfo'}">
 						<el-menu-item index="2-14">安全管理</el-menu-item>
 					</router-link>
 				</el-submenu>
@@ -122,7 +122,7 @@
 					<router-link :to="{name:'Roleinfo'}">
 						<el-menu-item index="2-3">角色管理</el-menu-item>
 					</router-link>
-					<router-link :to="{name:'Safetyinof'}">
+					<router-link :to="{name:'Safetyinfo'}">
 						<el-menu-item index="2-14">安全管理</el-menu-item>
 					</router-link>
 				</el-submenu>

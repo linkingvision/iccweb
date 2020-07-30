@@ -210,6 +210,7 @@ import '../../../assets/js/jQuery.md5.js'
                         this.editPopup = false;
                         this.tableData3=[];
                         this.loadTurn();
+                        this.$root.bus.$emit('webrtc',true);
                     }else{
                         this.$message({
                             message:this.$t("message.setting.Editorfailure") ,
