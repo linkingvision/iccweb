@@ -2,7 +2,7 @@
 <template>
     <div>
       <!-- 编辑弹窗 -->
-        <el-dialog :title="eltitle" :visible.sync="editPopup">
+        <el-dialog width="25%" :title="eltitle" :visible.sync="editPopup">
           <el-form class="el_form" ref="form" label-position='left' label-width="100px" size="small " :model="editform">
               <el-form-item :label="label.Type">
                 <el-input v-model="editform.Type"></el-input>
@@ -24,7 +24,7 @@
           </div>
         </el-dialog>
         <!-- 添加的弹窗 -->
-        <el-dialog :title="eltitle" :visible.sync="dialogFormVisible">
+        <el-dialog width="25%" :title="eltitle" :visible.sync="dialogFormVisible">
             <el-form class="el_form" ref="form" label-position='left' label-width="100px" size="small " :model="form">
                 <el-form-item :label="label.Type">
                     <el-input v-model="form.Type"></el-input>
@@ -400,16 +400,19 @@ import uuid from '../../../assets/js/uuid'
         deleteselect(){
             var selectop=this.selectop;
             //url
-            for(var i=0;i<selectop.length;i++){
-                var index=selectop[i].index;
+            for(var i=selectop.length-1;i>=0;i--){
                 //return false;
+                if(selectop[i].type=='duo'){
+                    this.tableData2.splice(selectop[i].index, 1);
+                }
                 var url = this.$store.state.IPPORT + "/api/v1/DelSrc?token="+encodeURIComponent(selectop[i].token)+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
-                    console.log(result);
-                    console.log(this.tableData);
                     if(result.status==200){
                         if(result.data.bStatus==true){
-                            this.loadfile();
+                            if(selectop[0].type=='dan'){
+                                this.tableData2=[];
+                                this.loadfile();
+                            }
                         }else{
                             this.$message({
                                 message: '删除失败',
@@ -422,27 +425,28 @@ import uuid from '../../../assets/js/uuid'
             }
             
         },
-        selectCall(row){
-            console.log("INDEX",row);
+        selectCall(row,index){
+            console.log("INDEX",row,index);
             this.selectop=[];
             for(var i=0;i<row.length;i++){
-                console.log(row[i].Token)
                 var selectop={
                     token:row[i].Token,
-                    index:row[i].index,
-                    type:row[i].Type,
+                    index:row[i].index-1,
+                    type:"dan",
                 };
+                
                 this.selectop.push(selectop);
             }
             
         },
         select_Call(row){
-            console.log(row);
             this.selectop=[];
             for(var i=0;i<row.length;i++){
-                console.log(row[i].Token)
                 var selectop={
                     token:row[i].Token,
+                    index:((this.currentPage2-1)*10)+i,
+                    type:'duo',
+                    Name:row[i].Name
                 };
                 this.selectop.push(selectop);
             }

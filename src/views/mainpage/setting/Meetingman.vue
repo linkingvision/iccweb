@@ -620,32 +620,4 @@ export default {
         padding-top: 8px;
     }
 }
-/deep/ .dasboard_modal{
-    .el-input-number__decrease, .el-input-number__increase{
-        background: none;
-    }
-    .el-dialog__body{
-        color: #FFF;
-    }
-    .el-form-item__label{
-        color: #FFF;
-    }
-    .el-input__inner{
-        color: #FFF !important;
-        border:1px solid rgba(181,181,181,1);
-    }
-    .el-range-input{
-        color: #FFF !important;
-        background: none;
-        border: none;
-    }
-    .el-radio-group{
-        display: flex;
-        justify-content: space-around;   
-        align-items: center; 
-        .el-radio{
-            color: #FFF;
-        }
-    }
-}
 </style>

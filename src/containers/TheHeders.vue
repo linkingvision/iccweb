@@ -21,7 +21,9 @@
                             color="link"
                             :caret="false">
                             <template #toggler-content>
-                                <i class="iconfont icon-zhongqi"></i>
+                                <el-badge value="!" class="item">
+                                    <i class="iconfont icon-zhongqi"></i>
+                                </el-badge>
                             </template>
                             <div class="news_hed">
                                 <div class="news_size"><div class="news_img"></div>修改后请您重启</div>
@@ -59,8 +61,11 @@
                             <CDropdownItem href="doc/api.html">
                                 <div class="about_ab"><i class="iconfont icon-API"></i>API</div>
                             </CDropdownItem>
-                            <CDropdownItem>
-                                <div @click="skin"  class="about_ab"><i class="iconfont icon-mingpianhuanfu"></i>换肤</div>
+                            <CDropdownItem @click="skin">
+                                <div class="about_ab"><i class="iconfont icon-mingpianhuanfu"></i>主题</div>
+                            </CDropdownItem>
+                            <CDropdownItem @click="Reboot">
+                                <div class="about_ab"><i class="iconfont icon-zhongqi"></i>重启</div>
                             </CDropdownItem>
                         </CDropdown>
                         
@@ -246,11 +251,14 @@ i{
 /* 铃铛 */
 .el-badge >>> .el-badge__content{
     border: 0;
-}
-.el-badge >>> .el-badge__content.is-fixed{
-    top: 10px;
+    height: 14px;
+    line-height: 12px;
     padding: 0 4px;
 }
+/* .el-badge >>> .el-badge__content.is-fixed{
+    top: 10px;
+    padding: 0 4px;
+} */
 .about_ab i{
     margin-right: 6px;
 }

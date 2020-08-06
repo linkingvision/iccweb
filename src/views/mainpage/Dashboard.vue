@@ -76,7 +76,7 @@
                                 color="#4C80FA"
                                 :percentage="Number(Math.round((strRunTime.nTotalSpaceByte-strRunTime.nFreeSpaceByte)/strRunTime.nTotalSpaceByte*100))"></el-progress> 
                                 <div>{{this.$t("message.dashboard.free_space")}}</div>
-                                <div>{{strRunTime.strFreeSpace}}</div>
+                                <div>({{((strRunTime.nFreeSpaceByte)/1024/1024/1024).toFixed(1)}}G)</div>
                             </div>
                             <div class="nr_mory1">
                                 <el-progress
@@ -87,7 +87,8 @@
                                 color="#FFF025"
                                 :percentage="Number(strRunTime.nMemoryUsage)"></el-progress>
                                 <div>{{this.$t("message.dashboard.memory")}}</div>
-                                <div>({{this.$t("message.dashboard.TotalMemory")}}: {{(strRunTime.nTotalMemoryByte/1024/1024/1024).toFixed(1)}}G)</div>
+                                <!-- {{this.$t("message.dashboard.TotalMemory")}}:  -->
+                                <div>({{(strRunTime.nTotalMemoryByte/1024/1024/1024).toFixed(1)}}G)</div>
                             </div>
                             <div class="nr_mory1">
                                 <el-progress

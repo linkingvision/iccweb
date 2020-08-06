@@ -27,6 +27,10 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
 
+//注册到vue原型上
+import clipboard from 'clipboard';
+Vue.prototype.clipboard = clipboard;
+
 Vue.use(CoreuiVue)
 Vue.use(VueI18n)
 const bus = new Vue()

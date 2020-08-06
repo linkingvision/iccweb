@@ -6,16 +6,16 @@
             <!-- 1 -->
             <el-form label-position="left" label-width="150px" :model="editform">
                 <el-form-item :label="label.user">
-                    <input disabled class="editinput" v-model="editform.strUser"/>
+                    <el-input disabled v-model="editform.strUser"></el-input>
                 </el-form-item>
                 <el-form-item :label="label.olPassword">
-                    <input class="editinput" v-model="editform.strPasswd"/>
+                    <el-input v-model="editform.strPasswd"></el-input>
                 </el-form-item>
                 <el-form-item :label="label.nePassword">
-                    <input class="editinput" v-model="editform.Newpassword"/>
+                    <el-input v-model="editform.Newpassword"></el-input>
                 </el-form-item>
                 <el-form-item :label="label.confirmpass1">
-                    <input class="editinput" v-model="editform.Newpassword1"/>
+                    <el-input v-model="editform.Newpassword1"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -28,13 +28,13 @@
             <!-- 1 -->
             <el-form label-position="left" label-width="150px" :model="form">
                 <el-form-item :label="label.user">
-                    <input class="editinput" v-model="form.strUser"/>
+                    <el-input v-model="form.strUser"></el-input>
                 </el-form-item>
                 <el-form-item :label="label.Password">
-                    <input class="editinput" v-model="form.strPasswd"/>
+                    <el-input v-model="form.strPasswd"></el-input>
                 </el-form-item>
                 <el-form-item :label="label.confirmpass">
-                    <input class="editinput" v-model="form.strPasswd1"/>
+                    <el-input v-model="form.strPasswd1"></el-input>
                 </el-form-item>
                 <!-- <el-form-item :label="label.role">
                     <input class="editinput" v-model="form.strRoleToken"/>
@@ -242,9 +242,11 @@ export default {
                 if(result.status==200){
                     if(result.data.bStatus==true){
                         this.editPopup = false;
-                        this.$router.push({
-                            path: 'logout'
-                        })
+                        if(form.strUser==this.$store.state.user){
+                            this.$router.push({
+                                path: '/logout'
+                            })
+                        }
                         this.$message(this.$t("message.setting.Changecg"));
                     }else{
                         this.$message(this.$t("message.setting.Changesb"));
@@ -349,7 +351,6 @@ export default {
 			display: inline-block;
 			font-size: inherit;
 			height: 40px;
-			color: #FFFFFF;
 			line-height: 40px;
 			outline: 0;
 			padding: 0 15px;
@@ -360,17 +361,4 @@ export default {
 	}
 }
 
-</style>
-<style scoped>
-
-.user_pop >>>.el-dialog{
-	background-color: #2E343C!important;
-}
-
-.user_pop >>> .el-form-item__label{
-	color: #FFFFFF!important;
-}
-.user_pop >>> .el-dialog__body{
-	padding: 30px 20px 0 20px;
-}
 </style>

@@ -212,7 +212,7 @@ export default {
             v1:undefined,
             l5sdesktop:undefined,
             l5sdesktops:undefined,
-            myModal1:false,//弹窗
+            myModal1:true,//弹窗
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",

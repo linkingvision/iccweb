@@ -1,6 +1,6 @@
 <template>
     <div class="Certification">
-        <div>认证模式</div>
+        <div>认证开启</div>
         <div>
             <el-switch
                 @change="Certchange()"

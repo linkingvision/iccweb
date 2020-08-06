@@ -2,7 +2,7 @@
     <div>
         <!-- 编辑弹窗 -->
         
-        <el-dialog :title="eltitle" :visible.sync="editPopup">
+        <el-dialog width="25%" :title="eltitle" :visible.sync="editPopup">
             <el-form class="el_form" ref="form" label-position='left' label-width="100px" size="small " :model="editform">
                     
                 <el-form-item :label="label.Type">
@@ -39,7 +39,7 @@
                 <el-button class="form_butt" type="primary" @click="edityes">{{$t("message.setting.OK")}}</el-button>
             </div>
         </el-dialog>
-        <el-dialog :title="eltitle" :visible.sync="dialogFormVisible">
+        <el-dialog width="25%" :title="eltitle" :visible.sync="dialogFormVisible">
             <el-form class="el_form" ref="form" label-position='left' label-width="100px" size="small " :model="form">
             
                 <el-form-item :label="label.Type">
