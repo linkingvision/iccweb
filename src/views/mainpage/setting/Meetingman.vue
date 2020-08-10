@@ -70,7 +70,7 @@
                 <el-form-item label="成员类型">
                     <div class="mode">
                         <el-radio-group v-model="sizeForm.member" size="medium">
-                            <el-radio  label="user">会议人员</el-radio>
+                            <el-radio  label="user">会议成员</el-radio>
                             <el-radio  label="device">会议设备</el-radio>
                         </el-radio-group>
                     </div>
@@ -211,7 +211,7 @@ export default {
                 name: 'Conference1',//名称
                 metttype: 'regular',//会议类型
                 Startdate: new Date(),//时间
-                Eendate: new Date(),//时间
+                Eendate: new Date(new Date().getTime()+ 60*60 * 1000),//时间
 
                 mettmodesetting:"nxn",
                 one:"1p2",

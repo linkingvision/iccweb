@@ -232,6 +232,7 @@ export default {
         clearInterval(this.timerRunInfo)
     },
     mounted(){
+        // localStorage.removeItem('mcuCamerasetting')
         $(".conten_you_stup").hide()
         if(this.usertoken!= undefined){
             this.l5svideplay()
@@ -478,8 +479,8 @@ export default {
             var up=H5sRTCGetCapability(this.UpdateCapability);
         },
         UpdateCapability(capability){
-            
-            console.log(capability);
+            var json_data=JSON.parse(localStorage.getItem('mcuCamerasetting'))
+            console.log(capability,json_data);
             if(capability){
 
                 for (let i = 0; i !== capability['videocodec'].length; ++i) {
@@ -493,9 +494,13 @@ export default {
                 }
                 for (let i = 0; i !== capability['videocodec'].length; ++i) {
                     const data = capability['videocodec'][i];
-                    if (data == 'H264')
-                    {
-                        this.VideoCodec = data
+                    if(json_data==null){
+                        if (data == 'H264')
+                        {
+                            this.VideoCodec = data
+                        }
+                    }else{
+                        this.VideoCodec = json_data.VideoCodec
                     }
                 }
                 for (let i = 0; i !== capability['videoin'].length; ++i) {
@@ -504,7 +509,14 @@ export default {
                         value: data.id,
                         label: data.name
                     }
-                    this.VideoIn=data.id
+                    if(json_data==null){
+                        this.VideoIn=data.id
+                    }else{
+                        console.log(data.name==json_data.VideoIn,data.name,json_data.VideoIn,"**********")
+                        if(data.id==json_data.VideoIn){
+                            this.VideoIn=data.id
+                        }
+                    }
                     this.VideoIns.push(src);
                 }	
 
@@ -538,9 +550,13 @@ export default {
                         label: data
                     }
                     // this.Resolution=data
-                    if (data == '720P')
-                    {
-                        this.Resolution=data
+                    if(json_data==null){
+                        if (data == '720P')
+                        {
+                            this.Resolution=data
+                        }
+                    }else{
+                        this.Resolution = json_data.Resolution
                     }
                     this.Resolutions.push(src);
                 }
@@ -554,9 +570,13 @@ export default {
                     }
                     // this.Bitratess=data
                     /* Default use 720P */
-                    if (data == '1024')
-                    {
-                        this.Bitratess=data
+                    if(json_data==null){
+                        if (data == '1024')
+                        {
+                            this.Bitratess=data
+                        }
+                    }else{
+                        this.Bitratess = json_data.Bitrate
                     }
                     this.Bitrates.push(src);
                 }
@@ -644,6 +664,16 @@ export default {
                 this.v1,
                 true
             )
+            var jsonData = {
+                'VideoCodec': this.VideoCodec, 
+                'VideoIn': this.VideoIn,
+                'Resolution': this.Resolution, 
+                'Bitrate': this.Bitratess
+
+            }; 
+            var str_jsonData = JSON.stringify(jsonData);
+            localStorage.mcuCamerasetting=str_jsonData
+            console.log(str_jsonData,JSON.parse(localStorage.getItem('mcuCamerasetting')))
             // return false
             this.v1.connect(
                 this.VideoIn,
@@ -734,7 +764,6 @@ export default {
             // console.log(this.$store.state.IPPORT)
             var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.usertoken+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
-                console.log(result)
                 // this.userdata=result.data.particiants
                 var data=result.data.particiants
                 if(data.length==0){
@@ -759,8 +788,6 @@ export default {
                         userdata["icon"]="iconfont icon-shexiangji"
                     }
                     this.userdata.push(userdata)
-                    
-                    console.log(i,userdata)
                 }
             })
         },
@@ -769,7 +796,7 @@ export default {
             var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.usertoken+"&session="+ this.$store.state.token;
             var mettdata=[]
             this.$http.get(url).then(result=>{
-                console.log(result)
+                // console.log(result)
                 // this.userdata=result.data.particiants
                 var data=result.data.particiants
                 if(data.length==0){
@@ -794,7 +821,6 @@ export default {
                     }
                     mettdata.push(userdata)
                     this.userdata=mettdata
-                    console.log(this.userdata)
                 }
             })
             
