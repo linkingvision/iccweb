@@ -78,7 +78,7 @@
             <div class="content_you" id="fullscreen" @mouseover="mouseOver"  @mouseleave="mouseLeave">
                 <div class="conten_you_stup">
                     <div class="conten_you_stupcen">
-                        <div class="but_g iconfont" :class="icon.connectionicon"  @click="connection"> </div>
+                        <div class="but_g iconfont" :class="icon.connectionicon"  @click="Reconnection"> </div>
                         <div class="but_g iconfont icon-guaduan" @click="drop"> </div>
                         <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
                         <CDropdown
@@ -229,39 +229,27 @@ export default {
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",
+            timerRunInfo:"",
             chatrecord:[],//聊天记录
             icon:{
-                connectionicon:"icon-shexiangjikongzhi-2",
+                connectionicon:"icon-shuaxin",
                 desktopicon:"icon-zhuomiangongxiang1"
             }
         }
     },
     beforeDestroy() {
-        if (this.h5handler != undefined)
-        {
-            this.h5handler.disconnect();
-            delete this.h5handler;
-            this.h5handler = undefined;
-        }
-        if (this.v1 != undefined)
-        {
-            this.v1.disconnect();
-            delete this.v1;
-            this.v1 = undefined;
-        }
-        if (this.l5sdesktop != undefined)
-        {
-            this.l5sdesktop.disconnect();
-            delete this.l5sdesktop;
-            this.l5sdesktop = undefined;
-        }
+        this.drop();
         this.$root.bus.$off('meettoken');
         clearInterval(this.timerRunInfo1);
+        clearInterval(this.timerRunInfo);
     },
     mounted(){
         // console.log("**",this.EVENT)
         $(".conten_you_stup").hide()
         this.mettuselest();
+        this.timerRunInfo = setInterval(() => {
+            this.mettuselest1();
+        }, 30*1000);
         this.updisplay();
         if(this.usertoken!=undefined){
             console.log("播放",this.usertoken)
@@ -273,6 +261,7 @@ export default {
             console.log("播放",token)
             _this.usertoken=token
             _this.l5svideplay()
+            _this.Upload();
             // _this.myModal=true;
         });
         _this.$root.bus.$on('sharedstart', function(token){
@@ -418,7 +407,56 @@ export default {
             this.$http.get(url).then(result=>{
                 console.log(result)
                 this.l5svideplay();
+                this.Upload();
             })
+        },
+        //重连
+        Reconnection(){
+            this.l5svideplay();
+            this.Upload()
+        },
+        //上传视频
+        Upload(){
+            if (this.v1 != undefined)
+            {
+                this.v1.disconnect();
+                delete this.v1;
+                this.v1 = undefined;
+            }
+            var audioout=this.audioout.toString();
+            var conf1 = {
+                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
+                protocol: window.location.protocol, //http: or https:
+                host:this.$store.state.WSROOT, //localhost:8080
+                rootpath:'/', // {string} - path of the app running
+                user:this.$store.state.user, // {string} - user name
+                type:'media', // {string} - media or sharing
+                audio: audioout,
+                callback: this.PlaybackCB, //Callback for the event
+                userdata: null, // user data
+                session: this.$store.state.token, //session got from login
+                consolelog: 'true' // 'true' or 'false' enable/disable console.log
+            };
+            // return false
+            this.v1 = new H5sRTCPush(conf1);
+            console.log("*******",this.VideoCodec,"1*",
+                this.VideoIn,"2*",
+                this.Bitratess,"5*",
+                this.Resolution,"3*",
+                this.AudioIn,
+                this.v1,
+                true
+            )
+            // return false
+            this.v1.connect(
+                this.VideoIn,
+                this.VideoCodec,
+                this.Bitratess,
+                this.Resolution,
+                this.AudioIn,
+                false
+            );
         },
         //切换视频
         DesktopSwitch(){
@@ -657,7 +695,6 @@ export default {
         },
         //开启视频
         connection(){
-            this.myModal1=false
             if(this.icon.connectionicon=="icon-shexiangjikongzhi-2"){
                 this.icon.connectionicon="icon-shexiangjikongzhi"
                 if (this.v1 != undefined)
@@ -729,6 +766,7 @@ export default {
         //获取列表
         mettuselest(){
             // console.log(this.$store.state.IPPORT)
+            this.userdata=[]
             var url = this.$store.state.IPPORT + "/api/v1/GetOnlineUserList?session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 console.log(result)
@@ -746,9 +784,32 @@ export default {
                         bOnline:true
                     }
                     this.userdata.push(userdata)
-                    
                 }
             })
+        },
+        mettuselest1(){
+            var url = this.$store.state.IPPORT + "/api/v1/GetOnlineUserList?session="+ this.$store.state.token;
+            var mettdata=[]
+            this.$http.get(url).then(result=>{
+                // console.log(result)
+                var data=result.data.userList
+                if(data.length==0){
+                    return false
+                }
+                for(var i=0; i<data.length;i++){
+                    if(this.$store.state.user==data[i].strName){
+                        continue
+                    }
+                    var userdata={
+                        strName: data[i].strName,
+                        icon:"iconfont icon-yonghuming",
+                        bOnline:true
+                    }
+                    mettdata.push(userdata)
+                }
+                this.userdata=mettdata
+            })
+            
         },
         //退出
         drop(){
@@ -756,7 +817,7 @@ export default {
             // $("#" + this.h5videoid).get(0).poster = '';
             // console.log("41")
             this.icon.desktopicon="icon-zhuomiangongxiang1"
-            this.icon.connectionicon="icon-shexiangjikongzhi-2"
+            // this.icon.connectionicon="icon-shexiangjikongzhi-2"
             if (this.l5sdesktops != undefined){
                 this.l5sdesktops.disconnect();
                 delete this.l5sdesktops;
@@ -779,11 +840,12 @@ export default {
                 this.l5sdesktop.disconnect();
                 delete this.l5sdesktop;
                 this.l5sdesktop = undefined;
-                var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
-                this.$http.get(url).then(result=>{
-                    console.log("关闭",result)
-                })
             }
+            
+            var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                console.log("关闭",result)
+            })
             // this.$router.push({
             //     path: 'Conference'
             // })

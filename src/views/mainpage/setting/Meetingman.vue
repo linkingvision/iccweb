@@ -401,16 +401,17 @@ export default {
                 this.$message('时间不能为空');
                 return false
             }
-            var starfs=new Date(form.Startdate).getTime();
-            var endds=new Date(form.Eendate).getTime();
-            var ks=new Date(starfs).toISOString()+"08:00";
-            var jss=new Date(endds).toISOString()+"08:00";
             // console.log(starfs,endds)
             if(starfs>endds){
                 this.$message('结束时间不能比开始时间早');
                 form.Eendate=''
                 return false
             }
+            
+            var starfs=new Date(form.Startdate).getTime();
+            var endds=new Date(form.Eendate).getTime();
+            var ks=new Date(starfs).toISOString()+"08:00";
+            var jss=new Date(endds).toISOString()+"08:00";
             // return false
 
             var token = uuid(4, 10);
@@ -426,8 +427,8 @@ export default {
             this.dialogFormVisible=false
             var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+form.name
             +"&token="+encodeURIComponent(token)
-            +"&begintime="+encodeURIComponent(form.Startdate)
-            +"&endtime="+encodeURIComponent(form.Eendate)
+            +"&begintime="+encodeURIComponent(ks)
+            +"&endtime="+encodeURIComponent(jss)
             +"&type="+encodeURIComponent(form.metttype)
             +"&layoutmode="+encodeURIComponent(form.mettmodesetting)
             +"&layout="+encodeURIComponent(playmode)

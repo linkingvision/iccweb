@@ -392,17 +392,18 @@ export default {
                 this.$message('时间不能为空');
                 return false
             }
-            var starfs=new Date(form.Startdate).getTime();
-            var endds=new Date(form.Eendate).getTime();
-            var ks=new Date(starfs).toISOString()+"08:00";
-            var jss=new Date(endds).toISOString()+"08:00";
-            // console.log(starfs,endds)
+            // return false
             if(starfs>endds){
                 this.$message('结束时间不能比开始时间早');
                 form.Eendate=''
                 return false
             }
             // return false
+            
+            var starfs=new Date(form.Startdate).getTime();
+            var endds=new Date(form.Eendate).getTime();
+            var ks=new Date(starfs).toISOString()+"08:00";
+            var jss=new Date(endds).toISOString()+"08:00";
 
             var token = uuid(4, 10);
             
@@ -418,34 +419,39 @@ export default {
             this.myModal=false
             var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+form.name
             +"&token="+encodeURIComponent(token)
-            +"&begintime="+encodeURIComponent(form.Startdate)
-            +"&endtime="+encodeURIComponent(form.Eendate)
+            +"&begintime="+encodeURIComponent(ks)
+            +"&endtime="+encodeURIComponent(jss)
             +"&type="+encodeURIComponent(form.metttype)
             +"&layoutmode="+encodeURIComponent(form.mettmodesetting)
             +"&layout="+encodeURIComponent(playmode)
             +"&layoutsize="+encodeURIComponent(form.resolutiondata)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 if(result.status==200){
-                    if(form.token.length!=0||form.user.length!=0){
-                        if(form.user.length>0){
-                            this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created)
-                            // .then((a)=>{
-                            //     console.log("aaaaa",a)
-                            // })
+                    if(result.data.bStatus){
+                        
+                        if(form.token.length!=0||form.user.length!=0){
+                            if(form.user.length>0){
+                                this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created)
+                                // .then((a)=>{
+                                //     console.log("aaaaa",a)
+                                // })
+                            }
+                            if(form.token.length>0){
+                                this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created)
+                            }
+                        }else if(form.token.length==0&&form.user.length==0){
+                            this.$message(this.label.Created);
+                            this.meetingdata()
                         }
-                        if(form.token.length>0){
-                            this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created)
-                        }
-                    }else if(form.token.length==0&&form.user.length==0){
-                        this.$message(this.label.Created);
-                        this.meetingdata()
+                        this.$nextTick(()=>{
+                            if(form.openmeeting){
+                                console.log("aaaaa")
+                                this.mettchang(token)
+                            }
+                        })
+                    }else{
+                        this.$message("创建失败");
                     }
-                    this.$nextTick(()=>{
-                        if(form.openmeeting){
-                            console.log("aaaaa")
-                            this.mettchang(token)
-                        }
-                    })
                 }
             })
         },

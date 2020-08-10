@@ -56,7 +56,7 @@
             <span slot="footer" class="dialog-footer">
                 <div class="particip_buttom">
                     <CButton class="part_buttom_but1" type="primary"  @click="myModal1=false">否</CButton>
-                    <CButton class="part_buttom_but" type="primary"  @click="connection">是</CButton>
+                    <CButton class="part_buttom_but" type="primary"  @click="Upload">是</CButton>
                 </div>
             </span>
         </el-dialog>
@@ -67,7 +67,7 @@
                 <div class="conten_you_stup">
                     <!-- 隐藏 -->
                     <div class="conten_you_stupcen">
-                        <div class="but_g iconfont" :class="icon.connectionicon"  @click="connection"> </div>
+                        <div class="but_g iconfont" :class="icon.connectionicon"  @click="Reconnection"> </div>
                         <div class="but_g iconfont icon-guaduan" @click="drop"> </div>
                         <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
                         <div class="but_g iconfont icon-fullscreen"  @click="FullScreen"> </div>
@@ -216,9 +216,10 @@ export default {
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",
+            timerRunInfo:"",
             chatrecord:[],//聊天记录
             icon:{
-                connectionicon:"icon-shexiangjikongzhi-2",
+                connectionicon:"icon-shuaxin",
                 desktopicon:"icon-zhuomiangongxiang1"
             }
         }
@@ -228,13 +229,17 @@ export default {
         this.$root.bus.$off('sharedstart');
         this.$root.bus.$off('sharedstop');
         clearInterval(this.timerRunInfo1)
+        clearInterval(this.timerRunInfo)
     },
     mounted(){
         $(".conten_you_stup").hide()
         if(this.usertoken!= undefined){
             this.l5svideplay()
-            this.mettuselest();
             this.updisplay();
+            this.mettuselest();
+            this.timerRunInfo = setInterval(() => {
+                this.mettuselest1();
+            }, 30*1000);
         }else{
             this.signout()
         }
@@ -599,6 +604,56 @@ export default {
                 console.log('Fullscreen is not supported on your browser.');
             }
         },
+        //重连
+        Reconnection(){
+            this.l5svideplay();
+            // this.Upload()
+            this.myModal1=true
+        },
+        //上传视频
+        Upload(){
+            this.myModal1=false
+            if (this.v1 != undefined)
+            {
+                this.v1.disconnect();
+                delete this.v1;
+                this.v1 = undefined;
+            }
+            var audioout=this.audioout.toString();
+            var conf1 = {
+                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
+                protocol: window.location.protocol, //http: or https:
+                host:this.$store.state.WSROOT, //localhost:8080
+                rootpath:'/', // {string} - path of the app running
+                user:this.$store.state.user, // {string} - user name
+                type:'media', // {string} - media or sharing
+                audio: audioout,
+                callback: this.PlaybackCB, //Callback for the event
+                userdata: null, // user data
+                session: this.$store.state.token, //session got from login
+                consolelog: 'true' // 'true' or 'false' enable/disable console.log
+            };
+            // return false
+            this.v1 = new H5sRTCPush(conf1);
+            console.log("*******",this.VideoCodec,"1*",
+                this.VideoIn,"2*",
+                this.Bitratess,"5*",
+                this.Resolution,"3*",
+                this.AudioIn,
+                this.v1,
+                true
+            )
+            // return false
+            this.v1.connect(
+                this.VideoIn,
+                this.VideoCodec,
+                this.Bitratess,
+                this.Resolution,
+                this.AudioIn,
+                false
+            );
+        },
         //开启视频
         connection(){
             this.myModal1=false
@@ -657,6 +712,7 @@ export default {
                 }
             }
         },
+        
         PlaybackCB(event, userdata){
             
             var msgevent = JSON.parse(event);
@@ -708,10 +764,45 @@ export default {
                 }
             })
         },
+        mettuselest1(){
+            // console.log(this.$store.state.IPPORT)
+            var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var mettdata=[]
+            this.$http.get(url).then(result=>{
+                console.log(result)
+                // this.userdata=result.data.particiants
+                var data=result.data.particiants
+                if(data.length==0){
+                    return false
+                }
+                for(var i=0; i<data.length;i++){
+                    if(data[i].strToken==this.usertoken){
+                        continue
+                    }
+                    var userdata={
+                        mosaicId: data[i].mosaicId,
+                        nSolt: data[i].nSolt,
+                        partId: data[i].partId,
+                        strName: data[i].strName,
+                        strToken: data[i].strToken,
+                        strType: data[i].strType,
+                        icon:"iconfont icon-yonghuming",
+                        bOnline: data[i].bOnline
+                    }
+                    if(userdata["strType"]=="device"){
+                        userdata["icon"]="iconfont icon-shexiangji"
+                    }
+                    mettdata.push(userdata)
+                    this.userdata=mettdata
+                    console.log(this.userdata)
+                }
+            })
+            
+        },
         //退出
         drop(){
             this.icon.desktopicon="icon-zhuomiangongxiang1"
-            this.icon.connectionicon="icon-shexiangjikongzhi-2"
+            // this.icon.connectionicon="icon-shexiangjikongzhi-2"
             if (this.l5sdesktops != undefined){
                 this.l5sdesktops.disconnect();
                 delete this.l5sdesktops;
@@ -733,14 +824,11 @@ export default {
                 this.l5sdesktop.disconnect();
                 delete this.l5sdesktop;
                 this.l5sdesktop = undefined;
-                var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
-                this.$http.get(url).then(result=>{
-                    console.log("关闭",result)
-                })
             }
-            // if(this.h5handler == undefined&&this.v1 == undefined&&this.l5sdesktop == undefined&&this.l5sdesktops==undefined){
-            //     
-            // }
+            var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                console.log("关闭",result)
+            })
         },
         signout(){
             this.$router.push({
