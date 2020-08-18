@@ -424,6 +424,7 @@ import uuid from '../../../assets/js/uuid'
                 if(result.status==200){
                     if(result.data.bStatus==true){
                         rows.splice(index_xlh, 1);
+                        this.total=this.tableData.length
                     }else{
                         this.$message({
                             message: '删除失败',

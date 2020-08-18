@@ -566,11 +566,11 @@ export default {
                 if(result.status==200){
                     this.sizeForm.tokendata=[];
                     var data=result.data.src;
-                    // console.log("***",result);
+                    console.log("***",result);
                     for(var i=0;i<data.length;i++){
-                        // if(data[i].nType=="H5_RTCM_CH"){
-                        //     continue
-                        // }
+                        if(data[i].nType=="H5_RTCM_CH"||data[i].nType=="H5_RTCS_CH"){
+                            continue
+                        }
                         var Role={
                             value: data[i].strToken,
                             label: data[i].strName

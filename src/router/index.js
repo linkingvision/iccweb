@@ -24,6 +24,8 @@ const Participants = () => import('@/views/mainpage/dashboard/Participants')
 
 const Conference = () => import('@/views/mainpage/Conference')
 const OneToOne = () => import('@/views/mainpage/OneToOne')
+const ConferenceControl = () => import('@/views/mainpage/ConferenceControl')
+const Control = () => import('@/views/mainpage/ConferenceControl/Control')
 
 const Setting = () => import('@/views/mainpage/Setting')
 const Meetingman = () => import('@/views/mainpage/setting/Meetingman')
@@ -98,6 +100,24 @@ export default new Router({
                       title: '4',
                       type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
+				},
+				{
+                    path: 'ConferenceControl',
+                    name: "ConferenceControl",
+                    component: ConferenceControl,
+                    meta: {
+                      title: '5',
+                      type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
+				{
+					path: 'Control',
+					name: "Control",
+					component: Control,
+					meta: {
+						title: '控制',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+					},
 				},
 				{
 					path: 'Participants',

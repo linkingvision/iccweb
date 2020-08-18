@@ -34,6 +34,12 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
+                <router-link :to="{name:'ConferenceControl'}">
+					<el-menu-item index="5">
+						<i class="iconfont icon-kongzhitai"></i>
+						<span slot="title">会议控制</span>
+					</el-menu-item>
+				</router-link>
                 <a href="/mediastore">
                     <el-menu-item index="2-1-1">
                         <i class="iconfont icon-wenjian"></i>
@@ -71,6 +77,12 @@
 					<el-menu-item index="4">
 						<i class="iconfont icon-dianduidian-"></i>
 						<span slot="title">对讲</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'ConferenceControl'}">
+					<el-menu-item index="5">
+						<i class="iconfont icon-kongzhitai"></i>
+						<span slot="title">会议控制</span>
 					</el-menu-item>
 				</router-link>
                 <a href="/mediastore">

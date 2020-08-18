@@ -100,7 +100,36 @@ $confere_fast_bg:#FFFFFF;
 	}
 	a{
 		color: $body-color;
-	} 
+	}
+	//会议控制
+	.Control_g{
+        .Control{
+            .Control_you{
+				.Control_you_top{
+                    color:$body-color;
+                }
+                .Control_you_content{
+                    .el-collapse{
+                        .el-collapse-item__header{
+                            color: $body-color;
+                            opacity: 0.7;
+                            border: none;
+                            padding: 0 7px;
+                        }
+                        .el-collapse-item__wrap{
+                            background: none;
+                            border-bottom: none;
+                            .el-collapse-item__content{
+                                padding: 0;
+                                color: $body-color;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 	// 视频
 	.particiants{
         .particiants_content{
@@ -181,7 +210,8 @@ $confere_fast_bg:#FFFFFF;
 				}
 			}
         }
-    }
+	}
+	
 	//顶部导航栏
 	.c_ding{
 		color: $body-color;

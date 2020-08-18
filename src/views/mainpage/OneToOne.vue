@@ -143,7 +143,7 @@
                                         <i class="icon_size iconfont icon-yonghuming"></i>
                                         <div class="user_size">{{a.user}}：</div>
                                     </div>
-                                    <div class="user_onl">{{a.msg}}</div>
+                                    <div class="user_onl" style="word-break: break-word;">{{a.msg}}</div>
                                 </div>
                             </div>
                             <div class="content_zuo_but">

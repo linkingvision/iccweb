@@ -536,6 +536,9 @@ export default {
                     this.sizeForm.tokendata=[];
                     var data=result.data.src;
                     for(var i=0;i<data.length;i++){
+                        if(data[i].nType=="H5_RTCM_CH"||data[i].nType=="H5_RTCS_CH"){
+                            continue
+                        }
                         var Role={
                             value: data[i].strToken,
                             label: data[i].strName

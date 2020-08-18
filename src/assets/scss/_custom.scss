@@ -13,6 +13,10 @@ $confere_fast_bg:#212121;
 .c-app.c-dark-theme {
     color: $body-color;
     background-color: $body-bg;
+    //弹窗
+    .modal-content{
+        background-color: #212121;
+    }
 }
 
 
@@ -87,72 +91,105 @@ $confere_fast_bg:#212121;
             }
         }
     }
+    //会议控制
+    .Control_g{
+        .Control{
+            .Control_you{
+                .Control_you_top{
+                    color: $body-color;
+                }
+                .Control_you_content{
+                    .el-collapse{
+                        border: none;
+                        background: #1C1C1C;
+                        .el-collapse-item__header{
+                            color: $body-color;
+                            background-color: #2E2E2E;
+                            opacity: 0.7;
+                            border: none;
+                            padding: 0 7px;
+                        }
+                        .el-collapse-item__wrap{
+                            background: none;
+                            border-bottom: none;
+                            .el-collapse-item__content{
+                                padding: 0;
+                                color: $body-color;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
      //视频
     .particiants{
         .particiants_content{
             .content_zuo{
-            .el-collapse{
-                border: none;
-                .el-collapse-item__header{
-                    color: $body-color;
-                    background-color: #2E2E2E;
-                    opacity: 0.7;
+                .el-collapse{
                     border: none;
-                    padding: 0 7px;
-                }
-                .el-collapse-item__wrap{
-                    background: none;
-                    border-bottom: none;
-                    .el-collapse-item__content{
-                        padding: 0;
+                    .el-collapse-item__header{
                         color: $body-color;
-                        // opacity: 0.7;
-                        //1
-                        .content_zuo_con{
-                            .content_zuo_content{
-                                .content_zuo_user{
-                                    .user_icon{
-                                        .icon_size1{
-                                            color:$body-color;
-                                            opacity:0.7;
+                        background-color: #2E2E2E;
+                        opacity: 0.7;
+                        border: none;
+                        padding: 0 7px;
+                    }
+                    .el-collapse-item__wrap{
+                        background: none;
+                        border-bottom: none;
+                        .el-collapse-item__content{
+                            padding: 0;
+                            color: $body-color;
+                            // opacity: 0.7;
+                            //1
+                            .content_zuo_con{
+                                .content_zuo_content{
+                                    .content_zuo_user{
+                                        .user_icon{
+                                            .icon_size1{
+                                                color:$body-color;
+                                                opacity:0.7;
+                                            }
+                                            .icon_size{
+                                                opacity:0.7;
+                                            }
+                                            .user_size{
+                                                color:$body-color;
+                                                opacity:0.4;
+                                            }
                                         }
-                                        .icon_size{
-                                            opacity:0.7;
+                                        .user_onl{
+                                            opacity:0.4;
                                         }
-                                        .user_size{
+                                    }
+                                }
+                                
+                            }
+                            //2
+                            .content_zuo_con2{
+                                .content_zuo_content{
+                                    .content_zuo_user{
+                                        .user_icon{
+                                            .user_size{
+                                                color:$body-color;
+                                                opacity:0.7;
+                                            }
+                                        }
+                                        .user_onl{
                                             color:$body-color;
                                             opacity:0.4;
                                         }
                                     }
-                                    .user_onl{
-                                        opacity:0.4;
-                                    }
                                 }
-                            }
-                            
-                        }
-                        //2
-                        .content_zuo_con2{
-                            .content_zuo_content{
-                                .content_zuo_user{
-                                    .user_icon{
-                                        .user_size{
-                                            color:$body-color;
-                                            opacity:0.7;
-                                        }
-                                    }
-                                    .user_onl{
-                                        color:$body-color;
-                                        opacity:0.4;
-                                    }
-                                }
-                            }
-                            .content_zuo_but{
-                                background-color:#272427;
-                                .chatwith_inp{
-                                    .chatwith_input{
-                                        /deep/ .el-input__inner{
-                                            background:#373438!important;
+                                .content_zuo_but{
+                                    background-color:#272427;
+                                    .chatwith_inp{
+                                        .chatwith_input{
+                                            /deep/ .el-input__inner{
+                                                background:#373438!important;
+                                            }
                                         }
                                     }
                                 }
@@ -160,7 +197,6 @@ $confere_fast_bg:#212121;
                         }
                     }
                 }
-            }
             }
             .content_you{
 				.conten_you_stup{
@@ -348,6 +384,13 @@ $confere_fast_bg:#212121;
     }
 } 
 
+//弹窗
+.modal-backdrop{
+    background-color: #000;
+}
+.modal-footer{
+    display: none;
+}
 //所有弹窗html > body table + ul 
 /* 时间 */
 .c-app.c-dark-theme ~ .el-popper{
