@@ -17,12 +17,12 @@
                 <div class="use_you_top">
                     <div class="use_user" id="rtc_togg">
                         <!-- 1 -->
-                        <CDropdown
+                        <!-- <CDropdown
                             color="link"
                             :caret="false">
                             <template #toggler-content>
-                                <el-badge value="!" class="item">
-                                    <i class="iconfont icon-zhongqi"></i>
+                                <el-badge class="item">
+                                    <i style="color:#ea5252;font-weight: 600;" class="iconfont icon-zhongqi"></i>
                                 </el-badge>
                             </template>
                             <div class="news_hed">
@@ -33,7 +33,12 @@
                                     <div @click="rtctogg">忽略</div>
                                 </div>
                             </div>
-                        </CDropdown>
+                        </CDropdown> -->
+                        <el-tooltip content="重启" placement="bottom" effect="dark">
+                            <el-button @click="Rebootdialog=true" style="border: none;background: none; color:#fff;line-height: 0.9;padding-right: 10px;" >
+                                <i style=" font-size: 18px;color:#ea5252;font-weight: 500;" class="iconfont icon-zhongqi"></i>
+                            </el-button>
+                        </el-tooltip>
                     </div>
                         <!-- 2 -->
                     <div class="use_user">
@@ -64,7 +69,7 @@
                             <CDropdownItem @click="skin">
                                 <div class="about_ab"><i class="iconfont icon-mingpianhuanfu"></i>主题</div>
                             </CDropdownItem>
-                            <CDropdownItem @click="Reboot">
+                            <CDropdownItem @click="Rebootdialog=true">
                                 <div class="about_ab"><i class="iconfont icon-zhongqi"></i>重启</div>
                             </CDropdownItem>
                         </CDropdown>
@@ -83,15 +88,29 @@
                         <div>{{$t("message.dashboard.version")}}: {{information.strVersion}}</div>
                     </div>
                 </el-dialog>
+                <CModal
+                    title="重启"
+                    :show.sync="Rebootdialog">
+                    <div class="bottom_QR">
+                        <div>确定要重启吗？</div>
+                        <div class="button_table">
+                            <el-button class="form_butt1" @click="Rebootdialog = false">{{$t("message.setting.Cancel")}}</el-button>
+                            <el-button class="form_butt" type="primary" @click="Reboot">{{$t("message.setting.OK")}}</el-button>
+                        </div>
+                    </div>
+                </CModal>
             </div>
         </div>
     </div>
 </template>
 <script>
+import Vue from 'vue'
+import { Loading } from 'element-ui';
     export default {
         name: 'TheHeders',
         data(){
             return{
+                Rebootdialog:false,
                 about:false,
                 gEvvalue:120,
                 user:this.$store.state.user,
@@ -128,13 +147,21 @@
                         }
                     }
                 })
-                
-                this.$nextTick(()=>{
-                    this.$router.push({
-                        name: `Logout`,
-                        path: 'Logout',
-                    })
+                var loading = Vue.prototype.$loading({
+                    lock: true,
+                    text: '拼命加载中...',
+                    background:"RGBA(0, 0, 0, 0.5)",
+                    target: '.bottom_QR'  // 需要loading的元素的类名
                 })
+                setTimeout(()=>{
+                    loading.close();
+                    this.$nextTick(()=>{
+                        this.$router.push({
+                            name: `Logout`,
+                            path: 'Logout',
+                        })
+                    })
+                },1000*30)
             },
             rtctogg(){
                 $("#rtc_togg").hide();
@@ -173,6 +200,13 @@
 </script>
 <style scoped>
 /* 重启 */
+.bottom_QR{
+    min-height: 150px;
+    font-size:16px;
+    font-weight:600;
+    text-align: center;
+    padding-top: 20px;
+}
 .news_hed{
     width: 140px;
     display: flex;
@@ -277,7 +311,7 @@ i{
   width: 100%;
   height:40px;
   /* background-color: #202020; */
-  color:rgba(255,255,255,1);
+  /* color:rgba(255,255,255,1); */
   position: fixed;
   top: 0;
   bottom: 0;
