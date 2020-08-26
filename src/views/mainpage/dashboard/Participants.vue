@@ -299,7 +299,7 @@ export default {
         },
         //是否有人在使用共享桌面
         golddesktop(){
-            var url = this.$store.state.IPPORT + "/api/v1/GetShareDesktopStatus?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/GetShareDesktopStatus?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     if(result.data.bShare){
@@ -313,7 +313,7 @@ export default {
             })
         },
         golddesktopss(){
-            var url = this.$store.state.IPPORT + "/api/v1/GetShareDesktopStatus?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/GetShareDesktopStatus?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     if(result.data.bShare){
@@ -335,7 +335,7 @@ export default {
                 $("#l5sShadesktop").get(0).poster = '';
             }
             this.timerRunInfo1 = setInterval(() => {
-                var url = this.$store.state.IPPORT + "/api/v1/GetSrc?token="+token+"&session="+ this.$store.state.token;
+                var url = this.$store.state.IPPORT + "/api/v1/GetSrc?token="+encodeURIComponent(token)+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
                     if(result.status==200){
                         console.log(result,"同步")
@@ -411,7 +411,7 @@ export default {
             }else{
                 if(this.icon.desktopicon=="icon-zhuomiangongxiang"){
 
-                    var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
+                    var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
                     this.$http.get(url).then(result=>{
                         if(result.status==200){
                             console.log("关闭共享",result)
@@ -427,7 +427,7 @@ export default {
                         }
                     })
                 }else{
-                    var url = this.$store.state.IPPORT + "/api/v1/StartShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
+                    var url = this.$store.state.IPPORT + "/api/v1/StartShareDesktop?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
                     this.$http.get(url).then(result=>{
                         if(result.status==200){
                             console.log("共享成果",result)
@@ -646,7 +646,7 @@ export default {
                 protocol: window.location.protocol, //http: or https:
                 host:this.$store.state.WSROOT, //localhost:8080
                 rootpath:'/', // {string} - path of the app running
-                user:this.$store.state.user, // {string} - user name
+                user:encodeURIComponent(this.$store.state.user), // {string} - user name
                 type:'media', // {string} - media or sharing
                 audio: audioout,
                 callback: this.PlaybackCB, //Callback for the event
@@ -762,7 +762,7 @@ export default {
         mettuselest(){
             this.userdata=[];
             // console.log(this.$store.state.IPPORT)
-            var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 // this.userdata=result.data.particiants
                 var data=result.data.particiants
@@ -793,7 +793,7 @@ export default {
         },
         mettuselest1(){
             // console.log(this.$store.state.IPPORT)
-            var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
             var mettdata=[]
             this.$http.get(url).then(result=>{
                 // console.log(result)
@@ -851,7 +851,7 @@ export default {
                 delete this.l5sdesktop;
                 this.l5sdesktop = undefined;
             }
-            var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 console.log("关闭",result)
             })

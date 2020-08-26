@@ -335,6 +335,7 @@ export default {
                 // console.log(row.bStartStatus)
                 var url = this.$store.state.IPPORT + "/api/v1/StartConference?token="+encodeURIComponent(row.strToken)+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
+                    console.log(result)
                     if(result.status==200){
                         this.$message('会议开始');
                     }
@@ -342,6 +343,7 @@ export default {
             }else if(row.bStartStatus==false){
                 var url = this.$store.state.IPPORT + "/api/v1/StopConference?token="+encodeURIComponent(row.strToken)+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
+                    console.log(result)
                     if(result.status==200){
                         this.$message('会议结束');
                     }
@@ -425,7 +427,7 @@ export default {
             }
             // return false
             this.dialogFormVisible=false
-            var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+form.name
+            var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+encodeURIComponent(form.name)
             +"&token="+encodeURIComponent(token)
             +"&begintime="+encodeURIComponent(ks)
             +"&endtime="+encodeURIComponent(jss)

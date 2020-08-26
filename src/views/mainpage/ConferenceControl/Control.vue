@@ -196,7 +196,15 @@
                                     <div class="Control_invite"></div>
                                     <div>邀请入会</div>
                                 </div>
-                                <div class="Control_you_function">
+                                <div class="Control_you_function" @click="myModal1 = true">
+                                    <div class="Control_Kickout"></div>
+                                    <div>踢出会议</div>
+                                </div>
+                                <div class="Control_you_function" @click="share">
+                                    <div class="Control_share"></div>
+                                    <div>分享二维码</div>
+                                </div>
+                                <!-- <div class="Control_you_function">
                                     <div class="Control_Video"></div>
                                     <div>会议录像</div>
                                 </div>
@@ -204,17 +212,9 @@
                                     <div class="Control_extend"></div>
                                     <div>延长会议</div>
                                 </div>
-                                <div class="Control_you_function" @click="myModal1 = true">
-                                    <div class="Control_Kickout"></div>
-                                    <div>踢出会议</div>
-                                </div>
                                 <div class="Control_you_function">
                                     <div class="Control_cam"></div>
                                     <div>摄像头</div>
-                                </div>
-                                <div class="Control_you_function" @click="share">
-                                    <div class="Control_share"></div>
-                                    <div>分享二维码</div>
                                 </div>
                                 <div class="Control_you_function">
                                     <div class="Control_speake"></div>
@@ -223,7 +223,7 @@
                                 <div class="Control_you_function">
                                     <div class="Control_microphone"></div>
                                     <div>麦克风</div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="Control_you_content2_button">
                                 <CButton class="form_butt" type="submit" @click="Endmetting">
@@ -429,16 +429,17 @@ export default {
         },
         //踢出参会者
         Delparticiant(){
-            if(this.selectop.length==0){
-                this.myModal1 = false
-                return false
-            }
+            // if(this.selectop.length==0){
+            //     this.myModal1 = false
+            //     return false
+            // }
             for(var i=0 ; i<this.selectop.length ; i++){
                 var url = this.$store.state.IPPORT
                     + "/api/v1/DelParticiant?token="
                     +encodeURIComponent(this.mettingtoken)+"&participanttoken="
                     +encodeURIComponent(this.selectop[i].token)+"&session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
+                    console.log(result)
                     this.myModal1 = false
                     this.mettinglist()
                     // this.$message(successfully);
@@ -522,12 +523,12 @@ export default {
         },
         //获取列表
         mettinglist(){
-            this.tableData=[]
             var url = this.$store.state.IPPORT + "/api/v1/GetParticiant?token="+this.mettingtoken+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
-                console.log(result)
+                // console.log(result)
                 if(result.status==200){
                     var data=result.data.particiants;
+                    this.tableData=[]
                     // console.log("***",result);
                     for(var i=0;i<data.length;i++){
                         if(data[i].strName==this.mettingtoken){
@@ -603,7 +604,6 @@ export default {
             this.selectop=[];
             
             for(var i=0;i<row.length;i++){
-                console.log(index,i,((this.currentPage-1)*10)+i)
                 var selectop={
                     token:row[i].strToken,
                     index:((this.currentPage-1)*10)+i,
@@ -611,8 +611,9 @@ export default {
                     Name:row[i].Name
                 };
                 this.selectop.push(selectop);
-                // console.log(this.selectop[i].type,this.selectop)
             }
+            
+            console.log(this.selectop)
         },
         //分页
         handleSizeChange1(val) {
@@ -703,6 +704,7 @@ export default {
                     flex-wrap: wrap;
                     .Control_you_function{
                         width: 33%;
+                        max-height: 120px;
                         text-align: center;
                         // background:linear-gradient(104deg,rgba(76,130,240,1),rgba(113,187,255,1));
                         .Control_invite{

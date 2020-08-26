@@ -113,7 +113,7 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <CButton class="conten_buttom_but" type="primary"  @click="myModalADD">创建</CButton>
+                <el-button class="conten_buttom_but" :loading="loading" type="primary"  @click="myModalADD">创建</el-button>
             </span>
         </el-dialog>
         <el-dialog
@@ -222,6 +222,7 @@ export default {
 	name: 'Conference',
 	data(){
 		return{
+            loading:false,//按钮加载
             myModal:false,
             myModal1:false,
             meetdata:[],
@@ -416,9 +417,7 @@ export default {
                 playmode=form.ep
             }
             // return false
-            
-            this.myModal=false
-            var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+form.name
+            var url = this.$store.state.IPPORT + "/api/v1/CreateConference?name="+encodeURIComponent(form.name)
             +"&token="+encodeURIComponent(token)
             +"&begintime="+encodeURIComponent(ks)
             +"&endtime="+encodeURIComponent(jss)
@@ -429,28 +428,31 @@ export default {
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     if(result.data.bStatus){
-                        
+                        this.loading=true
                         if(form.token.length!=0||form.user.length!=0){
                             if(form.user.length>0){
                                 this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created)
-                                // .then((a)=>{
-                                //     console.log("aaaaa",a)
-                                // })
                             }
                             if(form.token.length>0){
                                 this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created)
                             }
+                            this.$nextTick(()=>{
+                                if(form.openmeeting){
+                                    this.loading=false
+                                    this.mettchang(token)
+                                }
+                            })
+                            // setTimeout(()=>{
+                                
+                            // },2000)
                         }else if(form.token.length==0&&form.user.length==0){
                             this.$message(this.label.Created);
+                            this.loading=false
+                            this.myModal=false
                             this.meetingdata()
                         }
-                        this.$nextTick(()=>{
-                            if(form.openmeeting){
-                                console.log("aaaaa")
-                                this.mettchang(token)
-                            }
-                        })
                     }else{
+                        this.loading=false
                         this.$message("创建失败");
                     }
                 }
@@ -459,24 +461,35 @@ export default {
         //添加参会者
         Addparticipants(token,usertoken,member,mettmodesize,successfully,userlength){
             // return false
+            var _this=this
+            console.log("添加人员",usertoken)
             for(var i=0 ; i<usertoken.length ; i++){
                 var url = this.$store.state.IPPORT
                  + "/api/v1/CreateParticipant?token="
                  +encodeURIComponent(token)+"&participanttoken="
                  +encodeURIComponent(usertoken[i])+"&type="+member+"&session="+ this.$store.state.token;
-                this.$http.get(url).then(result=>{
-                    this.myModal=false
-                    this.meetingdata()
-                    // this.$message(successfully);
-                })
+                // this.$http.get(url).then(result=>{
+                //     console.log("添加人员",result)
+                //     // this.$message(successfully);
+                // })
+                $.ajax({
+                    type: 'get',
+                    url: url,  
+                    async: false,  
+                    success: function(data){ 
+                        console.log("添加人员",data)
+                    }  
+                });
             }
-            // return Promise.resolve("sss")
         },
         //开启会议
         mettchang(token){
             var url = this.$store.state.IPPORT + "/api/v1/StartConference?token="+encodeURIComponent(token)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 if(result.status==200){
+                    this.myModal=false
+                    this.meetingdata()
+                    console.log("会议开始",result)
                     this.$message('会议开始');
                 }
             })
@@ -495,7 +508,7 @@ export default {
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     // this.meetdata=result.data.conference
-                    console.log(result)
+                    // console.log(result)
                     this.meetdata=[];
                     var data=result.data.conference
                     if(data.length==0){
@@ -532,7 +545,7 @@ export default {
                         }
                         this.meetdata.push(listdata)
                         
-                        console.log("1*",this.meetdata)
+                        // console.log("1*",this.meetdata)
                     }
                     if(this.meetdata.length!=0){
                         this.meetdata.sort(function(a,b){
