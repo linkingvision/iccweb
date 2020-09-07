@@ -113,7 +113,7 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <el-button class="conten_buttom_but" :loading="loading" type="primary"  @click="myModalADD">创建</el-button>
+                <el-button class="conten_buttom_but" type="primary"  @click="myModalADD">创建</el-button>
             </span>
         </el-dialog>
         <el-dialog
@@ -222,7 +222,6 @@ export default {
 	name: 'Conference',
 	data(){
 		return{
-            loading:false,//按钮加载
             myModal:false,
             myModal1:false,
             meetdata:[],
@@ -428,17 +427,15 @@ export default {
             this.$http.get(url).then(result=>{
                 if(result.status==200){
                     if(result.data.bStatus){
-                        this.loading=true
                         if(form.token.length!=0||form.user.length!=0){
                             if(form.user.length>0){
-                                this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created)
+                                this.Addparticipants(token,form.user,"user",form.mettmodesize,this.label.Created,form.openmeeting)
                             }
                             if(form.token.length>0){
-                                this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created)
+                                this.Addparticipants(token,form.token,"device",form.mettmodesize,this.label.Created,form.openmeeting)
                             }
                             this.$nextTick(()=>{
                                 if(form.openmeeting){
-                                    this.loading=false
                                     this.mettchang(token)
                                 }
                             })
@@ -447,19 +444,17 @@ export default {
                             // },2000)
                         }else if(form.token.length==0&&form.user.length==0){
                             this.$message(this.label.Created);
-                            this.loading=false
                             this.myModal=false
                             this.meetingdata()
                         }
                     }else{
-                        this.loading=false
                         this.$message("创建失败");
                     }
                 }
             })
         },
         //添加参会者
-        Addparticipants(token,usertoken,member,mettmodesize,successfully,userlength){
+        Addparticipants(token,usertoken,member,mettmodesize,successfully,userlength,openmeeting){
             // return false
             var _this=this
             console.log("添加人员",usertoken)
@@ -478,6 +473,10 @@ export default {
                     async: false,  
                     success: function(data){ 
                         console.log("添加人员",data)
+                        if(!openmeeting){
+                            _this.myModal=false
+                            _this.meetingdata()
+                        }
                     }  
                 });
             }

@@ -68,7 +68,8 @@ export default {
 		meettoken(token){
 			console.log("改变",token)
 			this.meettoken=token
-			this.myModal=true;
+			// this.myModal=true;
+			this.l5svideplay()
 		},
 		sharedstart(token){
 			console.log("改变1",token)
@@ -86,24 +87,22 @@ export default {
 	methods:{
 		//播放
 		l5svideplay(){
-			if(this.myModal==true){
-				if(this.meettoken!=undefined){
-					this.myModal=false;
-					if(this.$router.history.current.name!="OneToOne"){
-						console.log("1")
-						this.$router.push({
-							name: `OneToOne`,
-							path: 'OneToOne',
-							params: {
-								token:this.meettoken
-							}
-						})
-					}else{
-						console.log("2")
-						this.$root.bus.$emit('meettoken', this.meettoken);
-					}
-					console.log(this.$router.history.current.name)
+			if(this.meettoken!=undefined){
+				this.myModal=false;
+				if(this.$router.history.current.name!="OneToOne"){
+					console.log("1")
+					this.$router.push({
+						name: `OneToOne`,
+						path: 'OneToOne',
+						params: {
+							token:this.meettoken
+						}
+					})
+				}else{
+					console.log("2")
+					this.$root.bus.$emit('meettoken', this.meettoken);
 				}
+				console.log(this.$router.history.current.name)
 			}
 		},
 		open(){
@@ -122,9 +121,10 @@ export default {
 		},
 		EventCB(event, userdata){
 			var msgevent = JSON.parse(event);
-			if(msgevent.type=="H5S_EVENT_SEND_CONFERENCE"){
-				this.meettoken=msgevent.sendConference.token;
-			}else if(msgevent.type=="H5S_EVENT_START_SHARE_DESKTOP"){
+			if(msgevent.type=="L5S_EVENT_CONF_INVITE"){
+				this.meettoken=msgevent.confInvite.token;
+			}
+			else if(msgevent.type=="H5S_EVENT_START_SHARE_DESKTOP"){
 				this.sharedstart=msgevent.shareDesktop.token;
 				console.log("****",msgevent)
 			}else if(msgevent.type=="H5S_EVENT_STOP_SHARE_DESKTOP"){

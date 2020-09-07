@@ -4,75 +4,79 @@
         <el-dialog
             class="dasboard_modal"
             title="开启视频上传"
+            @close='closepreview'
             :visible.sync="myModal1"
-            width="25%">
-            <div class="up_you_content">
-                <span>Video Codec</span>
-                <el-select style="width:75%" v-model="VideoCodec" size="small" placeholder="请选择">
-                    <el-option
-                    v-for="item in VideoCodecs"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>
-            </div>
+            width="50%">
+            <div class="up_content">
+                <div class="up_zuo">
+                    <video class="l5video1" id="h5sVideoLocal" muted autoplay webkit-playsinline playsinline></video>
+                </div>
+                <div class="up_you">
+                    <div class="up_you_content">
+                        <span>Video Codec</span>
+                        <el-select style="width:75%" v-model="VideoCodec" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in VideoCodecs"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
 
-            <div class="up_you_content">
-                <span>Video In</span>
-                <el-select style="width:75%" v-model="VideoIn" size="small" placeholder="请选择">
-                    <el-option
-                    v-for="item in VideoIns"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>
-            </div>
+                    <div class="up_you_content">
+                        <span>Video In</span>
+                        <el-select style="width:75%" v-model="VideoIn" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in VideoIns"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
 
-            <div class="up_you_content">
-                <span>Resolution</span>
-                <el-select style="width:75%" v-model="Resolution" size="small" placeholder="请选择">
-                    <el-option
-                    v-for="item in Resolutions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>
-            </div>
+                    <div class="up_you_content">
+                        <span>Resolution</span>
+                        <el-select style="width:75%" v-model="Resolution" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in Resolutions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
 
-            <div class="up_you_content">
-                <span>Bitrate（Kpbs）</span>
-                <el-select style="width:75%" v-model="Bitratess" size="small" placeholder="请选择">
-                    <el-option
-                    v-for="item in Bitrates"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>
+                    <div class="up_you_content">
+                        <span>Bitrate（Kpbs）</span>
+                        <el-select style="width:75%" v-model="Bitratess" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in Bitrates"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="upvideoaudio">
+                <i class="iconfont icon-shexiangjikongzhi-2" @click='pushvideo=true' v-if="!pushvideo"></i>
+                <i class="iconfont icon-shexiangjikongzhi" @click='pushvideo=false' v-else></i>
+                
+                <i class="iconfont icon-yuyin1" @click='pushaudio=true' v-if="!pushaudio"></i>
+                <i class="iconfont icon-yuyin" @click='pushaudio=false' v-else></i>
             </div>
             <span slot="footer" class="dialog-footer">
                 <div class="particip_buttom">
-                    <CButton class="part_buttom_but1" type="primary"  @click="myModal1=false">否</CButton>
-                    <CButton class="part_buttom_but" type="primary"  @click="connection">是</CButton>
+                    <CButton class="part_buttom_but1" type="primary"  @click="Preview">预览</CButton>
+                    <CButton v-if="!Turnup" class="part_buttom_but" type="primary"  @click="Upload">拨打</CButton>
+                    <CButton v-else class="part_buttom_but" type="primary"  @click="Upload">接通</CButton>
                 </div>
             </span>
         </el-dialog>
-        <!-- <el-dialog
-            class="dasboard_modal"
-            title="加入会议"
-            :modal="false"
-            :close-on-click-modal="false"
-            :visible.sync="myModal"
-            width="25%">
-            是否接听会议?
-            <span slot="footer" class="dialog-footer particip_buttom">
-                <CButton class="part_buttom_but1" type="primary"  @click="myModal=false">否</CButton>
-                <CButton class="part_buttom_but" type="primary"  @click="l5svideplay">是</CButton>
-            </span>
-        </el-dialog> -->
         <!-- 身体 -->
         <div class="particiants_content">
             <div class="content_you" id="fullscreen" @mouseover="mouseOver"  @mouseleave="mouseLeave">
@@ -106,8 +110,8 @@
                         <div class="but_g iconfont icon-fullscreen"  @click="FullScreen"> </div>
                     </div>
                 </div>
+                <video class="l5videoup" id="l5videoup" autoplay webkit-playsinline playsinline></video>
                 <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
-                <video class="l5video1" id="h5sVideoLocal" muted autoplay webkit-playsinline playsinline></video>
             </div>
             <div class="content_zuo">
                 <el-collapse v-model="activeNames">
@@ -190,7 +194,8 @@
 import QRCode from 'qrcodejs2';
 import '../../assets/js/adapter'
 import uuid from '../../assets/js/uuid1'
-import {H5sPlayerRTC,H5sRTCGetCapability,H5sRTCPush} from '../../assets/js/h5splayer.js'
+// import '../../assets/js/h5splayer.js'
+import {L5sPlayerRTC,L5sRTCPush,L5sRTCGetCapability} from '../../assets/js/l5splayer.js'
 import Vue from 'vue'
 // import event from '../../containers/event'
 // Vue.prototype.EVENT = event
@@ -202,6 +207,7 @@ export default {
             chatwith: '',
             h5handler:undefined,
             usertoken:this.$route.params.token,
+            upuser:undefined,//打电话的user
             userdata:[],
 
             VideoCodecs: [],
@@ -223,14 +229,18 @@ export default {
             Bitratess:"",
             audioout:true,
             v1:undefined,
+            Previewfun:undefined,
             l5sdesktop:undefined,
             l5sdesktops:undefined,
             myModal1:false,
+            Turnup:false,
             Shareddesktop:true,//共享桌面
             golddesktops:false,//是否有人在共享屏幕
             timerRunInfo1:"",
             timerRunInfo:"",
             chatrecord:[],//聊天记录
+            pushvideo:"true",
+            pushaudio:"true",
             icon:{
                 connectionicon:"icon-shuaxin",
                 desktopicon:"icon-zhuomiangongxiang1"
@@ -251,23 +261,26 @@ export default {
             this.mettuselest1();
         }, 30*1000);
         this.updisplay();
-        if(this.usertoken!=undefined){
-            console.log("播放",this.usertoken)
-            this.l5svideplay()
-        }
         this.golddesktop();
         var _this=this
         _this.$root.bus.$on('meettoken', function(token){
             console.log("播放",token)
-            _this.usertoken=token
-            _this.l5svideplay()
-            _this.Upload();
+            // _this.usertoken=token
+            _this.upuser=undefined
+            _this.upuser=token
+            _this.Turnup=true
+            _this.myModal1=true
+            // _this.l5svideplay(token)
+            _this.$nextTick(()=>{
+                _this.Preview()
+            })
+            // _this.Upload();
             // _this.myModal=true;
         });
         _this.$root.bus.$on('sharedstart', function(token){
             console.log("播放",token)
             _this.$message('共享屏幕开始');
-            _this.desktops(token);
+            // _this.desktops(token);
         });
         _this.$root.bus.$on('sharedstop', function(token){
             console.log("停止",token)
@@ -276,6 +289,50 @@ export default {
         });
     },
     methods:{
+        // 预览
+        Preview(){
+            var pushvideo=this.pushvideo.toString();
+            var pushaudio=this.pushaudio.toString();
+            // console.log(this.pushvideo,pushvideo,this.pushaudio,pushaudio)
+            
+            // return false
+            if(this.Previewfun!=undefined){
+                this.Previewfun.disconnect();
+                delete this.Previewfun;
+                this.Previewfun = undefined;
+            }
+            var conf1 = {
+                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                // localvideoidcopy:'h5sVideoLocalcopy',
+                consolelog: 'true', // 'true' or 'false' enable/disable console.log
+                video: pushvideo, // 'true' or 'false' enable/disable video
+                audio: pushaudio, // 'true' or 'false' enable/disable audio
+                // Efacingmode:"user", // {string} - user or environment; desktop remove this config 
+                videoin: this.VideoIn,
+                codec: this.VideoCodec,
+                bitrate: this.Bitratess,
+                resolution: this.Resolution,
+                audioin: this.AudioIn,
+                // token:encodeURIComponent(this.$store.state.user),
+                // desktopshare: bDesktopSharing // true or false for desktop sharing
+			};
+			window.saveconf=conf1
+	        console.log(conf1)
+            this.Previewfun= L5sRTCGetCapability(null,conf1,
+									function(){
+										console.log('RTC do not support !'); 
+									});
+        },
+        //关闭预览
+        closepreview(){
+            console.log('关闭',this.Previewfun)
+            if(this.Previewfun!=undefined){
+                this.Previewfun.disconnect();
+                delete this.Previewfun;
+                this.Previewfun = undefined;
+                console.log('关闭1')
+            }
+        },
         // 二维码
         qrcode () {
             console.log(this.tokenshou)
@@ -303,12 +360,12 @@ export default {
         },
         //聊天
         sendnews(){
-            console.log("回车",this.chatwith);
+            console.log("回车",this.chatwith,this.upuser);
             if (this.v1 != undefined)
             {
                 if(this.chatwith){
                     console.log("回车1");
-                    this.v1.send(this.usertoken,this.chatwith)
+                    this.v1.send(this.upuser,this.chatwith)
                     this.chatwith=""
                 }else{
                     this.$message('消息不能为空');
@@ -391,24 +448,11 @@ export default {
         },
         //拨打电话
         call(user){
-            var token = uuid(4, 10);
-            this.usertoken=token
-            var starfs=new Date().getTime();
-            var endds=new Date().getTime();
-            var ks=new Date(starfs).toISOString()+"08:00";
-            var jss=new Date(endds).toISOString()+"08:00";
-
-            var url = this.$store.state.IPPORT + "/api/v1/OnetoOneConference?name="
-            +encodeURIComponent(this.$store.state.user)+"&token="
-            +encodeURIComponent(token)+"&begintime="
-            +encodeURIComponent(ks)+"&endtime="
-            +encodeURIComponent(jss)+"&user="
-            +encodeURIComponent(user)+"&session="+ this.$store.state.token;
-            this.$http.get(url).then(result=>{
-                console.log(result)
-                this.l5svideplay();
-                this.Upload();
-            })
+            this.myModal1=true
+            this.upuser=user
+            this.$nextTick (() =>
+                this.Preview()
+            )
         },
         //重连
         Reconnection(){
@@ -417,46 +461,118 @@ export default {
         },
         //上传视频
         Upload(){
+            var pushvideo=this.pushvideo.toString();
+            var pushaudio=this.pushaudio.toString();
+            $(".heder_Mask").hide()
             if (this.v1 != undefined)
             {
                 this.v1.disconnect();
                 delete this.v1;
                 this.v1 = undefined;
             }
+            this.myModal1=false
+            this.Turnup=false
             var audioout=this.audioout.toString();
             var conf1 = {
-                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                localvideoid:'l5videoup', //{string} - id of the local video element tag
                 //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
                 protocol: window.location.protocol, //http: or https:
                 host:this.$store.state.WSROOT, //localhost:8080
                 rootpath:'/', // {string} - path of the app running
                 user:encodeURIComponent(this.$store.state.user), // {string} - user name
                 type:'media', // {string} - media or sharing
-                audio: audioout,
                 callback: this.PlaybackCB, //Callback for the event
                 userdata: null, // user data
                 session: this.$store.state.token, //session got from login
                 consolelog: 'true' // 'true' or 'false' enable/disable console.log
             };
             // return false
-            this.v1 = new H5sRTCPush(conf1);
-            console.log("*******",this.VideoCodec,"1*",
-                this.VideoIn,"2*",
-                this.Bitratess,"5*",
-                this.Resolution,"3*",
-                this.AudioIn,
-                this.v1,
-                true
-            )
+            this.v1 = new L5sRTCPush(conf1);
+            var jsonData = {
+                'VideoCodec': this.VideoCodec, 
+                'VideoIn': this.VideoIn,
+                'Resolution': this.Resolution, 
+                'Bitrate': this.Bitratess
+
+            }; 
+            var str_jsonData = JSON.stringify(jsonData);
+            localStorage.mcuCamerasettingonetoone=str_jsonData
+            // console.log(str_jsonData,JSON.parse(localStorage.getItem('mcuCamerasettingonetoone')))
             // return false
-            this.v1.connect(
-                this.VideoIn,
-                this.VideoCodec,
-                this.Bitratess,
-                this.Resolution,
-                this.AudioIn,
-                false
-            );
+            var param = {
+                video: this.pushvideo, // 'true' or 'false' enable/disable video
+                audio: this.pushaudio, // 'true' or 'false' enable/disable audio
+                //facingmode:"environment", // {string} - user or environment; desktop remove this config 
+                videoin: this.VideoIn,
+                codec: this.VideoCodec,
+                bitrate: this.Bitratess,
+                resolution: this.Resolution,
+                audioin: this.AudioIn,
+                desktopshare: false // true or false for desktop sharing
+            };
+            console.log(param,'************',this.upuser)
+            this.v1.connect(this.upuser, param);
+        },
+        
+        PlaybackCB(event, userdata){
+            
+            var msgevent = JSON.parse(event);
+            if (msgevent.type === "message"){
+                var chatrecorddata={
+                    user:msgevent.user,
+                    msg:msgevent.msg
+                }
+                this.chatrecord.push(chatrecorddata)
+                this.$nextTick(() => {
+                    let ele = document.getElementById('chatrecord');
+                    ele.scrollTop = ele.scrollHeight;
+                })
+            }
+            if (msgevent.type === "L5S_EVENT_CONF_JOINED"){
+                this.upuser=msgevent.confJoined.token
+                console.log(msgevent.confJoined.token)
+            }
+            if (msgevent.type === 'L5S_EVENT_ADD_STREAM'){
+                console.log("L5S_EVENT_ADD_STREAM");
+                this.l5svideplay(msgevent.addStream.token)
+            }
+            if (msgevent.type === "L5S_EVENT_DEL_PARTICIPANT"){
+                console.log("关闭清空");
+                if (this.h5handler != undefined)
+                {
+                    this.h5handler.disconnect();
+                    delete this.h5handler;
+                    this.h5handler = undefined;
+                    $("#l5video").get(0).load();
+                    $("#l5video").get(0).poster = '';
+                }
+            }
+			
+            console.log("Playback callback *********", msgevent);
+        },
+        //播放视频
+        l5svideplay(token){
+            this.myModal=false;
+            if (this.h5handler != undefined)
+            {
+                this.h5handler.disconnect();
+                delete this.h5handler;
+                this.h5handler = undefined;
+            }
+            // console.log(playid,token,streamprofile)
+            let conf = {
+                videoid:"l5video",
+                protocol: window.location.protocol, //http: or https:
+                host: this.$store.state.WSROOT, //localhost:8080
+                streamprofile: "main", // {string} - stream profile, main/sub or other predefine transcoding profile
+                rootpath: '/', // '/'
+                token: token,
+                hlsver: 'v1', //v1 is for ts, v2 is for fmp4
+                session: this.$store.state.token //session got from login
+            };
+            console.log("播放",conf);
+            this.h5handler = new L5sPlayerRTC(conf);
+            this.h5handler.connect();
         },
         //切换视频
         DesktopSwitch(){
@@ -483,6 +599,7 @@ export default {
         },
         //共享桌面
         desktop(){
+            console.log("**********",this.upuser)
             if (this.l5sdesktops != undefined)
             {
                 this.l5sdesktops.disconnect();
@@ -498,77 +615,81 @@ export default {
                 this.golddesktopss();
             }else{
                 if(this.icon.desktopicon=="icon-zhuomiangongxiang"){
-
-                    var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
-                    this.$http.get(url).then(result=>{
-                        if(result.status==200){
-                            console.log("关闭共享",result)
-                            if (this.l5sdesktop != undefined)
-                            {
-                                this.l5sdesktop.disconnect();
-                                delete this.l5sdesktop;
-                                this.l5sdesktop = undefined;
-                                $("#l5sShadesktop").get(0).load();
-                                $("#l5sShadesktop").get(0).poster = '';
-                                this.icon.desktopicon="icon-zhuomiangongxiang1"
-                            }
-                        }
-                    })
+                    console.log("关闭共享")
+                    if (this.l5sdesktop != undefined)
+                    {
+                        this.l5sdesktop.disconnect();
+                        delete this.l5sdesktop;
+                        this.l5sdesktop = undefined;
+                        $("#l5sShadesktop").get(0).load();
+                        $("#l5sShadesktop").get(0).poster = '';
+                        this.icon.desktopicon="icon-zhuomiangongxiang1"
+                    }
                 }else{
-                    var url = this.$store.state.IPPORT + "/api/v1/StartShareDesktop?token="+encodeURIComponent(this.usertoken)+"&session="+ this.$store.state.token;
-                    this.$http.get(url).then(result=>{
-                        if(result.status==200){
-                            console.log("共享成果",result)
-                            this.icon.desktopicon="icon-zhuomiangongxiang"
-                            if (this.l5sdesktop != undefined)
-                            {
-                                this.l5sdesktop.disconnect();
-                                delete this.l5sdesktop;
-                                this.l5sdesktop = undefined;
-                            }
-                            var audioout=this.audioout.toString();
-                            var pushType=""
-                            if (this.Shareddesktop == true)
-                            {
-                                pushType = 'sharing';
-                            }
-                            var conf1 = {
-                                localvideoid:'l5sShadesktop', //{string} - id of the local video element tag
-                                //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
-                                protocol: window.location.protocol, //http: or https:
-                                host:this.$store.state.WSROOT, //localhost:8080
-                                rootpath:'/', // {string} - path of the app running
-                                user:this.$store.state.user, // {string} - user name
-                                type:pushType, // {string} - media or sharing
-                                audio: audioout,
-                                callback: null, //Callback for the event
-                                userdata: null, // user data
-                                session: this.$store.state.token, //session got from login
-                                consolelog: 'true' // 'true' or 'false' enable/disable console.log
-                            };
-                            console.log("************",conf1)
-                            // return false
-                            this.l5sdesktop = new H5sRTCPush(conf1);
-                            this.l5sdesktop.connect(
-                                this.VideoIn,
-                                this.VideoCodec,
-                                this.Bitratess,
-                                this.Resolution,
-                                this.AudioIn,
-                                this.Shareddesktop
-                            );
-                        }
-                    })
+                    console.log("共享成果")
+                    this.icon.desktopicon="icon-zhuomiangongxiang"
+                    if (this.l5sdesktop != undefined)
+                    {
+                        this.l5sdesktop.disconnect();
+                        delete this.l5sdesktop;
+                        this.l5sdesktop = undefined;
+                    }
+                    var audioout=this.audioout.toString();
+                    var pushType=""
+                    if (this.Shareddesktop == true)
+                    {
+                        pushType = 'sharing';
+                    }
+                    var conf1 = {
+                        localvideoid:'l5sShadesktop', //{string} - id of the local video element tag
+                        //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
+                        protocol: window.location.protocol, //http: or https:
+                        host:this.$store.state.WSROOT, //localhost:8080
+                        rootpath:'/', // {string} - path of the app running
+                        user:this.$store.state.user, // {string} - user name
+                        type:pushType, // {string} - media or sharing
+                        callback: null, //Callback for the event
+                        userdata: null, // user data
+                        session: this.$store.state.token, //session got from login
+                        consolelog: 'true' // 'true' or 'false' enable/disable console.log
+                    };
+                    var param = {
+                        video: true, // 'true' or 'false' enable/disable video
+                        audio: true, // 'true' or 'false' enable/disable audio
+                        //facingmode:"environment", // {string} - user or environment; desktop remove this config 
+                        videoin: this.VideoIn,
+                        codec: this.VideoCodec,
+                        bitrate: this.Bitratess,
+                        resolution: this.Resolution,
+                        audioin: this.AudioIn,
+                        desktopshare: true // true or false for desktop sharing
+                    };
+                    // return false
+                    this.l5sdesktop = new L5sRTCPush(conf1);
+                    this.l5sdesktop.connect(this.upuser, param);
+                      
                 }
             }
         },
         //播放自己
         updisplay(){
-            var up=H5sRTCGetCapability(this.UpdateCapability);
+            var conf1 = {
+                localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
+                // localvideoidcopy:'h5sVideoLocalcopy',
+                consolelog: 'true', // 'true' or 'false' enable/disable console.log
+                video: "true", // 'true' or 'false' enable/disable video
+                audio: "true", // 'true' or 'false' enable/disable audio
+                facingmode:"user", // {string} - user or environment; desktop remove this config 
+                token:encodeURIComponent(this.$store.state.user),
+                // desktopshare: bDesktopSharing // true or false for desktop sharing
+            };
+            var up=L5sRTCGetCapability(this.UpdateCapability,conf1,function(){
+		                                console.log('RTC do not support !'); 
+									 });
         },
         UpdateCapability(capability){
-            
-            console.log(capability);
+            var json_data=JSON.parse(localStorage.getItem('mcuCamerasettingonetoone'))
+            // console.log(capability,json_data);
             if(capability){
 
                 for (let i = 0; i !== capability['videocodec'].length; ++i) {
@@ -582,9 +703,13 @@ export default {
                 }
                 for (let i = 0; i !== capability['videocodec'].length; ++i) {
                     const data = capability['videocodec'][i];
-                    if (data == 'H264')
-                    {
-                        this.VideoCodec = data
+                    if(json_data==null){
+                        if (data == 'H264')
+                        {
+                            this.VideoCodec = data
+                        }
+                    }else{
+                        this.VideoCodec = json_data.VideoCodec
                     }
                 }
                 for (let i = 0; i !== capability['videoin'].length; ++i) {
@@ -593,7 +718,14 @@ export default {
                         value: data.id,
                         label: data.name
                     }
-                    this.VideoIn=data.id
+                    if(json_data==null){
+                        this.VideoIn=data.id
+                    }else{
+                        // console.log(data.name==json_data.VideoIn,data.name,json_data.VideoIn,"**********")
+                        if(data.id==json_data.VideoIn){
+                            this.VideoIn=data.id
+                        }
+                    }
                     this.VideoIns.push(src);
                 }	
 
@@ -627,9 +759,13 @@ export default {
                         label: data
                     }
                     // this.Resolution=data
-                    if (data == '720P')
-                    {
-                        this.Resolution=data
+                    if(json_data==null){
+                        if (data == '720P')
+                        {
+                            this.Resolution=data
+                        }
+                    }else{
+                        this.Resolution = json_data.Resolution
                     }
                     this.Resolutions.push(src);
                 }
@@ -643,9 +779,13 @@ export default {
                     }
                     // this.Bitratess=data
                     /* Default use 720P */
-                    if (data == '1024')
-                    {
-                        this.Bitratess=data
+                    if(json_data==null){
+                        if (data == '1024')
+                        {
+                            this.Bitratess=data
+                        }
+                    }else{
+                        this.Bitratess = json_data.Bitrate
                     }
                     this.Bitrates.push(src);
                 }
@@ -749,20 +889,6 @@ export default {
                 }
             }
         },
-        PlaybackCB(event, userdata){
-            
-            var msgevent = JSON.parse(event);
-            var chatrecorddata={
-                user:msgevent.user,
-                msg:msgevent.msg
-            }
-            this.chatrecord.push(chatrecorddata)
-            this.$nextTick(() => {
-                let ele = document.getElementById('chatrecord');
-                ele.scrollTop = ele.scrollHeight;
-            })
-            console.log("Playback callback ", event,msgevent,this.chatrecord,chatrecorddata);
-        },
         //获取列表
         mettuselest(){
             // console.log(this.$store.state.IPPORT)
@@ -813,9 +939,7 @@ export default {
         },
         //退出
         drop(){
-            // $("#" + this.h5videoid).get(0).load();
-            // $("#" + this.h5videoid).get(0).poster = '';
-            // console.log("41")
+            this.upuser=undefined
             this.icon.desktopicon="icon-zhuomiangongxiang1"
             // this.icon.connectionicon="icon-shexiangjikongzhi-2"
             if (this.l5sdesktops != undefined){
@@ -828,6 +952,8 @@ export default {
                 this.h5handler.disconnect();
                 delete this.h5handler;
                 this.h5handler = undefined;
+                $("#l5video").get(0).load();
+                $("#l5video").get(0).poster = '';
             }
             if (this.v1 != undefined)
             {
@@ -841,38 +967,6 @@ export default {
                 delete this.l5sdesktop;
                 this.l5sdesktop = undefined;
             }
-            
-            var url = this.$store.state.IPPORT + "/api/v1/StopShareDesktop?token="+this.usertoken+"&session="+ this.$store.state.token;
-            this.$http.get(url).then(result=>{
-                console.log("关闭",result)
-            })
-            // this.$router.push({
-            //     path: 'Conference'
-            // })
-        },
-        //播放视频
-        l5svideplay(){
-            this.myModal=false;
-            if (this.h5handler != undefined)
-            {
-                this.h5handler.disconnect();
-                delete this.h5handler;
-                this.h5handler = undefined;
-            }
-            // console.log(playid,token,streamprofile)
-            let conf = {
-                videoid:"l5video",
-                protocol: window.location.protocol, //http: or https:
-                host: this.$store.state.WSROOT, //localhost:8080
-                streamprofile: "main", // {string} - stream profile, main/sub or other predefine transcoding profile
-                rootpath: '/', // '/'
-                token: this.usertoken,
-                hlsver: 'v1', //v1 is for ts, v2 is for fmp4
-                session: this.$store.state.token //session got from login
-            };
-            console.log("播放",conf);
-            this.h5handler = new H5sPlayerRTC(conf);
-            this.h5handler.connect();
         },
         mouseOver(){
             $(".conten_you_stup").show()
@@ -883,6 +977,8 @@ export default {
     }
 }
 </script>
+
+
 <style lang="scss" scoped>
 .particiants{
     width: 100%;
@@ -890,25 +986,43 @@ export default {
     // height: 96vh;
     // position: fixed;
     //头部
-    .l5video{
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-    }
     .l5sdesktop{
         width: 100%;
         height: 100%;
         object-fit: fill;
     }
     .dasboard_modal{
-        .up_you_content{
-            margin-top: 20px;
+        .up_content{
             width: 100%;
             display: flex;
-            align-items: center;
-            justify-content:space-around;
-            span{
-                width: 45%;
+            justify-content: space-between;
+            .up_zuo{
+                width: 50%;
+                .l5video1{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: fill;
+                }
+            }
+            .up_you{
+                width: 50%;
+                padding: 10px;
+                .up_you_content{
+                    margin-top: 20px;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content:space-around;
+                    span{
+                        width: 45%;
+                    }
+                }
+            }
+        }
+        .upvideoaudio{
+            margin-top: 15px;
+            i{
+                margin-right: 10px;
             }
         }
     }
@@ -1121,7 +1235,23 @@ export default {
             // height: 96vh;
             height: 100%;
             position: relative;
-            
+            .l5video{
+                width: 100%;
+                height: 100%;
+                // object-fit: fill;
+                // background-color: #FFFFFF;
+            }
+            .l5videoup{
+                width: 22%;
+                height: 20%;
+                // object-fit: fill;
+                // background-color: #000;
+                position: absolute;
+                bottom: 4%;
+                right: 4%;
+                min-height: 150px;
+                min-width: 250px;
+            }
             .conten_you_stup{
                 width: 100%;
                 position: absolute;
@@ -1162,14 +1292,6 @@ export default {
                         }
                     }
                 }
-            }
-            // .l5video{
-            //     width: 100%;
-            //     height: 100%;
-            //     object-fit: fill;
-            // }
-            .l5video1{
-                display: none;
             }
         }
     }

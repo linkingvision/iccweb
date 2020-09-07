@@ -183,7 +183,7 @@ $confere_fast_bg:#FFFFFF;
 								.content_zuo_but{
 									background-color: $heders-bg;
 									.chatwith_input{
-                                        /deep/ .el-input__inner{
+                                        .el-input__inner{
                                             background:#F0EFF2!important;
                                         }
                                     }
