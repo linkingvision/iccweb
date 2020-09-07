@@ -675,7 +675,6 @@ export default {
         updisplay(){
             var conf1 = {
                 localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
-                // localvideoidcopy:'h5sVideoLocalcopy',
                 consolelog: 'true', // 'true' or 'false' enable/disable console.log
                 video: "true", // 'true' or 'false' enable/disable video
                 audio: "true", // 'true' or 'false' enable/disable audio
