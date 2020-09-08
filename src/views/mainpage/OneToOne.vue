@@ -137,7 +137,9 @@
                                 <div @click.stop="DesktopSwitch" class="desktop_icon"></div>
                             </div>
                         </template>
-                        <video class="l5sdesktop" id="l5sShadesktop" muted autoplay webkit-playsinline playsinline></video>
+                        <div class="DesktopSwitch" style="width: 100%; height:150px;">
+                            <video class="l5sdesktop" id="l5sShadesktop" muted autoplay webkit-playsinline playsinline></video>
+                        </div>
                     </el-collapse-item>
                     <el-collapse-item title="消息" name="3">
                         <div class="content_zuo_con2">
@@ -165,26 +167,6 @@
                         </div>
                     </el-collapse-item>
                 </el-collapse>
-                <!-- 1 -->
-                
-                <!-- 2 -->
-                <!-- <div class="content_zuo_con1">
-                    <div class="content_zuo_title">文档</div>
-                    <div class="content_zuo_content">
-                        <div class="content_doc">
-                            <div class="doc_flex">
-                                <div class="doc_icon iconfont icon-wenjian"></div>
-                                <div class="doc_user">文档需求</div>
-                            </div>
-                            <div class="doc_flex">
-                                <div class="doc_hide iconfont icon-xiazai"></div>
-                                <div class="doc_dow iconfont icon-wenjian"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- 3 -->
-                
             </div>
         </div>
     </div>
@@ -262,16 +244,31 @@ export default {
         }, 30*1000);
         this.updisplay();
         this.golddesktop();
+        if(this.usertoken!=undefined){
+            this.myModal1=true
+            this.upuser=undefined
+            this.upuser=this.usertoken
+            this.Turnup=true
+            // _this.l5svideplay(token)
+            setTimeout(()=>{
+                this.$nextTick(()=>{
+                    $(".heder_Mask").hide()
+                    this.Preview()
+                })
+            },500)
+        }
+        console.log(this.usertoken)
         var _this=this
         _this.$root.bus.$on('meettoken', function(token){
             console.log("播放",token)
             // _this.usertoken=token
+            _this.myModal1=true
             _this.upuser=undefined
             _this.upuser=token
             _this.Turnup=true
-            _this.myModal1=true
             // _this.l5svideplay(token)
             _this.$nextTick(()=>{
+                $(".heder_Mask").hide()
                 _this.Preview()
             })
             // _this.Upload();
@@ -429,7 +426,7 @@ export default {
                                 session: this.$store.state.token //session got from login
                             };
                             console.log("播放",conf);
-                            this.l5sdesktops = new H5sPlayerRTC(conf);
+                            this.l5sdesktops = new L5sPlayerRTC(conf);
                             this.l5sdesktops.connect();
                         }
                     }
@@ -547,7 +544,12 @@ export default {
                     $("#l5video").get(0).poster = '';
                 }
             }
-			
+			if(msgevent.type === "L5S_EVENT_START_DESKTOP_SHARING"){
+                this.desktops(msgevent.startDesktopSharing.token)
+            }
+            if(msgevent.type === "L5S_EVENT_STOP_DESKTOP_SHARING"){
+                this.desktops()
+            }
             console.log("Playback callback *********", msgevent);
         },
         //播放视频
@@ -985,6 +987,13 @@ export default {
     // height: 96vh;
     // position: fixed;
     //头部
+    .DesktopSwitch{
+        video{
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+    }
     .l5sdesktop{
         width: 100%;
         height: 100%;

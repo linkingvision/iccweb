@@ -91,6 +91,7 @@ export default {
 				this.myModal=false;
 				if(this.$router.history.current.name!="OneToOne"){
 					console.log("1")
+					// this.$root.bus.$emit('meettoken', this.meettoken);
 					this.$router.push({
 						name: `OneToOne`,
 						path: 'OneToOne',
@@ -124,13 +125,13 @@ export default {
 			if(msgevent.type=="L5S_EVENT_CONF_INVITE"){
 				this.meettoken=msgevent.confInvite.token;
 			}
-			else if(msgevent.type=="H5S_EVENT_START_SHARE_DESKTOP"){
-				this.sharedstart=msgevent.shareDesktop.token;
-				console.log("****",msgevent)
-			}else if(msgevent.type=="H5S_EVENT_STOP_SHARE_DESKTOP"){
-				this.sharedstop=msgevent.stopShareDesktop.token;
-				console.log("****",msgevent)
-			}
+			// else if(msgevent.type=="H5S_EVENT_START_SHARE_DESKTOP"){
+			// 	this.sharedstart=msgevent.shareDesktop.token;
+			// 	console.log("****",msgevent)
+			// }else if(msgevent.type=="H5S_EVENT_STOP_SHARE_DESKTOP"){
+			// 	this.sharedstop=msgevent.stopShareDesktop.token;
+			// 	console.log("****",msgevent)
+			// }
 			console.log("****消息",msgevent)
 		},
 		clicktogg(){
