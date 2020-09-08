@@ -255,7 +255,7 @@ export default {
                     $(".heder_Mask").hide()
                     this.Preview()
                 })
-            },500)
+            },1000)
         }
         console.log(this.usertoken)
         var _this=this
@@ -680,7 +680,6 @@ export default {
                 consolelog: 'true', // 'true' or 'false' enable/disable console.log
                 video: "true", // 'true' or 'false' enable/disable video
                 audio: "true", // 'true' or 'false' enable/disable audio
-                facingmode:"user", // {string} - user or environment; desktop remove this config 
                 token:encodeURIComponent(this.$store.state.user),
                 // desktopshare: bDesktopSharing // true or false for desktop sharing
             };
