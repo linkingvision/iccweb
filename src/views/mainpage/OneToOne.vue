@@ -458,6 +458,8 @@ export default {
         },
         //上传视频
         Upload(){
+            console.log(this.AudioIn,'上传时AudioIn值')
+            // return false
             var pushvideo=this.pushvideo.toString();
             var pushaudio=this.pushaudio.toString();
             $(".heder_Mask").hide()
@@ -735,8 +737,13 @@ export default {
                         value: data.id,
                         label: data.name
                     }
-                    this.AudioIn=capability['audioin'][0].id
-                    this.AudioIns.push(src);
+                    if(!capability['audioin'][0].id){
+                        console.log(capability['audioin'][0].id,'为空')
+                        this.AudioIn='default'
+                    }else{
+                        this.AudioIn=capability['audioin'][0].id
+                        this.AudioIns.push(src);
+                    }
                 }
                 
                 for (let i = 0; i !== capability['audioout'].length; ++i) {
