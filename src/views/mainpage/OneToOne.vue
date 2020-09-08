@@ -731,31 +731,39 @@ export default {
                     this.VideoIns.push(src);
                 }	
 
-                for (let i = 0; i !== capability['audioin'].length; ++i) {
-                    const data = capability['audioin'][i];
-                    var src={
-                        value: data.id,
-                        label: data.name
-                    }
-                    if(!capability['audioin'][0].id){
-                        console.log(capability['audioin'][0].id,'为空')
-                        this.AudioIn='default'
-                    }else{
+                
+                if(capability['audioin'].length==0){
+                    console.log(capability['audioin'],'audioin为空时')
+                    this.AudioIn='default'
+                }else{
+                    for (let i = 0; i !== capability['audioin'].length; ++i) {
+                        const data = capability['audioin'][i];
+                        var src={
+                            value: data.id,
+                            label: data.name
+                        }
+                        console.log(capability['audioin'][0].id,'audioin的值')
                         this.AudioIn=capability['audioin'][0].id
                         this.AudioIns.push(src);
                     }
                 }
                 
-                for (let i = 0; i !== capability['audioout'].length; ++i) {
-                    const data = capability['audioout'][i];
-                    var src={
-                        value: data.id,
-                        label: data.name
-                    }
-                    this.AudioOut=capability['audioout'][0].id
-                    this.AudioOuts.push(src);
-                }
                 
+                if(capability['audioout'].length==0){
+                    console.log(capability['audioin'],'audioout的值')
+                    this.AudioOut='default'
+                }else{
+                    for (let i = 0; i !== capability['audioout'].length; ++i) {
+                        const data = capability['audioout'][i];
+                        var src={
+                            value: data.id,
+                            label: data.name
+                        }
+                        console.log(capability['audioin'][0].id,'audioout的值')
+                        this.AudioOut=capability['audioout'][0].id
+                        this.AudioOuts.push(src);
+                    }
+                }
                 var resolution = ['QVGA', 'VGA', 'D1', '720P', '1080P', '4K', '8K']
                 for (let i = 0; i !== resolution.length; ++i) {
                     const data = resolution[i];
