@@ -47,17 +47,9 @@ const Safetyinfo = () => import('@/views/mainpage/setting/Safetyinof')
 
 const Login = () => import('@/views/Login')
 const Logout = () => import('@/views/Logout')
-// const liveplay = () => import('@/views/widgets/liveplay')
-
 
 Vue.use(Router)
 
-
-
-// meta: {
-//     title: '首页',
-//     type: 'login'  // 是否需要判断是否登录,这里是需要判断
-// },
 
 
 export default new Router({
@@ -111,6 +103,15 @@ export default new Router({
                     },
 				},
 				{
+					path: 'Meetingman',
+					name: "Meetingman",
+					component: Meetingman,
+					meta: {
+					  title: '2-1',
+					  type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+					},
+				},
+				{
 					path: 'Control',
 					name: "Control",
 					component: Control,
@@ -137,15 +138,7 @@ export default new Router({
 						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 					},
 					children: [
-						{
-							path: 'Meetingman',
-							name: "Meetingman",
-							component: Meetingman,
-							meta: {
-							  title: '2-1',
-							  type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
-							},
-						},
+						
 						{
 							path: 'Userinfo',
 							name: "User",

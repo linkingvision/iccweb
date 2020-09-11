@@ -12,10 +12,6 @@ import LangZhCHT from '../static/lang/zhcht'
 import './assets/icon/iconfont.css'//字体
 import $ from 'jquery'
 
-
-// import event from './containers/event'
-// Vue.prototype.EVENT = event
-
 import axios from '@/http';
 Vue.prototype.$http = axios;
 
@@ -23,9 +19,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
-import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
-Vue.use(ViewUI);
 
 //注册到vue原型上
 import clipboard from 'clipboard';
@@ -34,7 +27,6 @@ Vue.prototype.clipboard = clipboard;
 Vue.use(CoreuiVue)
 Vue.use(VueI18n)
 const bus = new Vue()
-// console.log(store.state.lang,"mian")
 const i18n = new VueI18n({
   locale:"zhchs",
   messages: {
@@ -47,17 +39,13 @@ i18n.locale = store.state.lang
 
 router.beforeEach((to, from, next) => {
     const type = to.meta.type
-    // console.log(store.state.root)
     // 判断该路由是否需要登录权限
     if (type === 'Administrator'||type === 'Operator') {
-        // console.log(type,"1");
       if (store.state.token) {
 		// console.log(type,"2");
 		if(store.state.root==='Operator'&&type === 'Operator'){
-			// console.log(type,store.state.root,"4");
 			next('/dashboard')
 		}else{
-			// console.log(type,"5");
 			next()  // 确保一定要有next()被调用
 		}
       } else {
@@ -67,7 +55,6 @@ router.beforeEach((to, from, next) => {
         store.state.user = null
         sessionStorage.removeItem('mcuroot')
         store.state.root = null
-        // console.log(type,"3");
         next('/login')
       }
     } else {
@@ -81,7 +68,6 @@ new Vue({
   router,
   store,
   i18n,
-  //CIcon component documentation: https://coreui.io/vue/docs/components/icon
   icons,
   template: '<App/>',
   components: {

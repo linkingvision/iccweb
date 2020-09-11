@@ -9,12 +9,7 @@
 				background-color="#252525"
 				text-color="#d9d9d9"
 				active-text-color="#3277FF">
-				<router-link :to="{name:'Meetingman'}">
-					<el-menu-item index="2-1">
-						<i class="iconfont icon-huiyiguanli-"></i>
-						<span slot="title">会议管理</span>
-					</el-menu-item>
-				</router-link>
+				
 				
 
 				<el-submenu index="2-2">

@@ -25,9 +25,17 @@
                                     <!-- <i-select class="lang_back" :model="model1" style="width:200px">
                                         <i-option v-for="(item,index) in cityList" :key="index" :value="item.value">{{ item.label }}</i-option>
                                     </i-select> -->
-                                    <Select class="lang_back" v-model="lang" @on-change="langchang">
+                                    <!-- <Select class="lang_back" v-model="lang" @on-change="langchang">
                                         <Option  v-for="(item,index) in cityList" :key="index" :value="item.value">{{ item.label }}</Option>
-                                    </Select>
+                                    </Select> -->
+                                    <el-select class="lang_back" v-model="lang" @change="langchang" placeholder="请选择">
+                                        <el-option
+                                            v-for="item in cityList"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                        </el-option>
+                                    </el-select>
                                 </div>
                                 <div class="form-actions">
                                     <CButton class="form_butt" type="submit">
@@ -197,7 +205,8 @@ export default {
                         color:rgba(34,38,44,1);
                     }
                     .lang_back{
-                        .ivu-select-selection{
+                        width: 100%;
+                        .el-input__inner{
                             background: none;
                             border: none;
                         }

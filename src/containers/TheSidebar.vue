@@ -34,6 +34,12 @@
 						<span slot="title">视频会议</span>
 					</el-menu-item>
 				</router-link>
+                <router-link :to="{name:'Meetingman'}">
+					<el-menu-item index="2-1">
+						<i class="iconfont icon-huiyiguanli-"></i>
+						<span slot="title">会议管理</span>
+					</el-menu-item>
+				</router-link>
                 <router-link :to="{name:'ConferenceControl'}">
 					<el-menu-item index="5">
 						<i class="iconfont icon-kongzhitai"></i>
@@ -46,8 +52,8 @@
                         <span slot="title">文件夹</span>
                     </el-menu-item>
                 </a>
-                <router-link :to="{name:'Meetingman'}">
-					<el-menu-item index="2">
+                <router-link :to="{name:'User'}">
+					<el-menu-item index="2-2">
 						<i class="iconfont icon-shezhi"></i>
 						<span slot="title">设置</span>
 					</el-menu-item>
@@ -79,6 +85,12 @@
 						<span slot="title">视频会议</span>
 					</el-menu-item>
 				</router-link>
+                <router-link :to="{name:'Meetingman'}">
+					<el-menu-item index="2-1">
+						<i class="iconfont icon-huiyiguanli-"></i>
+						<span slot="title">会议管理</span>
+					</el-menu-item>
+				</router-link>
                 <router-link :to="{name:'ConferenceControl'}">
 					<el-menu-item index="5">
 						<i class="iconfont icon-kongzhitai"></i>
@@ -91,8 +103,8 @@
                         <span slot="title">文件夹</span>
                     </el-menu-item>
                 </a>
-                <router-link :to="{name:'Meetingman'}">
-					<el-menu-item index="2">
+                <router-link :to="{name:'User'}">
+					<el-menu-item index="2-2">
 						<i class="iconfont icon-shezhi"></i>
 						<span slot="title">设置</span>
 					</el-menu-item>

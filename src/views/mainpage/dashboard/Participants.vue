@@ -152,26 +152,6 @@
                         </div>
                     </el-collapse-item>
                 </el-collapse>
-                <!-- 1 -->
-                
-                <!-- 2 -->
-                <!-- <div class="content_zuo_con1">
-                    <div class="content_zuo_title">文档</div>
-                    <div class="content_zuo_content">
-                        <div class="content_doc">
-                            <div class="doc_flex">
-                                <div class="doc_icon iconfont icon-wenjian"></div>
-                                <div class="doc_user">文档需求</div>
-                            </div>
-                            <div class="doc_flex">
-                                <div class="doc_hide iconfont icon-xiazai"></div>
-                                <div class="doc_dow iconfont icon-wenjian"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- 3 -->
-                
             </div>
         </div>
     </div>
@@ -781,11 +761,14 @@ export default {
                         strName: data[i].strName,
                         strToken: data[i].strToken,
                         strType: data[i].strType,
-                        icon:"iconfont icon-yonghuming",
+                        icon:"user_icononline",
                         bOnline: data[i].bOnline
                     }
                     if(userdata["strType"]=="device"){
                         userdata["icon"]="iconfont icon-shexiangji"
+                    }
+                    if(!userdata["bOnline"]){
+                        userdata["icon"]="user_icononline1"
                     }
                     this.userdata.push(userdata)
                 }
@@ -813,11 +796,14 @@ export default {
                         strName: data[i].strName,
                         strToken: data[i].strToken,
                         strType: data[i].strType,
-                        icon:"iconfont icon-yonghuming",
+                        icon:"user_icononline",
                         bOnline: data[i].bOnline
                     }
                     if(userdata["strType"]=="device"){
                         userdata["icon"]="iconfont icon-shexiangji"
+                    }
+                    if(!userdata["bOnline"]){
+                        userdata["icon"]="user_icononline1"
                     }
                     mettdata.push(userdata)
                     this.userdata=mettdata
@@ -1012,6 +998,19 @@ export default {
                                             font-size:16px;
                                             font-family:PingFang SC;
                                             font-weight:500;
+                                        }
+                                        
+                                        .user_icononline{
+                                            width: 32px;
+                                            height: 32px;
+                                            background: url('~@/views/gallery/Participants_online.png') no-repeat center;
+                                            background-size: 100%;
+                                        }
+                                        .user_icononline1{
+                                            width: 32px;
+                                            height: 32px;
+                                            background: url('~@/views/gallery/Participants_online1.png') no-repeat center;
+                                            background-size: 100%;
                                         }
                                     }
                                 }
