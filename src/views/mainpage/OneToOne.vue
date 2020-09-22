@@ -110,7 +110,7 @@
                         <div class="but_g iconfont icon-fullscreen"  @click="FullScreen"> </div>
                     </div>
                 </div>
-                <video class="l5videoup" id="l5videoup" autoplay webkit-playsinline playsinline></video>
+                <video class="l5videoup" id="l5videoup" muted autoplay webkit-playsinline playsinline></video>
                 <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
             </div>
             <div class="content_zuo">
@@ -458,7 +458,7 @@ export default {
         },
         //上传视频
         Upload(){
-            console.log(this.AudioIn,'上传时AudioIn值')
+            console.log(this.AudioIn,this.pushvideo,this.pushaudio,'上传时AudioIn值')
             // return false
             var pushvideo=this.pushvideo.toString();
             var pushaudio=this.pushaudio.toString();

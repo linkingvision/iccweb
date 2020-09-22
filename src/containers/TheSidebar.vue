@@ -28,7 +28,7 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
-                <router-link :to="{name:'Conference'}">
+                <!-- <router-link :to="{name:'Conference'}">
 					<el-menu-item index="3">
 						<i class="iconfont icon-11111"></i>
 						<span slot="title">视频会议</span>
@@ -45,7 +45,7 @@
 						<i class="iconfont icon-kongzhitai"></i>
 						<span slot="title">会议控制</span>
 					</el-menu-item>
-				</router-link>
+				</router-link> -->
                 <a href="/mediastore">
                     <el-menu-item index="2-1-1">
                         <i class="iconfont icon-wenjian"></i>
@@ -79,7 +79,7 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
-                <router-link :to="{name:'Conference'}">
+                <!-- <router-link :to="{name:'Conference'}">
 					<el-menu-item index="3">
 						<i class="iconfont icon-11111"></i>
 						<span slot="title">视频会议</span>
@@ -96,7 +96,7 @@
 						<i class="iconfont icon-kongzhitai"></i>
 						<span slot="title">会议控制</span>
 					</el-menu-item>
-				</router-link>
+				</router-link> -->
                 <a href="/mediastore">
                     <el-menu-item index="2-1-1">
                         <i class="iconfont icon-wenjian"></i>
