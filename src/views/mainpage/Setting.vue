@@ -86,6 +86,16 @@
 						<el-menu-item index="2-13">TURN服务</el-menu-item>
 					</router-link>
 				</el-submenu>
+				<el-submenu index="2-14">
+					<template slot="title">
+						<i class="iconfont icon-xieyi"></i>
+						<span>协议</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'Protocol'}">
+						<el-menu-item index="2-14">协议</el-menu-item>
+					</router-link>
+				</el-submenu>
 				
 			</el-menu>
 			<el-menu
@@ -177,7 +187,16 @@
 						<el-menu-item index="2-13">TURN服务</el-menu-item>
 					</router-link>
 				</el-submenu>
-				
+				<el-submenu index="2-14">
+					<template slot="title">
+						<i class="iconfont icon-xieyi"></i>
+						<span>协议</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'Protocol'}">
+						<el-menu-item index="2-14">协议</el-menu-item>
+					</router-link>
+				</el-submenu>
 			</el-menu>
 		</div>
 		<div class="setting_you">

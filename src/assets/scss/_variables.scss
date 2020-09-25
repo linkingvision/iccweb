@@ -211,7 +211,14 @@ $confere_fast_bg:#FFFFFF;
 			}
         }
 	}
-	
+	//设置协议
+    .portcheck_input{
+        .el-input__inner{
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
 	//顶部导航栏
 	.c_ding{
 		color: $body-color;

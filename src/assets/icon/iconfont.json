@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2337497",
+      "name": "协议",
+      "font_class": "xieyi",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "6839109",
+      "name": "会议管理",
+      "font_class": "huiyiguanli1",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "6138400",
+      "name": "日志",
+      "font_class": "rizhi",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "13425685",
+      "name": "系统维护",
+      "font_class": "xitongweihu",
+      "unicode": "e741",
+      "unicode_decimal": 59201
+    },
+    {
       "icon_id": "12772539",
       "name": "暂停 停止",
       "font_class": "zantingtingzhi",

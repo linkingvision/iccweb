@@ -43,6 +43,7 @@ const WebrtcCloudmode = () => import('@/views/mainpage/setting/WebrtcCloudmode')
 const WebrtcForwardingmode = () => import('@/views/mainpage/setting/WebrtcForwardingmode')
 const WebrtcTurnmode = () => import('@/views/mainpage/setting/WebrtcTurnmode')
 const Safetyinfo = () => import('@/views/mainpage/setting/Safetyinof')
+const Protocol = () => import('@/views/mainpage/setting/Protocol')
 
 
 const Login = () => import('@/views/Login')
@@ -245,6 +246,14 @@ export default new Router({
 							component: WebrtcTurnmode,
 							meta: {
 								title: '2-13',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Protocol',
+							name: "Protocol",
+							component: Protocol,
+							meta: {
+								title: '2-14',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						}

@@ -18,7 +18,7 @@
 
 				<router-link :to="{name:'dashboard'}">
 					<el-menu-item index="1">
-						<i class="iconfont icon-yibiaopan1"></i>
+						<i class="iconfont icon-11111"></i>
 						<span slot="title">仪表盘</span>
 					</el-menu-item>
 				</router-link>
@@ -59,6 +59,7 @@
 					</el-menu-item>
 				</router-link>
         </el-menu>
+        <!-- //// -->
         <el-menu
             v-else
 			:default-active="activemenu"
@@ -69,7 +70,7 @@
 
 				<router-link :to="{name:'dashboard'}">
 					<el-menu-item index="1">
-						<i class="iconfont icon-yibiaopan1"></i>
+						<i class="iconfont icon-11111"></i>
 						<span slot="title">仪表盘</span>
 					</el-menu-item>
 				</router-link>

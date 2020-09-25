@@ -222,6 +222,14 @@ $confere_fast_bg:#212121;
     .el-menu{
         border: none;
     }
+    //设置协议
+    .portcheck_input{
+        .el-input__inner{
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
     //顶部
     /*下拉*/
     .c_logo{
