@@ -132,7 +132,7 @@ export default {
 			// 	this.sharedstop=msgevent.stopShareDesktop.token;
 			// 	console.log("****",msgevent)
 			// }
-			console.log("****消息",msgevent)
+			// console.log("****消息",msgevent)
 		},
 		clicktogg(){
 			if(this.$store.state.sidebarShow){

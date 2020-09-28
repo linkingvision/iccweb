@@ -85,7 +85,7 @@
                         <div class="but_g iconfont" :class="icon.connectionicon"  @click="Reconnection"> </div>
                         <div class="but_g iconfont icon-guaduan" @click="drop"> </div>
                         <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
-                        <CDropdown
+                        <!-- <CDropdown
                             style="padding:0"
                             color="link"
                             placement="top-start"
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </CDropdown>
+                        </CDropdown> -->
                         <div class="but_g iconfont icon-fullscreen"  @click="FullScreen"> </div>
                     </div>
                 </div>
@@ -115,10 +115,24 @@
             </div>
             <div class="content_zuo">
                 <el-collapse v-model="activeNames">
-                    <el-collapse-item title="联系人" name="1">
+                    <el-collapse-item title="用户" name="1">
                         <div class="content_zuo_con">
                             <div class="content_zuo_content">
                                 <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
+                                    <div class="user_icon">
+                                        <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                                        <div class="user_size">{{a.strName}}</div>
+                                    </div>
+                                    <div class="user_onl iconfont icon-shexiangtou" @click="call(a.strName)"></div>
+                                    <!-- <div class="user_onl1" v-else>离线</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </el-collapse-item>
+                    <el-collapse-item title="联系人" name="4">
+                        <div class="content_zuo_con">
+                            <div class="content_zuo_content">
+                                <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index">
                                     <div class="user_icon">
                                         <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
                                         <div class="user_size">{{a.strName}}</div>
@@ -185,12 +199,13 @@ export default {
     name:"participants",
     data(){
         return {
-            activeNames: ['1','2','3'],//左边
+            activeNames: ['1','2','3','4'],//左边
             chatwith: '',
             h5handler:undefined,
             usertoken:this.$route.params.token,
             upuser:undefined,//打电话的user
             userdata:[],
+            Contactdata:[],
 
             VideoCodecs: [],
             VideoCodec:"",
@@ -239,6 +254,7 @@ export default {
         // console.log("**",this.EVENT)
         $(".conten_you_stup").hide()
         this.mettuselest();
+        this.Contactselest();
         this.timerRunInfo = setInterval(() => {
             this.mettuselest1();
         }, 30*1000);
@@ -915,6 +931,7 @@ export default {
                 }
             })
         },
+        
         mettuselest1(){
             var url = this.$store.state.IPPORT + "/api/v1/GetOnlineUserList?session="+ this.$store.state.token;
             var mettdata=[]
@@ -939,6 +956,27 @@ export default {
             })
             
         },
+        Contactselest(){
+            // console.log(this.$store.state.IPPORT)
+            this.Contactdata=[]
+            var url = this.$store.state.IPPORT + "/api/v1/GetContactList?session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                console.log(result)
+                var data=result.data.contacts
+                if(data.length==0){
+                    return false
+                }
+                for(var i=0; i<data.length;i++){
+                    var userdata={
+                        strName: data[i].strContact,
+                        icon:"iconfont icon-yonghuming",
+                        bOnline:true
+                    }
+                    this.Contactdata.push(userdata)
+                }
+            })
+        },
+        
         //退出
         drop(){
             this.upuser=undefined

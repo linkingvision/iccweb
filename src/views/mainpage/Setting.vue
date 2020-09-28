@@ -31,6 +31,19 @@
 					</router-link>
 				</el-submenu>
 
+				<el-submenu index="2-15">
+					<template slot="title">
+						<i class="iconfont icon-lianxiren"></i>
+						<span>联系人管理</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'Contact'}">
+						<el-menu-item index="2-15">
+							联系人管理
+						</el-menu-item>
+					</router-link>
+				</el-submenu>
+
 				<el-submenu index="2-4">
 					<template slot="title">
 						<i class="iconfont icon-shezhi_guanli"></i>
@@ -94,6 +107,18 @@
 					<!-- 二级 -->
 					<router-link :to="{name:'Protocol'}">
 						<el-menu-item index="2-14">协议</el-menu-item>
+					</router-link>
+				</el-submenu>
+				<el-submenu index="2-16">
+					<template slot="title">
+						<i class="iconfont icon-rongqiyun"></i>
+						<span>Docker</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'Docker'}">
+						<el-menu-item index="2-16">
+							Docker
+						</el-menu-item>
 					</router-link>
 				</el-submenu>
 				
@@ -131,6 +156,19 @@
 						<el-menu-item index="2-14">安全管理</el-menu-item>
 					</router-link>
 				</el-submenu>
+				
+				<el-submenu index="2-15">
+					<template slot="title">
+						<i class="iconfont icon-lianxiren"></i>
+						<span>联系人管理</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'Contact'}">
+						<el-menu-item index="2-15">
+							联系人管理
+						</el-menu-item>
+					</router-link>
+				</el-submenu>
 
 				<el-submenu index="2-4">
 					<template slot="title">
@@ -195,6 +233,19 @@
 					<!-- 二级 -->
 					<router-link :to="{name:'Protocol'}">
 						<el-menu-item index="2-14">协议</el-menu-item>
+					</router-link>
+				</el-submenu>
+
+				<el-submenu index="2-16">
+					<template slot="title">
+						<i class="iconfont icon-rongqiyun"></i>
+						<span>Docker</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'Docker'}">
+						<el-menu-item index="2-16">
+							Docker
+						</el-menu-item>
 					</router-link>
 				</el-submenu>
 			</el-menu>

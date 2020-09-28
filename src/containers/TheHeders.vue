@@ -15,6 +15,7 @@
                     <CIcon v-else name="cil-moon"/>
                 </button> -->
                 <div class="use_you_top">
+                    <div class="c_Docker" id="Docker"></div>
                     <div class="use_user" id="rtc_togg">
                         <!-- 1 -->
                         <!-- <CDropdown
@@ -136,8 +137,20 @@ import { Loading } from 'element-ui';
             _this.$root.bus.$on('webrtc', function(token){
                 $("#rtc_togg").show();
             });
+            this.Docker()
         },
         methods:{
+            Docker(){
+                var url = this.$store.state.IPPORT + "/api/v1/GetEnableLinkagent?session="+ this.$store.state.token;
+                this.$http.get(url).then(result=>{
+                    if(result.status==200){
+                        console.log(result)
+                        if(result.data.enable){
+                            document.getElementById('Docker').style.display='block'
+                        }
+                    }
+                })
+            },
             Reboot(){
                 var url = this.$store.state.IPPORT + "/api/v1/Restart?session="+ this.$store.state.token;
                 this.$http.get(url).then(result=>{
@@ -324,6 +337,12 @@ i{
 .c_logo{
 	width: 160px;
 	height: 100%;
+}
+.c_Docker{
+    width: 40px;
+	height: 100%;
+    background: url("~@/assets/imgs/Docker.png") center center no-repeat;
+    display: none;
 }
 .c_use{
 	width: 89%;

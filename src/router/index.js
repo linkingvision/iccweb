@@ -44,6 +44,8 @@ const WebrtcForwardingmode = () => import('@/views/mainpage/setting/WebrtcForwar
 const WebrtcTurnmode = () => import('@/views/mainpage/setting/WebrtcTurnmode')
 const Safetyinfo = () => import('@/views/mainpage/setting/Safetyinof')
 const Protocol = () => import('@/views/mainpage/setting/Protocol')
+const Contact = () => import('@/views/mainpage/setting/Contact')
+const Docker = () => import('@/views/mainpage/setting/Docker')
 
 
 const Login = () => import('@/views/Login')
@@ -254,6 +256,22 @@ export default new Router({
 							component: Protocol,
 							meta: {
 								title: '2-14',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Contact',
+							name: "Contact",
+							component: Contact,
+							meta: {
+								title: '2-15',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'Docker',
+							name: "Docker",
+							component: Docker,
+							meta: {
+								title: '2-16',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						}

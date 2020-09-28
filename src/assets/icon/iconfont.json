@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3434240",
+      "name": "联系人",
+      "font_class": "lianxiren",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "16867768",
+      "name": "docker",
+      "font_class": "rongqiyun",
+      "unicode": "e7b0",
+      "unicode_decimal": 59312
+    },
+    {
       "icon_id": "2337497",
       "name": "协议",
       "font_class": "xieyi",
