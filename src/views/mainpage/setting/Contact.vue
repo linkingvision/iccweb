@@ -40,8 +40,8 @@
             </div>
         </el-dialog>
         <div class="button_edi">
-            <CButton class="form_butt" @click="dialogFormVisible = true" type="submit">添加用户</CButton>
-            <CButton class="form_butt1" @click="deleteContacts" type="submit">删除用户</CButton>
+            <CButton class="form_butt" @click="dialogFormVisible = true" type="submit">添加联系人</CButton>
+            <CButton class="form_butt1" @click="deleteContacts" type="submit">删除联系人</CButton>
         </div>
         <el-table
             :data="tableData.filter(data => !search || data.strUser.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
@@ -98,6 +98,11 @@ import '../../../assets/js/jQuery.md5'
 export default {
 	name: 'Contact',
 	data(){
+        var checkAge = (rule, value, callback) => {
+            if (!value) {
+                return callback(new Error('请填写H323或SIP至少一个'));
+            }
+        };
 		return{
             total: 0, // 总条数 1
             currentPage: 1, // 当前页码1
@@ -121,23 +126,23 @@ export default {
                 confirmpass1:this.$t("message.setting.confirmpass"),//重复新密码
             },
 			form: {
-                strContact:"abc",
-                strH323: "h323:[username@]host[:port]",
-                strSIP:"sip:[username@]host[:port]",
+                strContact:"Contact1",
+                strH323: "h323:1000@192.168.1.1",
+                strSIP:"sip:1000@192.168.1.1",
             },
             Role:[],
             editform: {
-                strContact:"Operator",
+                strContact:"Contact1",
                 strH323: "12345",
                 strSIP:"12345",
             },
             selectop:[],//选择那几个
             rules: {
                 strH323: [
-                    { required: true, message: '请填写H323', trigger: 'blur' }
+                    { validator: checkAge, trigger: 'blur' }
                 ],
                 strSIP: [
-                    { required: true, message: '请填写SIP', trigger: 'blur' }
+                    { validator: checkAge, trigger: 'blur' }
                 ]
             }
 		}
@@ -152,33 +157,7 @@ export default {
 	created(){
 	},
 	methods:{
-        //删除用户
-        deleteContact(){
-            var selectop=this.selectop;
-            let root=process.env.VUE_APP_URL;
-            if (root == undefined){
-                root = window.location.protocol + '//' + window.location.host + window.location.pathname;
-            }
-            for(var i=0;i<selectop.length;i++){
-                var url = root + "/api/v1/DeleteUser?user="+encodeURIComponent(selectop[i].strUser)+"&session="+ this.$store.state.token;
-                this.$http.get(url).then(result=>{
-                    if(result.status==200){
-                        if(result.data.bStatus==true){
-                            this.tableData=[];
-                            this.Contact();
-                        }else{
-                            this.$message({
-                                message: "删除失败",
-                                type: 'warning'
-                            });
-                            return false;
-                        }
-                    }
-                })
-            }
-        },
-        
-        //添加用户
+        //添加联系人
         addContact(formName){
             this.$refs[formName].validate((valid) => {
                 if (!valid) {
@@ -188,16 +167,13 @@ export default {
             });
             var form=this.form;
             console.log(form)
-            let root=process.env.VUE_APP_URL;
-            if (root == undefined){
-                root = window.location.protocol + '//' + window.location.host + window.location.pathname;
-            }
-            if( form.strH323==""||form.strSIP==""){
-                this.$message(this.$t("message.setting.beblank"));
+            let root=this.$store.state.IPPORT;
+            if( form.strH323==""&&form.strSIP==""){
+                this.$message('H323和SIP不能同时为空');
                 return false;
             }
             this.dialogFormVisible=false;
-            // console.log(form.strPasswd,$.md5(form.strPasswd))
+            console.log(form.strContact,form.strSIP,form.strH323)
             var url = root + "/api/v1/AddContact?contact="+encodeURIComponent(form.strContact)+"&sip="+encodeURIComponent(form.strSIP)+"&h323="+encodeURIComponent(form.strH323)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
                 // console.log("***",result,form,url);
@@ -205,8 +181,9 @@ export default {
                     if(result.data.bStatus==true){
                         this.Contact();
                     }else{
+                        console.log(result)
                         this.$message({
-                            message: this.$t("message.setting.Creationfailed"),
+                            message: result.data.strCode,
                             type: 'warning'
                         });
                         return false;
@@ -218,7 +195,9 @@ export default {
 		handleClick(index,row){
 			this.editPopup = true;
 			console.log("***",index,row);
-			this.editform["strUser"]=row.strUser;
+            this.editform["strContact"]=row.strContact;
+            this.editform["strH323"]=row.strH323;
+            this.editform["strSIP"]=row.strSIP;
             // this.editform["strUserType"]=row.strUserType;
 		},
         // 修改密码
@@ -230,30 +209,31 @@ export default {
                 }
             });
             var form=this.editform;
-            let root=process.env.VUE_APP_URL;
-            if (root == undefined){
-                root = window.location.protocol + '//' + window.location.host + window.location.pathname;
-            }
-            if( form.strH323==""||form.strSIP==""){
-                // this.$message(this.$t("message.setting.beblank"));
+            let root=this.$store.state.IPPORT;
+            if( form.strH323==""&&form.strSIP==""){
+                this.$message('H323和SIP不能同时为空');
                 return false;
             }
-            var url = root + "/api/v1/UpdateUser?user="+encodeURIComponent(form.strUser)+"&oldpassword="+encodeURIComponent($.md5(form.strPasswd))+"&newpassword="+encodeURIComponent($.md5(form.Newpassword))+"&session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/DeleteContact?contact="+encodeURIComponent(form.strContact)+"&session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
-                // console.log(url,result)
                 if(result.status==200){
                     if(result.data.bStatus==true){
-                        this.editPopup = false;
-                        if(form.strUser==this.$store.state.user){
-                            this.$router.push({
-                                path: '/logout'
-                            })
-                        }
-                        this.$message(this.$t("message.setting.Changecg"));
+                        var url = root + "/api/v1/AddContact?contact="+encodeURIComponent(form.strContact)+"&sip="+encodeURIComponent(form.strSIP)+"&h323="+encodeURIComponent(form.strH323)+"&session="+ this.$store.state.token;
+                        this.$http.get(url).then(result=>{
+                            // console.log("***",result,form,url);
+                            if(result.status==200){
+                                if(result.data.bStatus==true){
+                                    this.Contact();
+                                    this.editPopup=false
+                                }else{
+                                    return false;
+                                }
+                            }
+                        })
                     }else{
-                        this.$message(this.$t("message.setting.Changesb"));
+                        console.log("删除失败")
+                        return false;
                     }
-                    
                 }
             })
         },

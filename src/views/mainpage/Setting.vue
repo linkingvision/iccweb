@@ -99,6 +99,29 @@
 						<el-menu-item index="2-13">TURN服务</el-menu-item>
 					</router-link>
 				</el-submenu>
+				<el-submenu index="2-18">
+					<template slot="title">
+						<i class="iconfont icon-rizhi"></i>
+						<span>日志</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'LogLevel'}">
+						<el-menu-item index="2-18">日志级别</el-menu-item>
+					</router-link>
+					<router-link :to="{name:'LogRotating'}">
+						<el-menu-item index="2-19">循环覆盖</el-menu-item>
+					</router-link>
+				</el-submenu>
+				<el-submenu index="2-17">
+					<template slot="title">
+						<i class="iconfont icon-xitongweihu"></i>
+						<span>系统维护</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'System'}">
+						<el-menu-item index="2-14">配置快照</el-menu-item>
+					</router-link>
+				</el-submenu>
 				<el-submenu index="2-14">
 					<template slot="title">
 						<i class="iconfont icon-xieyi"></i>
@@ -225,6 +248,32 @@
 						<el-menu-item index="2-13">TURN服务</el-menu-item>
 					</router-link>
 				</el-submenu>
+				
+				<el-submenu index="2-18">
+					<template slot="title">
+						<i class="iconfont icon-rizhi"></i>
+						<span>日志</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'LogLevel'}">
+						<el-menu-item index="2-18">日志级别</el-menu-item>
+					</router-link>
+					<router-link :to="{name:'LogRotating'}">
+						<el-menu-item index="2-19">循环覆盖</el-menu-item>
+					</router-link>
+				</el-submenu>
+
+				<el-submenu index="2-17">
+					<template slot="title">
+						<i class="iconfont icon-xitongweihu"></i>
+						<span>系统维护</span>
+					</template>
+					<!-- 二级 -->
+					<router-link :to="{name:'System'}">
+						<el-menu-item index="2-14">配置快照</el-menu-item>
+					</router-link>
+				</el-submenu>
+
 				<el-submenu index="2-14">
 					<template slot="title">
 						<i class="iconfont icon-xieyi"></i>

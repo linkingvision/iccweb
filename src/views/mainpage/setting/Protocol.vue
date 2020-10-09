@@ -1,6 +1,6 @@
 <template>
     <div class="Certification">
-        <div>PTSP服务检测</div>
+        <div>RTSP服务检测</div>
         <div>
             <el-switch
                 @change="Certchange()"

@@ -46,6 +46,9 @@ const Safetyinfo = () => import('@/views/mainpage/setting/Safetyinof')
 const Protocol = () => import('@/views/mainpage/setting/Protocol')
 const Contact = () => import('@/views/mainpage/setting/Contact')
 const Docker = () => import('@/views/mainpage/setting/Docker')
+const System = () => import('@/views/mainpage/setting/System')
+const LogLevel = () => import('@/views/mainpage/setting/LogLevel')
+const LogRotating = () => import('@/views/mainpage/setting/LogRotating')
 
 
 const Login = () => import('@/views/Login')
@@ -272,6 +275,30 @@ export default new Router({
 							component: Docker,
 							meta: {
 								title: '2-16',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'System',
+							name: "System",
+							component: System,
+							meta: {
+								title: '2-17',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'LogLevel',
+							name: "LogLevel",
+							component: LogLevel,
+							meta: {
+								title: '2-18',
+								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							},
+						},{
+							path: 'LogRotating',
+							name: "LogRotating",
+							component: LogRotating,
+							meta: {
+								title: '2-19',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
 						}
