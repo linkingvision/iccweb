@@ -854,7 +854,7 @@ export default {
 }
 .dasboard{
     width: 100%;
-    height: 96vh;
+    height: 90vh;
     .dasboard_global{
         width: 100%;
         height: 100%;
@@ -865,7 +865,7 @@ export default {
         align-content: space-between;
         border-radius: 10px;
         min-width: 993px;
-        min-height: 900px;
+        min-height: 870px;
         .dasboard_one{
             width: 100%;
             height: 69.3%;
@@ -1130,7 +1130,7 @@ export default {
 }
 .dasboard{
     width: 100%;
-    height: 96vh;
+    height: 90vh;
     .dasboard_global{
         width: 100%;
         height: 100%;
@@ -1141,7 +1141,7 @@ export default {
         align-content: space-between;
         border-radius: 10px;
         min-width: 993px;
-        min-height: 900px;
+        min-height: 870px;
         .dasboard_one{
             width: 100%;
             height: 69.3%;

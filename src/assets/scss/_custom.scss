@@ -239,6 +239,7 @@ $confere_fast_bg:#212121;
     .c_ding{
 		color: $body-color;
         background-color: $body-top;
+        z-index: 1100;
         .c_logo{
             background: url("~@/assets/imgs/l5s_logo1.png") center center no-repeat;
             background-size: 85%;
@@ -337,7 +338,7 @@ $confere_fast_bg:#212121;
     }
     // 表格
     .el-table {
-        min-height: 85vh;
+        min-height: 80vh;
         background: none
     }
     .el-table__empty-block{

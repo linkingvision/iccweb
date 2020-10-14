@@ -5,7 +5,7 @@
 		<TheSidebar/>
 		<CWrapper>
 			<!-- 顶部导航 -->
-			<!-- <TheHeader/> -->
+			<TheHeader/>
 			<!-- 内容 @click="-->
 			<div @click="clicktogg" class="c-body">
 				<main class="c-main">
@@ -166,7 +166,7 @@ export default {
     position: fixed;
     top: 0px;
 	/* bottom: 50px; */
-	z-index: 1000;
+	z-index: 1100;
 }
 /* 右边内容 */
 .c-wrapper{

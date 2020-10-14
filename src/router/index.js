@@ -77,8 +77,9 @@ export default new Router({
                     name: "dashboard",
                     component: Dashboard,
                     meta: {
-                      title: '1',
-                      type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+						name:"仪表盘",
+						title: '1',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
 				{
@@ -95,8 +96,9 @@ export default new Router({
                     name: "OneToOne",
                     component: OneToOne,
                     meta: {
-                      title: '4',
-                      type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+						name:"对讲",
+						title: '4',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
 				{
@@ -140,6 +142,7 @@ export default new Router({
 					name: "Setting",
 					component: Setting,
 					meta: {
+						name:"设置",
 						title: '2',
 						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 					},
@@ -160,15 +163,6 @@ export default new Router({
 							component: Roleinfo,
 							meta: {
 							title: '2-3',
-							type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
-							}
-						},
-						{
-							path: 'Safetyinfo',
-							name: "Safetyinfo",
-							component: Safetyinfo,
-							meta: {
-							title: '2-14',
 							type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							}
 						},
@@ -301,7 +295,15 @@ export default new Router({
 								title: '2-19',
 								type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
 							},
-						}
+						},{
+							path: 'Safetyinfo',
+							name: "Safetyinfo",
+							component: Safetyinfo,
+							meta: {
+							title: '2-20',
+							type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+							}
+						},
 					]
 				}
             ]

@@ -26,7 +26,7 @@ export default {
   @import 'assets/scss/style';
   // 表格
 	.c-app {
-		background-color: #F3F5FA;
+		background-color: #F7F7F7;
 	}
   	.dasboard_global{
 		width: 100%;

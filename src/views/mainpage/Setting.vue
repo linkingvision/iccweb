@@ -27,7 +27,7 @@
 						<el-menu-item index="2-3">角色管理</el-menu-item>
 					</router-link>
 					<router-link :to="{name:'Safetyinfo'}">
-						<el-menu-item index="2-14">安全管理</el-menu-item>
+						<el-menu-item index="2-20">安全管理</el-menu-item>
 					</router-link>
 				</el-submenu>
 
@@ -119,7 +119,7 @@
 					</template>
 					<!-- 二级 -->
 					<router-link :to="{name:'System'}">
-						<el-menu-item index="2-14">配置快照</el-menu-item>
+						<el-menu-item index="2-17">配置快照</el-menu-item>
 					</router-link>
 				</el-submenu>
 				<el-submenu index="2-14">
@@ -146,6 +146,8 @@
 				</el-submenu>
 				
 			</el-menu>
+			
+			
 			<el-menu
 			v-else
 			:default-active="activemenu"
@@ -176,7 +178,7 @@
 						<el-menu-item index="2-3">角色管理</el-menu-item>
 					</router-link>
 					<router-link :to="{name:'Safetyinfo'}">
-						<el-menu-item index="2-14">安全管理</el-menu-item>
+						<el-menu-item index="2-20">安全管理</el-menu-item>
 					</router-link>
 				</el-submenu>
 				
@@ -332,7 +334,7 @@ export default {
 <style lang="scss" scoped>
 .setting_all{
 	display: flex;
-	height: 96vh;
+	height: 90vh;
 	// background-color: #fff;
 	justify-content: space-between;
 	flex-wrap: wrap;
@@ -340,7 +342,7 @@ export default {
 		margin-top: 1vh;
 		width: 14%;
 		// min-width: 220px;
-		height: 95vh;
+		height: 90vh;
 		overflow-y: auto;
 		// background-color: #fff;
 		.el-submenu{
@@ -357,7 +359,7 @@ export default {
 	.setting_you{
 		padding: 1vh 5px;
 		width: 86%;
-		height: 96vh;
+		height: 90vh;
 		overflow-y: auto;
 		// background-color: #171717;
 	}

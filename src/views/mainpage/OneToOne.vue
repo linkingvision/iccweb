@@ -236,8 +236,8 @@ export default {
             timerRunInfo1:"",
             timerRunInfo:"",
             chatrecord:[],//聊天记录
-            pushvideo:"true",
-            pushaudio:"true",
+            pushvideo:true,
+            pushaudio:true,
             icon:{
                 connectionicon:"icon-shuaxin",
                 desktopicon:"icon-zhuomiangongxiang1"
