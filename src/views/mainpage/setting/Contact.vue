@@ -54,6 +54,7 @@
             width="55">
             </el-table-column>
             <el-table-column
+            label="序号"
             type="index"
             width="50">
             </el-table-column>

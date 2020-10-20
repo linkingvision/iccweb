@@ -515,8 +515,8 @@ export default {
             // console.log(str_jsonData,JSON.parse(localStorage.getItem('mcuCamerasettingonetoone')))
             // return false
             var param = {
-                video: this.pushvideo, // 'true' or 'false' enable/disable video
-                audio: this.pushaudio, // 'true' or 'false' enable/disable audio
+                video: pushvideo, // 'true' or 'false' enable/disable video
+                audio: pushaudio, // 'true' or 'false' enable/disable audio
                 //facingmode:"environment", // {string} - user or environment; desktop remove this config 
                 videoin: this.VideoIn,
                 codec: this.VideoCodec,
@@ -674,8 +674,8 @@ export default {
                         consolelog: 'true' // 'true' or 'false' enable/disable console.log
                     };
                     var param = {
-                        video: true, // 'true' or 'false' enable/disable video
-                        audio: true, // 'true' or 'false' enable/disable audio
+                        video: 'true', // 'true' or 'false' enable/disable video
+                        audio: "false", // 'true' or 'false' enable/disable audio
                         //facingmode:"environment", // {string} - user or environment; desktop remove this config 
                         videoin: this.VideoIn,
                         codec: this.VideoCodec,
