@@ -4,6 +4,39 @@ export default {
 	  {
 		update_successfully: 'update successfully'
 	  },
+	  live:
+	  {
+		  focusing:"Focusing",
+		  Focus:"Focus",
+		  aperture:"Aperture",
+		  liveview: 'Liveview',
+		  device: 'DEVICE',
+		  setting: 'SETTING',
+		  protocol: 'PROTOCOL',
+		  mainstream:'Main Stream',
+		  substream:'Sub Stream',
+		  camera:"Camera",
+		  waterprint:"Watermark",
+		  Videorecording:"Video recording",
+		  Region:"Region",
+		  Scan:"Scan to view video",
+		  Quality:"Quality",
+		  Switched:"Switched",
+  
+		  Video:"Video",
+		  Codec:"Codec",
+		  Width:"Width",
+		  Height:"Height",
+		  FPS:"FPS",
+		  Bitrate:"Bitrate",
+  
+		  Audio:"Audio",
+		  Codec:"Codec",
+		  SampleRate:"SampleRate",
+		  SampleBit:"SampleBit",
+		  Channels:"Channels",
+		  Bitrate:"Bitrate",
+	  },
 	  left:
 	  {
 		  VIDEO:'VIDEO PLATFORM CONTROL CENTER',

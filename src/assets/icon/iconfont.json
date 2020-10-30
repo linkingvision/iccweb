@@ -6,6 +6,90 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "12215120",
+      "name": "full",
+      "font_class": "full",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "12215227",
+      "name": "roundclosefill",
+      "font_class": "roundclosefill",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "17801605",
+      "name": "全屏",
+      "font_class": "tubiao_huaban1fuben9",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "17801630",
+      "name": "十六",
+      "font_class": "tubiao_huaban1fuben7",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "17801635",
+      "name": "十三",
+      "font_class": "tubiao_huaban1fuben6",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "17801665",
+      "name": "九",
+      "font_class": "tubiao_huaban1fuben5",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "17801667",
+      "name": "七",
+      "font_class": "tubiao_huaban1fuben4",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "17801673",
+      "name": "六",
+      "font_class": "tubiao_huaban1fuben3",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "17801679",
+      "name": "四",
+      "font_class": "tubiao_huaban1fuben2",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "17801682",
+      "name": "三",
+      "font_class": "tubiao_huaban1fuben",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "17801686",
+      "name": "一",
+      "font_class": "tubiao_huaban1",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "17802019",
+      "name": "二十五",
+      "font_class": "tubiao_huaban1fuben8",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
       "icon_id": "3434240",
       "name": "联系人",
       "font_class": "lianxiren",

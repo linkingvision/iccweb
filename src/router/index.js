@@ -19,6 +19,7 @@ const i18n = new VueI18n({
 const TheContainer = () => import('@/containers/TheContainer')
 
 // Views
+const VideoPlayback = () => import('@/views/mainpage/VideoPlayback')
 const Dashboard = () => import('@/views/mainpage/Dashboard')
 const Participants = () => import('@/views/mainpage/dashboard/Participants')
 
@@ -107,6 +108,14 @@ export default new Router({
                     component: ConferenceControl,
                     meta: {
                       title: '5',
+                      type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},{
+                    path: 'VideoPlayback',
+                    name: "VideoPlayback",
+                    component: VideoPlayback,
+                    meta: {
+                      title: '6',
                       type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},

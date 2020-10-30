@@ -9,6 +9,8 @@ $body-top:#202020;
 $concent-bg:#212121;
 $body-color: #FFFFFF;
 $confere_fast_bg:#212121;
+
+$collapse_size:#FFFFFF;
 /* 全体的css */
 .c-app.c-dark-theme {
     color: $body-color;
@@ -21,6 +23,50 @@ $confere_fast_bg:#212121;
 
 
 .c-app.c-dark-theme{
+    //实时播放页面
+    .liveview{
+        .liveview_left{
+            .el-input__inner{ //输入框
+                background-color:#4A4A4C !important;
+                border: none;
+                border-radius: 30px;
+            }
+        }
+        .liveview_right{
+            .videoColor {
+                background-color: #222222;
+                .palace{
+                    background-size: 10%;
+                    flex: 1 1 10%;
+                    border:1px solid black;
+                }
+
+            }
+            .liveview_group{
+                .liveview_function{
+                    .el-input__inner{
+                        background: none;
+                        border: 1px solid #9A9A9A;
+                    }
+                }
+                button{
+                    padding: 0;
+                    color: #999999;
+                }
+                
+                .liveview_butt{
+                    button{
+                        padding: 0;
+                        color: #999999;
+                        border: none;
+                        background: none;
+                        color: #999999;
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+    }
     //会议
 	.dasboard_global{
         .title_g{
@@ -261,7 +307,69 @@ $confere_fast_bg:#212121;
         min-width: 80px;
     }
 
-
+    //收缩框
+    .el-collapse{
+        border: none;
+        .el-collapse-item__header{
+            color: $body-color;
+            background-color: #2E2E2E;
+            opacity: 0.7;
+            border: none;
+            padding: 0 7px;
+        }
+        .el-collapse-item__wrap{
+            background: none;
+            border-bottom: none;
+            .el-collapse-item__content{
+                padding: 0;
+                color: $body-color;
+                &::-webkit-scrollbar {/*滚动条整体样式*/
+                    width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
+                    height: 8px;
+                    scrollbar-arrow-color:red;
+                }
+                &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+                    border-radius: 5px;
+                    -webkit-box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    background: rgba(218, 218, 218,0.2);
+                    scrollbar-arrow-color:red;
+                }
+                &::-webkit-scrollbar-track {/*滚动条里面轨道*/
+                    -webkit-box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    border-radius: 0;
+                    background: rgba(218, 218, 218,0.1);
+                }
+            }
+        }
+    }
+    //树形
+    .el-tree{
+        background: none !important;
+        color: $collapse_size;
+        font-size: 14px;
+        .el-tree-node.is-current>.el-tree-node__content{
+            background: none !important;
+            color: #3ABBFE;
+            width: 100%;
+        }
+        .el-tree-node__content{
+            background: none !important;
+            &:hover{
+                background: none !important;
+                color: #3ABBFE;
+            }
+        }
+        .el-checkbox__inner{
+            background-color: #494B4E !important;
+            border-radius: 50px !important;
+        }
+        .el-checkbox__input.is-checked .el-checkbox__inner,.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+            background-color: #3277FF !important;
+            border-color: rgba(255,255,255,1) !important;
+        }
+    }
 
     // 表格
     .el-tabs--border-card{

@@ -16,6 +16,40 @@ export default {
 		  password: '密码',
 		  language: '语言选择'
 	  },
+	  live:
+	  {
+		  focusing:"调焦",
+		  Focus:"聚焦",
+		  aperture:"光圈",
+		  liveview: '实时视频',
+		  device: '视频源',
+		  setting: '设置',
+		  protocol: '协议',
+		  mainstream:'主码流',
+		  substream:"辅码流",
+		  camera:"摄像机",
+		  waterprint:"水印",
+		  Videorecording:"正在录像",
+		  Region:"区域",
+		  Scan:"扫扫查看视频",
+		  Quality:"画质",
+		  Switched:'已切换',
+  
+		  Video:"视频",
+		  Codec:"编码类型",
+		  Width:"宽",
+		  Height:"高",
+		  FPS:"帧率",
+		  Bitrate:"码率",
+  
+		  Audio:"音频",
+		  Codec:"编码类型",
+		  SampleRate:"采样率",
+		  SampleBit:"采样位宽",
+		  Channels:"声道数",
+		  Bitrate:"码率",
+		  
+	  },
 	  left:{
 		videoconference:"视频会议",
 	  },

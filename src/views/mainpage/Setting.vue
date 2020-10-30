@@ -144,6 +144,12 @@
 						</el-menu-item>
 					</router-link>
 				</el-submenu>
+				<a href="/mediastore">
+                    <el-menu-item index="2-1-1">
+                        <i class="iconfont icon-wenjian"></i>
+                        <span slot="title">文件夹</span>
+                    </el-menu-item>
+                </a>
 				
 			</el-menu>
 			
@@ -299,6 +305,12 @@
 						</el-menu-item>
 					</router-link>
 				</el-submenu>
+				<a href="/mediastore">
+                    <el-menu-item index="2-1-1">
+                        <i class="iconfont icon-wenjian"></i>
+                        <span slot="title">文件夹</span>
+                    </el-menu-item>
+                </a>
 			</el-menu>
 		</div>
 		<div class="setting_you">

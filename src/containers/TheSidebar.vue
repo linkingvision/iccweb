@@ -28,6 +28,12 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
+                <router-link :to="{name:'VideoPlayback'}">
+					<el-menu-item index="6">
+						<i class="iconfont icon-dianduidian-"></i>
+						<span slot="title">视频播放</span>
+					</el-menu-item>
+				</router-link>
                 <!-- <router-link :to="{name:'Conference'}">
 					<el-menu-item index="3">
 						<i class="iconfont icon-11111"></i>
@@ -46,12 +52,7 @@
 						<span slot="title">会议控制</span>
 					</el-menu-item>
 				</router-link> -->
-                <a href="/mediastore">
-                    <el-menu-item index="2-1-1">
-                        <i class="iconfont icon-wenjian"></i>
-                        <span slot="title">文件夹</span>
-                    </el-menu-item>
-                </a>
+                
                 <router-link :to="{name:'User'}">
 					<el-menu-item index="2-2">
 						<i class="iconfont icon-shezhi"></i>
@@ -80,6 +81,12 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
+                <router-link :to="{name:'VideoPlayback'}">
+					<el-menu-item index="6">
+						<i class="iconfont icon-dianduidian-"></i>
+						<span slot="title">视频播放</span>
+					</el-menu-item>
+				</router-link>
                 <!-- <router-link :to="{name:'Conference'}">
 					<el-menu-item index="3">
 						<i class="iconfont icon-11111"></i>
@@ -98,12 +105,7 @@
 						<span slot="title">会议控制</span>
 					</el-menu-item>
 				</router-link> -->
-                <a href="/mediastore">
-                    <el-menu-item index="2-1-1">
-                        <i class="iconfont icon-wenjian"></i>
-                        <span slot="title">文件夹</span>
-                    </el-menu-item>
-                </a>
+                
                 <router-link :to="{name:'User'}">
 					<el-menu-item index="2-2">
 						<i class="iconfont icon-shezhi"></i>
