@@ -172,7 +172,7 @@
                 <div class="playback_function">
                     <div :class="icon" @click="resume()" class="strart"></div>
                     <!-- 倍速 -->
-                    <el-select v-model="region" size="mini" style="width:70px" @change="Speed()">
+                    <el-select v-model="region" size="mini" style="width:70px!important" @change="Speed()">
                         <el-option
                             v-for="item in regiondata"
                             :key="item.value"
@@ -189,9 +189,8 @@
 </template>
 
 <script>
-// import {listdatagload,listdatag} from '../public/regional'
-// import '../../assets/js/adapter'
-// import {H5sPlayerWS,H5sPlayerHls,H5sPlayerRTC,H5sPlayerAudBack} from '../../assets/js/h5splayer.js'
+import '../../assets/js/adapter'
+import {H5sPlayerWS,H5sPlayerHls,H5sPlayerRTC,H5sPlayerAudBack} from '../../assets/js/h5splayer'
 export default {
     
     name:"Playback",
@@ -690,6 +689,13 @@ export default {
             padding: 0 20%;
             justify-content: space-around;
             margin-top: 16px;
+            .el-select {
+                .el-input{
+                    .el-input__inner{
+                        width: 100px;
+                    }
+                }
+            }
         }
         .videoo{
             width: 100%;
@@ -701,13 +707,13 @@ export default {
 .icon_start{
     width: 32px;
     height: 32px;
-    // background: url('~@/views/replay/imgs/Playback_start.png') no-repeat center;
+    background: url('~@/views/gallery/Playback_start.png') no-repeat center;
     background-size: 100%;
 }
 .icon_stop{
     width: 32px;
     height: 32px;
-    // background: url('~@/views/replay/imgs/Playback_stop.png') no-repeat center;
+    background: url('~@/views/gallery/Playback_stop.png') no-repeat center;
     background-size: 100%;
 }
 .g_flex{

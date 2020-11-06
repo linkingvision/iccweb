@@ -56,6 +56,14 @@ $collapse_size:#FFFFFF;
                     padding: 7px 20px;
                 }
             }
+            .snap_you_bottom{
+                height: 80vh;
+                .button_edi{
+                    button{
+                        color: #FFF;
+                    }
+                }
+            }
         }
     }
     //实时播放页面
