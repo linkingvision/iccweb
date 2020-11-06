@@ -35,13 +35,14 @@
                 <el-collapse-item title="用户" name="2">
                     <div class="content_zuo_con">
                         <div class="content_zuo_content">
-                            <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
-                                <div class="user_icon">
-                                    <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                            <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index" @click="call(a.strName)">
+                                <div class="user_icon" >
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-ziyuan1"></use>
+                                    </svg>
+                                    <!-- <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i> -->
                                     <div class="user_size">{{a.strName}}</div>
                                 </div>
-                                <div class="user_onl iconfont icon-chakanshipin" @click="call(a.strName)"></div>
-                                <!-- <div class="user_onl1" v-else>离线</div> -->
                             </div>
                         </div>
                     </div>
@@ -49,13 +50,14 @@
                 <el-collapse-item title="联系人" name="3">
                     <div class="content_zuo_con">
                         <div class="content_zuo_content">
-                            <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index">
-                                <div class="user_icon">
-                                    <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                            <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index" @click="call(a.strName)">
+                                <div class="user_icon" >
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-ziyuan1"></use>
+                                    </svg>
+                                    <!-- <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i> -->
                                     <div class="user_size">{{a.strName}}</div>
                                 </div>
-                                <div class="user_onl iconfont icon-chakanshipin" @click="call(a.strName)"></div>
-                                <!-- <div class="user_onl1" v-else>离线</div> -->
                             </div>
                         </div>
                     </div>
@@ -269,7 +271,7 @@ export default {
             var Contactdata=[]
             var url = this.$store.state.IPPORT + "/api/v1/GetContactList?session="+ this.$store.state.token;
             this.$http.get(url).then(result=>{
-                console.log(result)
+                // console.log(result)
                 var data=result.data.contacts
                 if(data.length==0){
                     return false
@@ -637,6 +639,7 @@ export default {
                                 width: 100%;
                                 height: 90%;
                                 .content_zuo_user{
+                                    cursor: pointer;
                                     width: 100%;
                                     display: flex;
                                     justify-content: space-between;

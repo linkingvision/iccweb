@@ -194,7 +194,7 @@ $collapse_size:#FFFFFF;
                         .el-collapse-item__header{
                             color: $body-color;
                             background-color: #2E2E2E;
-                            opacity: 0.7;
+                            // opacity: 0.7;
                             border: none;
                             padding: 0 7px;
                         }
@@ -221,7 +221,7 @@ $collapse_size:#FFFFFF;
                     .el-collapse-item__header{
                         color: $body-color;
                         background-color: #2E2E2E;
-                        opacity: 0.7;
+                        // opacity: 0.7;
                         border: none;
                         padding: 0 7px;
                     }
@@ -239,19 +239,16 @@ $collapse_size:#FFFFFF;
                                         .user_icon{
                                             .icon_size1{
                                                 color:$body-color;
-                                                opacity:0.7;
-                                            }
-                                            .icon_size{
-                                                opacity:0.7;
+                                                // opacity:0.7;
                                             }
                                             .user_size{
                                                 color:$body-color;
-                                                opacity:0.4;
+                                                // opacity:0.4;
                                             }
                                         }
-                                        .user_onl{
-                                            opacity:0.4;
-                                        }
+                                    }
+                                    .user_onl{
+                                        color:#FFFFFF;
                                     }
                                 }
                                 
@@ -263,12 +260,12 @@ $collapse_size:#FFFFFF;
                                         .user_icon{
                                             .user_size{
                                                 color:$body-color;
-                                                opacity:0.7;
+                                                // opacity:0.7;
                                             }
                                         }
                                         .user_onl{
                                             color:$body-color;
-                                            opacity:0.4;
+                                            // opacity:0.4;
                                         }
                                     }
                                 }
@@ -356,7 +353,7 @@ $collapse_size:#FFFFFF;
         .el-collapse-item__header{
             color: $body-color;
             background-color: #2E2E2E;
-            opacity: 0.7;
+            // opacity: 0.7;
             border: none;
             padding: 0 7px;
         }

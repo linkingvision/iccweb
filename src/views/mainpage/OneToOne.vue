@@ -120,10 +120,13 @@
                             <div class="content_zuo_content">
                                 <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
                                     <div class="user_icon">
-                                        <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-ziyuan1"></use>
+                                        </svg>
+                                        <!-- <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i> -->
                                         <div class="user_size">{{a.strName}}</div>
                                     </div>
-                                    <div class="user_onl iconfont icon-shexiangtou" @click="call(a.strName)"></div>
+                                    <div class="user_onl iconfont icon-shipin1" @click="call(a.strName)"></div>
                                     <!-- <div class="user_onl1" v-else>离线</div> -->
                                 </div>
                             </div>
@@ -134,10 +137,13 @@
                             <div class="content_zuo_content">
                                 <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index">
                                     <div class="user_icon">
-                                        <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-ziyuan1"></use>
+                                        </svg>
+                                        <!-- <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i> -->
                                         <div class="user_size">{{a.strName}}</div>
                                     </div>
-                                    <div class="user_onl iconfont icon-shexiangtou" @click="call(a.strName)"></div>
+                                    <div class="user_onl iconfont icon-shipin1" @click="call(a.strName)"></div>
                                     <!-- <div class="user_onl1" v-else>离线</div> -->
                                 </div>
                             </div>
@@ -160,7 +166,10 @@
                             <div class="content_zuo_content" id="chatrecord">
                                 <div class="content_zuo_user" v-for="(a,index) in chatrecord" :key="index">
                                     <div class="user_icon">
-                                        <i class="icon_size iconfont icon-yonghuming"></i>
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-ziyuan1"></use>
+                                        </svg>
+                                        <!-- <i class="icon_size iconfont icon-yonghuming"></i> -->
                                         <div class="user_size">{{a.user}}：</div>
                                     </div>
                                     <div class="user_onl" style="word-break: break-word;">{{a.msg}}</div>
@@ -1147,7 +1156,7 @@ export default {
                                     font-size:14px;
                                     font-family:PingFang SC;
                                     font-weight:500;
-                                    color:rgba(59,205,107,1);
+                                    // color:#FFFFFF;
                                     cursor:pointer;
                                 }
                                 .user_onl1{
@@ -1178,7 +1187,7 @@ export default {
                                     align-items: flex-start;
                                     padding: 10px 18px;
                                     .user_icon{
-                                        width: 30%;
+                                        width: 35%;
                                         display: flex;
                                         align-items: center;
                                         .icon_size{
@@ -1247,7 +1256,7 @@ export default {
                     font-size:15px;
                     font-family:PingFang SC;
                     font-weight:500;
-                    opacity:0.7;
+                    // opacity:0.7;
                     top: 0;
                 }
                 .content_zuo_content{
@@ -1268,7 +1277,7 @@ export default {
                                 font-family:PingFang SC;
                                 font-weight:500;
                                 color:rgba(255,255,255,1);
-                                opacity:0.7;
+                                // opacity:0.7;
                             }
                         }
                     }

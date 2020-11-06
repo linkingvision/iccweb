@@ -10,6 +10,7 @@ import LangEn from '../static/lang/en'
 import LangZhCHS from '../static/lang/zhchs'
 import LangZhCHT from '../static/lang/zhcht'
 import './assets/icon/iconfont.css'//字体
+import './assets/icon/iconfont.js'//字体
 import $ from 'jquery'
 
 import axios from '@/http';

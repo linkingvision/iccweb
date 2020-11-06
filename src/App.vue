@@ -13,7 +13,14 @@ export default {
 }
 </script>
 <style>
-
+/* 通用svg图标 */
+.icon {
+  width: 2em;
+  height: 2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 
 /* 下拉 */
 

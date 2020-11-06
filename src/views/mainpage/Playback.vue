@@ -213,7 +213,7 @@ export default {
             endvalue: new Date().getTime(),
             startvalue:new Date().getTime() - 3600 * 1000 * 1,
             myModal1:false,
-            region:'0.5',
+            region:'1.0',
             regiondata:[{
                     value: "0.5",
                     label: "0.5"
@@ -326,21 +326,21 @@ export default {
             
         },
         mettuselest(){
-            var url = this.$store.state.IPPORT + "/api/v1/GetOnlineUserList?session="+ this.$store.state.token;
+            var url = this.$store.state.IPPORT + "/api/v1/GetUserList?session="+ this.$store.state.token;
             var mettdata=[]
             this.$http.get(url).then(result=>{
                 // console.log(result)
-                var data=result.data.userList
+                var data=result.data.users
                 if(data.length==0){
                     return false
                 }
                 for(var i=0; i<data.length;i++){
-                    if(this.$store.state.user==data[i].strName){
-                        continue
-                    }
+                    // if(this.$store.state.user==data[i].strName){
+                    //     continue
+                    // }
                     var userdata={
-                        token : data[i].strName+'-rtcm',
-                        label : data[i].strName,
+                        token : data[i].strUser+'-rtcm',
+                        label : data[i].strUser,
                         iconclass : 'iconfont icon-yonghuming',
                     }
                     mettdata.push(userdata)
