@@ -1,43 +1,14 @@
 <template>
     <div class=liveview>
-        <div id="watermarktoggle"></div>
         <!-- 左侧数据栏 -->
 		<div class="liveview_left">
             <el-input
                 class="liveview_left_input"
-                placeholder="输入关键字进行过滤"
+                placeholder="输入设备关键字进行过滤"
                 v-model="filterText">
             </el-input>
             <el-collapse v-model="activeNames">
-                <el-collapse-item title="用户" name="1">
-                    <div class="content_zuo_con">
-                        <div class="content_zuo_content">
-                            <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
-                                <div class="user_icon">
-                                    <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
-                                    <div class="user_size">{{a.strName}}</div>
-                                </div>
-                                <div class="user_onl iconfont icon-shexiangtou" @click="call(a.strName)"></div>
-                                <!-- <div class="user_onl1" v-else>离线</div> -->
-                            </div>
-                        </div>
-                    </div>
-                </el-collapse-item>
-                <el-collapse-item title="联系人" name="2">
-                    <div class="content_zuo_con">
-                        <div class="content_zuo_content">
-                            <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index">
-                                <div class="user_icon">
-                                    <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
-                                    <div class="user_size">{{a.strName}}</div>
-                                </div>
-                                <div class="user_onl iconfont icon-shexiangtou" @click="call(a.strName)"></div>
-                                <!-- <div class="user_onl1" v-else>离线</div> -->
-                            </div>
-                        </div>
-                    </div>
-                </el-collapse-item>
-                <el-collapse-item title="设备" name="3" >
+                <el-collapse-item title="设备" name="1" >
                     <el-tree
                         :data="data"
                         node-key="id"
@@ -61,6 +32,35 @@
                         </span>
                     </el-tree>
                 </el-collapse-item>
+                <el-collapse-item title="用户" name="2">
+                    <div class="content_zuo_con">
+                        <div class="content_zuo_content">
+                            <div class="content_zuo_user" v-for="(a,index) in userdata" :key="index">
+                                <div class="user_icon">
+                                    <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                                    <div class="user_size">{{a.strName}}</div>
+                                </div>
+                                <div class="user_onl iconfont icon-chakanshipin" @click="call(a.strName)"></div>
+                                <!-- <div class="user_onl1" v-else>离线</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </el-collapse-item>
+                <el-collapse-item title="联系人" name="3">
+                    <div class="content_zuo_con">
+                        <div class="content_zuo_content">
+                            <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index">
+                                <div class="user_icon">
+                                    <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
+                                    <div class="user_size">{{a.strName}}</div>
+                                </div>
+                                <div class="user_onl iconfont icon-chakanshipin" @click="call(a.strName)"></div>
+                                <!-- <div class="user_onl1" v-else>离线</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </el-collapse-item>
+                
             </el-collapse>
 		</div>
 		<!-- 右边视频栏 -->
@@ -135,7 +135,7 @@ export default {
 		}
     },
     beforeDestroy() {
-        this.$root.bus.$off('meettoken');
+        // this.$root.bus.$off('meettoken');
         clearInterval(this.timerRunInfo);
     },
 	mounted(){
@@ -590,17 +590,6 @@ export default {
     // flex-wrap: wrap;
     justify-content: space-between;
     /* 水印 */
-    #watermarktoggle{
-        position: fixed;
-        z-index: 100;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        display: block;
-        pointer-events: none;
-        margin-top: 40px;
-    }
     .liveview_left{
         width: 16%;
         min-width: 290px;
@@ -673,10 +662,10 @@ export default {
                                     }
                                 }
                                 .user_onl{
-                                    font-size:14px;
+                                    font-size:20px;
                                     font-family:PingFang SC;
                                     font-weight:500;
-                                    color:rgba(59,205,107,1);
+                                    color:rgb(16, 108, 228);
                                     cursor:pointer;
                                 }
                                 .user_onl1{

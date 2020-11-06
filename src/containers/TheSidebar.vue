@@ -28,10 +28,16 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
-                <router-link :to="{name:'VideoPlayback'}">
+                <router-link :to="{name:'liveview'}">
 					<el-menu-item index="6">
-						<i class="iconfont icon-dianduidian-"></i>
+						<i class="iconfont icon-shipin1"></i>
 						<span slot="title">视频播放</span>
+					</el-menu-item>
+				</router-link>
+				<router-link :to="{name:'Playback'}">
+					<el-menu-item index="7">
+						<i class="iconfont icon-videofill"></i>
+						<span slot="title">回放</span>
 					</el-menu-item>
 				</router-link>
                 <!-- <router-link :to="{name:'Conference'}">
@@ -81,10 +87,16 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
-                <router-link :to="{name:'VideoPlayback'}">
+                <router-link :to="{name:'liveview'}">
 					<el-menu-item index="6">
-						<i class="iconfont icon-dianduidian-"></i>
+						<i class="iconfont icon-shipin1"></i>
 						<span slot="title">视频播放</span>
+					</el-menu-item>
+				</router-link>
+				<router-link :to="{name:'Playback'}">
+					<el-menu-item index="7">
+						<i class="iconfont icon-videofill"></i>
+						<span slot="title">回放</span>
 					</el-menu-item>
 				</router-link>
                 <!-- <router-link :to="{name:'Conference'}">

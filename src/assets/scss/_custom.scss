@@ -23,6 +23,41 @@ $collapse_size:#FFFFFF;
 
 
 .c-app.c-dark-theme{
+    //回放
+    .playback{
+        .playback_snap_zuo{
+            .el-input__inner{ //输入框
+                background-color:#4A4A4C !important;
+                border: none;
+                border-radius: 30px;
+            }
+        }
+        .playback_snap_you{
+            .el-input__inner{
+                background: none;
+                border: 1px solid #999999;
+                height: 30px;
+                line-height: 30px;
+            }
+            .el-input__icon{
+                line-height: 30px;
+            }
+            .snap_you_topbutt{
+                .snap_you_topbutt1{
+                    background: #3ABBFE;
+                    border: none;
+                    color: #FFFFFF;
+                    padding: 8px 20px;
+                }
+                .snap_you_topbutt2{
+                    background: none;
+                    border: 1px solid #3ABBFE;
+                    color: #FFFFFF;
+                    padding: 7px 20px;
+                }
+            }
+        }
+    }
     //实时播放页面
     .liveview{
         .liveview_left{
@@ -323,6 +358,7 @@ $collapse_size:#FFFFFF;
             .el-collapse-item__content{
                 padding: 0;
                 color: $body-color;
+                overflow: auto;
                 &::-webkit-scrollbar {/*滚动条整体样式*/
                     width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
                     height: 8px;
@@ -447,7 +483,7 @@ $collapse_size:#FFFFFF;
     // 表格
     .el-table {
         min-height: 80vh;
-        background: none
+        background: none;
     }
     .el-table__empty-block{
         min-height: 80vh;

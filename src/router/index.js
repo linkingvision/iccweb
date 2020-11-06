@@ -19,9 +19,11 @@ const i18n = new VueI18n({
 const TheContainer = () => import('@/containers/TheContainer')
 
 // Views
-const VideoPlayback = () => import('@/views/mainpage/VideoPlayback')
+const Playback = () => import('@/views/mainpage/Playback')
+const liveview = () => import('@/views/mainpage/liveview')
 const Dashboard = () => import('@/views/mainpage/Dashboard')
 const Participants = () => import('@/views/mainpage/dashboard/Participants')
+
 
 const Conference = () => import('@/views/mainpage/Conference')
 const OneToOne = () => import('@/views/mainpage/OneToOne')
@@ -107,16 +109,27 @@ export default new Router({
                     name: "ConferenceControl",
                     component: ConferenceControl,
                     meta: {
-                      title: '5',
-                      type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+						name:"对讲",
+						title: '5',
+						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},{
-                    path: 'VideoPlayback',
-                    name: "VideoPlayback",
-                    component: VideoPlayback,
+                    path: 'liveview',
+                    name: "liveview",
+                    component: liveview,
                     meta: {
-                      title: '6',
-                      type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+						name:"视频播放",
+						title: '6',
+						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},{
+                    path: 'Playback',
+                    name: "Playback",
+                    component: Playback,
+                    meta: {
+						name:"回放",
+						title: '7',
+						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
 				{

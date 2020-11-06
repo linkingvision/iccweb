@@ -1,27 +1,59 @@
 <template>
     <div class="playback">
         <div class="playback_snap_zuo">
-            <!-- 模糊查询搜查 -->
             <el-input
-                class="snap_zuo_input"
-                placeholder="输入关键字进行过滤"
+                class="liveview_left_input"
+                placeholder="输入设备关键字进行过滤"
                 v-model="filterText">
             </el-input>
-            <div class="snap_zuo_title">设备</div>
-            <!-- 这是原下拉框代码 -->
-            <el-tree
-                :data="data"
-                show-checkbox
-                node-key="id"
-                :filter-node-method="filterNode"
-                ref="tree"
-                highlight-current
-                :props="defaultProps">
-                <span slot-scope="{ data }">
-                    <i :class="data.iconclass" style="color:rgb(142, 132, 132);"></i>
-                    <span :class="data.iconclass1" style="padding-left: 4px;">{{data.label}}</span>
-                </span>
-            </el-tree>
+            <el-collapse v-model="activeNames">
+                <el-collapse-item title="设备" name="1" >
+                    <el-tree
+                        :data="data"
+                        show-checkbox
+                        node-key="id"
+                        :filter-node-method="filterNode"
+                        ref="tree"
+                        highlight-current
+                        :props="defaultProps">
+                        <span slot-scope="{ data }">
+                            <i :class="data.iconclass" style="color:rgb(142, 132, 132);"></i>
+                            <span :class="data.iconclass1" style="padding-left: 4px;">{{data.label}}</span>
+                        </span>
+                    </el-tree>
+                </el-collapse-item>
+                <el-collapse-item title="用户" name="2">
+                    <el-tree
+                        :data="userdata"
+                        show-checkbox
+                        node-key="id"
+                        :filter-node-method="filterNode"
+                        ref="userdata"
+                        highlight-current
+                        :props="defaultProps">
+                        <span slot-scope="{ data }">
+                            <i :class="data.iconclass" style="color:#0099da;"></i>
+                            <span :class="data.iconclass1" style="padding-left: 4px;">{{data.label}}</span>
+                        </span>
+                    </el-tree>
+                </el-collapse-item>
+                <el-collapse-item title="联系人" name="3">
+                    <el-tree
+                        :data="Contactdata"
+                        show-checkbox
+                        node-key="id"
+                        :filter-node-method="filterNode"
+                        ref="Contactdata"
+                        highlight-current
+                        :props="defaultProps">
+                        <span slot-scope="{ data }">
+                            <i :class="data.iconclass" style="color:#0099da;"></i>
+                            <span :class="data.iconclass1" style="padding-left: 4px;">{{data.label}}</span>
+                        </span>
+                    </el-tree>
+                </el-collapse-item>
+                
+            </el-collapse>
         </div>
         <div class="playback_snap_you">
             <div class="snap_you_top">
@@ -157,19 +189,22 @@
 </template>
 
 <script>
-import {listdatagload,listdatag} from '../public/regional'
-import '../../assets/js/adapter'
-import {H5sPlayerWS,H5sPlayerHls,H5sPlayerRTC,H5sPlayerAudBack} from '../../assets/js/h5splayer.js'
+// import {listdatagload,listdatag} from '../public/regional'
+// import '../../assets/js/adapter'
+// import {H5sPlayerWS,H5sPlayerHls,H5sPlayerRTC,H5sPlayerAudBack} from '../../assets/js/h5splayer.js'
 export default {
     
     name:"Playback",
     data() {
         return {
+            activeNames: ['1','2','3'],//左边
             v1:undefined,
             label:{
                 Name:this.$t("message.table.Name"),
                 Token:this.$t("message.table.Token"),
                 Time:this.$t("message.table.Time"),
+                StartTime:this.$t("message.table.StartTime"),
+                EndTime:this.$t("message.table.EndTime"),
                 Playback:this.$t("message.archive.Playback")
             },
             icon:'icon_start',
@@ -218,7 +253,9 @@ export default {
             pageSize: 10,//一页数量
             search: '',
             filterText: '',
-            data: listdatag,
+            userdata:[],//用户列表
+            Contactdata:[],//联系人列表
+            data:[],//摄像机
             defaultProps: {
                 children: 'children',
                 label: 'label',
@@ -229,16 +266,115 @@ export default {
             rowstarf:"",//跟进进度条开始时间
             rowend:"",//进度条结束时间
             displayc:"",//实时时间
-            url:""//图片地址
+            url:"",//图片地址
+            timerRunInfo:''
         }
     },
     beforeDestroy() {
         this.handleClose();
+        clearInterval(this.timerRunInfo);
         // this.$root.bus.$off('liveplay');
     },
     mounted(){
+        this.mettuselest();
+        this.Contactselest();
+        this.GetSrc();
+        this.timerRunInfo = setInterval(() => {
+            this.mettuselest();
+            this.Contactselest();
+        }, 30*1000);
     },
     methods:{
+        //获取列表
+        GetSrc(){
+            var url = this.$store.state.IPPORT + "/api/v1/GetSrc?session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                console.log(result)
+                if (result.status == 200){
+                    var data =  result.data;
+                    var srcGroup = {children: []};
+                    srcGroup.label='摄像机';
+                    srcGroup.iconclass="iconfont  icon-kaiqishexiangtou1";
+                    for(var i=0; i< data.src.length; i++){
+                        var item = data.src[i];
+                        if(item.nType=="H5_RTCM_CH"||item.nType=="H5_RTCS_CH"){
+                            continue
+                        }
+                        var newItem ={
+                                token : item['strToken'],
+                                label : item['strName'],
+                                iconclass : 'iconfont  icon-kaiqishexiangtou1',
+                                iconclass2 : 'iconfont  icon-shexiangtou',
+                                name:item['strName']+"--"+"主码流",
+                                disabled_me:false};
+                        
+                        if(!item['bOnline'])
+                            newItem['iconclass'] = 'iconfont icon-kaiqishexiangtou';
+
+                        if(item['nType'] == 'H5_CLOUD')
+                            newItem['iconclass'] = 'mdi mdi-cloud-upload fa-fw';
+                        
+                        if(item['bRec'] == true)
+                            newItem['iconclass2'] = 'iconfont icon-radioboxfill none';
+                            
+                    srcGroup.children.push(newItem);
+                    }
+                    this.data.push(srcGroup);
+                } 
+            }).catch((err) =>{
+                console.log('GetSrc failed', err);
+            })
+            
+        },
+        mettuselest(){
+            var url = this.$store.state.IPPORT + "/api/v1/GetOnlineUserList?session="+ this.$store.state.token;
+            var mettdata=[]
+            this.$http.get(url).then(result=>{
+                // console.log(result)
+                var data=result.data.userList
+                if(data.length==0){
+                    return false
+                }
+                for(var i=0; i<data.length;i++){
+                    if(this.$store.state.user==data[i].strName){
+                        continue
+                    }
+                    var userdata={
+                        token : data[i].strName+'-rtcm',
+                        label : data[i].strName,
+                        iconclass : 'iconfont icon-yonghuming',
+                    }
+                    mettdata.push(userdata)
+                }
+                this.userdata=mettdata
+                // console.log(this.userdata,data)
+            })
+            
+        },
+        
+        Contactselest(){
+            // console.log(this.$store.state.IPPORT)
+            // this.Contactdata=[]
+            var Contactdata=[]
+            var url = this.$store.state.IPPORT + "/api/v1/GetContactList?session="+ this.$store.state.token;
+            this.$http.get(url).then(result=>{
+                // console.log(result)
+                var data=result.data.contacts
+                if(data.length==0){
+                    return false
+                }
+                for(var i=0; i<data.length;i++){
+                    var userdata={
+                        token : data[i].strContact+'-rtcm',
+                        label : data[i].strContact,
+                        iconclass : 'iconfont icon-yonghuming',
+                    }
+                    Contactdata.push(userdata)
+                }
+                this.Contactdata=Contactdata
+            })
+        },
+
         datechange(){
             console.log(this.value)
             this.startvalue=this.value
@@ -350,20 +486,36 @@ export default {
         //按钮搜索
         async getCheckedNodes() {
             this.tableData1=[];
-            console.log("node值",this.$refs.tree.getCheckedNodes());
-            var nodes=this.$refs.tree.getCheckedNodes();
+            var nodes='';
+            var userdata=this.$refs.userdata.getCheckedNodes()//用户列表
+            var Contactdata=this.$refs.Contactdata.getCheckedNodes()//联系人列表
+            var datas=this.$refs.tree.getCheckedNodes()//摄像机
+            if(userdata.length!=0&&Contactdata.length!=0&&datas.length!=0){
+                console.log('0000')
+            }
+            if(userdata.length!=0){
+                nodes=this.$refs.userdata.getCheckedNodes();
+            }else if(Contactdata.length!=0){
+                nodes=this.$refs.Contactdata.getCheckedNodes();
+            }else if(datas.length!=0){
+                nodes=this.$refs.tree.getCheckedNodes();
+            }
+            
+            console.log("node值",nodes);
+            // return false
             var srartdate=new Date(this.startvalue).toISOString()+"08:00";
             var enddate= new Date(this.endvalue).toISOString()+"08:00";
             // console.log(this.endvalue,this.startvalue,srartdate,enddate)
             for(var l=0 ;l<nodes.length; l++){
                 if(nodes[l].token!=undefined){
-                    // console.log(nodes[l].token,nodes[l].label)
+                    console.log(nodes[l].token,nodes[l].label)
                     var label=nodes[l].label
                     // return false
                     var url = this.$store.state.IPPORT + "/api/v1/Search?type=record&token="+nodes[l].token+"&start="+srartdate+"&end="+enddate+"&session="+ this.$store.state.token;
                     // console.log(url);
                     //return false;
                     await this.$http.get(url).then(result=>{
+                        console.log(result)
                         if(result.status == 200){
                             this.$message('Query successful');
                             var data=result.data;
@@ -445,20 +597,33 @@ export default {
     display: flex;
     justify-content: space-between;
     .playback_snap_zuo{
-        width: 18%;
-        height: 87vh;
-        .snap_zuo_title{
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-family: PingFang SC;
-            font-weight: 500;
-            margin-bottom: 10px;
+        width: 16%;
+        min-width: 290px;
+        height: 90vh;
+        margin: 0 5px;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        .liveview_left_input{
+            margin: 10px 0;
+        }
+        //录像管理
+        .black{
+            display: none;font-size: 12px;color: #606266; padding-left: 4px;line-height: 26px;color: #f00;
+        }
+        .none{
+            display: block;
+        }
+        
+        .el_tree .el-tree-node__content{
+            min-height: 24px;
+            height: auto;
         }
     }
     .playback_snap_you{
         width: 82%;
-        height: 87vh;
+        height: 90vh;
         .snap_you_top{
             padding: 15px 20px;
             @extend .g_flex;
@@ -475,6 +640,9 @@ export default {
                 @extend .g_flex;
                 justify-content: space-around;
                 align-items: center;
+                .snap_you_topinterval{
+                    min-width: 40px;
+                }
             }
             .snap_you_topdate{
                 width: 45%;
@@ -496,6 +664,7 @@ export default {
             }
         }
         .snap_you_bottom{
+            height: 80vh;
             .button_edi button{
                 border: 0;
                 background:none;
@@ -504,6 +673,9 @@ export default {
                 button:last-child{
                     margin-right: 0;
                 }
+            }
+            .el-table{
+                height: 100%;
             }
         }
     }
@@ -529,13 +701,13 @@ export default {
 .icon_start{
     width: 32px;
     height: 32px;
-    background: url('~@/views/replay/imgs/Playback_start.png') no-repeat center;
+    // background: url('~@/views/replay/imgs/Playback_start.png') no-repeat center;
     background-size: 100%;
 }
 .icon_stop{
     width: 32px;
     height: 32px;
-    background: url('~@/views/replay/imgs/Playback_stop.png') no-repeat center;
+    // background: url('~@/views/replay/imgs/Playback_stop.png') no-repeat center;
     background-size: 100%;
 }
 .g_flex{
