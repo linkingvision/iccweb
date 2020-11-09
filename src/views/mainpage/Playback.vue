@@ -406,7 +406,7 @@ export default {
             var pbconf1 = {
                 begintime: row.starf,
                 endtime: row.end,
-                showposter: 'true', //'true' or 'false' show poster
+                showposter: 'false', //'true' or 'false' show poster
                 callback: this.PlaybackCB,
                 serverpb: 'true',
                 userdata:  this // user data
