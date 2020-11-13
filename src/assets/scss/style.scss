@@ -9,3 +9,10 @@
 // If you want to add something do it here
 @import "custom";
 
+.c-body::-webkit-scrollbar{
+    display: none;
+}
+//全局按钮
+button:focus{
+    outline: none !important;
+}

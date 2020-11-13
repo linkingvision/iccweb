@@ -136,7 +136,10 @@
                         width=310px>
                         <template slot-scope="scope">
                             <div class="button_edi">
-                                <a :href="scope.row.url" :download="scope.row.urlto"><button type="button" style="margin-right: 40px;" class="iconfont icon-download"></button></a>
+                                <!-- <button @click="aa(scope.row.url,scope.row.urlto)" type="button" id="transform">11212</button> -->
+                                <a :download="scope.row.urlto" id="a-upload" :href="scope.row.url" >
+                                    <button type="button" style="margin-right: 40px;" class="iconfont icon-download"></button>
+                                </a>
                                 <button type="button" class="iconfont icon-play" @click="Refresh1(scope.$index, scope.row)" data-toggle="modal" data-target="#myModal"></button>
                             </div>
                         </template>
@@ -209,7 +212,7 @@ export default {
             icon:'icon_start',
             timelink:0,//滑块
             max:0,//滑块最大值
-            value: '',
+            value: (new Date().getTime() - 3600 * 1000 * 1),
             endvalue: new Date().getTime(),
             startvalue:new Date().getTime() - 3600 * 1000 * 1,
             myModal1:false,
@@ -529,11 +532,11 @@ export default {
                                         end : item["strEndTime"],
                                         type: item['nType'],
                                         percentage:0,
-                                        url:item["strPath"]+"?session="+ this.$store.state.token,
+                                        url: 'http:'+"//"+"192.168.100.103:9080"+item["strPath"]+"?session="+ this.$store.state.token,
                                         urlto:urlto[urlto.length-1],
                                         strFileName:""
                                     };
-                                    console.log(timeitem.url)
+                                    console.log(timeitem.url,window.location.host)
                                     //   console.log(data)
                                     if(item['nType']==="H5_REC_MANUAL"){
                                             timeitem["type"] = this.$t("message.archive.ManualRecord");

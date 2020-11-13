@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18190705",
+      "name": "yangshengqi",
+      "font_class": "yangshengqi1",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
       "icon_id": "13343729",
       "name": "开启摄像头",
       "font_class": "kaiqishexiangtou",

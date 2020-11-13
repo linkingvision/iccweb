@@ -83,7 +83,8 @@
                 <div class="conten_you_stup">
                     <div class="conten_you_stupcen">
                         <div class="but_g iconfont" :class="icon.connectionicon"  @click="Reconnection"> </div>
-                        <div class="but_g iconfont icon-guaduan" @click="drop"> </div>
+                        <div class="but_g iconfont" :class="icon.audio" @click="dropaudio"> </div>
+                        <div class="but_g iconfont icon-guaduan" style="font-size:32px" @click="drop"> </div>
                         <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
                         <!-- <CDropdown
                             style="padding:0"
@@ -249,7 +250,8 @@ export default {
             pushaudio:true,
             icon:{
                 connectionicon:"icon-shuaxin",
-                desktopicon:"icon-zhuomiangongxiang1"
+                desktopicon:"icon-zhuomiangongxiang1",
+                audio:'icon-yangshengqi1'
             }
         }
     },
@@ -311,6 +313,16 @@ export default {
         });
     },
     methods:{
+        dropaudio(){
+            console.log(this.icon.audio)
+            if(this.icon.audio=='icon-yangshengqi1'){
+                $('#l5video').get(0).muted  = true;
+                this.icon.audio='icon-yangshengqi'
+            }else if(this.icon.audio=='icon-yangshengqi'){
+                $('#l5video').get(0).muted  = false;
+                this.icon.audio='icon-yangshengqi1'
+            }
+        },
         // 预览
         Preview(){
             var pushvideo=this.pushvideo.toString();

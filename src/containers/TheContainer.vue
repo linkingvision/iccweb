@@ -192,6 +192,9 @@ export default {
 	height: 100%;
 }
 
+.c-main > .container-fluid::-webkit-scrollbar{
+     display: none;
+}
 
 /* // 顶部 */
 
