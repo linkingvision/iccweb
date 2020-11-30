@@ -99,7 +99,7 @@ export default {
             }
             var url=root+'api/v1/Login?user='+encodeURIComponent(this.name)+'&password='+encodeURIComponent($.md5(this.passw))+''
             
-            // console.log(root,url)
+            console.log(root,url)
             this.$http.get(url).then(result=>{
                 // console.log(result)
                 if(result.status == 200){
@@ -164,7 +164,7 @@ export default {
         text-align: center;
         margin: 12% auto 0;
         .login_title{
-            height: 70px;
+            height: 90px;
             margin-bottom: 30px;
             background: url('../assets/imgs/l5s_logo.png')no-repeat center center;
         }
