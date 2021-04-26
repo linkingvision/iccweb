@@ -3,8 +3,9 @@
 	<div class="setting_all">
 		<div class="setting_zuo">
 			<el-menu
-			v-if="$store.state.darkMode"
-			:default-active="activemenu"
+
+				v-if="$store.state.darkMode"
+				:default-active="activemenu"
 				class="el-menu-vertical-demo"
 				background-color="#252525"
 				text-color="#d9d9d9"
@@ -82,13 +83,48 @@
 						<el-menu-item index="2-9">自定义</el-menu-item>
 					</router-link>
 				</el-submenu>
+				<el-submenu index="System1">
+					<template slot="title">
+						<i class="iconfont icon-xitongweihu"></i>
+						<span>系统</span>
+					</template>
+					<!-- 系统维护 -->
+					<el-submenu index="System">
+						<template slot="title">
+							<span>系统维护</span>
+						</template>
+						<!-- 二级 -->
+						<router-link :to="{name:'System'}">
+							<el-menu-item index="2-17">配置快照</el-menu-item>
+						</router-link>
+					</el-submenu>
+					<el-submenu index="Docker">
+						<template slot="title">
+							<span>Docker</span>
+						</template>
+						<router-link :to="{name:'Docker'}">
+							<el-menu-item index="2-18">Docker</el-menu-item>
+						</router-link>
+					</el-submenu>
+					<el-submenu index="2-30">
+						<template slot="title">
+							<span>日志</span>
+						</template>
+						<!-- 二级 -->
+						<router-link :to="{name:'LogLevel'}">
+							<el-menu-item index="2-18">日志级别</el-menu-item>
+						</router-link>
+						<router-link :to="{name:'LogRotating'}">
+							<el-menu-item index="2-30">循环覆盖</el-menu-item>
+						</router-link>
+					</el-submenu>
+				</el-submenu>
 
-				<el-submenu index="2-11">
+				<!-- <el-submenu index="2-11">
 					<template slot="title">
 						<i class="iconfont icon-WebRTC"></i>
 						<span>WEBRTC</span>
 					</template>
-					<!-- 二级 -->
 					<router-link :to="{name:'WebrtcCloudmode'}">
 						<el-menu-item index="2-11">云模式</el-menu-item>
 					</router-link>
@@ -98,30 +134,28 @@
 					<router-link :to="{name:'WebrtcTurnmode'}">
 						<el-menu-item index="2-13">TURN服务</el-menu-item>
 					</router-link>
-				</el-submenu>
-				<el-submenu index="2-18">
+				</el-submenu> -->
+				<!-- <el-submenu index="2-18">
 					<template slot="title">
 						<i class="iconfont icon-rizhi"></i>
 						<span>日志</span>
 					</template>
-					<!-- 二级 -->
 					<router-link :to="{name:'LogLevel'}">
 						<el-menu-item index="2-18">日志级别</el-menu-item>
 					</router-link>
 					<router-link :to="{name:'LogRotating'}">
 						<el-menu-item index="2-19">循环覆盖</el-menu-item>
 					</router-link>
-				</el-submenu>
-				<el-submenu index="2-17">
+				</el-submenu> -->
+				<!-- <el-submenu index="2-17">
 					<template slot="title">
 						<i class="iconfont icon-xitongweihu"></i>
 						<span>系统维护</span>
 					</template>
-					<!-- 二级 -->
 					<router-link :to="{name:'System'}">
 						<el-menu-item index="2-17">配置快照</el-menu-item>
 					</router-link>
-				</el-submenu>
+				</el-submenu> -->
 				<el-submenu index="2-14">
 					<template slot="title">
 						<i class="iconfont icon-xieyi"></i>
@@ -131,19 +165,33 @@
 					<router-link :to="{name:'Protocol'}">
 						<el-menu-item index="2-14">协议</el-menu-item>
 					</router-link>
+					<el-submenu index="2-11">
+						<template slot="title">
+							<span>WEBRTC</span>
+						</template>
+						<!-- 二级 -->
+						<router-link :to="{name:'WebrtcCloudmode'}">
+							<el-menu-item index="2-11">云模式</el-menu-item>
+						</router-link>
+						<router-link :to="{name:'WebrtcForwardingmode'}">
+							<el-menu-item index="2-12">转发模式</el-menu-item>
+						</router-link>
+						<router-link :to="{name:'WebrtcTurnmode'}">
+							<el-menu-item index="2-13">TURN服务</el-menu-item>
+						</router-link>
+					</el-submenu>
 				</el-submenu>
-				<el-submenu index="2-16">
+				<!-- <el-submenu index="2-16">
 					<template slot="title">
 						<i class="iconfont icon-rongqiyun"></i>
 						<span>Docker</span>
 					</template>
-					<!-- 二级 -->
 					<router-link :to="{name:'Docker'}">
 						<el-menu-item index="2-16">
 							Docker
 						</el-menu-item>
 					</router-link>
-				</el-submenu>
+				</el-submenu> -->
 				<a href="/mediastore">
                     <el-menu-item index="2-1-1">
                         <i class="iconfont icon-wenjian"></i>
@@ -257,19 +305,18 @@
 					</router-link>
 				</el-submenu>
 				
-				<el-submenu index="2-18">
+				<!-- <el-submenu index="2-18">
 					<template slot="title">
 						<i class="iconfont icon-rizhi"></i>
 						<span>日志</span>
 					</template>
-					<!-- 二级 -->
 					<router-link :to="{name:'LogLevel'}">
 						<el-menu-item index="2-18">日志级别</el-menu-item>
 					</router-link>
 					<router-link :to="{name:'LogRotating'}">
 						<el-menu-item index="2-19">循环覆盖</el-menu-item>
 					</router-link>
-				</el-submenu>
+				</el-submenu> -->
 
 				<el-submenu index="2-17">
 					<template slot="title">
