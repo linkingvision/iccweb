@@ -162,11 +162,12 @@ export default {
     background: url('./gallery/login_back.png') no-repeat;
     .login_head{
         text-align: center;
-        margin: 12% auto 0;
+        margin: 10% auto 0;
         .login_title{
-            height: 90px;
-            margin-bottom: 30px;
+            height: 150px;
+            // margin-bottom: 30px;
             background: url('../assets/imgs/l5s_logo.png')no-repeat center center;
+            background-size: 15%;
         }
         .login_content{
             margin: 0 auto;

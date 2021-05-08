@@ -319,16 +319,16 @@ $collapse_size:#FFFFFF;
     //顶部
     /*下拉*/
     .c_logo{
-        background: url("~@/assets/imgs/icclogo.png") center center no-repeat;
-        background-size: 85%;
+        background: url("~@/assets/imgs/icc.svg") center center no-repeat;
+        background-size: 100%;
     }
     .c_ding{
 		color: $body-color;
         background-color: $body-top;
         z-index: 1100;
         .c_logo{
-            background: url("~@/assets/imgs/icclogo.png") center center no-repeat;
-            background-size: 85%;
+            background: url("~@/assets/imgs/icc.svg") center center no-repeat;
+            background-size: 100%;
         }
 		.toggler{
 			border: none !important;
@@ -599,8 +599,8 @@ $collapse_size:#FFFFFF;
         }
     }
     .c_logo{
-        background: url("~@/assets/imgs/icclogo.png") center center no-repeat;
-        background-size: 85%;
+        background: url("~@/assets/imgs/icc.svg") center center no-repeat;
+        background-size: 100%;
     }
     .toggler{
         border: none !important;
