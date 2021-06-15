@@ -91,6 +91,7 @@ export default {
 			devicesdkpb: "设备SDK回放",
 			gb28181: "国标",
 			transcoding: "转码",
+			MCURes:"MCU分辨率",
 			VideoConference: "视频会议",
 			cluster: "集群",
 			Online: "在线",

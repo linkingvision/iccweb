@@ -34,7 +34,7 @@
                                 <div class="function_list_content" v-for="(c,index) in system" :key="index">
                                     <span>{{c.name}}</span>
                                     <el-switch
-                                    v-if="c.name=='transcoding:'||c.name=='转码:'"
+                                    v-if="c.name=='transcoding:'||c.name=='转码:'||c.name=='H323:'||c.name=='SIP:'"
                                     v-model="c.id"
                                     disabled
                                     active-color="#13ce66"
@@ -492,10 +492,10 @@ export default {
                             id:data.bTranscoding
                         },{
                             name:"H323:",
-                            id:data.strH323Limit
+                            id:data.bH323
                         },{
                             name:"SIP:",
-                            id:data.strSipLimit
+                            id:data.bSip
                         },{
                             name:"通道:",
                             id:data.strChannelLimit
@@ -503,9 +503,12 @@ export default {
                             name:"User:",
                             id:data.strUserLimit
                         },{
-                            name:"",
-                            id:""
-                        }]
+                            name:"VMR:",
+                            id:data.strVMRoomLimit
+                        },{
+                            name:this.$t("message.dashboard.MCURes"),
+                            id:data.strMCURes
+                        },{}]
                     this.capability=cpu;
                     this.system=fun;
                     // console.log("***********",this.system)

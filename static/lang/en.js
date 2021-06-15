@@ -110,6 +110,7 @@ export default {
 			gb28181: "GB28181",
 			devicesdkpb: "Device SDK Playback",
 			transcoding: "Transcoding",
+			MCURes:"MCURes",
 			VideoConference: "Video Conference",
 			cluster: "Cluster",
 			Online: "Online",
