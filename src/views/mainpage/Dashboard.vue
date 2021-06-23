@@ -471,7 +471,7 @@ export default {
             var url =_this.$store.state.IPPORT + "/api/v1/GetSystemInfo?session=" + _this.$store.state.token;
                 // console.log("------------",url)
             _this.$http.get(url).then(result => {
-                // console.log(result);
+                console.log(result,555555);
                 if (result.status == 200) {
                     var data =  result.data;
                     var cpu=[{
@@ -509,9 +509,10 @@ export default {
                             name:this.$t("message.dashboard.MCURes"),
                             id:data.strMCURes
                         },{}]
+                        console.log(fun);
                     this.capability=cpu;
                     this.system=fun;
-                    // console.log("***********",this.system)
+                    console.log("***********",this.system)
                 }
             }).catch(error => {
                 console.log("GetSystemInfo");
@@ -1246,8 +1247,7 @@ export default {
                             width: 100%;
                             height: 90%;
                             display: flex;
-                            justify-content: center;
-                            align-content: space-around;
+                            justify-content:space-around;
                             flex-wrap: wrap;
                             .function_list_content{
                                 width: 40%;

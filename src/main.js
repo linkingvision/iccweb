@@ -4,6 +4,7 @@ import CoreuiVue from '@coreui/vue/src'
 import App from './App'
 import router from './router/index'
 import { iconsSet as icons } from './assets/icons/icons.js'
+import {message} from './assets/js/resetMessage';
 import store from './store'
 import VueI18n from 'vue-i18n'
 import LangEn from '../static/lang/en'
@@ -18,6 +19,7 @@ Vue.prototype.$http = axios;
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+ElementUI.Dialog.props.closeOnClickModal.default=false;
 Vue.use(ElementUI)
 
 
@@ -28,6 +30,7 @@ Vue.prototype.clipboard = clipboard;
 Vue.use(CoreuiVue)
 Vue.use(VueI18n)
 const bus = new Vue()
+Vue.prototype.$message = message;
 const i18n = new VueI18n({
   locale:"zhchs",
   messages: {

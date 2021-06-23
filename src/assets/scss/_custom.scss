@@ -491,7 +491,7 @@ $collapse_size:#FFFFFF;
         background: none;
     }
     .el-table__empty-block{
-        min-height: 80vh;
+        min-height: 70vh;
         background: none{
             repeat:no-repeat;
             position:center
@@ -501,6 +501,9 @@ $collapse_size:#FFFFFF;
         .el-table__empty-text{
             display: none;
         }
+    }
+    .el-table th{
+        line-height: 50px !important;
     }
      .el-table th, .el-table tr{
         background-color: #252525 !important;
@@ -515,7 +518,7 @@ $collapse_size:#FFFFFF;
       background:none!important;
     }
      .el-table__body tr.hover-row>td{
-      background-color: #252525!important;
+      background-color: #3c3c3c!important;
     }
      .el-table td, .el-table th.is-leaf {
         color:rgba(255,255,255,1);

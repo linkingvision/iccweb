@@ -28,6 +28,12 @@
 						<span slot="title">对讲</span>
 					</el-menu-item>
 				</router-link>
+                <router-link :to="{name:'Vcroom'}">
+					<el-menu-item index="8">
+						<i class="iconfont icon-kongzhitai"></i>
+						<span slot="title">虚拟会议室</span>
+					</el-menu-item>
+				</router-link>
                 <router-link :to="{name:'liveview'}">
 					<el-menu-item index="6">
 						<i class="iconfont icon-shipin1"></i>
@@ -85,6 +91,12 @@
 					<el-menu-item index="4">
 						<i class="iconfont icon-dianduidian-"></i>
 						<span slot="title">对讲</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'Vcroom'}">
+					<el-menu-item index="8">
+						<i class="iconfont icon-kongzhitai"></i>
+						<span slot="title">虚拟会议室</span>
 					</el-menu-item>
 				</router-link>
                 <router-link :to="{name:'liveview'}">

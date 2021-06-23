@@ -52,7 +52,7 @@ const Docker = () => import('@/views/mainpage/setting/Docker')
 const System = () => import('@/views/mainpage/setting/System')
 const LogLevel = () => import('@/views/mainpage/setting/LogLevel')
 const LogRotating = () => import('@/views/mainpage/setting/LogRotating')
-
+const Vcroom = () => import("@/views/mainpage/Vcroom")
 
 const Login = () => import('@/views/Login')
 const Logout = () => import('@/views/Logout')
@@ -105,12 +105,22 @@ export default new Router({
                     },
 				},
 				{
+                    path: 'Vcroom',
+                    name: "Vcroom",
+                    component: Vcroom,
+                    meta: {
+						name:"虚拟会议室",
+						title: '4',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
+				{
                     path: 'ConferenceControl',
                     name: "ConferenceControl",
                     component: ConferenceControl,
                     meta: {
 						name:"对讲",
-						title: '5',
+						title: '8',
 						type: 'Operator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},{
