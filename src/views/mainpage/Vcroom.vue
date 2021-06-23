@@ -187,13 +187,15 @@ export default({
                         nId:form.roomid,
                         strName:form.Name
                     }
-                    this.tableData.splice(this.editindex, 1,list)
+                    // this.tableData.splice(this.editindex, 1,list)
                     var url = this.$store.state.IPPORT + "/api/v1/AddVMRoom?id=" +form.roomid+"&name="+
                     form.Name+"&session="+this.$store.state.token;
                     this.$http.get(url).then(result=>{
                         if(result.status==200){
                             if(result.data.bStatus==true){
                                 console.log(result.data);
+                                this.tabledata = [];
+                                this.getdata()
                             }else{
                                 this.$message({
                                     message: '添加失败',
