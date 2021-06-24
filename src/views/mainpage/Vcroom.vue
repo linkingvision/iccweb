@@ -38,11 +38,14 @@
                 <el-button class="form_butt" type="primary" @click="edityes">{{$t("message.setting.OK")}}</el-button>
             </div>
         </el-dialog>
-        <div class="btn">
+        <!-- <div class="btn">
             <el-button size="small" type="primary" @click="addroom"> 添加 </el-button>
             <el-button size="small" @click="deleteselect"> 删除 </el-button>
+        </div> -->
+        <div class="button_edi">
+                <CButton class="form_butt" @click="addroom" type="submit">添加</CButton>
+                <CButton class="form_butt1" @click="deleteselect" type="submit">删除</CButton>
         </div>
-        
         <div class="Vcdata">
             <el-table :data="tableData.slice((currentPage1-1)*pageSize,currentPage1*pageSize)" style="width: 100%" @select='selectCall'
             @select-all='select_Call'>
@@ -301,5 +304,9 @@ export default({
     .Vcroom{
         width: 100%;
         height: 100%;
+        .button_edi{
+            padding-top: 10px;
+            padding-left: 20px;
+        }
     }
 </style>
