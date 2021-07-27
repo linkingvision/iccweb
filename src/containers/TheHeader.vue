@@ -11,6 +11,11 @@
 
 export default {
   name: 'TheHeader',
+  data(){
+	  return{
+		//   name:this.$route.matched[1].meta.name=="会议房间"?this.$route.matched[1].meta.name+" : "+this.$store.state.room:this.$route.matched[1].meta.name,
+	  }
+  },
   mounted(){
 	  console.log(this.$route)
   }

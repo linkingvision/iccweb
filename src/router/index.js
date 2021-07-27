@@ -53,6 +53,8 @@ const System = () => import('@/views/mainpage/setting/System')
 const LogLevel = () => import('@/views/mainpage/setting/LogLevel')
 const LogRotating = () => import('@/views/mainpage/setting/LogRotating')
 const Vcroom = () => import("@/views/mainpage/Vcroom")
+const videoconf = () => import("@/views/mainpage/videoconf")
+const Device = () => import("@/views/mainpage/Device")
 
 const Login = () => import('@/views/Login')
 const Logout = () => import('@/views/Logout')
@@ -110,7 +112,27 @@ export default new Router({
                     component: Vcroom,
                     meta: {
 						name:"虚拟会议室",
-						title: '4',
+						title: '11',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
+				{
+                    path: 'Device',
+                    name: "Device",
+                    component: Device,
+                    meta: {
+						name:"会议房间",
+						title: '12',
+						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
+                    },
+				},
+				{
+                    path: 'videoconf',
+                    name: "videoconf",
+                    component: videoconf,
+                    meta: {
+						name:"视频会议",
+						title: '10',
 						type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
                     },
 				},
@@ -337,7 +359,7 @@ export default new Router({
 							}
 						},
 					]
-				}
+				},
             ]
 		},
 		

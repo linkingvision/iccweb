@@ -327,7 +327,7 @@ export default {
         Preview(){
             var pushvideo=this.pushvideo.toString();
             var pushaudio=this.pushaudio.toString();
-            // console.log(this.pushvideo,pushvideo,this.pushaudio,pushaudio)
+            console.log(this.pushvideo,pushvideo,this.pushaudio,pushaudio)
             
             // return false
             if(this.Previewfun!=undefined){
@@ -641,8 +641,7 @@ export default {
         //共享桌面
         desktop(){
             console.log("**********",this.upuser)
-            if (this.l5sdesktops != undefined)
-            {
+            if (this.l5sdesktops != undefined){
                 this.l5sdesktops.disconnect();
                 delete this.l5sdesktops;
                 this.l5sdesktops = undefined;
@@ -728,7 +727,7 @@ export default {
         },
         UpdateCapability(capability){
             var json_data=JSON.parse(localStorage.getItem('mcuCamerasettingonetoone'))
-            // console.log(capability,json_data);
+            console.log(capability,json_data);
             if(capability){
 
                 for (let i = 0; i !== capability['videocodec'].length; ++i) {

@@ -38,9 +38,9 @@
                 <el-button class="form_butt" type="primary" @click="edityes">{{$t("message.setting.OK")}}</el-button>
             </div>
         </el-dialog>
-        <!-- <div class="btn">
-            <el-button size="small" type="primary" @click="addroom"> 添加 </el-button>
-            <el-button size="small" @click="deleteselect"> 删除 </el-button>
+        <!-- <div class="button_edi">
+            <el-button class="form_butt" size="mini" type="primary" @click="addroom"> 添加 </el-button>
+            <el-button class="form_butt1" size="mini" @click="deleteselect"> 删除 </el-button>
         </div> -->
         <div class="button_edi">
                 <CButton class="form_butt" @click="addroom" type="submit">添加</CButton>
@@ -83,7 +83,7 @@
 </template>
 <script>
 
-export default({
+export default{
     name:'Vcroom',
     data(){
         return{
@@ -298,7 +298,7 @@ export default({
             this.currentPage1 = val;
         },
     }
-})
+}
 </script>
 <style lang="scss" scoped>
     .Vcroom{
@@ -309,4 +309,5 @@ export default({
             padding-left: 20px;
         }
     }
+    
 </style>

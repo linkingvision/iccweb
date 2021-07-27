@@ -11,7 +11,12 @@ const state = {
   user:null,
   root:null,
   IPPORT:'',
-  WSROOT:''
+  WSROOT:'',
+  title:'',
+  VideoCodec:'',
+  Resolution:'',
+  Resolution:'',
+  room:'',
 }
 
 const mutations = {

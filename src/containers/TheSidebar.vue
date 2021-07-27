@@ -11,15 +11,20 @@
         <el-menu
             v-if="$store.state.darkMode"
 			:default-active="activemenu"
-				class="el-menu-vertical-demo"
-				background-color="#212121"
-				text-color="#FFFFFF"
-				active-text-color="#3277FF">
-
+			class="el-menu-vertical-demo"
+			background-color="#212121"
+			text-color="#FFFFFF"
+			active-text-color="#3277FF">
 				<router-link :to="{name:'dashboard'}">
 					<el-menu-item index="1">
 						<i class="iconfont icon-11111"></i>
 						<span slot="title">仪表盘</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'videoconf'}">
+					<el-menu-item index="10">
+						<i class="iconfont icon-duorenhuiyikuaizhuang"></i>
+						<span slot="title">视频会议</span>
 					</el-menu-item>
 				</router-link>
                 <router-link :to="{name:'OneToOne'}">
@@ -29,7 +34,7 @@
 					</el-menu-item>
 				</router-link>
                 <router-link :to="{name:'Vcroom'}">
-					<el-menu-item index="8">
+					<el-menu-item index="11">
 						<i class="iconfont icon-kongzhitai"></i>
 						<span slot="title">虚拟会议室</span>
 					</el-menu-item>
@@ -85,6 +90,12 @@
 					<el-menu-item index="1">
 						<i class="iconfont icon-11111"></i>
 						<span slot="title">仪表盘</span>
+					</el-menu-item>
+				</router-link>
+                <router-link :to="{name:'OneToOne'}">
+					<el-menu-item index="10">
+						<i class="iconfont icon-dianduidian-"></i>
+						<span slot="title">视频会议</span>
 					</el-menu-item>
 				</router-link>
                 <router-link :to="{name:'OneToOne'}">
@@ -146,8 +157,17 @@ export default {
   name: 'TheSidebar',
   data(){
       return {
-          activemenu:"1"
+          activemenu:"1",
+		  title:this.$store.state.title,
       }
+  },
+  watch:{
+	title:{
+		handler: function() {
+			console.log(this.$route.matched[1].meta.title);
+			this.menuList();
+		},
+	}
   },
 //   nav,
   computed: {
@@ -171,7 +191,11 @@ export default {
             this.$store.commit('toggleSidebarDesktop')
         },
         menuList(){ 
-            let path = this.$route.matched[1].meta.title
+			console.log(this.title);
+            var path = this.$route.matched[1].meta.title
+			// if (this.$store.state.title) {
+			// 	path=this.$store.state.title
+			// }
             this.activemenu = path
         }
     }
