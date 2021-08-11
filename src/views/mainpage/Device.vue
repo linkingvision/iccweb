@@ -379,7 +379,7 @@ export default {
                 const joined = (data) => {
                 };
                 $("#sele").append(
-                    '<div class="select" style="position:relative;" id="video'+key+'"><video class="h5video" id="'+key+'" playsinline autoplay muted="muted"></video></div>'
+                    '<div class="select" style="position:relative;" id="video'+key+'"><video class="h5video" id="'+key+'" playsinline autoplay></video></div>'
                     );
                 $('#video'+key).append(
                     '<span class="label label-primary hide" id="curres'+key+'"style="padding:0 6px; position: absolute; bottom: 0px; left: 0px; margin: 15px;background:#212121;"></span>' +
