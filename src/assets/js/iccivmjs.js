@@ -6473,13 +6473,14 @@ var VideoPublisher = function (_EventEmitter) {
 				var media = {
 					audioRecv: false,
 					videoRecv: false,
-					audioSend: true,
+					// audioSend: true,
 					videoSend: true
 					// ...medial,
 				};
 				for (var key in medial) {
 					media[key] = medial[key];
 				}
+				console.log(media);
 				_this4.plugin.createOffer({
 					media: media,
 					simulcast: false,

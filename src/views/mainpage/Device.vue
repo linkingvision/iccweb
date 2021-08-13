@@ -113,6 +113,7 @@ export default {
             VideoCodec:this.$store.state.VideoCodec,
             Resolution:this.$store.state.Resolution,
             Bitratess:this.$store.state.Bitratess,
+            pushaudio:this.$store.state.pushaudio,
             // room:1234,
             room:this.$store.state.room,
             user:this.$store.state.user,
@@ -320,7 +321,7 @@ export default {
             room.connect();
             room.on("datachannelready", () => {
                 let currentStream;
-                let media = { video: this.Resolution,vcodec:this.VideoCodec};
+                let media = {audioSend: this.pushaudio,video: this.Resolution,vcodec:this.VideoCodec};
                 var localFeed = room.findOrCreateLocalFeed("videoroom", "localcam");
                 const _videoPublisher = localFeed.data_provider;
                 this.videoPublisher = _videoPublisher;

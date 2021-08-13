@@ -17,6 +17,7 @@ const state = {
   Resolution:'',
   Resolution:'',
   room:'',
+  pushaudio:'',
 }
 
 const mutations = {

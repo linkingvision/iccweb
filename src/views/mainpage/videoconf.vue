@@ -61,17 +61,17 @@
                             </el-option>
                         </el-select>
                     </div>
+                    <div class="upvideoaudio">
+                        <!-- <i class="iconfont icon-shexiangjikongzhi-2" @click='pushvideo=true' v-if="!pushvideo"></i>
+                        <i class="iconfont icon-shexiangjikongzhi" @click='pushvideo=false' v-else></i> -->
+                        
+                        <i class="iconfont icon-yuyin1" @click='pushaudio=true' v-if="!pushaudio"></i>
+                        <i class="iconfont icon-yuyin" @click='pushaudio=false' v-else></i>
+                    </div>
                 </div>
             
             </div>
             <div class="upvideoaudio">
-                <div class="icont">
-                    <!-- <i class="iconfont icon-shexiangjikongzhi-2" @click='pushvideo=true' v-if="!pushvideo"></i>
-                    <i class="iconfont icon-shexiangjikongzhi" @click='pushvideo=false' v-else></i>
-                    
-                    <i class="iconfont icon-yuyin1" @click='pushaudio=true' v-if="!pushaudio"></i>
-                    <i class="iconfont icon-yuyin" @click='pushaudio=false' v-else></i> -->
-                </div>
                 <div class="particip_buttom">
 					<!-- <router-link :to="{name:Device}" style="color:#09C08F"> -->
                         <CButton class="part_buttom_but" type="primary"  @click="conent">加入会议室</CButton>
@@ -117,7 +117,7 @@ export default {
         myModal1:false,
         Previewfun:undefined,
         pushvideo:true,
-        pushaudio:true,
+        pushaudio:false,
         VideoCodecs: [],
         VideoCodec:"",
         VideoIns: [],
@@ -323,6 +323,7 @@ export default {
             }
         },
         conent(){
+            this.$store.state.pushaudio=this.pushaudio
             if (this.Resolution=="QVGA") {
                 this.Resolution = "lowres"
             }else if (this.Resolution == "VGA") {
