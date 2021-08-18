@@ -301,7 +301,7 @@ export default {
                     this.Resolutions.push(src);
                 }
                 
-                var bitrate = ['128', '256', '512', '1024',"1500", '2048']
+                var bitrate = ['No limit', '128', '256', '512', '1024',"1500", '2048']
                 for (let i = 0; i !== bitrate.length; ++i) {
                     const data = bitrate[i];
                     var src={
@@ -310,13 +310,9 @@ export default {
                     }
                     // this.Bitratess=data
                     /* Default use 720P */
-                    if(json_data==null){
-                        if (data == '1024')
-                        {
-                            this.Bitratess=data
-                        }
-                    }else{
-                        this.Bitratess = json_data.Bitrate
+                    if (data == 'No limit')
+                    {
+                        this.Bitratess='No limit'
                     }
                     this.Bitrates.push(src);
                 }

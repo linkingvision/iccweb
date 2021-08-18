@@ -34,7 +34,7 @@
                                 <div class="function_list_content" v-for="(c,index) in system" :key="index">
                                     <span>{{c.name}}</span>
                                     <el-switch
-                                    v-if="c.name=='transcoding:'||c.name=='转码:'||c.name=='H323:'||c.name=='SIP:'"
+                                    v-if="c.name=='transcoding :'||c.name=='转码 :'||c.name=='H323 :'||c.name=='SIP :'"
                                     v-model="c.id"
                                     disabled
                                     active-color="#13ce66"
@@ -488,25 +488,25 @@ export default {
                         id:data.strEndtime
                     }]
                     var fun=[{
-                            name:this.$t("message.dashboard.transcoding")+":",
+                            name:this.$t("message.dashboard.transcoding")+" :",
                             id:data.bTranscoding
                         },{
-                            name:"H323:",
+                            name:"H323 :",
                             id:data.bH323
                         },{
-                            name:"SIP:",
+                            name:"SIP :",
                             id:data.bSip
                         },{
-                            name:"通道:",
+                            name:"通道 :",
                             id:data.strChannelLimit
                         },{
-                            name:"User:",
+                            name:"用户 :",
                             id:data.strUserLimit
                         },{
-                            name:"VMR:",
+                            name:"VMR :",
                             id:data.strVMRoomLimit
                         },{
-                            name:this.$t("message.dashboard.MCURes"),
+                            name:this.$t("message.dashboard.MCURes")+" :",
                             id:data.strMCURes
                         },{}]
                         console.log(fun);

@@ -133,7 +133,7 @@
                             </div>
                         </div>
                     </el-collapse-item>
-                    <el-collapse-item title="联系人" name="4">
+                    <!-- <el-collapse-item title="联系人" name="4">
                         <div class="content_zuo_con">
                             <div class="content_zuo_content">
                                 <div class="content_zuo_user" v-for="(a,index) in Contactdata" :key="index">
@@ -141,15 +141,13 @@
                                         <svg class="icon" aria-hidden="true">
                                             <use xlink:href="#icon-ziyuan1"></use>
                                         </svg>
-                                        <!-- <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i> -->
                                         <div class="user_size">{{a.strName}}</div>
                                     </div>
                                     <div class="user_onl iconfont icon-shipin1" @click="call(a.strName)"></div>
-                                    <!-- <div class="user_onl1" v-else>离线</div> -->
                                 </div>
                             </div>
                         </div>
-                    </el-collapse-item>
+                    </el-collapse-item> -->
                     <el-collapse-item title="" name="2" >
                         <template slot="title">
                             <div style="display: flex;justify-content: space-between;width: 85%; align-items: center;">

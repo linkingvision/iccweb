@@ -141,7 +141,7 @@ export default {
         if (this.room) {
             this.conent()
         }
-        var bitrate = ['128', '256', '512', '1024',"1500", '2048']
+        var bitrate = ['No limit','128', '256', '512', '1024',"1500", '2048']
         for (let i = 0; i !== bitrate.length; ++i) {
             const data = bitrate[i];
             var src={
@@ -296,7 +296,12 @@ export default {
         change(){
             console.log(parseInt(this.Bitratess));
             if(this.videoPublisher.publish){
-                this.videoPublisher.changeBandwidth(parseInt(this.Bitratess)*1000);
+                if (this.Bitratess=='No limit') {
+                    var bit = '0'
+                }else{
+                    var bit = parseInt(this.Bitratess)
+                }
+                this.videoPublisher.changeBandwidth(bit*1000);
             }
         },
         conent(){
@@ -330,7 +335,6 @@ export default {
                 };
                 const onlocalstream = (stream) => {
                     $("#local").get(0).srcObject = stream;
-                    $("#local").get(0).play();
                     currentStream = stream;
                 };
                 const oncleanup = () => {
@@ -400,7 +404,6 @@ export default {
                 let onremotestream = (stream) => {
                     console.log();
                     $("#"+key).get(0).srcObject = stream;
-                    $("#"+key).get(0).play();
                     currentStream = stream;
                 }
                 const oncleanup = () => {
