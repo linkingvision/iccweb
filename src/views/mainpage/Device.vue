@@ -42,6 +42,16 @@
                         <video class="h5video" id="local" playsinline autoplay muted="muted"></video>
                     </div>
                 </el-collapse-item>  
+                <el-collapse-item title="" name="2" >
+                        <template slot="title">
+                            <div style="display: flex;justify-content: space-between;width: 85%; align-items: center;">
+                                <div>共享桌面</div>
+                            </div>
+                        </template>
+                        <div class="DesktopSwitch" style="width: 100%; height:200px;">
+                            <video class="l5sdesktop" id="l5sShadesktop" muted autoplay webkit-playsinline playsinline></video>
+                        </div>
+                    </el-collapse-item>
                 <el-collapse-item title="用户" name="1">
                     <div class="content_zuo_con">
                         <div class="content_zuo_content">
