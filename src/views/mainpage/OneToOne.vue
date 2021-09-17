@@ -141,9 +141,11 @@
                                         <svg class="icon" aria-hidden="true">
                                             <use xlink:href="#icon-ziyuan1"></use>
                                         </svg>
+                                        <i class="icon_size" :class="[a.icon,a.bOnline ? '' : 'icon_size1']"></i>
                                         <div class="user_size">{{a.strName}}</div>
                                     </div>
                                     <div class="user_onl iconfont icon-shipin1" @click="call(a.strName)"></div>
+                                    <div class="user_onl1" v-else>离线</div>
                                 </div>
                             </div>
                         </div>

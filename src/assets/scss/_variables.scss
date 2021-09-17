@@ -230,8 +230,8 @@ $confere_fast_bg:#FFFFFF;
 			}
 		}
 		.c_logo{
-            background: url("~@/assets/imgs/icclogo1.png") center center no-repeat;
-            background-size: 85%;
+            background: url("~@/assets/imgs/icc1.svg") center center no-repeat;
+            background-size: 100%;
         }
 		.toggler{
 			border: none !important;
@@ -369,8 +369,8 @@ $confere_fast_bg:#FFFFFF;
 		background-color: #FFFFFF;
 		z-index: 1100;
 		.c_logo{
-            background: url("~@/assets/imgs/icclogo1.png") center center no-repeat;
-            background-size: 85%;
+            background: url("~@/assets/imgs/icc1.svg") center center no-repeat;
+            background-size: 100%;
         }
 		.toggler{
 			border: none !important;
@@ -418,4 +418,21 @@ $confere_fast_bg:#FFFFFF;
             display: none;
         }
     }
+}
+.videoconf{
+    .el-dialog__body{
+        padding-top:0 !important;
+    }
+    // .videoconf_left_center {
+    //     width: 100%;
+    //     height: 29%;
+    //     background: #fff;
+    //     margin-top: 20px;
+    //   }
+    //   .videoconf_left_bot {
+    //     width: 100%;
+    //     height: 29%;
+    //     background: #fff;
+    //     margin-top: 20px;
+    //   }
 }

@@ -179,6 +179,7 @@
 
 <script>
 var echarts = require("echarts");
+// import {Room} from '../../assets/js/iccivmjs.js';
 export default {
 	name: 'Dashboard',
 	data(){
@@ -235,7 +236,6 @@ export default {
                 nIndex:"",
                 nvidia:""
             },
-            
 		}
 	},
 	mounted(){
@@ -506,7 +506,7 @@ export default {
                             name:"VMR :",
                             id:data.strVMRoomLimit
                         },{
-                            name:this.$t("message.dashboard.MCURes")+" :",
+                            name:this.$t("message.dashboard.MCURes")+' :',
                             id:data.strMCURes
                         },{}]
                         console.log(fun);

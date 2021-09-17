@@ -92,9 +92,9 @@
 						<span slot="title">仪表盘</span>
 					</el-menu-item>
 				</router-link>
-                <router-link :to="{name:'OneToOne'}">
+                <router-link :to="{name:'videoconf'}">
 					<el-menu-item index="10">
-						<i class="iconfont icon-dianduidian-"></i>
+						<i class="iconfont icon-duorenhuiyikuaizhuang"></i>
 						<span slot="title">视频会议</span>
 					</el-menu-item>
 				</router-link>
@@ -105,7 +105,7 @@
 					</el-menu-item>
 				</router-link>
                 <router-link :to="{name:'Vcroom'}">
-					<el-menu-item index="8">
+					<el-menu-item index="11">
 						<i class="iconfont icon-kongzhitai"></i>
 						<span slot="title">虚拟会议室</span>
 					</el-menu-item>

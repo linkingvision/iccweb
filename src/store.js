@@ -15,9 +15,9 @@ const state = {
   title:'',
   VideoCodec:'',
   Resolution:'',
-  Resolution:'',
   room:'',
   pushaudio:'',
+  pushvideo:'',
 }
 
 const mutations = {

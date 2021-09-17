@@ -50,7 +50,7 @@
                         </el-select>
                     </div>
 
-                    <div class="up_you_content">
+                    <!-- <div class="up_you_content">
                         <span>Bitrate（Kpbs）</span>
                         <el-select style="width:75%" v-model="Bitratess" size="small" placeholder="请选择">
                             <el-option
@@ -60,10 +60,10 @@
                             :value="item.value">
                             </el-option>
                         </el-select>
-                    </div>
+                    </div> -->
                     <div class="upvideoaudio">
-                        <!-- <i class="iconfont icon-shexiangjikongzhi-2" @click='pushvideo=true' v-if="!pushvideo"></i>
-                        <i class="iconfont icon-shexiangjikongzhi" @click='pushvideo=false' v-else></i> -->
+                        <i class="iconfont icon-shexiangjikongzhi-2" @click='pushvideo=true' v-if="!pushvideo"></i>
+                        <i class="iconfont icon-shexiangjikongzhi" @click='pushvideo=false' v-else></i>
                         
                         <i class="iconfont icon-yuyin1" @click='pushaudio=true' v-if="!pushaudio"></i>
                         <i class="iconfont icon-yuyin" @click='pushaudio=false' v-else></i>
@@ -124,8 +124,6 @@ export default {
         VideoIn:"",
         Resolutions: [],
         Resolution:"",
-        Bitrates: [],
-        Bitratess:"",
     };
   },
   mounted(){
@@ -133,7 +131,7 @@ export default {
   },
   methods:{
      	closepreview(){
-            console.log('关闭',this.Previewfun)
+            console.log('关闭',this.Previewfun);
             if(this.Previewfun!=undefined){
                 this.Previewfun.disconnect();
                 delete this.Previewfun;
@@ -143,7 +141,7 @@ export default {
         },
 		join(){
             this.myModal1=true;
-			var h5sVideoLocal=this.h5sVideoLocal
+			let h5sVideoLocal=this.h5sVideoLocal;
             this.$nextTick (() =>
                     this.Preview(h5sVideoLocal)
             )
@@ -151,12 +149,12 @@ export default {
         getup(){
             this.$router.push({
                 path: '/Vcroom'
-            })
+            });
         },
       	Preview(h5sVideoLocal){
-            var pushvideo=this.pushvideo.toString();
-            var pushaudio=this.pushaudio.toString();
-            console.log(this.pushvideo,pushvideo,this.pushaudio,pushaudio)
+            let pushvideo=this.pushvideo.toString();
+            let pushaudio=this.pushaudio.toString();
+            console.log(this.pushvideo,pushvideo,this.pushaudio,pushaudio);
             
             // return false
             if(this.Previewfun!=undefined){
@@ -164,7 +162,7 @@ export default {
                 delete this.Previewfun;
                 this.Previewfun = undefined;
             }
-            var conf1 = {
+            let conf1 = {
                 localvideoid:h5sVideoLocal, //{string} - id of the local video element tag
                 // localvideoidcopy:'h5sVideoLocalcopy',
                 consolelog: 'true', // 'true' or 'false' enable/disable console.log
@@ -179,15 +177,15 @@ export default {
                 // token:encodeURIComponent(this.$store.state.user),
                 // desktopshare: bDesktopSharing // true or false for desktop sharing
 			};
-			window.saveconf=conf1
-	        console.log(conf1)
+			window.saveconf=conf1;
+	        console.log(conf1);
             this.Previewfun= L5sRTCGetCapability(null,conf1,
             function(){
                 console.log('RTC do not support !'); 
             });
         },
         updisplay(){
-            var conf = {
+            let conf = {
                 localvideoid:'h5sVideoLocal', //{string} - id of the local video element tag
                 consolelog: 'true', // 'true' or 'false' enable/disable console.log
                 video: "true", // 'true' or 'false' enable/disable video
@@ -195,12 +193,12 @@ export default {
                 token:encodeURIComponent(this.$store.state.user),
                 // desktopshare: bDesktopSharing // true or false for desktop sharing
             };
-            var up=L5sRTCGetCapability(this.UpdateCapability,conf,function(){
+            let up=L5sRTCGetCapability(this.UpdateCapability,conf,function(){
 				console.log('RTC do not support !'); 
 			});
         },
         UpdateCapability(capability){
-            var json_data=JSON.parse(localStorage.getItem('mcuCamerasettingonetoone'))
+            let json_data=JSON.parse(localStorage.getItem('mcuCamerasettingonetoone'))
             console.log(capability,json_data);
             if(capability){
 
@@ -236,7 +234,7 @@ export default {
                     }else{
                         // console.log(data.name==json_data.VideoIn,data.name,json_data.VideoIn,"**********")
                         if(data.id==json_data.VideoIn){
-                            this.VideoIn=data.id
+                            this.VideoIn=data.id;
                         }
                     }
                     this.VideoIns.push(src);
@@ -260,15 +258,15 @@ export default {
                 //     this.AudioOut=capability['audioout'][0].id
                 //     this.AudioOuts.push(src);
                 // }
-                var videoCodec = ['h264','vp9','av1']
+                let videoCodec = ['h264','vp9','av1'];
 				for (let i = 0; i !== videoCodec.length; ++i) {
                     const data = videoCodec[i];
                     /* Default use 720P */
                     
-                    var src={
+                    let src={
                         value: data,
                         label: data
-                    }
+                    };
                     // this.Resolution=data
                     if(json_data==null){
                         if (data == 'vp9')
@@ -276,11 +274,11 @@ export default {
                             this.VideoCodec=data
                         }
                     }else{
-                        this.VideoCodec = json_data.VideoCodec
+                        this.VideoCodec = json_data.VideoCodec;
                     }
                     this.VideoCodecs.push(src);
                 }
-                var resolution = ['QVGA', 'VGA', '720P', '1080P', '4K']
+                let resolution = ['QVGA', 'VGA', '720P', '1080P', '4K'];
                 for (let i = 0; i !== resolution.length; ++i) {
                     const data = resolution[i];
                     /* Default use 720P */
@@ -301,43 +299,43 @@ export default {
                     this.Resolutions.push(src);
                 }
                 
-                var bitrate = ['No limit', '128', '256', '512', '1024',"1500", '2048']
-                for (let i = 0; i !== bitrate.length; ++i) {
-                    const data = bitrate[i];
-                    var src={
-                        value: data,
-                        label: data
-                    }
-                    // this.Bitratess=data
-                    /* Default use 720P */
-                    if (data == 'No limit')
-                    {
-                        this.Bitratess='No limit'
-                    }
-                    this.Bitrates.push(src);
-                }
+                // var bitrate = ['No limit','128', '256', '512', '1024',"1500", '2048']
+                // for (let i = 0; i !== bitrate.length; ++i) {
+                //     const data = bitrate[i];
+                //     var src={
+                //         value: data,
+                //         label: data
+                //     }
+                //     // this.Bitratess=data
+                //     /* Default use 720P */
+                //     if (data == 'No limit')
+                //     {
+                //         this.Bitratess=data
+                //     }
+                //     this.Bitrates.push(src);
+                // }
             }
         },
         conent(){
-            this.$store.state.pushaudio=this.pushaudio
+            this.$store.state.pushaudio=this.pushaudio;
+            this.$store.state.pushvideo=this.pushvideo;
             if (this.Resolution=="QVGA") {
-                this.Resolution = "lowres"
+                this.Resolution = "lowres";
             }else if (this.Resolution == "VGA") {
-                this.Resolution = "stdres"
+                this.Resolution = "stdres";
             }else if (this.Resolution == "720P") {
-                this.Resolution = "hires"
+                this.Resolution = "hires";
             }else if (this.Resolution == "1080P") {
-                this.Resolution = "fhdres"
+                this.Resolution = "fhdres";
             }else if (this.Resolution == "4K") {
-                this.Resolution = "4kres"
+                this.Resolution = "4kres";
             }
             this.$store.state.VideoCodec=this.VideoCodec;
             this.$store.state.Resolution=this.Resolution;
-            this.$store.state.Bitratess=this.Bitratess;
             this.$store.state.room=this.input;
 			if (this.input=='') {
-				alert("请输入房间名")
-				return
+				alert("请输入房间名");
+				return;
 			}
             this.myModal1=false;
 			// this.Device="Device";
@@ -385,18 +383,18 @@ export default {
           line-height: 30px;
       }
     }
-    .videoconf_left_center {
-      width: 100%;
-      height: 29%;
-      background: #202020;
-      margin-top: 20px;
-    }
-    .videoconf_left_bot {
-      width: 100%;
-      height: 29%;
-      background: #202020;
-      margin-top: 20px;
-    }
+    // .videoconf_left_center {
+    //   width: 100%;
+    //   height: 29%;
+    //   background: #202020;
+    //   margin-top: 20px;
+    // }
+    // .videoconf_left_bot {
+    //   width: 100%;
+    //   height: 29%;
+    //   background: #202020;
+    //   margin-top: 20px;
+    // }
   }
   .dasboard_modal{
         .up_content{

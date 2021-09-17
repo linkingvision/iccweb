@@ -1,43 +1,47 @@
+
 <template>
     <div class="device" id="device">
-        <div class="sele"  v-show="!share" id="sele">
-            
-            <!-- <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div> -->
-        </div>
-        <div class="conten_you_stup">
-            <div class="conten_you_stupcen">
-                <div @click="Reconnection" style="width:90px; padding-top: 16px;">
-                    <el-select id="selectt" style="width:75%" v-model="Bitratess" size="small" placeholder="请选择" @change="change">
-                        <el-option
-                        v-for="item in Bitrates"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                        </el-option>
-                    </el-select></div>
-                <div class="but_g iconfont" :class="icon.audio" @click="dropaudio"> </div>
-                <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
-                <div class="but_g iconfont icon-huiyi"  @click="FullScreen"> </div>
-                <div class="but_g iconfont icon-huiyiguanli" @click="show"> </div>
-                <div class="but_g iconfont icon-guaduan" style="font-size:32px" @click="drop"> </div>
+        <div class="seles"  v-show="!share" id="fullscreen" style='position:relative;' @click.stop="sele">
+            <div class="iconfont icon-fullscreen" style=" font-size:22px; position:absolute; top:0px; right:0px;z-index:1;"  @click.stop="FullScreen"> </div>
+            <div class="sele" id="sele" style='position:relative'></div>
+            <div class="conten_you_stup">
+                <div class="conten_you_stupcen">
+                    <div style="width:150px;"></div>
+                    <div @click="Reconnection" style="width:110px; padding-top: 16px;">
+                        <el-select id="selectt" style="width:75%" v-model="Bitratess" size="small" placeholder="请选择" @change="change">
+                            <el-option
+                            v-for="item in Bitrates"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div style="width:100px;"></div>
+                    <div class="but_g iconfont " :class="icon.video" @click="dropvideo"> </div>
+                    <div class="but_g iconfont" :class="icon.audio" @click="dropaudio"> </div>
+                    <div class="but_g iconfont icon-huiyiguanli" @click="show"> </div>
+                    <!-- <div class="but_g iconfont icon-yaoqingruhui"> </div> -->
+                    <div class="but_g iconfont icon-huiyi"  @click.stop="chat"> </div>
+                    <div class="but_g iconfont " :class="icon.desktopicon"  @click="desktop"> </div>
+                    <div class="but_g iconfont icon-editor" style="font-size:33px;"> </div>
+                    <div class="but_g iconfont icon-guaduan" style="font-size:32px" @click="drop"> </div>
+                    <div style="width:300px;"></div>
+                </div>
             </div>
+            <div class="text" @click.stop="text">
+                <el-input v-model="input" placeholder="请输入内容" @keyup.enter.native="onSubmit"></el-input>
+            </div>
+
         </div>
-        <div class="share" v-show="share" id="share">
-            <video class="l5video" id="l5video" autoplay webkit-playsinline playsinline></video>
-        </div>
+        
         <div class="serig" id="serig">
             <el-collapse v-model="activeNames">
+                <el-collapse-item title="" name="5">
+                    <div class="selects" style="position:relative;">
+                        <video class="h5video" id="local" playsinline autoplay muted="muted"></video>
+                    </div>
+                </el-collapse-item>  
                 <el-collapse-item title="用户" name="1">
                     <div class="content_zuo_con">
                         <div class="content_zuo_content">
@@ -55,50 +59,20 @@
                         </div>
                     </div>
                 </el-collapse-item>
-                <el-collapse-item title="" name="2" >
-                    <template slot="title">
-                        <div style="display: flex;justify-content: space-between;width: 85%; align-items: center;">
-                            <div>共享桌面</div>
-                            <!-- @click="DesktopSwitch"  -->
-                            <div @click.stop="DesktopSwitch" class="desktop_icon"></div>
-                        </div>
-                    </template>
-                    <div class="DesktopSwitch" id="DesktopSwitch" style="width: 100%; height:150px;">
-                        <video class="l5sdesktop" id="l5sShadesktop" muted autoplay webkit-playsinline playsinline></video>
-                    </div>
-                </el-collapse-item>
-                <el-collapse-item title="消息" name="3">
+                <el-collapse-item title="聊天" name="3">
                     <div class="content_zuo_con2">
-                        <!-- <div class="content_zuo_content" id="chatrecord">
-                            <div class="content_zuo_user" v-for="(a,index) in chatrecord" :key="index">
-                                <div class="user_icon">
-                                    <svg class="icon" aria-hidden="true">
-                                        <use xlink:href="#icon-ziyuan1"></use>
-                                    </svg>
-                                    <div class="user_size">{{a.user}}：</div>
-                                </div>
-                                <div class="user_onl" style="word-break: break-word;">{{a.msg}}</div>
-                            </div>
+                        <div class="panel-body relative" style=" width:100%;height:72%;" id="chatroom" >
                         </div>
                         <div class="content_zuo_but">
                             <div class="chatwith_inp">
-                                <el-input class="chatwith_input" v-model="chatwith" placeholder="请输入内容" @keyup.enter.native="sendnews"></el-input>
-                            </div>
-                            <div class="chatwith_icon">
-                                <span class="iconfont icon-biaoqing"></span>
-                                <span class="iconfont icon-biaoqing"></span>
-                            </div>
-                            <div>
+
+                                <el-input class="chatwith_input" type="textarea" :rows="3" resize="none" v-model="chatwith" placeholder="请输入内容"></el-input>
                                 <CButton class="form_butt1" type="submit" @click="sendnews">发送</CButton>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </el-collapse-item>
-                <el-collapse-item title="" name="5">
-                    <div class="selects" style="position:relative;">
-                        <video class="h5video" id="local" playsinline autoplay muted="muted"></video>
-                    </div>
-                </el-collapse-item>  
+                
             </el-collapse>
         </div>
     </div>
@@ -111,13 +85,13 @@ export default {
     data(){
         return{
             VideoCodec:this.$store.state.VideoCodec,
-            Resolution:this.$store.state.Resolution,
-            Bitratess:this.$store.state.Bitratess,
             pushaudio:this.$store.state.pushaudio,
-            // room:1234,
-            room:this.$store.state.room,
+            pushvideo:this.$store.state.pushvideo,
+            Resolution:this.$store.state.Resolution,
+            rooms:this.$store.state.room,
             user:this.$store.state.user,
             Bitrates:[],
+            Bitratess:'',
             upuser:undefined,//打电话的user
             l5sdesktop:undefined,
             l5sdesktops:undefined,
@@ -126,8 +100,10 @@ export default {
             icon:{
                 connectionicon:"icon-shuaxin",
                 desktopicon:"icon-zhuomiangongxiang1",
-                audio:'icon-yangshengqi1'
+                audio:'icon-yuyin1',
+                video:this.$store.state.pushvideo ? 'icon-shexiangjikongzhi':'icon-shexiangjikongzhi-2'
             },
+            chatwith: '',
             shows:true,
             audioout:true,
             share:false,
@@ -135,24 +111,120 @@ export default {
             usertoken:this.$route.params.token,
             videoPublisher:{},
             userdata:[],
+			room:'',
+            input:'',
+            textScreen:true
         }
     },
     mounted(){
-        if (this.room) {
+        // console.log(this.pushaudio);
+        if (this.pushaudio) {
+            this.icon.audio="icon-yuyin"
+        }else{
+            this.icon.audio="icon-yuyin1"
+        }
+
+        if (this.rooms) {
             this.conent()
         }
         var bitrate = ['No limit','128', '256', '512', '1024',"1500", '2048']
-        for (let i = 0; i !== bitrate.length; ++i) {
-            const data = bitrate[i];
-            var src={
-                value: data,
-                label: data
+            for (let i = 0; i !== bitrate.length; ++i) {
+                const data = bitrate[i];
+                var src={
+                    value: data,
+                    label: data
+                }
+                if (data == 'No limit')
+                {
+                    this.Bitratess=data
+                }
+                this.Bitrates.push(src);
             }
-            this.Bitrates.push(src);
-        }
-        this.mouse()
+        // this.mouse()；
     },
     methods:{
+        // chatwith(){},
+        sendnews(){
+            console.log("回车",this.chatwith);
+            // if (this.v1 != undefined)
+            // {
+            //     if(this.chatwith){
+            //         console.log("回车1");
+            //         this.v1.send(this.upuser,this.chatwith)
+            //         this.chatwith=""
+            //     }else{
+            //         this.$message('消息不能为空');
+            //     }
+            // }
+            if (this.chatwith!=''&&this.room) {
+                let message = {
+                    type: "message",
+                    text: this.chatwith,
+                }
+                this.room.text_room.send_txt(JSON.stringify(message));
+                this.chatwith=''
+            }
+        },
+        //全屏
+        FullScreen(){
+            var elem = $("#fullscreen").get(0);
+            if (
+            document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
+            document.mozFullScreenEnabled ||
+            document.msFullscreenEnabled
+            ) {
+                if (
+                    document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    document.mozFullScreenElement ||
+                    document.msFullscreenElement
+                ) {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                        
+                    }
+                } else {
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                    } else if (elem.webkitRequestFullscreen) {
+                        elem.webkitRequestFullscreen();
+                    } else if (elem.mozRequestFullScreen) {
+                        elem.mozRequestFullScreen();
+                    } else if (elem.msRequestFullscreen) {
+                        elem.msRequestFullscreen();
+                    }
+                }
+            } else {
+                console.log('Fullscreen is not supported on your browser.');
+            }
+        },
+        text(){
+            console.log(this.input);
+        },
+        sele(){
+            if (this.textScreen ==false) {
+                $(".text").hide();
+                this.textScreen = true;
+            }
+        },
+        //聊天
+        onSubmit(){
+            if (this.input!=''&&this.room) {
+                let message = {
+                    type: "message",
+                    text: this.input,
+                }
+                this.room.text_room.send_txt(JSON.stringify(message));
+                this.input=''
+            }
+        },
         mouse(){
             $(".sele").mouseenter(function(){
                 $(".conten_you_stup").show()
@@ -180,97 +252,110 @@ export default {
         show(){
             if (this.shows) {
                 $("#serig").hide()
-                $("#sele").css("width","99%")
+                $(".seles").css("width","99%")
                 this.shows=false;
             }else{
                 $("#serig").show()
-                $("#sele").css("width","83%")
+                $(".seles").css("width","83%")
                 this.shows=true;
             }
             
         },
         Reconnection(){},
-        dropaudio(){},
+        //视频
+        dropvideo(){
+            let muted = this.videoPublisher.plugin.isVideoMuted();
+            if(muted)
+                this.videoPublisher.plugin.unmuteVideo();
+            else
+                this.videoPublisher.plugin.muteVideo();
+            muted = this.videoPublisher.plugin.isVideoMuted();
+            $('#mute').html(muted ? this.icon.video = "icon-shexiangjikongzhi-2" : this.icon.video = "icon-shexiangjikongzhi");
+        },
+        //音频
+        dropaudio(){
+            let muted = this.videoPublisher.plugin.isAudioMuted();
+            console.log(muted,this.videoPublisher);
+            if(muted)
+                this.videoPublisher.plugin.unmuteAudio();
+            else
+                this.videoPublisher.plugin.muteAudio();
+            muted = this.videoPublisher.plugin.isAudioMuted();
+            $('#mute').html(muted ? this.icon.audio = "icon-yuyin1" : this.icon.audio = "icon-yuyin");
+        },
         drop(){},
         //共享桌面
         desktop(){
-            console.log("**********",this.upuser)
-            if (this.l5sdesktops != undefined){
-                this.l5sdesktops.disconnect();
-                delete this.l5sdesktops;
-                this.l5sdesktops = undefined;
-                $("#l5sShadesktop").get(0).load();
-                $("#l5sShadesktop").get(0).poster = '';
-                this.icon.desktopicon="icon-zhuomiangongxiang"
-                return false
-            }
-            if(this.golddesktops==true){
-                this.$message('有用户正在共享桌面');
+			if (this.icon.desktopicon=='icon-zhuomiangongxiang1') {
+                this.icon.desktopicon = "icon-zhuomiangongxiang"
             }else{
-                if(this.icon.desktopicon=="icon-zhuomiangongxiang"){
-                    console.log("关闭共享")
-                    if (this.l5sdesktop != undefined)
-                    this.shares=true;
-                    {
-                        this.l5sdesktop.disconnect();
-                        delete this.l5sdesktop;
-                        this.l5sdesktop = undefined;
-                        $("#l5sShadesktop").get(0).load();
-                        $("#l5sShadesktop").get(0).poster = '';
-                        this.icon.desktopicon="icon-zhuomiangongxiang1"
-                    }
-                }else{
-                    console.log("共享成果")
-                    this.icon.desktopicon="icon-zhuomiangongxiang"
-                    console.log(this.l5sdesktop);
-                    if (this.l5sdesktop != undefined){
-                        this.l5sdesktop.disconnect();
-                        delete this.l5sdesktop;
-                        this.l5sdesktop = undefined;
-                    }
-                    // var audioout=this.audioout.toString();
-                    var pushType="";
-                    if (this.Shareddesktop == true)
-                    {
-                        pushType = 'sharing';
-                    }
-                    var conf1 = {
-                        localvideoid:'l5sShadesktop', //{string} - id of the local video element tag
-                        //localvideodom: h5svideodomlocal, //{object} - local video dom. if there has videoid, just use the videoid
-                        protocol: window.location.protocol, //http: or https:
-                        host:this.$store.state.WSROOT, //localhost:8080
-                        rootpath:'/', // {string} - path of the app running
-                        user:this.$store.state.user, // {string} - user name
-                        type:pushType, // {string} - media or sharing
-                        callback: null, //Callback for the event
-                        userdata: null, // user data
-                        session: this.$store.state.token, //session got from login
-                        consolelog: 'true' // 'true' or 'false' enable/disable console.log
-                    };
-                    var param = {
-                        video: 'true', // 'true' or 'false' enable/disable video
-                        audio: "false", // 'true' or 'false' enable/disable audio
-                        //facingmode:"environment", // {string} - user or environment; desktop remove this config 
-                        videoin: this.VideoIn,
-                        codec: this.VideoCodec,
-                        bitrate: this.Bitratess,
-                        resolution: this.Resolution,
-                        audioin: this.AudioIn,
-                        desktopshare: true // true or false for desktop sharing
-                    };
-                    // return false
-                    this.l5sdesktop = new L5sRTCPush(conf1);
-                    this.l5sdesktop.connect(this.upuser, param);
-                    this.shares=false;
-                }
+                this.icon.desktopicon = "icon-zhuomiangongxiang1"
             }
+			let room = this.room;
+			var conf = {
+                protocol: window.location.protocol, // {string} - 'http:' or 'https:'
+                // host: window.location.host, //{string} - 'localhost:8080'
+                host:this.$store.state.WSROOT, //{string} - 'localhost:8080'
+                rootpath: "/", // {string} - path of the app running
+                userid: this.user,
+                username: this.user,
+                vmrid:parseInt(this.rooms),
+                // session: this.$store.state.token, //{string} - session got from login
+                session: 'c1782caf-b670-42d8-ba90-2244d0b0ee83', //{string} - session got from login
+                // consolelog: 'true', // 'true' or 'false' enable/disable console.log
+            };
+            let screen = new Room(conf)
+			screen.connect();
+			screen.on("datachannelready", () => {
+				console.log(room);
+				let currentStream;
+				let media = {video: 'screen', audioSend: false, videoRecv: false};
+				var localFeed = room.findOrCreateLocalFeed("videoroom", 'screen');
+				const _videoPublisher = localFeed.data_provider;
+				const joined = (data) => {
+					localFeed.extras = { remote_id: data.id };
+				};
+				const onlocalstream = (stream) => {
+					console.log(stream);
+					$("#l5sShadesktop").get(0).srcObject = stream;
+					// $("#local").get(0).srcObject = stream;
+					currentStream = stream;
+				};
+				const oncleanup = () => {
+				};
+				const onwebrtcState = (on) => {
+					console.log("onwebrtcState", on);
+					localFeed.makeLive();
+				};
+				_videoPublisher.on("joined", joined);
+				_videoPublisher.on("onlocalstream", onlocalstream);
+				_videoPublisher.on("webrtcState", onwebrtcState);
+				_videoPublisher.on("oncleanup", oncleanup);
+
+				const cleanup = () => {
+					_videoPublisher.removeListener("joined", joined);
+					_videoPublisher.removeListener("onlocalstream", onlocalstream);
+					_videoPublisher.removeListener("oncleanup", oncleanup);
+					if (currentStream) {
+						currentStream.getTracks().forEach((t) => t.stop());
+					}
+				};
+				_videoPublisher
+					.connect()
+					.then(() => {
+						_videoPublisher.publish(media);
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+			});
         },
          //切换视频
         DesktopSwitch(){
             if (this.shares) {
                 return
             }
-            this.share = !this.share
+            this.share = !this.share;
             console.log("桌面切换",this.share)
             var insert = function(nodeInsert,nodeTo){
                 if(nodeInsert.insertAdjacentElement)
@@ -291,10 +376,19 @@ export default {
             insert(t1,obj);
             //     document.body.removeChild(obj);
         },
-        FullScreen(){},
+        chat(){
+            if (this.textScreen) {
+                $(".text").show();
+                this.textScreen = false;
+            }else{
+                $(".text").hide();
+                this.textScreen = true;
+            }
+            
+        },
         //切换码率
         change(){
-            console.log(parseInt(this.Bitratess));
+            console.log(parseInt(this.Bitratess),"-----------");
             if(this.videoPublisher.publish){
                 if (this.Bitratess=='No limit') {
                     var bit = '0'
@@ -312,12 +406,13 @@ export default {
                 rootpath: "/", // {string} - path of the app running
                 userid: this.user,
                 username: this.user,
-                vmrid:parseInt(this.room),
+                vmrid:parseInt(this.rooms),
                 // session: this.$store.state.token, //{string} - session got from login
                 session: 'c1782caf-b670-42d8-ba90-2244d0b0ee83', //{string} - session got from login
                 // consolelog: 'true', // 'true' or 'false' enable/disable console.log
             };
             let room = new Room(conf)
+			this.room = room
             this.publish(room);
         },
         publish(room){
@@ -326,7 +421,8 @@ export default {
             room.connect();
             room.on("datachannelready", () => {
                 let currentStream;
-                let media = {audioSend: this.pushaudio,video: this.Resolution,vcodec:this.VideoCodec};
+                let media = {audioSend: this.pushaudio, video: this.Resolution,vcodec:this.VideoCodec};
+                console.log(media);
                 var localFeed = room.findOrCreateLocalFeed("videoroom", "localcam");
                 const _videoPublisher = localFeed.data_provider;
                 this.videoPublisher = _videoPublisher;
@@ -335,6 +431,7 @@ export default {
                 };
                 const onlocalstream = (stream) => {
                     $("#local").get(0).srcObject = stream;
+                    // $("#local").get(0).play();
                     currentStream = stream;
                 };
                 const oncleanup = () => {
@@ -367,13 +464,13 @@ export default {
             });
             room.on("onnewfeed", (feed) => {
                 this.userdata=[];
-                console.log("------ remote feed 1", feed);
                 let currentStream;
+                console.log("------ remote feed 1", feed);
                 var remoteFeed = feed;
                 if (remoteFeed.is_local) {
                     return;
                 }
-                const key = remoteFeed.user.id;
+                const key = remoteFeed.key
                 // this.userdata.push(key)
                 const videoSubscriber = remoteFeed.data_provider;
                 var participants = videoSubscriber.room.participants;
@@ -393,7 +490,6 @@ export default {
                 bitrateTimer.push(key);
                 clearInterval(bitrateTimer[key])
                 bitrateTimer[key] = setInterval(()=>{
-                    // console.log(videoSubscriber);
                     var bitrate = videoSubscriber.plugin.getBitrate();
                     $('#curbitrate'+key).text(bitrate);
                     var width = $("#"+key).get(0).videoWidth;
@@ -426,6 +522,13 @@ export default {
                     .connect(parseInt(feed.extras.remote_id))
                     .then(() => console.log("Connected"));
             }); 
+            room.on('datachannelrecvmsg',(text)=>{
+
+                let date = text.date.substr(text.date.indexOf('T')+1,8);
+                if (text.type=="message") {
+                    $('#chatroom').append('<p style="margin-bottom: 0px;">[' + date + '] ' + text.from + ': ' + text.text);
+                }
+            })
         }
             
     }
@@ -434,19 +537,21 @@ export default {
 <style lang="scss" scoped>
 
 .conten_you_stup{
-    // width: 100%;
+    width: 100%;
     position: absolute;
-    left: 25%;
-    bottom: 15%;
+    left: 0%;
+    bottom: 0%;
     display: flex;
     justify-content: center;
     z-index: 10;
+    margin-right: -2px;
     cursor:pointer;
     .conten_you_stupcen{
+        width: 100%;
         background:rgba(0,0,0,0.5);
         padding: 0 10px;
         padding-left: 35px;
-        border-radius:35px;
+        // border-radius:35px;
         display: flex;
         justify-content: space-around;
         .but_g{
@@ -520,73 +625,58 @@ export default {
 }
 .content_zuo_con2{
     width: 100%;
-    height: 15vh;
-    // .content_zuo_content{
-    //     width: 100%;
-    //     height: 50%;
-    //     overflow: auto;
-    //     &::-webkit-scrollbar{
-    //         display: none;
-    //     }
-    //     .content_zuo_user{
-    //         width: 100%;
-    //         display: flex;
-    //         // flex-wrap: wrap;
-    //         // justify-content: space-between;
-    //         align-items: flex-start;
-    //         padding: 10px 18px;
-    //         .user_icon{
-    //             width: 35%;
-    //             display: flex;
-    //             align-items: center;
-    //             .icon_size{
-    //                 font-size:14px;
-    //                 color: #0099da;
-    //                 margin-right: 8px;
-    //             }
-    //             .user_size{
-    //                 font-size:14px;
-    //                 font-family:PingFang SC;
-    //                 font-weight:500;
-    //             }
-    //         }
-    //         .user_onl{
-    //             width: 70%;
-    //             font-size:14px;
-    //             font-family:PingFang SC;
-    //             font-weight:500;
-    //         }
-    //     }
-    // }
-    // .content_zuo_but{
-    //     width: 100%;
-    //     height: 30%;
-    //     padding: 10px 18px;
-    //     div{
-    //         margin: 10px 0;
-    //     }
-    //     .chatwith_inp{
-    //         .chatwith_input{
-    //             width: 100%;
-    //             border-radius:2px;
-    //             /deep/ .el-input__inner{
-    //                 border: none !important;
-    //                 background:rgba(238,240,245,1)!important;
-    //             }
-    //         }
-    //     }
-    //     .chatwith_icon{
-    //         span{
-    //             margin-right: 10px;
-    //         }
-    //     }
-    //     .form_butt1{
-    //         width: 100%;
-    //         text-align: center;
-    //         background:rgba(50,119,255,1);
-    //         border-radius:2px;
-    //         color: #FFFFFF;
-    //     }
-    // }
+    height: 40vh;
+    .content_zuo_but{
+        width: 100%;
+        height: 28%;
+        padding: 15px 5px 0 10px;
+        background: #2E2E2E;
+        .chatwith_inp{
+            display: flex;
+            justify-content: space-between;
+            .chatwith_input{
+                width: 84%;
+                // height: 100px;
+                border-radius:2px;
+                /deep/ .el-textarea__inner{
+                    overflow-y: auto;
+                    border: none !important;
+                    background:#373438 !important;
+                    &::-webkit-scrollbar {/*滚动条整体样式*/
+                    width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
+                    height: 8px;
+                    scrollbar-arrow-color:red;
+                }
+                &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+                    border-radius: 5px;
+                    -webkit-box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    background: rgba(218, 218, 218,0.2);
+                    scrollbar-arrow-color:red;
+                }
+                &::-webkit-scrollbar-track {/*滚动条里面轨道*/
+                    -webkit-box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    box-shadow: inset 0 0 5px rgba(218, 218, 218,0.2);
+                    border-radius: 0;
+                    background: rgba(218, 218, 218,0.1);
+                }
+                }
+            }
+        }
+        .chatwith_icon{
+            span{
+                margin-right: 10px;
+            }
+        }
+        .form_butt1{
+            margin-top: 40px;
+            width: 15%;
+            height: 35px;
+            text-align: center;
+            background:rgba(50,119,255,1);
+            border-radius:2px;
+            color: #FFFFFF;
+        }
+    }
 }
 </style>

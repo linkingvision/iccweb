@@ -633,6 +633,18 @@ $collapse_size:#FFFFFF;
     .el-dialog__body{
         padding-top:0 !important;
     }
+    // .videoconf_left_center {
+    //     width: 100%;
+    //     height: 29%;
+    //     background: #202020;
+    //     margin-top: 20px;
+    //   }
+    //   .videoconf_left_bot {
+    //     width: 100%;
+    //     height: 29%;
+    //     background: #202020;
+    //     margin-top: 20px;
+    //   }
 }
 
 //视频会议
@@ -655,8 +667,8 @@ $collapse_size:#FFFFFF;
             height: 100%;
         }
     }
-    .sele{
-        width: 83%;
+    .seles{
+        width: 80%;
         height: 100%;
         // display: flex;
         border: 1px solid #38383b;
@@ -675,10 +687,14 @@ $collapse_size:#FFFFFF;
             }
         }
     }
-    .serig{
-        width: 17%;
+    .sele{
+        width: 100%;
         height: 100%;
-        padding-left: 10px;
+    }
+    .serig{
+        width: 20%;
+        height: 100%;
+        // padding-left: 10px;
         overflow: scroll;
         &::-webkit-scrollbar{
             display: none;
@@ -695,7 +711,15 @@ $collapse_size:#FFFFFF;
             height: 10vh;
         }
     }
-    
+    .text{
+        // width: 200px;
+        // height: 50px;
+        background:#353535 ;
+        position: absolute;
+        bottom: 73px;
+        left: 50%;
+        display: none;
+    }
     
     .up_you_content{
         position: absolute;
